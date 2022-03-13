@@ -1,0 +1,4 @@
+Name = Sistema de logros
+Version = 1.0.0
+Credits = Nyaruko, Clara
+Website = https://newpokeliberty.blogspot.com/2018/05/script-sistema-de-logros-para-essentials.html

@@ -1,0 +1,4 @@
+Name = Magic Gachapon System
+Version = 1.0.0
+Credits = Kyu, Clara 
+Website = https://newpokeliberty.blogspot.com/2021/03/script-magic-gachapon-system.html

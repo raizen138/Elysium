@@ -1,0 +1,5 @@
+Name         = Location Signposts with Background Image
+Version      = 1.1
+Website      = https://reliccastle.com/resources/385/
+Credits      = PurpleZaffre, Golisopod User, LostSoulsDev / carmaniac
+
