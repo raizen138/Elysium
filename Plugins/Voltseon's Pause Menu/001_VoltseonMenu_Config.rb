@@ -10,7 +10,7 @@
 # Made for people who dont want
 # to have ugly pause menus
 # so here's a really cool one!
-# Version: 1.7
+# Version: 1.8
 #
 #
 #-------------------------------------------------------------------------------
@@ -69,8 +69,7 @@ MENU_TEXTOUTLINE = [
             Color.new(0,82,107),
             Color.new(126,98,11),
             Color.new(38,22,91),
-            Color.new(12,37,24),
-            Color.new(0,58,76)
+            Color.new(12,37,24)
           ]
 LOCATION_TEXTCOLOR = [
             Color.new(248,248,248),
@@ -90,8 +89,7 @@ LOCATION_TEXTOUTLINE = [
             Color.new(0,82,107),
             Color.new(137,0,100),
             Color.new(38,22,91),
-            Color.new(12,37,24),
-            Color.new(0,58,76)
+            Color.new(12,37,24)
           ]
 
 # Sound Options

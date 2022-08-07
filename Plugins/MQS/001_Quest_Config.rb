@@ -21,6 +21,9 @@ QUEST_JINGLE = "Mining found all.ogg"
 # Name of file in Audio/SE that plays when a quest is failed
 QUEST_FAIL = "GUI sel buzzer.ogg"
 
+# Option to have quests sorted by story, then time started
+SORT_QUESTS = true
+
 # Future plans are to add different backgrounds that can be chosen by you
 
 #===============================================================================

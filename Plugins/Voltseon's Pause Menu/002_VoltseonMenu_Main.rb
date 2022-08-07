@@ -56,7 +56,7 @@ class VoltseonsPauseMenu_Scene
       filename = MENU_FILE_PATH + "Backgrounds/arrow_left_#{DEFAULT_MENU_THEME}"
     end
     @sprites["leftarrow"] = AnimatedSprite.new(filename,8,40,28,2,@viewport)
-    @sprites["leftarrow"].x       = Graphics.width/2 - @sprites["leftarrow"].bitmap.width - ($PokemonTemp.menu_icon_width/4 * 3)
+    @sprites["leftarrow"].x       = Graphics.width/2 - @sprites["leftarrow"].bitmap.width - ($game_temp.menu_icon_width/4 * 3)
     @sprites["leftarrow"].y       = Graphics.height - 56
     @sprites["leftarrow"].z       = 2
     @sprites["leftarrow"].visible = true
@@ -67,7 +67,7 @@ class VoltseonsPauseMenu_Scene
       filename = MENU_FILE_PATH + "Backgrounds/arrow_right_#{DEFAULT_MENU_THEME}"
     end
     @sprites["rightarrow"] = AnimatedSprite.new(filename,8,40,28,2,@viewport)
-    @sprites["rightarrow"].x       = Graphics.width/2 + ($PokemonTemp.menu_icon_width/4 * 3)
+    @sprites["rightarrow"].x       = Graphics.width/2 + ($game_temp.menu_icon_width/4 * 3)
     @sprites["rightarrow"].y       = Graphics.height - 56
     @sprites["rightarrow"].z       = 2
     @sprites["rightarrow"].visible = true
@@ -76,7 +76,7 @@ class VoltseonsPauseMenu_Scene
     @shouldExit = false
     @shouldRefresh = true
     @hidden = false
-    $PokemonTemp.menu_theme_changed = false
+    $game_temp.menu_theme_changed = false
   end
 
   def pbStartScene
@@ -249,7 +249,7 @@ class VoltseonsPauseMenu_Scene
     shadowColor = LOCATION_TEXTOUTLINE[$PokemonSystem.current_menu_theme].is_a?(Color) ? LOCATION_TEXTOUTLINE[$PokemonSystem.current_menu_theme] : Color.new(48,48,48)
     xOffset = @sprites["location"].bitmap.width - 64
     pbSetSystemFont(@sprites["location"].bitmap)
-    pbDrawTextPositions(@sprites["location"].bitmap,[["#{$game_map.name}",xOffset,4,1,baseColor,shadowColor,true]])
+    pbDrawTextPositions(@sprites["location"].bitmap,[["#{$game_map.name}",xOffset,12,1,baseColor,shadowColor,true]])
     @sprites["location"].x = -@sprites["location"].bitmap.width + (@sprites["location"].bitmap.text_size($game_map.name).width + 64 + 32)
     @components.each do |component|
       component.refresh
@@ -285,12 +285,12 @@ class Scene_Map
     if safeExists?(MENU_FILE_PATH) && safeExists?(MENU_FILE_PATH + "Backgrounds/")
       sscene = VoltseonsPauseMenu_Scene.new
     else
-      if !$PokemonTemp.menu_warining_done
+      if !$game_temp.menu_warining_done
         pbMessage("Current MENU_FILE_PATH defined for Voltseon's Pause Menu is #{MENU_FILE_PATH}")
         pbMessage("This directory does not exist in your game folder.")
         pbMessage("To rectify this, open the 001_VoltseonMenu_Config.rb using the text editor of your choice, and edit the MENU_FILE_PATH you see there.")
         pbMessage("Opening default pause menu as a failsafe...")
-        $PokemonTemp.menu_warining_done = true
+        $game_temp.menu_warining_done = true
       end
       sscene = PokemonPauseMenu_Scene.new
     end
@@ -312,9 +312,9 @@ end
 #-------------------------------------------------------------------------------
 # Debug command to change menu themes
 #-------------------------------------------------------------------------------
-DebugMenuCommands.register("setmenutheme", {
-  "parent"      => "playermenu",
+MenuHandlers.add(:debug_menu, :set_menu_theme, {
   "name"        => _INTL("Set Menu Theme"),
+  "parent"      => "playermenu",
   "description" => _INTL("Change the Menu Theme for Voltseon's Pause Menu..."),
   "effect"      => proc {
     maxval = 0
@@ -333,36 +333,27 @@ DebugMenuCommands.register("setmenutheme", {
     params.setDefaultValue($PokemonSystem.current_menu_theme)
     $PokemonSystem.current_menu_theme = pbMessageChooseNumber(_INTL("Set the menu theme. (0 - {1})", maxval), params)
     pbMessage(_INTL("The menu theme has been set to {1}.", $PokemonSystem.current_menu_theme))
-    $PokemonTemp.menu_theme_changed = (oldval != $PokemonSystem.current_menu_theme)
+    $game_temp.menu_theme_changed = (oldval != $PokemonSystem.current_menu_theme)
   }
 })
 
 #-------------------------------------------------------------------------------
 # Options command to change menu themes
 #-------------------------------------------------------------------------------
-class PokemonOption_Scene
-  alias voltseonMenu_pbAddOnOptions pbAddOnOptions
-  def pbAddOnOptions(options)
-    if CHANGE_THEME_IN_OPTIONS
-      maxval = 0
-      oldval = $PokemonSystem.current_menu_theme
-      loop do
-        break if !pbResolveBitmap(MENU_FILE_PATH + "Backgrounds/bg_#{maxval}")
-        maxval += 1
-      end
-      if maxval > 1
-        options.push(NumberOption.new(_INTL("Menu Theme"), 1, maxval,
-          proc { $PokemonSystem.current_menu_theme },
-          proc { |value|
-            $PokemonSystem.current_menu_theme = value
-            $PokemonTemp.menu_theme_changed = (oldval != $PokemonSystem.current_menu_theme)
-          }
-        ))
-      end
-    end
-    return voltseonMenu_pbAddOnOptions(options)
-  end
-end
+
+MenuHandlers.add(:options_menu, :menu_theme, {
+  "name"        => _INTL("Menu Theme"),
+  "order"       => 200,
+  "type"        => NumberOption,
+  "condition"   => proc { next CHANGE_THEME_IN_OPTIONS },
+  "parameters"  => 0..MENU_TEXTCOLOR.length,
+  "description" => _INTL("Set pause menu theme."),
+  "get_proc"    => proc { next $PokemonSystem.current_menu_theme },
+  "set_proc"    => proc { |value, scene|
+    $game_temp.menu_theme_changed = $PokemonSystem.current_menu_theme != value if !$game_temp.menu_theme_changed
+    $PokemonSystem.current_menu_theme = value
+  }
+})
 
 #-------------------------------------------------------------------------------
 # Attribute in PokemonSystem to save the current menu theme in the save file
@@ -377,9 +368,9 @@ class PokemonSystem
 end
 
 #-------------------------------------------------------------------------------
-# Attribute in PokemonTemp to store the last selected  menu option
+# Attribute in Game_Temp to store the last selected  menu option
 #-------------------------------------------------------------------------------
-class PokemonTemp
+class Game_Temp
   attr_accessor :last_menu_selection
   attr_accessor :menu_warining_done
   attr_accessor :menu_theme_changed

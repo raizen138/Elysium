@@ -170,7 +170,9 @@ end
 #===============================================================================
 # Initiate quest data
 #===============================================================================
-class PokemonGlobalMetadata  
+class PokemonGlobalMetadata
+#  attr_writer :quests
+
   def quests
     @quests = Player_Quests.new if !@quests
     return @quests
@@ -291,7 +293,13 @@ class QuestData
     stg = ("Stage" + "#{stage}").to_sym
     return "#{QuestModule.const_get(quest)[stg]}"
   end 
-
+### Code for Percy
+  # Get current stage label
+  def getStageLabel(quest,stage)
+    lab = ("StageLabel" + "#{stage}").to_sym
+    return "#{QuestModule.const_get(quest)[lab]}"
+  end 
+###
   # Get maximum number of tasks for quest
   def getMaxStagesForQuest(quest)
     quests = getQuestStages(quest)
@@ -315,4 +323,15 @@ def hasAnyQuests?
     return true
   end
   return false      
+end
+
+def getCurrentStage(quest)
+  $PokemonGlobal.quests.active_quests.each do |s|
+    return s.stage if s.id == quest
+  end
+  return nil
+end
+
+def taskCompleteJingle
+  pbMessage(_INTL("\\se[{1}]<ac><c2=#{colorQuest("red")}>Task completed!</c2>\nYour quest log has been updated!</ac>",QUEST_JINGLE))
 end

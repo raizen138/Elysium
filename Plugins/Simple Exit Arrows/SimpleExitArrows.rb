@@ -7,10 +7,12 @@
 # The below code will do the work of hiding and showing the arrow when needed.
 ################################################################################
 class Game_Player < Game_Character
+#alias __original__pbCheckEventTriggerAfterTurning pbCheckEventTriggerAfterTurning
   # Run when the player turns.
   # The default version of this method is empty, so replacing it outright
   # like this is fine. You may want to double check, just in case, however.
   def pbCheckEventTriggerAfterTurning
+	#__original__pbCheckEventTriggerAfterTurning
     pxCheckExitArrows
   end
 end
@@ -50,11 +52,15 @@ def pxCheckExitArrows(init=false)
 end
 
 # Run on scene change, init them as well
-Events.onMapSceneChange+=proc{|sender,e|
-  pxCheckExitArrows(true)
-}
+EventHandlers.add(:on_map_or_spriteset_change, :exit_arrow, 
+  proc { |sender, e|
+    pxCheckExitArrows(true)
+  }
+)
 
 # Run on every step taken
-Events.onLeaveTile+=proc {|sender,e|
-  pxCheckExitArrows
-}
+EventHandlers.add(:on_leave_tile, :exit_arrow,
+  proc { |sender, e|
+    pxCheckExitArrows
+  }
+)

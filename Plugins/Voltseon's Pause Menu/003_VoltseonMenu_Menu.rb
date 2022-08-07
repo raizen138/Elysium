@@ -7,7 +7,7 @@ class VoltseonsPauseMenu < Component
     @sprites = spritehash
     @menu = menu
     @entries = []
-    @currentSelection = $PokemonTemp.last_menu_selection
+    @currentSelection = $game_temp.last_menu_selection
     @shouldRefresh = true
     # Background image
     @sprites["menuback"] = Sprite.new(@viewport)
@@ -27,12 +27,12 @@ class VoltseonsPauseMenu < Component
     redrawMenuIcons
     @sprites["dummyiconL"] = IconSprite.new(0,0,@viewport)
     @sprites["dummyiconL"].y = Graphics.height - 42
-    @sprites["dummyiconL"].ox = $PokemonTemp.menu_icon_width/2
-    @sprites["dummyiconL"].oy = $PokemonTemp.menu_icon_width/2
+    @sprites["dummyiconL"].ox = $game_temp.menu_icon_width/2
+    @sprites["dummyiconL"].oy = $game_temp.menu_icon_width/2
     @sprites["dummyiconR"] = IconSprite.new(0,0,@viewport)
     @sprites["dummyiconR"].y = Graphics.height - 42
-    @sprites["dummyiconR"].ox = $PokemonTemp.menu_icon_width/2
-    @sprites["dummyiconR"].oy = $PokemonTemp.menu_icon_width/2
+    @sprites["dummyiconR"].ox = $game_temp.menu_icon_width/2
+    @sprites["dummyiconR"].oy = $game_temp.menu_icon_width/2
     calculateXPositions(true)
     @sprites["entrytext"] = BitmapSprite.new(Graphics.width/2,40,@viewport)
     @sprites["entrytext"].y = Graphics.height - 188
@@ -47,7 +47,7 @@ class VoltseonsPauseMenu < Component
     exit = false # should the menu-loop continue
     if Input.trigger?(Input::BACK) || Input.trigger?(Input::ACTION)
       @menu.shouldExit = true
-      $PokemonTemp.last_menu_selection = @currentSelection
+      $game_temp.last_menu_selection = @currentSelection
       return
     elsif Input.press?(Input::LEFT)
       shiftCursor(-1)
@@ -61,7 +61,7 @@ class VoltseonsPauseMenu < Component
       redrawMenuIcons
       calculateXPositions(true)
       @shouldRefresh = true
-      $PokemonTemp.last_menu_selection = @currentSelection
+      $game_temp.last_menu_selection = @currentSelection
     end
     if @shouldRefresh && !@menu.shouldExit
       refreshMenu
@@ -187,15 +187,15 @@ class VoltseonsPauseMenu < Component
       @sprites["icon#{i}"] = IconSprite.new(0,0,@viewport)
       @sprites["icon#{i}"].visible = true
       @sprites["icon#{i}"].y = Graphics.height - 42
-      @sprites["icon#{i}"].ox = $PokemonTemp.menu_icon_width/2
-      @sprites["icon#{i}"].oy = $PokemonTemp.menu_icon_width/2
+      @sprites["icon#{i}"].ox = $game_temp.menu_icon_width/2
+      @sprites["icon#{i}"].oy = $game_temp.menu_icon_width/2
     end
     if @displayIndexes.length == 2
       @sprites["icon1"] = IconSprite.new(0,0,@viewport)
       @sprites["icon1"].visible = true
       @sprites["icon1"].y = Graphics.height - 42
-      @sprites["icon1"].ox = $PokemonTemp.menu_icon_width/2
-      @sprites["icon1"].oy = $PokemonTemp.menu_icon_width/2
+      @sprites["icon1"].ox = $game_temp.menu_icon_width/2
+      @sprites["icon1"].oy = $game_temp.menu_icon_width/2
     end
   end
 
@@ -207,22 +207,22 @@ class VoltseonsPauseMenu < Component
     offset = middle == 0 ? maxdist : maxdist/(@displayIndexes.length/2)
     offset = offset.clamp(maxdist/3,maxdist)
     lastx = 0
-    addl_space = 48 - $PokemonTemp.menu_icon_width
+    addl_space = 48 - $game_temp.menu_icon_width
     for i in 0...middle
-      finalx = Graphics.width/2 - ($PokemonTemp.menu_icon_width/2) - ((offset - 21) * @displayIndexes.length/2)
-      finalx -= ($PokemonTemp.menu_icon_width + offset + addl_space) * (middle - i)
+      finalx = Graphics.width/2 - ($game_temp.menu_icon_width/2) - ((offset - 21) * @displayIndexes.length/2)
+      finalx -= ($game_temp.menu_icon_width + offset + addl_space) * (middle - i)
       @sprites["icon#{i}"].x = finalx
       lastx = finalx if i == 0
     end
-    @sprites["dummyiconL"].x = lastx - ($PokemonTemp.menu_icon_width + offset + addl_space)
+    @sprites["dummyiconL"].x = lastx - ($game_temp.menu_icon_width + offset + addl_space)
     lastx = 0
     for i in (middle + 1)...@displayIndexes.length
-      finalx = Graphics.width/2 + ($PokemonTemp.menu_icon_width/2) + (@displayIndexes.length < 5 ?  offset/2 : ((offset - 21) * @displayIndexes.length/2))
-      finalx += ($PokemonTemp.menu_icon_width + offset + addl_space) * (i - middle)
+      finalx = Graphics.width/2 + ($game_temp.menu_icon_width/2) + (@displayIndexes.length < 5 ?  offset/2 : ((offset - 21) * @displayIndexes.length/2))
+      finalx += ($game_temp.menu_icon_width + offset + addl_space) * (i - middle)
       @sprites["icon#{i}"].x = finalx
       lastx = finalx
     end
-    @sprites["dummyiconR"].x = lastx + ($PokemonTemp.menu_icon_width + offset + addl_space)
+    @sprites["dummyiconR"].x = lastx + ($game_temp.menu_icon_width + offset + addl_space)
     return if !recalc
     @iconsBaseX = {}
     @iconsDeviationL = {}
@@ -278,6 +278,6 @@ class VoltseonsPauseMenu < Component
     pbSetSystemFont(@sprites["entrytext"].bitmap)
     baseColor = MENU_TEXTCOLOR[$PokemonSystem.current_menu_theme].is_a?(Color) ? MENU_TEXTCOLOR[$PokemonSystem.current_menu_theme] : Color.new(248,248,248)
     shadowColor = MENU_TEXTOUTLINE[$PokemonSystem.current_menu_theme].is_a?(Color) ? MENU_TEXTOUTLINE[$PokemonSystem.current_menu_theme] : Color.new(48,48,48)
-    pbDrawTextPositions(@sprites["entrytext"].bitmap,[[text,128,0,2,baseColor,shadowColor]])
+    pbDrawTextPositions(@sprites["entrytext"].bitmap,[[text,128,12,2,baseColor,shadowColor]])
   end
 end

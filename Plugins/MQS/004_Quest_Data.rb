@@ -28,6 +28,8 @@ module QuestModule
     :Location1 => "Lappet Town",
     :Location2 => "Viridian Forest",
     :Location3 => "Route 3",
+	:StageLabel1 => "1",
+	:StageLabel2 => "2",
     :QuestDescription => "Some wild Pokémon stole a little boy's favourite toy. Find those troublemakers and help him get it back.",
     :RewardString => "Something shiny!"
   }

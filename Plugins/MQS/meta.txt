@@ -1,7 +1,8 @@
-Name         = Modern Quest System + UI
-Version      = 1.0.1
-Link         = https://reliccastle.com/resources/709/
-Credits      = ThatWelshOne_,mej71,derFischae,Marin
+Name       = Modern Quest System + UI
+Version    = 1.0.2
+Essentials = 20.1
+Website    = https://reliccastle.com/resources/709/
+Credits    = ThatWelshOne_,mej71,derFischae,Marin
 
 #===============================================================================
 # More detailed credits

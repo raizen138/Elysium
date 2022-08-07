@@ -18,7 +18,7 @@ class SafariHud < Component
     text2 = (Settings::SAFARI_STEPS>0) ? _INTL("Steps: {1}/{2}", pbSafariState.steps,Settings::SAFARI_STEPS) : ""
     @sprites["overlay"].bitmap.clear
     pbSetSystemFont(@sprites["overlay"].bitmap)
-    pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 0,1,@baseColor,@shadowColor],[text2,Graphics.width/2 - 8,32,1,@baseColor,@shadowColor]])
+    pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 12,1,@baseColor,@shadowColor],[text2,Graphics.width/2 - 8,44,1,@baseColor,@shadowColor]])
   end
 end
 
@@ -49,9 +49,9 @@ class BugContestHud < Component
     end
     @sprites["overlay"].bitmap.clear
     pbSetSystemFont(@sprites["overlay"].bitmap)
-    pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 0,1,
-      @baseColor,@shadowColor],[text2,Graphics.width/2 - 8,32,1,@baseColor,@shadowColor],
-      [text3,248,64,1,@baseColor,@shadowColor]])
+    pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 12,1,
+      @baseColor,@shadowColor],[text2,Graphics.width/2 - 8,44,1,@baseColor,@shadowColor],
+      [text3,248,76,1,@baseColor,@shadowColor]])
   end
 end
 
@@ -187,8 +187,8 @@ class DateAndTimeHud < Component
     text2 = _INTL("{1}",pbGetTimeNow.strftime("%I:%M %p"))
     @sprites["overlay"].bitmap.clear
     pbSetSystemFont(@sprites["overlay"].bitmap)
-    pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 0,1,
-      @baseColor,@shadowColor],[text2,Graphics.width/2 - 8,32,1,@baseColor,@shadowColor]])
+    pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 12,1,
+      @baseColor,@shadowColor],[text2,Graphics.width/2 - 8,44,1,@baseColor,@shadowColor]])
     @last_time = pbGetTimeNow.strftime("%I:%M %p")
   end
 end
@@ -236,7 +236,7 @@ class NewQuestHud < Component
     if numQuests > 0
       text = _INTL("You have {1} new quest{2}!",numQuests, numQuests == 1 ? "" : "s")
       pbSetSmallFont(@sprites["overlay"].bitmap)
-      pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 0,1,@baseColor,@shadowColor]])
+      pbDrawTextPositions(@sprites["overlay"].bitmap,[[text,Graphics.width/2 - 8, 12,1,@baseColor,@shadowColor]])
     end
   end
 end

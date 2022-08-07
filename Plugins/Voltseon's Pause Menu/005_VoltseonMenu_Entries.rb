@@ -67,7 +67,7 @@ class MenuEntryBag < MenuEntry
     item = nil
     pbFadeOutIn(99999) {
       scene = PokemonBag_Scene.new
-      screen = PokemonBagScreen.new(scene,$PokemonBag)
+      screen = PokemonBagScreen.new(scene,$bag)
       item = screen.pbStartScreen
     }
     if item
@@ -152,7 +152,7 @@ class MenuEntryMap < MenuEntry # Play Pokémon Splice
     pbShowMap(-1,false)
   end
 
-  def selectable?; return $PokemonBag.pbHasItem?(:TOWNMAP); end
+  def selectable?; return $bag.has?(:TOWNMAP); end
 end
 #-------------------------------------------------------------------------------
 # Entry for Options Screen
@@ -170,7 +170,7 @@ class MenuEntryOptions < MenuEntry
       screen.pbStartScreen
       pbUpdateSceneMap
     }
-    return $PokemonTemp.menu_theme_changed
+    return $game_temp.menu_theme_changed
   end
 
   def selectable?; return true; end
@@ -186,7 +186,7 @@ class MenuEntryDebug < MenuEntry
 
   def selected(menu)
     pbFadeOutIn(99999) { pbDebugMenu }
-    return $PokemonTemp.menu_theme_changed
+    return $game_temp.menu_theme_changed
   end
 
   def selectable?; return $DEBUG; end
