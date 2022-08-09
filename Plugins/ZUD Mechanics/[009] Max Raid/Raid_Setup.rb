@@ -69,6 +69,7 @@ class MaxRaidBattle
     }
     Input.update
     BattleCreationHelperMethods.set_outcome(outcome, rules[:outcome])
+	$player.has_raid_database = true if Settings::UNLOCK_DATABASE_FROM_RAIDS
     return outcome
   end
 

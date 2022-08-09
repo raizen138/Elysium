@@ -191,15 +191,3 @@ class Battle::Move
     return zud_pbAdditionalEffectChance(user, target, effectChance)
   end
 end
-
-
-#-------------------------------------------------------------------------------
-# Aliased to ensure captured Max Raid Pokemon always go to storage, never the party.
-#-------------------------------------------------------------------------------
-class Battle::Peer
-  alias zud_pbStorePokemon pbStorePokemon
-  def pbStorePokemon(player, pkmn)
-    return $PokemonStorage.pbStoreCaught(pkmn) if @raid_battle
-    zud_pbStorePokemon(player, pkmn)
-  end
-end

@@ -125,7 +125,9 @@ end
 #-------------------------------------------------------------------------------
 class Battle::Move::LowerPPOfTargetLastMoveBy3 < Battle::Move
   def pbEffectAgainstTarget(user, target)
+    return if target.fainted?
     last_move = target.pbGetMoveWithID(target.lastRegularMoveUsed)
+    return if !last_move || last_move.pp == 0 || last_move.total_pp <= 0
     reduction = [3, last_move.pp].min
     target.pbSetPP(last_move, last_move.pp - reduction)
     move_name = last_move.name

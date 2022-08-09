@@ -166,7 +166,7 @@ module GameData
     end
 	
 	#---------------------------------------------------------------------------
-    # Compatibility with Following Pokemon EX and Visible Overworld Wild Encounters.
+    # Compatibility with Following Pokemon EX.
     #---------------------------------------------------------------------------
 	def self.ow_sprite_filename(*params)
       params = species_overworld_params(*params)
@@ -378,6 +378,17 @@ module GameData
       end
     end
   end
+end
+
+
+#-------------------------------------------------------------------------------
+# Compatibility with Visible Overworld Wild Encounters.
+#-------------------------------------------------------------------------------
+def ow_sprite_filename(*params)
+  params = species_overworld_params(*params)
+  fname = GameData::Species.check_graphic_file("Graphics/Characters/", params, "Followers")
+  fname = "Graphics/Characters/Followers/000.png" if nil_or_empty?(fname)
+  return fname
 end
 
 

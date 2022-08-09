@@ -1020,6 +1020,7 @@ class RaidDataScene
     rules[:weather] = :None
     rules[:terrain] = :None
     rules[:environ] = :Cave
+	rules[:simple] = true
     pokemon[:form] = GameData::Species.get(pkmn).form
     pokemon[:gmaxfactor] = (GameData::Species.get(pkmn).hasGmax?) ? true : false
     raidmsg = (rules[:rank] == 6) ? "Legendary" : rules[:rank]

@@ -59,7 +59,7 @@ class RaidBattle < Battle
       pbDynamaxAdventure.swap_pokemon
     else
       pkmn.reset_moves
-      stored_box = @peer.pbStorePokemon(pbPlayer, pkmn)
+      stored_box = $PokemonStorage.pbStoreCaught(pkmn)
       box_name = @peer.pbBoxName(stored_box)
       pbDisplayPaused(_INTL("{1} has been sent to Box \"{2}\"!", pkmn.name, box_name))
     end

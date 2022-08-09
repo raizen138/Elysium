@@ -14,9 +14,17 @@ class Battle::Scene
     idxTrainer   = (idxBattler) ? @battle.pbGetOwnerIndexFromBattlerIndex(idxBattler) : 0
     midbattle    = $game_temp.dx_midbattle
     all_triggers = []
-    triggers.each { |trigger| all_triggers.push(trigger, trigger + "_repeat") }
+    triggers.each do |trigger| 
+      all_triggers.push(trigger,
+                        trigger + "_repeat",
+                        trigger + "_repeat_alt",
+                        trigger + "_random",
+                        trigger + "_repeat_random") 
+    end
     all_triggers.each do |trigger|
-	  next if !midbattle.has_key?(trigger)
+      next if !midbattle.has_key?(trigger)
+      next if trigger.include?("_random") && rand(10) < 5
+      next if trigger.include?("repeat_alt") && @battle.turnCount.even?
       case midbattle[trigger]
       #-------------------------------------------------------------------------
       # When trigger is set to a String or Array, plays trainer speech if possible.
@@ -74,6 +82,14 @@ class Battle::Scene
           #---------------------------------------------------------------------
           when :text, :message        then pbMidbattleSpeech(idxTrainer, idxTarget, battler, value, false)
           when :speech, :dialogue     then pbMidbattleSpeech(idxTrainer, idxTarget, battler, value)
+          #---------------------------------------------------------------------
+          # Plays an animation.
+          #---------------------------------------------------------------------
+          when :anim, :animation      then midbattle_PlayAnimation(battler, idxTarget, value)
+          #---------------------------------------------------------------------
+          # Uses an item on a battler.
+          #---------------------------------------------------------------------
+          when :useitem               then midbattle_UseItem(battler, value)
           #---------------------------------------------------------------------
           # Changes to battlers or battle states.
           #---------------------------------------------------------------------
@@ -191,6 +207,40 @@ class Battle::Scene
   end
   
   #-------------------------------------------------------------------------------
+  # Plays an animation.
+  #-------------------------------------------------------------------------------
+  def midbattle_PlayAnimation(battler, idxTarget, value)
+    if value.is_a?(Array)
+      anim, index = value[0], value[1]
+    else
+      anim, index = value, nil
+    end
+    target = (index) ? midbattle_Battler(battler.index, idxTarget, index) : nil
+    case anim
+    when Symbol then pbAnimation(anim, battler, target)
+    when String then pbCommonAnimation(anim, battler, target)
+    end
+  end
+  
+  #-------------------------------------------------------------------------------
+  # Uses an item on a battler.
+  #-------------------------------------------------------------------------------
+  def midbattle_UseItem(battler, item)
+    trainerName = @battle.pbGetOwnerName(battler.index)
+    @battle.pbUseItemMessage(item, trainerName)
+    if battler
+      if ItemHandlers.triggerCanUseInBattle(item, battler.pokemon, battler, 0, true, @battle, self, false)
+        ItemHandlers.triggerBattleUseOnBattler(item, battler, self)
+        battler.pbItemOnStatDropped
+      else
+        @battle.pbDisplay(_INTL("But it had no effect!"))
+      end
+    else
+      @battle.pbDisplay(_INTL("But it's not where this item can be used!"))
+    end
+  end
+  
+  #-------------------------------------------------------------------------------
   # Changes a battler's HP.
   #-------------------------------------------------------------------------------
   def midbattle_ChangeHP(battler, value)
@@ -256,7 +306,7 @@ class Battle::Scene
     if value.is_a?(Array)
       form, msg = value[0], value[1]
     else
-      form, msg = midbattle[trigger][real_key], nil
+      form, msg = value, nil
     end
     if msg.is_a?(String)
       lowercase = (msg.first == "{") ? false : true
