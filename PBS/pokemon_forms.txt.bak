@@ -2014,7 +2014,7 @@ Pokedex = Sad that its true identity may be exposed, Mimikyu will mercilessly se
 #-------------------------------
 [NECROZMA,1]
 FormName = Dusk Mane
-Types = LIGHT,STEEL
+Types = PSYCHIC,STEEL
 BaseStats = 97,157,127,77,113,109
 BaseExp = 340
 EVs = ATTACK,3
@@ -2026,7 +2026,7 @@ Pokedex = This is Necrozma's form while it's absorbing the power of Solgaleo, ma
 #-------------------------------
 [NECROZMA,2]
 FormName = Dawn Wings
-Types = LIGHT,GHOST
+Types = PSYCHIC,GHOST
 BaseStats = 97,113,109,77,157,127
 BaseExp = 340
 EVs = SPECIAL_ATTACK,3
@@ -2037,7 +2037,7 @@ Pokedex = Lunala no longer has a will of its own. Now under the control of Necro
 #-------------------------------
 [NECROZMA,3]
 FormName = Ultra Necrozma
-Types = LIGHT,DRAGON
+Types = PSYCHIC,DRAGON
 BaseStats = 97,167,97,129,167,97
 BaseExp = 377
 EVs = ATTACK,1,SPECIAL_ATTACK,1,SPEED,1
@@ -2048,7 +2048,7 @@ Pokedex = The light pouring out from all over its body affects living things and
 #-------------------------------
 [NECROZMA,4]
 PokedexForm = 3
-Types = LIGHT,DRAGON
+Types = PSYCHIC,DRAGON
 BaseStats = 97,167,97,129,167,97
 BaseExp = 377
 EVs = ATTACK,1,SPECIAL_ATTACK,1,SPEED,1

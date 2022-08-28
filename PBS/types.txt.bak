@@ -127,3 +127,26 @@ IsSpecialType = true
 Weaknesses = POISON,STEEL
 Resistances = FIGHTING,BUG,DARK
 Immunities = DRAGON
+#-------------------------------
+[LIGHT]
+Name = Light
+IconPosition = 19
+IsSpecialType = true
+Weaknesses = DARK,BUG,GRASS
+Resistances = FIGHTING,FIRE,FAIRY
+Immunities = LIGHT
+#-------------------------------
+[MYSTIC]
+Name = Mystic
+IconPosition = 20
+IsSpecialType = true
+Weaknesses = VOID
+Resistances = DRAGON,FAIRY
+Immunities = LIGHT
+#-------------------------------
+[VOID]
+Name = Void
+IconPosition = 21
+IsSpecialType = true
+Weaknesses = LIGHT
+Resistances = MYSTIC,FAIRY

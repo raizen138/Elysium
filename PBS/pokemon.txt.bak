@@ -2362,7 +2362,7 @@ WildItemCommon = BLACKSLUDGE
 #-------------------------------
 [SHELLDER]
 Name = Shellder
-Types = WATER,VOID
+Types = WATER
 BaseStats = 30,65,100,40,45,25
 GenderRatio = Female50Percent
 GrowthRate = Slow
@@ -2391,7 +2391,7 @@ Evolutions = CLOYSTER,Item,WATERSTONE
 #-------------------------------
 [CLOYSTER]
 Name = Cloyster
-Types = WATER,VOID
+Types = WATER,ICE
 BaseStats = 50,95,180,70,85,45
 GenderRatio = Female50Percent
 GrowthRate = Slow

@@ -27,8 +27,8 @@ BaseMoney = 16
 #-------------------------------
 [RIVAL2]
 Name = Rival
-Gender = Male
-BaseMoney = 36
+Gender = Female
+BaseMoney = 16
 #-------------------------------
 [AROMALADY]
 Name = Aroma Lady
@@ -153,8 +153,8 @@ Name = Super Nerd
 Gender = Male
 BaseMoney = 48
 #-------------------------------
-[TAMER]
-Name = Tamer
+[FIREBREATHER]
+Name = Firebreather
 Gender = Male
 BaseMoney = 40
 #-------------------------------
