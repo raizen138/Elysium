@@ -3,7 +3,7 @@
 #===============================================================================
 module Settings
 ################################################################################  
-# Switch & Variable Settings
+# Switch Settings
 ################################################################################
 # Switch Numbers for toggling off battle mechanics. Setting these game switch
 # numbers to "false" in an event will disable that particular mechanic.

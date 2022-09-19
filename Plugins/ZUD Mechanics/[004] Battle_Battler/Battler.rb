@@ -79,7 +79,8 @@ class Battle::Battler
     transform = @effects[PBEffects::Transform]
     newpoke   = @effects[PBEffects::TransformPokemon]
     species   = (transform) ? newpoke.species_data.id : nil
-    return false if transform && self.item && GameData::Item.get(self.item).is_ultra_item?
+    return false if !self.item || !GameData::Item.get(self.item).is_z_crystal?
+    return false if transform && GameData::Item.get(self.item).is_ultra_item?
     return @pokemon&.compat_zmove?(move, nil, species)
   end
   

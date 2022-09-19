@@ -418,7 +418,7 @@ class SpritePositioner
     cw.y = Graphics.height - cw.height
     allspecies = []
     GameData::Species.each do |sp|
-	  next if sp.no_dynamax
+	  next if sp.no_dynamax && @dynamax_mode
       name = (sp.form == 0) ? sp.name : _INTL("{1} (form {2})", sp.real_name, sp.form)
       allspecies.push([sp.id, sp.species, sp.form, name, false]) if name && !name.empty?
       if @dynamax_mode && sp.hasGmax? && !(sp.species == :ALCREMIE && sp.form > 0)

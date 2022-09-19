@@ -157,7 +157,7 @@ module GameData
     def max_move?;  return !@maxmove.nil?; end
       
     def generic?;   return GameData::Type.exists?(@id); end
-    def exclusive?; return !@species.empty?; end
+    def exclusive?; return @species.length > 0; end
     def gmax?;      return @gmax; end
     
     #---------------------------------------------------------------------------
@@ -225,7 +225,7 @@ module GameData
       self.each do |pm|
         next if !pm.z_move?
         next if pm.exclusive? && !pm.species.include?(species)
-        if item == pm.item
+        if item == pm.item || item.nil?
           case param
           # When param is a list of moves
           when Array

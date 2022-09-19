@@ -83,26 +83,6 @@ module GameData
     end
 	
     #---------------------------------------------------------------------------
-    # Gets all eligible moves that a species's entire evolutionary line can learn.
-    #---------------------------------------------------------------------------
-    def get_family_moves
-      moves = []
-      baby = GameData::Species.get_species_form(get_baby_species, @form)
-      prev = GameData::Species.get_species_form(get_previous_species, @form)
-      if baby.species != @species
-        baby.moves.each { |m| moves.push(m[1]) }
-      end
-      if prev.species != @species && prev.species != baby.species
-        prev.moves.each { |m| moves.push(m[1]) }
-      end
-      @moves.each { |m| moves.push(m[1]) }
-      @tutor_moves.each { |m| moves.push(m) }
-      get_egg_moves.each { |m| moves.push(m) }
-      moves |= []
-      return moves
-    end
-	
-    #---------------------------------------------------------------------------
     # Determines if this species's icon sprites have visual gender differences.
     #---------------------------------------------------------------------------
     def gendered_icons?

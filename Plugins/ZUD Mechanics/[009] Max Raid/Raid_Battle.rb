@@ -124,7 +124,7 @@ class RaidBattle < Battle
     ret = @scene.pbCommandMenuEx(idxBattler,
                                 [_INTL("What will\n{1} do?", @battlers[idxBattler].name),
                                  _INTL("Fight"),
-                                 _INTL("Ball"),
+                                 _INTL("Bag"),
                                  _INTL("Pokémon"),
                                  _INTL("Cheer")], 5)
     ret = 4 if ret == 3
@@ -507,7 +507,11 @@ class Battle
   #-----------------------------------------------------------------------------
   alias zud_pbStorePokemon pbStorePokemon
   def pbStorePokemon(pkmn)
-    raid_ResetPokemon(pkmn)
+    if pkmn.isSpecies?(:ETERNATUS) || !pkmn.dynamax_able?
+      pkmn.gmax_factor = false
+      pkmn.dynamax_lvl = 0
+    end
+    raid_ResetPokemon(pkmn) if pkmn.dynamax?
     zud_pbStorePokemon(pkmn)
   end
   
@@ -518,10 +522,6 @@ class Battle
     if pkmn.dynamax_lvl > 10
       pkmn.dynamax_lvl /= 10
       pkmn.dynamax_lvl += rand(5)
-    end
-    if pkmn.isSpecies?(:ETERNATUS) || !pkmn.dynamax_able?
-      pkmn.gmax_factor = false
-      pkmn.dynamax_lvl = 0
     end
   end
 end

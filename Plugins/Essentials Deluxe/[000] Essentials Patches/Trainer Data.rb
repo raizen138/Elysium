@@ -9,32 +9,11 @@
 #-------------------------------------------------------------------------------
 module GameData
   class Trainer
-    SCHEMA = {
-      "Items"        => [:items,           "*e", :Item],
-      "LoseText"     => [:lose_text,       "q"],
-      "Pokemon"      => [:pokemon,         "ev", :Species],
-      "Form"         => [:form,            "u"],
-      "Name"         => [:name,            "s"],
-      "Moves"        => [:moves,           "*e", :Move],
-      "Ability"      => [:ability,         "e", :Ability],
-      "AbilityIndex" => [:ability_index,   "u"],
-      "Item"         => [:item,            "e", :Item],
-      "Gender"       => [:gender,          "e", { "M" => 0, "m" => 0, "Male" => 0, "male" => 0, "0" => 0,
-                                                  "F" => 1, "f" => 1, "Female" => 1, "female" => 1, "1" => 1 }],
-      "Nature"       => [:nature,          "e", :Nature],
-      "IV"           => [:iv,              "uUUUUU"],
-      "EV"           => [:ev,              "uUUUUU"],
-      "Happiness"    => [:happiness,       "u"],
-      "Shiny"        => [:shininess,       "b"],
-      "SuperShiny"   => [:super_shininess, "b"],
-      "Shadow"       => [:shadowness,      "b"],
-      "Ball"         => [:poke_ball,       "e", :Item],
-      "Ace"          => [:trainer_ace,     "b"],
-      "Focus"        => (PluginManager.installed?("Focus Meter System")) ? [:focus,     "e", :Focus]     : [:focus,    "u"],
-      "Birthsign"    => (PluginManager.installed?("Pokémon Birthsigns")) ? [:birthsign, "e", :Birthsign] : [:birthsign,"u"],
-      "DynamaxLvl"   => [:dynamax_lvl,     "u"],
-      "Gigantamax"   => [:gmaxfactor,      "b"]
-    }
+    SCHEMA["Ace"]        = [:trainer_ace, "b"]
+    SCHEMA["Focus"]      = [:focus,       "u"] # Placeholder
+    SCHEMA["Birthsign"]  = [:birthsign,   "u"] # Placeholder
+    SCHEMA["DynamaxLvl"] = [:dynamax_lvl, "u"]
+    SCHEMA["Gigantamax"] = [:gmaxfactor,  "b"]
     
     def to_trainer
       tr_name = self.name

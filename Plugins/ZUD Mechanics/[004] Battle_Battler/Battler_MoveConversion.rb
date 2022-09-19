@@ -15,7 +15,7 @@ class Battle::Battler
       case mode
       when 1, "Z-Move"
         next if !@pokemon.compat_zmove?(@moves[i], nil, transform)
-        @moves[i]          = convert_zmove(@moves[i], transform)
+        @moves[i]          = convert_zmove(@moves[i], @pokemon.item, transform)
         @moves[i].pp       = [1, @base_moves[i].pp].min
         @moves[i].total_pp = 1
       # Max Moves
@@ -30,11 +30,11 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   # Gets a battler's Z-Move based on the inputted base move.
   #-----------------------------------------------------------------------------
-  def convert_zmove(move, transform = nil)
+  def convert_zmove(move, item = nil, transform = nil)
     if move.statusMove?
       poke_move = Pokemon::Move.new(move.id)
     else
-      id = @pokemon.get_zmove(move, transform)
+      id = @pokemon.get_zmove(move, item, transform)
       poke_move = Pokemon::Move.new(id)
     end
     poke_move.old_move = move
@@ -188,7 +188,7 @@ class Battle::Battler
       if newtype && GameData::Type.exists?(newtype)
         transform = @effects[PBEffects::TransformSpecies]
         if move.zMove?
-          z_move    = @pokemon.get_zmove(newtype, transform)
+          z_move    = @pokemon.get_zmove(newtype, nil, transform)
           poke_move = Pokemon::Move.new(z_move)
           poke_move.old_move = base_move
           return Battle::PowerMove.from_pokemon_move(@battle, poke_move)

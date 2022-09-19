@@ -404,8 +404,8 @@ class Battle::PowerMove::GeneralEffect < Battle::PowerMove
           effect, setting, msg, user_msg = eff[0], eff[1], eff[2], eff[3]
           lowercase = (msg && msg.first == "{") ? false : true
           case sides
-          when :allies    then idxSide = user.idxOwnSide
-          when :opponents then idxSide = user.idxOpposingSide
+          when :allies    then idxSide = 0
+          when :opponents then idxSide = 1
           end
           ret = user.apply_team_effects(effect, setting, idxSide, skip_message, msg, lowercase, user_msg)
           skip_message.push(ret) if ret

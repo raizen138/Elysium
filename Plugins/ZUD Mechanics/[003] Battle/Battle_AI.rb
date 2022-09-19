@@ -54,7 +54,7 @@ class Battle::AI
       user.eachMoveWithIndex do |m, i|
 	    user.base_moves.push(m)
         if user.pokemon.compat_zmove?(m, nil, species)
-          zmove = user.convert_zmove(m)
+          zmove = user.convert_zmove(m, user.item, species)
           zmove.pp = m.pp
         else
           zmove = nil

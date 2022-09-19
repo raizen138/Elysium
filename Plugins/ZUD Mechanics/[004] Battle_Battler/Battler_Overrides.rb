@@ -17,7 +17,6 @@ class Battle::Battler
     if self.dynamax? && @effects[PBEffects::Dynamax] == 0
       @effects[PBEffects::Dynamax] = Settings::DYNAMAX_TURNS
     end
-    @effects[PBEffects::GMaxTrapping]  = false
     @effects[PBEffects::MaxGuard]      = false
     @effects[PBEffects::MaxRaidBoss]   = false
     @effects[PBEffects::RaidShield]    = -1
@@ -28,6 +27,7 @@ class Battle::Battler
     # Round about way of preventing trapping effects of certain G-Max moves from
     # ending prematurely if the user of the move leaves the field.
     #-----------------------------------------------------------------------------
+    @effects[PBEffects::GMaxTrapping] = false if !batonPass
     trap_hash = {}
     @battle.allBattlers.each do |b|
       next if !b.effects[PBEffects::GMaxTrapping]
@@ -153,7 +153,7 @@ class Battle::Battler
     side  = (@battle.opposes?(self.index)) ? 1 : 0
     owner = @battle.pbGetOwnerIndexFromBattlerIndex(self.index)
     if @battle.zMove[side][owner] == self.index
-      z_move = convert_zmove(choice[2])
+      z_move = convert_zmove(choice[2], nil, @effects[PBEffects::TransformSpecies])
       z_move.specialUseZMove = true
       choice[2] = z_move
       pbUseMove(choice, specialUsage)

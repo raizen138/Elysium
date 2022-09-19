@@ -109,7 +109,7 @@ ZMove   = TENMILLIONVOLTTHUNDERBOLT
 Item    = PIKASHUNIUMZ
 Move    = THUNDERBOLT
 Species = PIKACHU
-Flag    = AllFormsAbove_8
+Flag    = AllFormsAbove_7
 #-------------------------------
 [ZMOVE]
 ZMove   = STOKEDSPARKSURFER

@@ -177,27 +177,4 @@ class Battle::Scene::PokemonDataBox < SpriteWrapper
 	  self.bitmap.blt(offset, 46, @shieldHPBitmap.bitmap, Rect.new(0, 0, 2 + shieldHP * 26, 12))
     end
   end
-  
-  #-----------------------------------------------------------------------------
-  # Edited to include Max Raid displays.
-  #-----------------------------------------------------------------------------
-  def refresh
-    self.bitmap.clear
-    return if !@battler.pokemon
-    draw_background
-    draw_name
-    if @battler.effects[PBEffects::MaxRaidBoss]
-      draw_raid_shield
-      draw_raid_counters
-    else
-      draw_level
-      draw_gender
-    end
-    draw_status
-    draw_shiny_icon
-    draw_special_form_icon
-    draw_owned_icon
-    refreshHP
-    refreshExp
-  end
 end

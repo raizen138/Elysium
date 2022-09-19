@@ -171,8 +171,11 @@ class Battle::Battler
   # Capturing a Max Raid Pokemon.
   #-----------------------------------------------------------------------------
   def raid_CatchPokemon(target)
+    pbBGMFade(0.2)
+    pbWait((0.2 * 60).round)
+    pbBGMPlay("Battle Raid Capture")
     @battle.pbDisplayPaused(_INTL("{1} is weak!\nThrow a Poké Ball now!", target.pbThis))
-    pbWait(20)
+    pbWait(30)
     cmd = 0
     cmd = @battle.pbShowCommands("", ["Catch", "Don't Catch"], 1)
     case cmd

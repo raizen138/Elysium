@@ -6,8 +6,8 @@
 ##################################################################################
 CONFIG_URL = "https://gachapgd.000webhostapp.com/gacha/config.txt"
 
-TIERCOLORS = [Color.new(255,255,255),Color.new(255,255,255),Color.new(255,255,255),
-              Color.new(205,215,74),Color.new(164,121,169)]
+TIERCOLORS = [Color.new(255,255,255),Color.new(112,112,112),Color.new(209,162,148),
+              Color.new(229,229,229),Color.new(255,197,41)]
 TIERSOUNDS = ["ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg"]
 
 FRASES = ["Aprovecha que no tienes dinero y huye de este juego infernal. No merece la pena",
@@ -25,8 +25,21 @@ class BannerReward < SpriteWrapper
     @id = id
     @stars = stars - 1
     @reward = reward
+    @color = TIERCOLORS[stars-1]
     
     self.bitmap = Bitmap.new(160,160)
+    @light = Sprite.new(@viewport)
+    @light.bitmap = Bitmap.new("Graphics/Pictures/Gacha/gacha")
+    @light.ox = @light.bitmap.width/2
+    @light.oy = @light.bitmap.height/2
+    #@light.x = Graphics.width/2
+    #@light.y = Graphics.height/2
+    @light.zoom_x = 0.5
+    @light.zoom_y = 0.5
+    #@light.opacity = 0
+    @light.color = TIERCOLORS[@stars]
+    @light.angle += 2
+
     @rewardSprite = Sprite.new(@viewport)
     @rewardSprite.bitmap = Bitmap.new(@reward)
     @rewardSprite.ox = @rewardSprite.bitmap.width/2 
@@ -43,7 +56,7 @@ class BannerReward < SpriteWrapper
     starsRect = Rect.new(0, starsY, @starsSprite.bitmap.width, @starsSprite.bitmap.height)
     @starsSprite.bitmap.blt(0, 0, starsBitmap, starsRect)
     @starsSprite.x= 36
-    @starsSprite.y = (@id!=1 ? 140 : 112)
+    @starsSprite.y = 140
     @starsSprite.ox = @starsSprite.bitmap.width/2 
     @starsSprite.oy = @starsSprite.bitmap.height/2 
   end
@@ -53,36 +66,42 @@ class BannerReward < SpriteWrapper
     super(value)
     @rewardSprite.x = value + self.bitmap.width/2 - self.ox
     @starsSprite.x = value + 36 + @starsSprite.ox - self.ox
+    @light.x = value + self.bitmap.width/2 - self.ox
   end
   
   def y=(value)
     super(value)
     @rewardSprite.y = value + self.bitmap.height/2 - self.oy
-    y = (@id != 1 ? 140 : 112)
+    y = 140
     @starsSprite.y = value + y + @starsSprite.oy - self.oy
+    @light.y = value + self.bitmap.height/2 - self.oy
   end
   
   def zoom_x=(value)
     super(value)
     @rewardSprite.zoom_x = value + 1.0
     @starsSprite.zoom_x = value
+    @light.zoom_x = value
   end
   
   def zoom_y=(value)
     super(value)
     @rewardSprite.zoom_y = value + 1.0
     @starsSprite.zoom_y = value
+    @light.zoom_y = value
   end
     
   def opacity=(value)
     super(value)
     @rewardSprite.opacity = value
     @starsSprite.opacity = value
+    @light.opacity = value
   end
   
   def dispose
     @rewardSprite.dispose
     @starsSprite.dispose
+    @light.dispose
   end
 end
 
@@ -210,7 +229,7 @@ class GachaScene
     @sprites["button1"].x = 16
     @sprites["button1"].y = 336
     pbSetSystemFont(@sprites["button1"].bitmap)
-    pbDrawShadowText(@sprites["button1"].bitmap,0,0,128,32,"Información",base,shadow,1)
+    pbDrawShadowText(@sprites["button1"].bitmap,0,6,128,32,"Información",base,shadow,1)
     
     if @sel == 1
       @sprites["button2"].bitmap = Bitmap.new("Graphics/Pictures/Gacha/Boton Sel")
@@ -221,7 +240,7 @@ class GachaScene
     @sprites["button2"].y = 304
     @sprites["button2"].bitmap.font.size = 38
     pbSetSystemFont(@sprites["button2"].bitmap)
-    pbDrawShadowText(@sprites["button2"].bitmap,9,0,112,48,"Tirar",base,shadow,1)
+    pbDrawShadowText(@sprites["button2"].bitmap,9,13,112,58,"Tirar",base,shadow,1)
 
     if @sel == 2
       @sprites["button3"].bitmap = Bitmap.new("Graphics/Pictures/Gacha/Boton Chiquito Sel")
@@ -231,7 +250,7 @@ class GachaScene
     @sprites["button3"].x = 368
     @sprites["button3"].y = 336
     pbSetSystemFont(@sprites["button3"].bitmap)
-    pbDrawShadowText(@sprites["button3"].bitmap,0,0,128,32,"Salir",base,shadow,1)
+    pbDrawShadowText(@sprites["button3"].bitmap,0,6,128,32,"Salir",base,shadow,1)
     
     if @sel == 3
       @sprites["bannerSel"].visible = true
@@ -252,10 +271,10 @@ class GachaScene
     end
     
     @sprites["text"].bitmap.clear
-    pbDrawShadowText(@sprites["text"].bitmap,0,0,Graphics.width,98,@banners[@banner_sel].name,base,shadow,1)
+    pbDrawShadowText(@sprites["text"].bitmap,0,25,Graphics.width,98,@banners[@banner_sel].name,base,shadow,1)
     
     @sprites["coins"].bitmap.clear
-    pbDrawShadowText(@sprites["coins"].bitmap,0,0,Graphics.width,25,"x"+$PokemonGlobal.gachaCoins.to_s,base,shadow)
+    pbDrawShadowText(@sprites["coins"].bitmap,0,5,Graphics.width,25,"x"+$PokemonGlobal.gachaCoins.to_s,base,shadow)
   end
   
   def changeBanner(dir)
@@ -342,16 +361,16 @@ class GachaScene
     bg.bitmap = Bitmap.new("Graphics/Pictures/Gacha/rewardBG")
     bg.tone = Tone.new(color.red, color.green, color.blue)
     
-    light = Sprite.new(@viewport)
-    light.bitmap = Bitmap.new("Graphics/Pictures/Gacha/gacha")
-    light.ox = light.bitmap.width/2
-    light.oy = light.bitmap.height/2
-    light.x = Graphics.width/2
-    light.y = Graphics.height/2
-    #light.zoom_x = 11.0
-    #light.zoom_y = 11.0
-    light.opacity = 0
-    light.color = color
+    # light = Sprite.new(@viewport)
+    # light.bitmap = Bitmap.new("Graphics/Pictures/Gacha/gacha")
+    # light.ox = light.bitmap.width/2
+    # light.oy = light.bitmap.height/2
+    # light.x = Graphics.width/2
+    # light.y = Graphics.height/2
+    # #light.zoom_x = 11.0
+    # #light.zoom_y = 11.0
+    # light.opacity = 0
+    # light.color = color
     
     reward = BannerReward.new(0,filename,stars,@viewport)
     reward.ox = reward.bitmap.width/2
@@ -366,14 +385,14 @@ class GachaScene
     frame = 0
     while (!Input.trigger?(Input::C) && frame >= 9) || frame <= 9
       if (0..9).include?(frame)
-        light.opacity += 25.5
+        #light.opacity += 25.5
         #light.zoom_x -= 1.0
         #light.zoom_y -= 1.0
         reward.opacity += 25.5
         reward.zoom_x -= 1.0
         reward.zoom_y -= 1.0
       end
-      light.angle += 2
+      #light.angle += 2
       frame+=1
       Graphics.update
       Input.update
@@ -382,7 +401,7 @@ class GachaScene
     
     bg.dispose
     reward.dispose
-    light.dispose
+    #light.dispose
   end
   
   def pokeReward(poke,stars) # Obtención de pokémon
@@ -390,12 +409,14 @@ class GachaScene
                                       poke.isShiny?, poke.form]) 
     rewardAnim(file,stars)
     pbAddPokemon(poke)
+    Game.save
   end
   
   def itemReward(item,stars) # Obtención de objetos
     file = pbItemIconFile(getID(PBItems,item))
     rewardAnim(file,stars)
     $PokemonBag.pbStoreItem(item)
+    Game.save
   end
 
   def update 
@@ -447,7 +468,11 @@ class GachaScene
             if Kernel.pbMessage("¿Quieres hacer una tirada? SE GUARDARÁ LA PARTIDA",["Sí","No"])==0
               gachaponRead(@banners[@banner_sel].script)
               $PokemonGlobal.gachaCoins -= 1
-              pbSave
+              if Game.save
+                pbMessage(_INTL("\\se[]The game was saved.\\me[GUI save game] The previous save file has been backed up.\\wtnp[30]"))
+              else
+                pbMessage(_INTL("\\se[]Save failed.\\wtnp[30]"))
+              end
               refresh
             end
           else

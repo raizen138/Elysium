@@ -6277,7 +6277,7 @@ Pocket = 9
 Price = 0
 FieldUse = OnPokemon
 Flags = ZCrystal,KeyItem
-Description = It converts Z-Power into crystals that upgrades a Thunderbolt by Pikachu in a cap to an exclusive Z-Move.
+Description = It converts Z-Power into crystals that upgrade a capped Pikachu's Thunderbolt to an exclusive Z-Move.
 #-------------------------------
 [ALORAICHIUMZ]
 Name = Aloraichium Z
@@ -6525,3 +6525,67 @@ Pocket = 1
 Price = 10
 Flags = Fling_30
 Description = Throw one into certain Pokémon Dens, and it may lure a rare wild Dynamaxed Pokémon.
+#-------------------------------
+[BLACKAUGURITE]
+Name = Black Augurite
+NamePlural = Black Augurites
+Pocket = 1
+Price = 2100
+Flags = EvolutionStone,Fling_30
+Description = A glassy black stone that produces a sharp cutting edge when split. It’s loved by a certain Pokémon.
+#-------------------------------
+[PEATBLOCK]
+Name = Peat Block
+NamePlural = Peat Blocks
+Pocket = 1
+Price = 2100
+Flags = EvolutionStone,Fling_30
+Description = A block of muddy material that can be used as fuel for burning when it is dried. It’s loved by a certain Pokémon.
+#-------------------------------
+[LINKINGCORD]
+Name = Linking Cord
+NamePlural = Linking Cords
+Pocket = 1
+Price = 2100
+Flags = EvolutionStone,Fling_30
+Description = A string exuding a mysterious energy that makes you feel a strange sense of connection. It’s loved by certain Pokémon.
+#-------------------------------
+[ADAMANTCRYSTAL]
+Name = Adamant Crystal
+NamePlural = Adamant Crystals
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = When used on Dialga, this large, glowing gem wells with power and allows the Pokémon to change form.
+#-------------------------------
+[LUSTROUSGLOBE]
+Name = Lustrous Globe
+NamePlural = Lustrous Globes
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = When used on Palkia, this large, glowing orb wells with power and allows the Pokémon to change form.
+#-------------------------------
+[LEGENDPLATE]
+Name = Legend Plate
+NamePlural = Legend Plates
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A stone tablet imbued with the essence of all creation. When used on a certain Pokémon, it allows that Pokémon to gain the power of every type there is.
+#-------------------------------
+[BLANKPLATE]
+Name = Blank Plate
+NamePlural = Blank Plates
+Pocket = 1
+Price = 1000
+Flags = Fling_90
+Description = A stone tablet imbued with the essence of normalcy. When used on a certain Pokémon, it allows that Pokémon to gain the power of the Normal type.
+#-------------------------------
+[HOPOBERRY]
+Name = Hopo Berry
+NamePlural = Hopo Berries
+Pocket = 5
+Price = 20
+Flags = Berry,Fling_10,NaturalGift_FIGHTING_100
+Description = A Berry that can be fed to a Pokémon to restore its PP.

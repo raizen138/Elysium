@@ -34,7 +34,7 @@ class LocationWindow
     @sprites["Image"].opacity = 255
     @height = @sprites["Image"].bitmap.height
     pbSetSystemFont(@sprites["Image"].bitmap)
-    pbDrawTextPositions(@sprites["Image"].bitmap,[[name,22,@sprites["Image"].bitmap.height-44,0,@baseColor,@shadowColor,true]])
+    pbDrawTextPositions(@sprites["Image"].bitmap,[[name,22,@sprites["Image"].bitmap.height-40,0,@baseColor,@shadowColor,true]])
     @currentmap = $game_map.map_id
     @frames = 0
   end

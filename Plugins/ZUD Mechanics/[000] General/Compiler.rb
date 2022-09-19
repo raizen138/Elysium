@@ -188,7 +188,9 @@ module Compiler
   #-----------------------------------------------------------------------------
   def compile_dynamax_metrics(path = "PBS/Plugins/ZUD/dynamax_metrics.txt")
     # Creates new metrics entry if species doesn't already have one.
-	path = "PBS/Plugins/ZUD/dynamax_metrics_ebdx.txt" if PluginManager.installed?("Generation 8 Pack Scripts")
+    path = "PBS/Plugins/ZUD/dynamax_metrics_ebdx.txt" if PluginManager.installed?("Generation 8 Pack Scripts")
+    compile_pbs_file_message_start(path)
+    idx = 0
     GameData::Species.each do |species|
       next if species.no_dynamax
       if !GameData::SpeciesMetrics.exists?(species.id)
@@ -212,11 +214,9 @@ module Compiler
       end
     end
     pbAutoPositionDynamax if !safeExists?(path)
-    compile_pbs_file_message_start(path)
     schema = GameData::SpeciesMetrics::ZUD_SCHEMA
     File.open(path, "rb") { |f|
       FileLineData.file = path
-      idx = 0
       pbEachFileSection(f) { |contents, species_id|
         echo "." if idx % 50 == 0
         idx += 1
@@ -366,20 +366,16 @@ module Compiler
           next if sp.species != entry.species.first
           entry.species.push(sp.id)
         end
-      elsif entry.flag.include?("AllFormsAbove_")
-        form = entry.flag.last.to_i
+      elsif entry.flag.include?("_")
+        form = entry.flag.split("_").last.to_i
         GameData::Species.each do |sp|
           next if sp.species != entry.species.first
-          next if sp.form < form
+          next if entry.flag.include?("AllFormsAbove") && sp.form < form
+          next if entry.flag.include?("AllFormsBelow") && sp.form >= form
           entry.species.push(sp.id)
         end
-      elsif entry.flag.include?("AllFormsBelow_")
-        form = entry.flag.last.to_i
-        GameData::Species.each do |sp|
-          next if sp.species != entry.species.first
-          next if sp.form > form
-          entry.species.push(sp.id)
-        end
+        entry.species.delete_at(0)
+        entry.species.push(nil) if entry.species.length == 0
       end
       entry.species.uniq!
     end
@@ -397,21 +393,6 @@ module Compiler
       end
     end
     GameData::Species.save
-    #---------------------------------------------------------------------------
-    # Adds new function codes for these particular moves so that they may 
-    # interact with Dynamax. Doesn't rewrite them if a custom function code is
-    # already present.
-    #---------------------------------------------------------------------------
-    rewrite_moves = false
-    [:BEHEMOTHBLADE, :BEHEMOTHBASH, :DYNAMAXCANNON].each do |move|
-      next if GameData::Move::DATA[move].function_code != "None"
-      GameData::Move::DATA[move].function_code = "DoubleDamageOnDynamaxTargets"
-      rewrite_moves = true
-    end
-    if rewrite_moves
-      GameData::Move.save
-      Compiler.write_moves
-    end
     MessageTypes.setMessagesAsHash(MessageTypes::GMaxNames, gmax_form_names)
     MessageTypes.setMessagesAsHash(MessageTypes::GMaxEntries, gmax_pokedex_entries)
     process_pbs_file_message_end

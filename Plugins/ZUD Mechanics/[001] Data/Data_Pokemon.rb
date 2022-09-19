@@ -187,10 +187,10 @@ class Pokemon
   #-----------------------------------------------------------------------------
   # Returns the ID of a Power Move compatible with the inputted parameters.
   #-----------------------------------------------------------------------------
-  def get_zmove(param, transform = nil)
-    return nil if !compat_zmove?(param, nil, transform)
+  def get_zmove(param, item = nil, transform = nil)
+    return nil if !compat_zmove?(param, nil, transform) && !item.nil?
     species = (transform) ? transform : self.species_data.id
-    return GameData::PowerMove.zmove_from(param, self.item, species)
+    return GameData::PowerMove.zmove_from(param, item, species)
   end  
     
   def get_maxmove(param, category = nil, transform = nil)
