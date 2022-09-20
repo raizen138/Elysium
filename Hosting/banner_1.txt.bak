@@ -1,0 +1,117 @@
+prob = rand(100)
+case prob
+#############################################
+# Tier 1 con un 45%
+#############################################
+when (0...45) 
+	result = rand(10)
+	badges = $player.badge_count
+	if (0..3).include?(result)
+		if badges < 2
+			itemReward(:POKEBALL,1,10)
+		elsif badges < 6
+			itemReward(:GREATBALL,1,10)
+		else 
+			itemReward(:ULTRABALL,1,10)
+		end
+	elsif (3..4).include?(result)
+		stones = [:FIRESTONE,:WATERSTONE,:THUNDERSTONE,:LEAFSTONE,:MOONSTONE,:SUNSTONE,:SHINYSTONE,:DUSKSTONE,:DAWNSTONE,:ICESTONE]
+		resultStone = stones[rand(stones.length)]
+		itemReward(resultStone,1,1)
+	elsif (4..7).include?(result)
+		if badges < 1
+			itemReward(:EXPCANDYXS,1,5)
+		elsif badges < 5
+			itemReward(:EXPCANDYS,1,5)
+		elsif badges < 8
+			itemReward(:EXPCANDYM,1,5)
+		else
+			itemReward(:EXPCANDYL,1,5)
+		end
+	elsif (7..8).include?(result)
+		evos = [:ELECTIRIZER,:KINGSROCK,:RAZORFANG,:MAGMARIZER,:METALCOAT,:OVALSTONE,:PRISMSCALE,:PROTECTOR,:RAZORCLAW,:REAPERCLOTH,:UPGRADE,:BLACKAUGURITE,:PEATBLOCK]
+		resultEvo = evos[rand(evos.length)]
+		itemReward(resultEvo,1,1)
+	elsif (8..10).include?(result)
+		berries = [:CHESTOBERRY,:PECHABERRY,:RAWSTBERRY,:ASPEARBERRY,:PERSIMBERRY,:SITRUSBERRY,:ORANBERRY,:LEPPABERRY]
+		resultBerry = berries[rand(berries.length)]
+		itemReward(resultBerry,1,3)
+	else
+		itemReward(:SODAPOP,1,5)
+	end
+#############################################
+# Tier 2 con un 28%
+#############################################
+when (45...73) 
+	result = rand(2)
+	if (0..1).include?(result)
+		balls = [:HEAVYBALL,:NETBALL,:NESTBALL,:TIMERBALL,:DIVEBALL,:DUSKBALL,:HEALBALL,:QUICKBALL]
+		resultBall = balls[rand(balls.length)]
+		itemReward(resultBall,2,5)
+	else
+		compe = [:FOCUSSASH,:ASSAULTVEST,:LEFTOVERS,:WEAKNESSPOLICY,:LIFEORB,:CHOICEBAND,:CHOICESPECS,:CHOICESCARF,:BLACKBELT,:BLACKSLUDGE,:TOXICORB,:FLAMEORB]
+		resultCompe = compe[rand(compe.length)]
+		itemReward(resultCompe,2,1)
+	end
+#############################################
+# Tier 3 con un 15%
+#############################################
+when (73...88) 
+	poke = Pokemon.new(:SMEARGLE,pbBalancedLevel($player.pokemon_party))
+	poke.ability_index = 1
+	poke.learn_move(:EXTREMESPEED)
+    poke.learn_move(:FIREBLAST)
+    poke.learn_move(:HYDROPUMP)
+	poke.learn_move(:POWERWHIP)
+	poke.owner.id = $player.make_foreign_ID
+	poke.owner.name = "Ilima"
+	shinyRand = rand(1000)
+	if (0..1).include?(shinyRand)
+		poke.shiny = true
+	end
+	poke.calc_stats
+	pokeReward(poke,3)
+#############################################
+# Tier 4 con un 10%
+#############################################
+when (88...98) 
+	poke = Pokemon.new(:VIVILLON,pbBalancedLevel($player.pokemon_party))
+	poke.ability_index = 1
+	poke.form = 0
+	poke.learn_move(:HURICANE)
+    poke.learn_move(:QUIVERDANCE)
+    poke.learn_move(:POWDER)
+	poke.learn_move(:SUPERSONIC)
+	poke.owner.id = $player.make_foreign_ID
+	poke.owner.name = "Viola"
+	shinyRand = rand(1000)
+	if (0..1).include?(shinyRand)
+		poke.shiny = true
+	end
+	poke.calc_stats
+	pokeReward(poke,4)
+#############################################
+# Tier 5 con un 2%
+#############################################
+when (98...100) 
+	poke = Pokemon.new(:GOSSIFLEUR,pbBalancedLevel($player.pokemon_party))
+	poke.ability_index = 1
+	poke.iv[:HP] = 31
+	poke.iv[:ATTACK] = 31
+	poke.iv[:DEFENSE] = 31
+	poke.iv[:SPECIAL_ATTACK] = 31
+	poke.iv[:SPECIAL_DEFENSE] = 31
+	poke.iv[:SPEED] = 31
+	poke.learn_move(:GIGADRAIN)
+    poke.learn_move(:COTTONGUARD)
+    poke.learn_move(:PROTECT)
+	poke.learn_move(:HYPERVOICE)
+	poke.owner.id = $player.make_foreign_ID
+	poke.owner.name = "Milo"
+	shinyRand = rand(1000)
+	if (0..1).include?(shinyRand)
+		poke.shiny = true
+	end
+	poke.calc_stats
+	pokeReward(poke,5)
+end

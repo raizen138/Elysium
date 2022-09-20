@@ -353,9 +353,11 @@ class GachaScene
     Input.update
   end
   
-  def rewardAnim(filename,stars) #Animación para obtener premios
+  def rewardAnim(filename,stars,qty) #Animación para obtener premios
     color = TIERCOLORS[stars-1]
     sound = TIERSOUNDS[stars-1]
+    base   = Color.new(248,248,248)
+    shadow = Color.new(72,80,88)
     
     bg = Sprite.new(@viewport)
     bg.bitmap = Bitmap.new("Graphics/Pictures/Gacha/rewardBG")
@@ -380,6 +382,15 @@ class GachaScene
     reward.opacity=0
     reward.zoom_x = 11.0
     reward.zoom_y = 11.0
+
+    qtyIcon = Sprite.new(@viewport)
+    qtyIcon.bitmap = Bitmap.new(Graphics.width,25)
+    qtyIcon.x = Graphics.width/2 + 20
+    qtyIcon.y = Graphics.height/2 + 15
+    qtyIcon.opacity=0
+    pbSetSystemFont(qtyIcon.bitmap)
+    qtyIcon.bitmap.clear
+    pbDrawShadowText(qtyIcon.bitmap,0,5,Graphics.width,25,"x"+qty.to_s,base,shadow)
     
     pbSEPlay(sound)
     frame = 0
@@ -388,6 +399,10 @@ class GachaScene
         #light.opacity += 25.5
         #light.zoom_x -= 1.0
         #light.zoom_y -= 1.0
+        #if qty > 1
+        #  qtyIcon.opacity += 25.5
+        #end
+        qtyIcon.opacity += 25.5
         reward.opacity += 25.5
         reward.zoom_x -= 1.0
         reward.zoom_y -= 1.0
@@ -401,21 +416,25 @@ class GachaScene
     
     bg.dispose
     reward.dispose
+    qtyIcon.dispose
     #light.dispose
   end
   
   def pokeReward(poke,stars) # Obtención de pokémon
-    file = pbCheckPokemonBitmapFiles([poke.species, false, poke.isFemale?,
-                                      poke.isShiny?, poke.form]) 
-    rewardAnim(file,stars)
-    pbAddPokemon(poke)
+    #file = pbCheckPokemonBitmapFiles([poke.species, false, poke.isFemale?,poke.isShiny?, poke.form]) 
+    file = GameData::Species.front_sprite_filename(poke.species, poke.form, 0, poke.shiny?)
+    rewardAnim(file,stars,0)
+    poke.obtain_method = 2
+    poke.obtain_text = "Gachapon"
+    pbAddPokemonSilent(poke)
     Game.save
   end
   
-  def itemReward(item,stars) # Obtención de objetos
-    file = pbItemIconFile(getID(PBItems,item))
-    rewardAnim(file,stars)
-    $PokemonBag.pbStoreItem(item)
+  def itemReward(item,stars,qty) # Obtención de objetos
+    #file = pbItemIconFile(getID(PBItems,item))
+    file = GameData::Item.icon_filename(item)
+    rewardAnim(file,stars,qty)
+    $bag.add(item,qty)
     Game.save
   end
 
