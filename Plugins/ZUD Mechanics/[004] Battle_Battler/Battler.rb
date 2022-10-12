@@ -38,8 +38,9 @@ class Battle::Battler
   #   -User is in Primal form, or able to Primal Revert.
   #   -User is in Ultra form, or able to Ultra Burst.
   #   -User is currently Dynamaxed.
-  #   -User is in Celestial form (Birthsigns plugin).
-  #   -User has an available Zodiac Power (Birthsigns plugin).
+  #   -User is currently in a battle style. (PLA Battle Styles)
+  #   -User is in Celestial form. (Pokemon Birthsigns)
+  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
   #   -User doesn't have a Mega form.
   #-----------------------------------------------------------------------------
   def hasMega?
@@ -49,6 +50,7 @@ class Battle::Battler
     return false if primal? || hasPrimal?
     return false if ultra?  || hasUltra?
     return false if dynamax?
+    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
     return false if celestial? || hasZodiacPower?
     return @pokemon&.hasMegaForm?
   end
@@ -62,8 +64,9 @@ class Battle::Battler
   #   -User is in Primal form, or able to Primal Revert.
   #   -User is able to Ultra Burst first.
   #   -User is currently Dynamaxed.
-  #   -User is in Celestial form (Birthsigns plugin).
-  #   -User has an available Zodiac Power (Birthsigns plugin).
+  #   -User is currently in a battle style. (PLA Battle Styles)
+  #   -User is in Celestial form. (Pokemon Birthsigns)
+  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
   #   -User doesn't have a compatible Z-Move.
   #-----------------------------------------------------------------------------
   def hasZMove?
@@ -71,6 +74,7 @@ class Battle::Battler
     return false if primal? || hasPrimal?
     return false if hasUltra?
     return false if dynamax?
+    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
     return false if celestial? || hasZodiacPower?
     return hasCompatibleZMove?(@moves)
   end
@@ -94,8 +98,9 @@ class Battle::Battler
   #   -User is in Mega form.
   #   -User is already in Ultra form.
   #   -User is currently Dynamaxed.
-  #   -User is in Celestial form (Birthsigns plugin).
-  #   -User has an available Zodiac Power (Birthsigns plugin).
+  #   -User is currently in a battle style. (PLA Battle Styles)
+  #   -User is in Celestial form. (Pokemon Birthsigns)
+  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
   #   -User doesn't have an Ultra form.
   #-----------------------------------------------------------------------------
   def hasUltra?
@@ -103,6 +108,7 @@ class Battle::Battler
     return false if shadowPokemon?
     return false if primal? || hasPrimal?
     return false if mega? || ultra? || dynamax?
+    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
     return false if celestial? || hasZodiacPower?
     return @pokemon&.hasUltraForm?
   end
@@ -113,19 +119,21 @@ class Battle::Battler
   # Returns false if:
   #   -User is already Dynamaxed.
   #   -User has an available Z-Move.
+  #   -User is currently in a battle style. (PLA Battle Styles)
   #   -User is in Mega form, or able to Mega Evolve.
   #   -User is in Primal form, or able to Primal Revert.
   #   -User is in Ultra form, or able to Ultra Burst.
   #   -User is Transformed into a species already in a Mega, Primal, or Ultra form.
-  #   -User has an available Zodiac Power (Birthsigns plugin).
+  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
   #   -User is a Shadow Pokemon.
-  #   -User is in Celestial form (Birthsigns plugin).
+  #   -User is in Celestial form. (Pokemon Birthsigns)
   #   -User is a species that is unable to Dynamax.
   #   -User is Transformed into a species that is unable to Dynamax.
   #-----------------------------------------------------------------------------
   def hasDynamax?
     return false if dynamax?
     return false if hasZMove?
+    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
     return false if hasZodiacPower?
     transform  = @effects[PBEffects::Transform]        || @effects[PBEffects::Illusion]
     newpoke    = @effects[PBEffects::TransformPokemon] if @effects[PBEffects::Transform]

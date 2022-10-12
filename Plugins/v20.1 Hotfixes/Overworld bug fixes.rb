@@ -173,3 +173,110 @@ class BugContestState
     @places.push(judgearray[2])
   end
 end
+
+#===============================================================================
+# Fixed fully grown berry plants looking like sprouts upon entering the map.
+#===============================================================================
+class BerryPlantSprite
+  def set_event_graphic(berry_plant, full_check = false)
+    return if !berry_plant || (berry_plant.growth_stage == @old_stage && !full_check)
+    case berry_plant.growth_stage
+    when 0
+      @event.character_name = ""
+    else
+      if berry_plant.growth_stage == 1
+        @event.character_name = "berrytreeplanted"   # Common to all berries
+        @event.turn_down
+      else
+        filename = sprintf("berrytree_%s", GameData::Item.get(berry_plant.berry_id).id.to_s)
+        if pbResolveBitmap("Graphics/Characters/" + filename)
+          @event.character_name = filename
+          case berry_plant.growth_stage
+          when 2 then @event.turn_down    # X sprouted
+          when 3 then @event.turn_left    # X taller
+          when 4 then @event.turn_right   # X flowering
+          else
+            @event.turn_up if berry_plant.growth_stage >= 5   # X berries
+          end
+        else
+          @event.character_name = "Object ball"
+        end
+      end
+      if berry_plant.new_mechanics && @old_stage != berry_plant.growth_stage &&
+         @old_stage > 0 && berry_plant.growth_stage <= GameData::BerryPlant::NUMBER_OF_GROWTH_STAGES + 1
+        spriteset = $scene.spriteset(@map.map_id)
+        spriteset&.addUserAnimation(Settings::PLANT_SPARKLE_ANIMATION_ID,
+                                    @event.x, @event.y, false, 1)
+      end
+    end
+    @old_stage = berry_plant.growth_stage
+  end
+end
+
+#===============================================================================
+# Fixed being able to interact with a follower that is beneath the player.
+#===============================================================================
+class Game_FollowerFactory
+  def update
+    followers = $PokemonGlobal.followers
+    return if followers.length == 0
+    # Update all followers
+    leader = $game_player
+    player_moving = $game_player.moving? || $game_player.jumping?
+    followers.each_with_index do |follower, i|
+      event = @events[i]
+      next if !@events[i]
+      if follower.invisible_after_transfer && player_moving
+        follower.invisible_after_transfer = false
+        event.turn_towards_leader($game_player)
+      end
+      event.move_speed  = leader.move_speed
+      event.transparent = !follower.visible?
+      if $PokemonGlobal.sliding
+        event.straighten
+        event.walk_anime = false
+      else
+        event.walk_anime = true
+      end
+      if event.jumping? || event.moving? || !player_moving
+        event.update
+      elsif !event.starting
+        event.set_starting
+        event.update
+        event.clear_starting
+      end
+      follower.direction = event.direction
+      leader = event
+    end
+    # Check event triggers
+    if Input.trigger?(Input::USE) && !$game_temp.in_menu && !$game_temp.in_battle &&
+       !$game_player.move_route_forcing && !$game_temp.message_window_showing &&
+       !pbMapInterpreterRunning?
+      # Get position of tile facing the player
+      facing_tile = $map_factory.getFacingTile
+      # Assumes player is 1x1 tile in size
+      each_follower do |event, follower|
+        next if !facing_tile || event.map.map_id != facing_tile[0] ||
+                !event.at_coordinate?(facing_tile[1], facing_tile[2])   # Not on facing tile
+        next if event.jumping?
+        follower.interact(event)
+      end
+    end
+  end
+end
+
+#===============================================================================
+# Fixed priority 1 tiles appearing below the player at larger screen sizes.
+#===============================================================================
+class TilemapRenderer
+  def refresh_tile_z(tile, map, y, layer, tile_id)
+    if tile.shows_reflection
+      tile.z = -100
+    elsif tile.bridge && $PokemonGlobal.bridge > 0
+      tile.z = 0
+    else
+      priority = tile.priority
+      tile.z = (priority == 0) ? 0 : (y * SOURCE_TILE_HEIGHT) + (priority * SOURCE_TILE_HEIGHT) + SOURCE_TILE_HEIGHT + 1
+    end
+  end
+end

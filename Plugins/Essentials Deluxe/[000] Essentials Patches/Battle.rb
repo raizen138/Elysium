@@ -41,7 +41,8 @@ class Battle
     when 1, "Z-Move"  then @zMove[side][owner]         = set
     when 2, "Ultra"   then @ultraBurst[side][owner]    = set
     when 3, "Dynamax" then @dynamax[side][owner]       = set
-    when 4, "Zodiac"  then @zodiac[side][owner]        = set
+    when 4, "Style"   then @battleStyle[side][owner]   = set
+    when 5, "Zodiac"  then @zodiac[side][owner]        = set
     end
   end
 
@@ -56,8 +57,7 @@ class Battle
       return true if pbCanDynamax?(idxBattler)
     end
     if PluginManager.installed?("PLA Battle Styles")
-      return true if pbCanStrongStyle?(idxBattler)
-      return true if pbCanAgileStyle?(idxBattler)
+      return true if pbCanUseStyle?(idxBattler)
     end
     if PluginManager.installed?("Pokémon Birthsigns")
       return true if pbCanZodiacPower?(idxBattler)
@@ -137,16 +137,13 @@ class Battle
         end
       end
       if PluginManager.installed?("PLA Battle Styles")
-        @strong_style[side].each_with_index do |style, i|
-          @strong_style[side][i] = -1 if style >= 0
-        end
-        @agile_style[side].each_with_index do |style, i|
-          @agile_style[side][i] = -1 if style >= 0
+        @battleStyle[side].each_with_index do |style, i|
+          @battleStyle[side][i] = -1 if style >= 0
         end
       end
       if PluginManager.installed?("Pokémon Birthsigns")
         @zodiacPower[side].each_with_index do |zodiac, i|
-          @zodiacPower[side][i] = -1 if zodiac>=0
+          @zodiacPower[side][i] = -1 if zodiac >= 0
         end
       end
       if PluginManager.installed?("Focus Meter System")
@@ -260,8 +257,7 @@ class Battle::AI
       @battle.pbRegisterDynamax(idxBattler) if pbEnemyShouldDynamax?(idxBattler)
     end
     if PluginManager.installed?("PLA Battle Styles")
-      @battle.pbRegisterStrongStyle(idxBattler) if pbEnemyShouldStrongStyle?(idxBattler)
-      @battle.pbRegisterAgileStyle(idxBattler) if pbEnemyShouldAgileStyle?(idxBattler)
+      @battle.pbRegisterStyle(idxBattler) if pbEnemyShouldUseStyle?(idxBattler)
     end
     if PluginManager.installed?("Pokémon Birthsigns")
       @battle.pbRegisterZodiacPower(idxBattler) if pbEnemyShouldZodiacPower?(idxBattler)

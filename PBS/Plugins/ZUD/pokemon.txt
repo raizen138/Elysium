@@ -1,0 +1,2761 @@
+# This installation is part of the ZUD Plugin for Pokemon Essentials v20.1
+#-------------------------------
+[BULBASAUR]
+Habitat = Grassland
+#-------------------------------
+[IVYSAUR]
+Habitat = Grassland
+#-------------------------------
+[VENUSAUR]
+Habitat = Grassland
+#-------------------------------
+[CHARMANDER]
+Habitat = Mountain
+#-------------------------------
+[CHARMELEON]
+Habitat = Mountain
+#-------------------------------
+[CHARIZARD]
+Habitat = Mountain
+#-------------------------------
+[SQUIRTLE]
+Habitat = WatersEdge
+#-------------------------------
+[WARTORTLE]
+Habitat = WatersEdge
+#-------------------------------
+[BLASTOISE]
+Habitat = WatersEdge
+#-------------------------------
+[CATERPIE]
+Habitat = Forest
+#-------------------------------
+[METAPOD]
+Habitat = Forest
+#-------------------------------
+[BUTTERFREE]
+Habitat = Forest
+#-------------------------------
+[WEEDLE]
+Habitat = Forest
+#-------------------------------
+[KAKUNA]
+Habitat = Forest
+#-------------------------------
+[BEEDRILL]
+Habitat = Forest
+#-------------------------------
+[PIDGEY]
+Habitat = Forest
+#-------------------------------
+[PIDGEOTTO]
+Habitat = Forest
+#-------------------------------
+[PIDGEOT]
+Habitat = Forest
+#-------------------------------
+[RATTATA]
+Habitat = Grassland
+#-------------------------------
+[RATICATE]
+Habitat = Grassland
+#-------------------------------
+[SPEAROW]
+Habitat = RoughTerrain
+#-------------------------------
+[FEAROW]
+Habitat = RoughTerrain
+#-------------------------------
+[EKANS]
+Habitat = Grassland
+#-------------------------------
+[ARBOK]
+Habitat = Grassland
+#-------------------------------
+[PIKACHU]
+Habitat = Forest
+#-------------------------------
+[RAICHU]
+Habitat = Forest
+#-------------------------------
+[SANDSHREW]
+Habitat = RoughTerrain
+#-------------------------------
+[SANDSLASH]
+Habitat = RoughTerrain
+#-------------------------------
+[NIDORANfE]
+Habitat = Grassland
+#-------------------------------
+[NIDORINA]
+Habitat = Grassland
+#-------------------------------
+[NIDOQUEEN]
+Habitat = Grassland
+#-------------------------------
+[NIDORANmA]
+Habitat = Grassland
+#-------------------------------
+[NIDORINO]
+Habitat = Grassland
+#-------------------------------
+[NIDOKING]
+Habitat = Grassland
+#-------------------------------
+[CLEFAIRY]
+Habitat = Mountain
+#-------------------------------
+[CLEFABLE]
+Habitat = Mountain
+#-------------------------------
+[VULPIX]
+Habitat = Grassland
+#-------------------------------
+[NINETALES]
+Habitat = Grassland
+#-------------------------------
+[JIGGLYPUFF]
+Habitat = Grassland
+#-------------------------------
+[WIGGLYTUFF]
+Habitat = Grassland
+#-------------------------------
+[ZUBAT]
+Habitat = Cave
+#-------------------------------
+[GOLBAT]
+Habitat = Cave
+#-------------------------------
+[ODDISH]
+Habitat = Grassland
+#-------------------------------
+[GLOOM]
+Habitat = Grassland
+#-------------------------------
+[VILEPLUME]
+Habitat = Grassland
+#-------------------------------
+[PARAS]
+Habitat = Forest
+#-------------------------------
+[PARASECT]
+Habitat = Forest
+#-------------------------------
+[VENONAT]
+Habitat = Forest
+#-------------------------------
+[VENOMOTH]
+Habitat = Forest
+#-------------------------------
+[DIGLETT]
+Habitat = Cave
+#-------------------------------
+[DUGTRIO]
+Habitat = Cave
+#-------------------------------
+[MEOWTH]
+Habitat = Urban
+#-------------------------------
+[PERSIAN]
+Habitat = Urban
+#-------------------------------
+[PSYDUCK]
+Habitat = WatersEdge
+#-------------------------------
+[GOLDUCK]
+Habitat = WatersEdge
+#-------------------------------
+[MANKEY]
+Habitat = Forest
+#-------------------------------
+[PRIMEAPE]
+Habitat = Forest
+#-------------------------------
+[GROWLITHE]
+Habitat = Grassland
+#-------------------------------
+[ARCANINE]
+Habitat = Grassland
+#-------------------------------
+[POLIWAG]
+Habitat = WatersEdge
+#-------------------------------
+[POLIWHIRL]
+Habitat = WatersEdge
+#-------------------------------
+[POLIWRATH]
+Habitat = WatersEdge
+#-------------------------------
+[ABRA]
+Habitat = Urban
+#-------------------------------
+[KADABRA]
+Habitat = Urban
+#-------------------------------
+[ALAKAZAM]
+Habitat = Urban
+#-------------------------------
+[MACHOP]
+Habitat = Mountain
+#-------------------------------
+[MACHOKE]
+Habitat = Mountain
+#-------------------------------
+[MACHAMP]
+Habitat = Mountain
+#-------------------------------
+[BELLSPROUT]
+Habitat = Forest
+#-------------------------------
+[WEEPINBELL]
+Habitat = Forest
+#-------------------------------
+[VICTREEBEL]
+Habitat = Forest
+#-------------------------------
+[TENTACOOL]
+Habitat = Sea
+#-------------------------------
+[TENTACRUEL]
+Habitat = Sea
+#-------------------------------
+[GEODUDE]
+Habitat = Mountain
+#-------------------------------
+[GRAVELER]
+Habitat = Mountain
+#-------------------------------
+[GOLEM]
+Habitat = Mountain
+#-------------------------------
+[PONYTA]
+Habitat = Grassland
+#-------------------------------
+[RAPIDASH]
+Habitat = Grassland
+#-------------------------------
+[SLOWPOKE]
+Habitat = WatersEdge
+#-------------------------------
+[SLOWBRO]
+Habitat = WatersEdge
+#-------------------------------
+[MAGNEMITE]
+Habitat = Urban
+#-------------------------------
+[MAGNETON]
+Habitat = Urban
+#-------------------------------
+[FARFETCHD]
+Habitat = Grassland
+#-------------------------------
+[DODUO]
+Habitat = Grassland
+#-------------------------------
+[DODRIO]
+Habitat = Grassland
+#-------------------------------
+[SEEL]
+Habitat = Sea
+#-------------------------------
+[DEWGONG]
+Habitat = Sea
+#-------------------------------
+[GRIMER]
+Habitat = Urban
+#-------------------------------
+[MUK]
+Habitat = Urban
+#-------------------------------
+[SHELLDER]
+Habitat = Sea
+#-------------------------------
+[CLOYSTER]
+Habitat = Sea
+#-------------------------------
+[GASTLY]
+Habitat = Cave
+#-------------------------------
+[HAUNTER]
+Habitat = Cave
+#-------------------------------
+[GENGAR]
+Habitat = Cave
+#-------------------------------
+[ONIX]
+Habitat = Cave
+#-------------------------------
+[DROWZEE]
+Habitat = Grassland
+#-------------------------------
+[HYPNO]
+Habitat = Grassland
+#-------------------------------
+[KRABBY]
+Habitat = WatersEdge
+#-------------------------------
+[KINGLER]
+Habitat = WatersEdge
+#-------------------------------
+[VOLTORB]
+Habitat = Urban
+#-------------------------------
+[ELECTRODE]
+Habitat = Urban
+#-------------------------------
+[EXEGGCUTE]
+Habitat = Forest
+#-------------------------------
+[EXEGGUTOR]
+Habitat = Forest
+#-------------------------------
+[CUBONE]
+Habitat = Mountain
+#-------------------------------
+[MAROWAK]
+Habitat = Mountain
+#-------------------------------
+[HITMONLEE]
+Habitat = Urban
+#-------------------------------
+[HITMONCHAN]
+Habitat = Urban
+#-------------------------------
+[LICKITUNG]
+Habitat = Grassland
+#-------------------------------
+[KOFFING]
+Habitat = Urban
+#-------------------------------
+[WEEZING]
+Habitat = Urban
+#-------------------------------
+[RHYHORN]
+Habitat = RoughTerrain
+#-------------------------------
+[RHYDON]
+Habitat = RoughTerrain
+#-------------------------------
+[CHANSEY]
+Habitat = Urban
+#-------------------------------
+[TANGELA]
+Habitat = Grassland
+#-------------------------------
+[KANGASKHAN]
+Habitat = Grassland
+#-------------------------------
+[HORSEA]
+Habitat = Sea
+#-------------------------------
+[SEADRA]
+Habitat = Sea
+#-------------------------------
+[GOLDEEN]
+Habitat = WatersEdge
+#-------------------------------
+[SEAKING]
+Habitat = WatersEdge
+#-------------------------------
+[STARYU]
+Habitat = Sea
+#-------------------------------
+[STARMIE]
+Habitat = Sea
+#-------------------------------
+[MRMIME]
+Habitat = Urban
+#-------------------------------
+[SCYTHER]
+Habitat = Grassland
+#-------------------------------
+[JYNX]
+Habitat = Urban
+#-------------------------------
+[ELECTABUZZ]
+Habitat = Grassland
+#-------------------------------
+[MAGMAR]
+Habitat = Mountain
+#-------------------------------
+[PINSIR]
+Habitat = Forest
+#-------------------------------
+[TAUROS]
+Habitat = Grassland
+#-------------------------------
+[MAGIKARP]
+Habitat = WatersEdge
+#-------------------------------
+[GYARADOS]
+Habitat = WatersEdge
+#-------------------------------
+[LAPRAS]
+Habitat = Sea
+#-------------------------------
+[DITTO]
+Habitat = Urban
+#-------------------------------
+[EEVEE]
+Habitat = Urban
+#-------------------------------
+[VAPOREON]
+Habitat = Urban
+#-------------------------------
+[JOLTEON]
+Habitat = Urban
+#-------------------------------
+[FLAREON]
+Habitat = Urban
+#-------------------------------
+[PORYGON]
+Habitat = Urban
+#-------------------------------
+[OMANYTE]
+Habitat = Sea
+#-------------------------------
+[OMASTAR]
+Habitat = Sea
+#-------------------------------
+[KABUTO]
+Habitat = Sea
+#-------------------------------
+[KABUTOPS]
+Habitat = Sea
+#-------------------------------
+[AERODACTYL]
+Habitat = Mountain
+#-------------------------------
+[SNORLAX]
+Habitat = Mountain
+#-------------------------------
+[ARTICUNO]
+Habitat = Cave
+#-------------------------------
+[ZAPDOS]
+Habitat = Urban
+#-------------------------------
+[MOLTRES]
+Habitat = Mountain
+#-------------------------------
+[DRATINI]
+Habitat = WatersEdge
+#-------------------------------
+[DRAGONAIR]
+Habitat = WatersEdge
+#-------------------------------
+[DRAGONITE]
+Habitat = WatersEdge
+#-------------------------------
+[MEWTWO]
+Habitat = Urban
+#-------------------------------
+[MEW]
+Habitat = Rare
+#-------------------------------
+[CHIKORITA]
+Habitat = Grassland
+#-------------------------------
+[BAYLEEF]
+Habitat = Grassland
+#-------------------------------
+[MEGANIUM]
+Habitat = Grassland
+#-------------------------------
+[CYNDAQUIL]
+Habitat = Grassland
+#-------------------------------
+[QUILAVA]
+Habitat = Grassland
+#-------------------------------
+[TYPHLOSION]
+Habitat = Grassland
+#-------------------------------
+[TOTODILE]
+Habitat = WatersEdge
+#-------------------------------
+[CROCONAW]
+Habitat = WatersEdge
+#-------------------------------
+[FERALIGATR]
+Habitat = WatersEdge
+#-------------------------------
+[SENTRET]
+Habitat = Grassland
+#-------------------------------
+[FURRET]
+Habitat = Grassland
+#-------------------------------
+[HOOTHOOT]
+Habitat = Forest
+#-------------------------------
+[NOCTOWL]
+Habitat = Forest
+#-------------------------------
+[LEDYBA]
+Habitat = Forest
+#-------------------------------
+[LEDIAN]
+Habitat = Forest
+#-------------------------------
+[SPINARAK]
+Habitat = Forest
+#-------------------------------
+[ARIADOS]
+Habitat = Forest
+#-------------------------------
+[CROBAT]
+Habitat = Cave
+#-------------------------------
+[CHINCHOU]
+Habitat = Sea
+#-------------------------------
+[LANTURN]
+Habitat = Sea
+#-------------------------------
+[PICHU]
+Habitat = Forest
+#-------------------------------
+[CLEFFA]
+Habitat = Mountain
+#-------------------------------
+[IGGLYBUFF]
+Habitat = Grassland
+#-------------------------------
+[TOGEPI]
+Habitat = Forest
+#-------------------------------
+[TOGETIC]
+Habitat = Forest
+#-------------------------------
+[NATU]
+Habitat = Forest
+#-------------------------------
+[XATU]
+Habitat = Forest
+#-------------------------------
+[MAREEP]
+Habitat = Grassland
+#-------------------------------
+[FLAAFFY]
+Habitat = Grassland
+#-------------------------------
+[AMPHAROS]
+Habitat = Grassland
+#-------------------------------
+[BELLOSSOM]
+Habitat = Grassland
+#-------------------------------
+[MARILL]
+Habitat = WatersEdge
+#-------------------------------
+[AZUMARILL]
+Habitat = WatersEdge
+#-------------------------------
+[SUDOWOODO]
+Habitat = Forest
+#-------------------------------
+[POLITOED]
+Habitat = WatersEdge
+#-------------------------------
+[HOPPIP]
+Habitat = Grassland
+#-------------------------------
+[SKIPLOOM]
+Habitat = Grassland
+#-------------------------------
+[JUMPLUFF]
+Habitat = Grassland
+#-------------------------------
+[AIPOM]
+Habitat = Forest
+#-------------------------------
+[SUNKERN]
+Habitat = Grassland
+#-------------------------------
+[SUNFLORA]
+Habitat = Grassland
+#-------------------------------
+[YANMA]
+Habitat = Forest
+#-------------------------------
+[WOOPER]
+Habitat = WatersEdge
+#-------------------------------
+[QUAGSIRE]
+Habitat = WatersEdge
+#-------------------------------
+[ESPEON]
+Habitat = Urban
+#-------------------------------
+[UMBREON]
+Habitat = Urban
+#-------------------------------
+[MURKROW]
+Habitat = Forest
+#-------------------------------
+[SLOWKING]
+Habitat = WatersEdge
+#-------------------------------
+[MISDREAVUS]
+Habitat = Cave
+#-------------------------------
+[UNOWN]
+Habitat = Rare
+#-------------------------------
+[WOBBUFFET]
+Habitat = Cave
+#-------------------------------
+[GIRAFARIG]
+Habitat = Grassland
+#-------------------------------
+[PINECO]
+Habitat = Forest
+#-------------------------------
+[FORRETRESS]
+Habitat = Forest
+#-------------------------------
+[DUNSPARCE]
+Habitat = Cave
+#-------------------------------
+[GLIGAR]
+Habitat = Mountain
+#-------------------------------
+[STEELIX]
+Habitat = Cave
+#-------------------------------
+[SNUBBULL]
+Habitat = Urban
+#-------------------------------
+[GRANBULL]
+Habitat = Urban
+#-------------------------------
+[QWILFISH]
+Habitat = Sea
+#-------------------------------
+[SCIZOR]
+Habitat = Grassland
+#-------------------------------
+[SHUCKLE]
+Habitat = Mountain
+#-------------------------------
+[HERACROSS]
+Habitat = Forest
+#-------------------------------
+[SNEASEL]
+Habitat = Forest
+#-------------------------------
+[TEDDIURSA]
+Habitat = Mountain
+#-------------------------------
+[URSARING]
+Habitat = Mountain
+#-------------------------------
+[SLUGMA]
+Habitat = Mountain
+#-------------------------------
+[MAGCARGO]
+Habitat = Mountain
+#-------------------------------
+[SWINUB]
+Habitat = Cave
+#-------------------------------
+[PILOSWINE]
+Habitat = Cave
+#-------------------------------
+[CORSOLA]
+Habitat = Sea
+#-------------------------------
+[REMORAID]
+Habitat = Sea
+#-------------------------------
+[OCTILLERY]
+Habitat = Sea
+#-------------------------------
+[DELIBIRD]
+Habitat = Mountain
+#-------------------------------
+[MANTINE]
+Habitat = Sea
+#-------------------------------
+[SKARMORY]
+Habitat = RoughTerrain
+#-------------------------------
+[HOUNDOUR]
+Habitat = RoughTerrain
+#-------------------------------
+[HOUNDOOM]
+Habitat = RoughTerrain
+#-------------------------------
+[KINGDRA]
+Habitat = Sea
+#-------------------------------
+[PHANPY]
+Habitat = RoughTerrain
+#-------------------------------
+[DONPHAN]
+Habitat = RoughTerrain
+#-------------------------------
+[PORYGON2]
+Habitat = Urban
+#-------------------------------
+[STANTLER]
+Habitat = Forest
+#-------------------------------
+[SMEARGLE]
+Habitat = Urban
+#-------------------------------
+[TYROGUE]
+Habitat = Urban
+#-------------------------------
+[HITMONTOP]
+Habitat = Urban
+#-------------------------------
+[SMOOCHUM]
+Habitat = Urban
+#-------------------------------
+[ELEKID]
+Habitat = Grassland
+#-------------------------------
+[MAGBY]
+Habitat = Mountain
+#-------------------------------
+[MILTANK]
+Habitat = Grassland
+#-------------------------------
+[BLISSEY]
+Habitat = Urban
+#-------------------------------
+[RAIKOU]
+Habitat = Grassland
+#-------------------------------
+[ENTEI]
+Habitat = Grassland
+#-------------------------------
+[SUICUNE]
+Habitat = Grassland
+#-------------------------------
+[LARVITAR]
+Habitat = Mountain
+#-------------------------------
+[PUPITAR]
+Habitat = Mountain
+#-------------------------------
+[TYRANITAR]
+Habitat = Mountain
+#-------------------------------
+[LUGIA]
+Habitat = Sea
+#-------------------------------
+[HOOH]
+Habitat = Rare
+#-------------------------------
+[CELEBI]
+Habitat = Forest
+#-------------------------------
+[TREECKO]
+Habitat = Forest
+#-------------------------------
+[GROVYLE]
+Habitat = Forest
+#-------------------------------
+[SCEPTILE]
+Habitat = Forest
+#-------------------------------
+[TORCHIC]
+Habitat = Grassland
+#-------------------------------
+[COMBUSKEN]
+Habitat = Grassland
+#-------------------------------
+[BLAZIKEN]
+Habitat = Grassland
+#-------------------------------
+[MUDKIP]
+Habitat = WatersEdge
+#-------------------------------
+[MARSHTOMP]
+Habitat = WatersEdge
+#-------------------------------
+[SWAMPERT]
+Habitat = WatersEdge
+#-------------------------------
+[POOCHYENA]
+Habitat = Grassland
+#-------------------------------
+[MIGHTYENA]
+Habitat = Grassland
+#-------------------------------
+[ZIGZAGOON]
+Habitat = Grassland
+#-------------------------------
+[LINOONE]
+Habitat = Grassland
+#-------------------------------
+[WURMPLE]
+Habitat = Forest
+#-------------------------------
+[SILCOON]
+Habitat = Forest
+#-------------------------------
+[BEAUTIFLY]
+Habitat = Forest
+#-------------------------------
+[CASCOON]
+Habitat = Forest
+#-------------------------------
+[DUSTOX]
+Habitat = Forest
+#-------------------------------
+[LOTAD]
+Habitat = WatersEdge
+#-------------------------------
+[LOMBRE]
+Habitat = WatersEdge
+#-------------------------------
+[LUDICOLO]
+Habitat = WatersEdge
+#-------------------------------
+[SEEDOT]
+Habitat = Forest
+#-------------------------------
+[NUZLEAF]
+Habitat = Forest
+#-------------------------------
+[SHIFTRY]
+Habitat = Forest
+#-------------------------------
+[TAILLOW]
+Habitat = Grassland
+#-------------------------------
+[SWELLOW]
+Habitat = Grassland
+#-------------------------------
+[WINGULL]
+Habitat = Sea
+#-------------------------------
+[PELIPPER]
+Habitat = Sea
+#-------------------------------
+[RALTS]
+Habitat = Urban
+#-------------------------------
+[KIRLIA]
+Habitat = Urban
+#-------------------------------
+[GARDEVOIR]
+Habitat = Urban
+#-------------------------------
+[SURSKIT]
+Habitat = WatersEdge
+#-------------------------------
+[MASQUERAIN]
+Habitat = WatersEdge
+#-------------------------------
+[SHROOMISH]
+Habitat = Forest
+#-------------------------------
+[BRELOOM]
+Habitat = Forest
+#-------------------------------
+[SLAKOTH]
+Habitat = Forest
+#-------------------------------
+[VIGOROTH]
+Habitat = Forest
+#-------------------------------
+[SLAKING]
+Habitat = Forest
+#-------------------------------
+[NINCADA]
+Habitat = Forest
+#-------------------------------
+[NINJASK]
+Habitat = Forest
+#-------------------------------
+[SHEDINJA]
+Habitat = Forest
+#-------------------------------
+[WHISMUR]
+Habitat = Cave
+#-------------------------------
+[LOUDRED]
+Habitat = Cave
+#-------------------------------
+[EXPLOUD]
+Habitat = Cave
+#-------------------------------
+[MAKUHITA]
+Habitat = Mountain
+#-------------------------------
+[HARIYAMA]
+Habitat = Mountain
+#-------------------------------
+[AZURILL]
+Habitat = WatersEdge
+#-------------------------------
+[NOSEPASS]
+Habitat = Cave
+#-------------------------------
+[SKITTY]
+Habitat = Urban
+#-------------------------------
+[DELCATTY]
+Habitat = Urban
+#-------------------------------
+[SABLEYE]
+Habitat = Cave
+#-------------------------------
+[MAWILE]
+Habitat = Cave
+#-------------------------------
+[ARON]
+Habitat = Mountain
+#-------------------------------
+[LAIRON]
+Habitat = Mountain
+#-------------------------------
+[AGGRON]
+Habitat = Mountain
+#-------------------------------
+[MEDITITE]
+Habitat = Mountain
+#-------------------------------
+[MEDICHAM]
+Habitat = Mountain
+#-------------------------------
+[ELECTRIKE]
+Habitat = Grassland
+#-------------------------------
+[MANECTRIC]
+Habitat = Grassland
+#-------------------------------
+[PLUSLE]
+Habitat = Grassland
+#-------------------------------
+[MINUN]
+Habitat = Grassland
+#-------------------------------
+[VOLBEAT]
+Habitat = Forest
+#-------------------------------
+[ILLUMISE]
+Habitat = Forest
+#-------------------------------
+[ROSELIA]
+Habitat = Grassland
+#-------------------------------
+[GULPIN]
+Habitat = Grassland
+#-------------------------------
+[SWALOT]
+Habitat = Grassland
+#-------------------------------
+[CARVANHA]
+Habitat = Sea
+#-------------------------------
+[SHARPEDO]
+Habitat = Sea
+#-------------------------------
+[WAILMER]
+Habitat = Sea
+#-------------------------------
+[WAILORD]
+Habitat = Sea
+#-------------------------------
+[NUMEL]
+Habitat = Mountain
+#-------------------------------
+[CAMERUPT]
+Habitat = Mountain
+#-------------------------------
+[TORKOAL]
+Habitat = Mountain
+#-------------------------------
+[SPOINK]
+Habitat = Mountain
+#-------------------------------
+[GRUMPIG]
+Habitat = Mountain
+#-------------------------------
+[SPINDA]
+Habitat = Mountain
+#-------------------------------
+[TRAPINCH]
+Habitat = RoughTerrain
+#-------------------------------
+[VIBRAVA]
+Habitat = RoughTerrain
+#-------------------------------
+[FLYGON]
+Habitat = RoughTerrain
+#-------------------------------
+[CACNEA]
+Habitat = RoughTerrain
+#-------------------------------
+[CACTURNE]
+Habitat = RoughTerrain
+#-------------------------------
+[SWABLU]
+Habitat = Forest
+#-------------------------------
+[ALTARIA]
+Habitat = Forest
+#-------------------------------
+[ZANGOOSE]
+Habitat = Grassland
+#-------------------------------
+[SEVIPER]
+Habitat = Grassland
+#-------------------------------
+[LUNATONE]
+Habitat = Cave
+#-------------------------------
+[SOLROCK]
+Habitat = Cave
+#-------------------------------
+[BARBOACH]
+Habitat = WatersEdge
+#-------------------------------
+[WHISCASH]
+Habitat = WatersEdge
+#-------------------------------
+[CORPHISH]
+Habitat = WatersEdge
+#-------------------------------
+[CRAWDAUNT]
+Habitat = WatersEdge
+#-------------------------------
+[BALTOY]
+Habitat = RoughTerrain
+#-------------------------------
+[CLAYDOL]
+Habitat = RoughTerrain
+#-------------------------------
+[LILEEP]
+Habitat = Sea
+#-------------------------------
+[CRADILY]
+Habitat = Sea
+#-------------------------------
+[ANORITH]
+Habitat = WatersEdge
+#-------------------------------
+[ARMALDO]
+Habitat = WatersEdge
+#-------------------------------
+[FEEBAS]
+Habitat = WatersEdge
+#-------------------------------
+[MILOTIC]
+Habitat = WatersEdge
+#-------------------------------
+[CASTFORM]
+Habitat = Mountain
+#-------------------------------
+[KECLEON]
+Habitat = Forest
+#-------------------------------
+[SHUPPET]
+Habitat = Urban
+#-------------------------------
+[BANETTE]
+Habitat = Urban
+#-------------------------------
+[DUSKULL]
+Habitat = Forest
+#-------------------------------
+[DUSCLOPS]
+Habitat = Forest
+#-------------------------------
+[TROPIUS]
+Habitat = Forest
+#-------------------------------
+[CHIMECHO]
+Habitat = Urban
+#-------------------------------
+[ABSOL]
+Habitat = Mountain
+#-------------------------------
+[WYNAUT]
+Habitat = Cave
+#-------------------------------
+[SNORUNT]
+Habitat = Cave
+#-------------------------------
+[GLALIE]
+Habitat = Cave
+#-------------------------------
+[SPHEAL]
+Habitat = Sea
+#-------------------------------
+[SEALEO]
+Habitat = Sea
+#-------------------------------
+[WALREIN]
+Habitat = Sea
+#-------------------------------
+[CLAMPERL]
+Habitat = Sea
+#-------------------------------
+[HUNTAIL]
+Habitat = Sea
+#-------------------------------
+[GOREBYSS]
+Habitat = Sea
+#-------------------------------
+[RELICANTH]
+Habitat = Sea
+#-------------------------------
+[LUVDISC]
+Habitat = Sea
+#-------------------------------
+[BAGON]
+Habitat = RoughTerrain
+#-------------------------------
+[SHELGON]
+Habitat = RoughTerrain
+#-------------------------------
+[SALAMENCE]
+Habitat = RoughTerrain
+#-------------------------------
+[BELDUM]
+Habitat = RoughTerrain
+#-------------------------------
+[METANG]
+Habitat = RoughTerrain
+#-------------------------------
+[METAGROSS]
+Habitat = RoughTerrain
+#-------------------------------
+[REGIROCK]
+Habitat = Cave
+#-------------------------------
+[REGICE]
+Habitat = Cave
+#-------------------------------
+[REGISTEEL]
+Habitat = Cave
+#-------------------------------
+[LATIAS]
+Habitat = WatersEdge
+#-------------------------------
+[LATIOS]
+Habitat = WatersEdge
+#-------------------------------
+[KYOGRE]
+Habitat = Sea
+#-------------------------------
+[GROUDON]
+Habitat = RoughTerrain
+#-------------------------------
+[RAYQUAZA]
+Habitat = Rare
+#-------------------------------
+[JIRACHI]
+Habitat = Mountain
+#-------------------------------
+[DEOXYS]
+Habitat = Rare
+#-------------------------------
+[TURTWIG]
+Habitat = Forest
+#-------------------------------
+[GROTLE]
+Habitat = Forest
+#-------------------------------
+[TORTERRA]
+Habitat = Forest
+#-------------------------------
+[CHIMCHAR]
+Habitat = Forest
+#-------------------------------
+[MONFERNO]
+Habitat = Forest
+#-------------------------------
+[INFERNAPE]
+Habitat = Forest
+#-------------------------------
+[PIPLUP]
+Habitat = WatersEdge
+#-------------------------------
+[PRINPLUP]
+Habitat = WatersEdge
+#-------------------------------
+[EMPOLEON]
+Habitat = WatersEdge
+#-------------------------------
+[STARLY]
+Habitat = Grassland
+#-------------------------------
+[STARAVIA]
+Habitat = Grassland
+#-------------------------------
+[STARAPTOR]
+Habitat = Grassland
+#-------------------------------
+[BIDOOF]
+Habitat = WatersEdge
+#-------------------------------
+[BIBAREL]
+Habitat = WatersEdge
+#-------------------------------
+[KRICKETOT]
+Habitat = Grassland
+#-------------------------------
+[KRICKETUNE]
+Habitat = Grassland
+#-------------------------------
+[SHINX]
+Habitat = Grassland
+#-------------------------------
+[LUXIO]
+Habitat = Grassland
+#-------------------------------
+[LUXRAY]
+Habitat = Grassland
+#-------------------------------
+[BUDEW]
+Habitat = Grassland
+#-------------------------------
+[ROSERADE]
+Habitat = Grassland
+#-------------------------------
+[CRANIDOS]
+Habitat = RoughTerrain
+#-------------------------------
+[RAMPARDOS]
+Habitat = RoughTerrain
+#-------------------------------
+[SHIELDON]
+Habitat = RoughTerrain
+#-------------------------------
+[BASTIODON]
+Habitat = RoughTerrain
+#-------------------------------
+[BURMY]
+Habitat = Forest
+#-------------------------------
+[WORMADAM]
+Habitat = Forest
+#-------------------------------
+[MOTHIM]
+Habitat = Forest
+#-------------------------------
+[COMBEE]
+Habitat = Forest
+#-------------------------------
+[VESPIQUEN]
+Habitat = Forest
+#-------------------------------
+[PACHIRISU]
+Habitat = Forest
+#-------------------------------
+[BUIZEL]
+Habitat = WatersEdge
+#-------------------------------
+[FLOATZEL]
+Habitat = WatersEdge
+#-------------------------------
+[CHERUBI]
+Habitat = Forest
+#-------------------------------
+[CHERRIM]
+Habitat = Forest
+#-------------------------------
+[SHELLOS]
+Habitat = Sea
+#-------------------------------
+[GASTRODON]
+Habitat = Sea
+#-------------------------------
+[AMBIPOM]
+Habitat = Forest
+#-------------------------------
+[DRIFLOON]
+Habitat = Urban
+#-------------------------------
+[DRIFBLIM]
+Habitat = Urban
+#-------------------------------
+[BUNEARY]
+Habitat = Grassland
+#-------------------------------
+[LOPUNNY]
+Habitat = Grassland
+#-------------------------------
+[MISMAGIUS]
+Habitat = Cave
+#-------------------------------
+[HONCHKROW]
+Habitat = Forest
+#-------------------------------
+[GLAMEOW]
+Habitat = Urban
+#-------------------------------
+[PURUGLY]
+Habitat = Urban
+#-------------------------------
+[CHINGLING]
+Habitat = Urban
+#-------------------------------
+[STUNKY]
+Habitat = Grassland
+#-------------------------------
+[SKUNTANK]
+Habitat = Grassland
+#-------------------------------
+[BRONZOR]
+Habitat = Cave
+#-------------------------------
+[BRONZONG]
+Habitat = Cave
+#-------------------------------
+[BONSLY]
+Habitat = Forest
+#-------------------------------
+[MIMEJR]
+Habitat = Urban
+#-------------------------------
+[HAPPINY]
+Habitat = Urban
+#-------------------------------
+[CHATOT]
+Habitat = Forest
+#-------------------------------
+[SPIRITOMB]
+Habitat = Cave
+#-------------------------------
+[GIBLE]
+Habitat = Cave
+#-------------------------------
+[GABITE]
+Habitat = Cave
+#-------------------------------
+[GARCHOMP]
+Habitat = Cave
+#-------------------------------
+[MUNCHLAX]
+Habitat = Mountain
+#-------------------------------
+[RIOLU]
+Habitat = Mountain
+#-------------------------------
+[LUCARIO]
+Habitat = Mountain
+#-------------------------------
+[HIPPOPOTAS]
+Habitat = RoughTerrain
+#-------------------------------
+[HIPPOWDON]
+Habitat = RoughTerrain
+#-------------------------------
+[SKORUPI]
+Habitat = RoughTerrain
+#-------------------------------
+[DRAPION]
+Habitat = RoughTerrain
+#-------------------------------
+[CROAGUNK]
+Habitat = Forest
+#-------------------------------
+[TOXICROAK]
+Habitat = Forest
+#-------------------------------
+[CARNIVINE]
+Habitat = Forest
+#-------------------------------
+[FINNEON]
+Habitat = Sea
+#-------------------------------
+[LUMINEON]
+Habitat = Sea
+#-------------------------------
+[MANTYKE]
+Habitat = Sea
+#-------------------------------
+[SNOVER]
+Habitat = Forest
+#-------------------------------
+[ABOMASNOW]
+Habitat = Forest
+#-------------------------------
+[WEAVILE]
+Habitat = Forest
+#-------------------------------
+[MAGNEZONE]
+Habitat = Urban
+#-------------------------------
+[LICKILICKY]
+Habitat = Grassland
+#-------------------------------
+[RHYPERIOR]
+Habitat = RoughTerrain
+#-------------------------------
+[TANGROWTH]
+Habitat = Grassland
+#-------------------------------
+[ELECTIVIRE]
+Habitat = Grassland
+#-------------------------------
+[MAGMORTAR]
+Habitat = Mountain
+#-------------------------------
+[TOGEKISS]
+Habitat = Forest
+#-------------------------------
+[YANMEGA]
+Habitat = Forest
+#-------------------------------
+[LEAFEON]
+Habitat = Urban
+#-------------------------------
+[GLACEON]
+Habitat = Urban
+#-------------------------------
+[GLISCOR]
+Habitat = Mountain
+#-------------------------------
+[MAMOSWINE]
+Habitat = Cave
+#-------------------------------
+[PORYGONZ]
+Habitat = Urban
+#-------------------------------
+[GALLADE]
+Habitat = Urban
+#-------------------------------
+[PROBOPASS]
+Habitat = Cave
+#-------------------------------
+[DUSKNOIR]
+Habitat = Forest
+#-------------------------------
+[FROSLASS]
+Habitat = Mountain
+#-------------------------------
+[ROTOM]
+Habitat = Urban
+#-------------------------------
+[UXIE]
+Habitat = Cave
+#-------------------------------
+[MESPRIT]
+Habitat = Cave
+#-------------------------------
+[AZELF]
+Habitat = Cave
+#-------------------------------
+[DIALGA]
+Habitat = Rare
+#-------------------------------
+[PALKIA]
+Habitat = Rare
+#-------------------------------
+[HEATRAN]
+Habitat = Mountain
+#-------------------------------
+[REGIGIGAS]
+Habitat = Cave
+#-------------------------------
+[GIRATINA]
+Habitat = Rare
+#-------------------------------
+[CRESSELIA]
+Habitat = Urban
+#-------------------------------
+[PHIONE]
+Habitat = Sea
+#-------------------------------
+[MANAPHY]
+Habitat = Sea
+#-------------------------------
+[DARKRAI]
+Habitat = Urban
+#-------------------------------
+[SHAYMIN]
+Habitat = Grassland
+#-------------------------------
+[ARCEUS]
+Habitat = Rare
+#-------------------------------
+[VICTINI]
+Habitat = Urban
+#-------------------------------
+[SNIVY]
+Habitat = Grassland
+#-------------------------------
+[SERVINE]
+Habitat = Grassland
+#-------------------------------
+[SERPERIOR]
+Habitat = Grassland
+#-------------------------------
+[TEPIG]
+Habitat = Mountain
+#-------------------------------
+[PIGNITE]
+Habitat = Mountain
+#-------------------------------
+[EMBOAR]
+Habitat = Mountain
+#-------------------------------
+[OSHAWOTT]
+Habitat = WatersEdge
+#-------------------------------
+[DEWOTT]
+Habitat = WatersEdge
+#-------------------------------
+[SAMUROTT]
+Habitat = WatersEdge
+#-------------------------------
+[PATRAT]
+Habitat = Grassland
+#-------------------------------
+[WATCHOG]
+Habitat = Grassland
+#-------------------------------
+[LILLIPUP]
+Habitat = Grassland
+#-------------------------------
+[HERDIER]
+Habitat = Grassland
+#-------------------------------
+[STOUTLAND]
+Habitat = Grassland
+#-------------------------------
+[PURRLOIN]
+Habitat = Urban
+#-------------------------------
+[LIEPARD]
+Habitat = Urban
+#-------------------------------
+[PANSAGE]
+Habitat = Forest
+#-------------------------------
+[SIMISAGE]
+Habitat = Forest
+#-------------------------------
+[PANSEAR]
+Habitat = Forest
+#-------------------------------
+[SIMISEAR]
+Habitat = Forest
+#-------------------------------
+[PANPOUR]
+Habitat = Forest
+#-------------------------------
+[SIMIPOUR]
+Habitat = Forest
+#-------------------------------
+[MUNNA]
+Habitat = Grassland
+#-------------------------------
+[MUSHARNA]
+Habitat = Grassland
+#-------------------------------
+[PIDOVE]
+Habitat = Urban
+#-------------------------------
+[TRANQUILL]
+Habitat = Urban
+#-------------------------------
+[UNFEZANT]
+Habitat = Urban
+#-------------------------------
+[BLITZLE]
+Habitat = Grassland
+#-------------------------------
+[ZEBSTRIKA]
+Habitat = Grassland
+#-------------------------------
+[ROGGENROLA]
+Habitat = Cave
+#-------------------------------
+[BOLDORE]
+Habitat = Cave
+#-------------------------------
+[GIGALITH]
+Habitat = Cave
+#-------------------------------
+[WOOBAT]
+Habitat = Cave
+#-------------------------------
+[SWOOBAT]
+Habitat = Cave
+#-------------------------------
+[DRILBUR]
+Habitat = Cave
+#-------------------------------
+[EXCADRILL]
+Habitat = Cave
+#-------------------------------
+[AUDINO]
+Habitat = Urban
+#-------------------------------
+[TIMBURR]
+Habitat = Urban
+#-------------------------------
+[GURDURR]
+Habitat = Urban
+#-------------------------------
+[CONKELDURR]
+Habitat = Urban
+#-------------------------------
+[TYMPOLE]
+Habitat = WatersEdge
+#-------------------------------
+[PALPITOAD]
+Habitat = WatersEdge
+#-------------------------------
+[SEISMITOAD]
+Habitat = WatersEdge
+#-------------------------------
+[THROH]
+Habitat = Urban
+#-------------------------------
+[SAWK]
+Habitat = Urban
+#-------------------------------
+[SEWADDLE]
+Habitat = Forest
+#-------------------------------
+[SWADLOON]
+Habitat = Forest
+#-------------------------------
+[LEAVANNY]
+Habitat = Forest
+#-------------------------------
+[VENIPEDE]
+Habitat = Forest
+#-------------------------------
+[WHIRLIPEDE]
+Habitat = Forest
+#-------------------------------
+[SCOLIPEDE]
+Habitat = Forest
+#-------------------------------
+[COTTONEE]
+Habitat = Grassland
+#-------------------------------
+[WHIMSICOTT]
+Habitat = Grassland
+#-------------------------------
+[PETILIL]
+Habitat = Grassland
+#-------------------------------
+[LILLIGANT]
+Habitat = Grassland
+#-------------------------------
+[BASCULIN]
+Habitat = Sea
+#-------------------------------
+[SANDILE]
+Habitat = RoughTerrain
+#-------------------------------
+[KROKOROK]
+Habitat = RoughTerrain
+#-------------------------------
+[KROOKODILE]
+Habitat = RoughTerrain
+#-------------------------------
+[DARUMAKA]
+Habitat = Forest
+#-------------------------------
+[DARMANITAN]
+Habitat = Forest
+#-------------------------------
+[MARACTUS]
+Habitat = RoughTerrain
+#-------------------------------
+[DWEBBLE]
+Habitat = WatersEdge
+#-------------------------------
+[CRUSTLE]
+Habitat = WatersEdge
+#-------------------------------
+[SCRAGGY]
+Habitat = Urban
+#-------------------------------
+[SCRAFTY]
+Habitat = Urban
+#-------------------------------
+[SIGILYPH]
+Habitat = Cave
+#-------------------------------
+[YAMASK]
+Habitat = Cave
+#-------------------------------
+[COFAGRIGUS]
+Habitat = Cave
+#-------------------------------
+[TIRTOUGA]
+Habitat = Sea
+#-------------------------------
+[CARRACOSTA]
+Habitat = Sea
+#-------------------------------
+[ARCHEN]
+Habitat = RoughTerrain
+#-------------------------------
+[ARCHEOPS]
+Habitat = RoughTerrain
+#-------------------------------
+[TRUBBISH]
+Habitat = Urban
+#-------------------------------
+[GARBODOR]
+Habitat = Urban
+#-------------------------------
+[ZORUA]
+Habitat = Forest
+#-------------------------------
+[ZOROARK]
+Habitat = Forest
+#-------------------------------
+[MINCCINO]
+Habitat = Grassland
+#-------------------------------
+[CINCCINO]
+Habitat = Grassland
+#-------------------------------
+[GOTHITA]
+Habitat = Urban
+#-------------------------------
+[GOTHORITA]
+Habitat = Urban
+#-------------------------------
+[GOTHITELLE]
+Habitat = Urban
+#-------------------------------
+[SOLOSIS]
+Habitat = Urban
+#-------------------------------
+[DUOSION]
+Habitat = Urban
+#-------------------------------
+[REUNICLUS]
+Habitat = Urban
+#-------------------------------
+[DUCKLETT]
+Habitat = WatersEdge
+#-------------------------------
+[SWANNA]
+Habitat = WatersEdge
+#-------------------------------
+[VANILLITE]
+Habitat = Cave
+#-------------------------------
+[VANILLISH]
+Habitat = Cave
+#-------------------------------
+[VANILLUXE]
+Habitat = Cave
+#-------------------------------
+[DEERLING]
+Habitat = Forest
+#-------------------------------
+[SAWSBUCK]
+Habitat = Forest
+#-------------------------------
+[EMOLGA]
+Habitat = Forest
+#-------------------------------
+[KARRABLAST]
+Habitat = Forest
+#-------------------------------
+[ESCAVALIER]
+Habitat = Forest
+#-------------------------------
+[FOONGUS]
+Habitat = Forest
+#-------------------------------
+[AMOONGUSS]
+Habitat = Forest
+#-------------------------------
+[FRILLISH]
+Habitat = Sea
+#-------------------------------
+[JELLICENT]
+Habitat = Sea
+#-------------------------------
+[ALOMOMOLA]
+Habitat = Sea
+#-------------------------------
+[JOLTIK]
+Habitat = Cave
+#-------------------------------
+[GALVANTULA]
+Habitat = Cave
+#-------------------------------
+[FERROSEED]
+Habitat = Forest
+#-------------------------------
+[FERROTHORN]
+Habitat = Forest
+#-------------------------------
+[KLINK]
+Habitat = Urban
+#-------------------------------
+[KLANG]
+Habitat = Urban
+#-------------------------------
+[KLINKLANG]
+Habitat = Urban
+#-------------------------------
+[TYNAMO]
+Habitat = Sea
+#-------------------------------
+[EELEKTRIK]
+Habitat = Sea
+#-------------------------------
+[EELEKTROSS]
+Habitat = Sea
+#-------------------------------
+[ELGYEM]
+Habitat = Urban
+#-------------------------------
+[BEHEEYEM]
+Habitat = Urban
+#-------------------------------
+[LITWICK]
+Habitat = Urban
+#-------------------------------
+[LAMPENT]
+Habitat = Urban
+#-------------------------------
+[CHANDELURE]
+Habitat = Urban
+#-------------------------------
+[AXEW]
+Habitat = RoughTerrain
+#-------------------------------
+[FRAXURE]
+Habitat = RoughTerrain
+#-------------------------------
+[HAXORUS]
+Habitat = RoughTerrain
+#-------------------------------
+[CUBCHOO]
+Habitat = Mountain
+#-------------------------------
+[BEARTIC]
+Habitat = Mountain
+#-------------------------------
+[CRYOGONAL]
+Habitat = Mountain
+#-------------------------------
+[SHELMET]
+Habitat = Forest
+#-------------------------------
+[ACCELGOR]
+Habitat = Forest
+#-------------------------------
+[STUNFISK]
+Habitat = Sea
+#-------------------------------
+[MIENFOO]
+Habitat = Grassland
+#-------------------------------
+[MIENSHAO]
+Habitat = Grassland
+#-------------------------------
+[DRUDDIGON]
+Habitat = Cave
+#-------------------------------
+[GOLETT]
+Habitat = Cave
+#-------------------------------
+[GOLURK]
+Habitat = Cave
+#-------------------------------
+[PAWNIARD]
+Habitat = Mountain
+#-------------------------------
+[BISHARP]
+Habitat = Mountain
+#-------------------------------
+[BOUFFALANT]
+Habitat = Grassland
+#-------------------------------
+[RUFFLET]
+Habitat = Mountain
+#-------------------------------
+[BRAVIARY]
+Habitat = Mountain
+#-------------------------------
+[VULLABY]
+Habitat = RoughTerrain
+#-------------------------------
+[MANDIBUZZ]
+Habitat = RoughTerrain
+#-------------------------------
+[HEATMOR]
+Habitat = Forest
+#-------------------------------
+[DURANT]
+Habitat = Forest
+#-------------------------------
+[DEINO]
+Habitat = Cave
+#-------------------------------
+[ZWEILOUS]
+Habitat = Cave
+#-------------------------------
+[HYDREIGON]
+Habitat = Cave
+#-------------------------------
+[LARVESTA]
+Habitat = RoughTerrain
+#-------------------------------
+[VOLCARONA]
+Habitat = RoughTerrain
+#-------------------------------
+[COBALION]
+Habitat = Cave
+#-------------------------------
+[TERRAKION]
+Habitat = RoughTerrain
+#-------------------------------
+[VIRIZION]
+Habitat = Forest
+#-------------------------------
+[TORNADUS]
+Habitat = Mountain
+#-------------------------------
+[THUNDURUS]
+Habitat = Mountain
+#-------------------------------
+[RESHIRAM]
+Habitat = Rare
+#-------------------------------
+[ZEKROM]
+Habitat = Rare
+#-------------------------------
+[LANDORUS]
+Habitat = RoughTerrain
+#-------------------------------
+[KYUREM]
+Habitat = Cave
+#-------------------------------
+[KELDEO]
+Habitat = WatersEdge
+#-------------------------------
+[MELOETTA]
+Habitat = Urban
+#-------------------------------
+[GENESECT]
+Habitat = Urban
+#-------------------------------
+[CHESPIN]
+Habitat = Grassland
+#-------------------------------
+[QUILLADIN]
+Habitat = Grassland
+#-------------------------------
+[CHESNAUGHT]
+Habitat = Grassland
+#-------------------------------
+[FENNEKIN]
+Habitat = Forest
+#-------------------------------
+[BRAIXEN]
+Habitat = Forest
+#-------------------------------
+[DELPHOX]
+Habitat = Forest
+#-------------------------------
+[FROAKIE]
+Habitat = WatersEdge
+#-------------------------------
+[FROGADIER]
+Habitat = WatersEdge
+#-------------------------------
+[GRENINJA]
+Habitat = WatersEdge
+#-------------------------------
+[BUNNELBY]
+Habitat = Grassland
+#-------------------------------
+[DIGGERSBY]
+Habitat = Grassland
+#-------------------------------
+[FLETCHLING]
+Habitat = Grassland
+#-------------------------------
+[FLETCHINDER]
+Habitat = Grassland
+#-------------------------------
+[TALONFLAME]
+Habitat = Grassland
+#-------------------------------
+[SCATTERBUG]
+Habitat = Forest
+#-------------------------------
+[SPEWPA]
+Habitat = Forest
+#-------------------------------
+[VIVILLON]
+Habitat = Forest
+#-------------------------------
+[LITLEO]
+Habitat = Grassland
+#-------------------------------
+[PYROAR]
+Habitat = Grassland
+#-------------------------------
+[FLABEBE]
+Habitat = Grassland
+#-------------------------------
+[FLOETTE]
+Habitat = Grassland
+#-------------------------------
+[FLORGES]
+Habitat = Grassland
+#-------------------------------
+[SKIDDO]
+Habitat = Grassland
+#-------------------------------
+[GOGOAT]
+Habitat = Grassland
+#-------------------------------
+[PANCHAM]
+Habitat = Forest
+#-------------------------------
+[PANGORO]
+Habitat = Forest
+#-------------------------------
+[FURFROU]
+Habitat = Urban
+#-------------------------------
+[ESPURR]
+Habitat = Urban
+#-------------------------------
+[MEOWSTIC]
+Habitat = Urban
+#-------------------------------
+[HONEDGE]
+Habitat = Urban
+#-------------------------------
+[DOUBLADE]
+Habitat = Urban
+#-------------------------------
+[AEGISLASH]
+Habitat = Urban
+#-------------------------------
+[SPRITZEE]
+Habitat = Forest
+#-------------------------------
+[AROMATISSE]
+Habitat = Forest
+#-------------------------------
+[SWIRLIX]
+Habitat = Urban
+#-------------------------------
+[SLURPUFF]
+Habitat = Urban
+#-------------------------------
+[INKAY]
+Habitat = Sea
+#-------------------------------
+[MALAMAR]
+Habitat = Sea
+#-------------------------------
+[BINACLE]
+Habitat = Sea
+#-------------------------------
+[BARBARACLE]
+Habitat = Sea
+#-------------------------------
+[SKRELP]
+Habitat = Sea
+#-------------------------------
+[DRAGALGE]
+Habitat = Sea
+#-------------------------------
+[CLAUNCHER]
+Habitat = Sea
+#-------------------------------
+[CLAWITZER]
+Habitat = Sea
+#-------------------------------
+[HELIOPTILE]
+Habitat = RoughTerrain
+#-------------------------------
+[HELIOLISK]
+Habitat = RoughTerrain
+#-------------------------------
+[TYRUNT]
+Habitat = RoughTerrain
+#-------------------------------
+[TYRANTRUM]
+Habitat = RoughTerrain
+#-------------------------------
+[AMAURA]
+Habitat = Mountain
+#-------------------------------
+[AURORUS]
+Habitat = Mountain
+#-------------------------------
+[SYLVEON]
+Habitat = Urban
+#-------------------------------
+[HAWLUCHA]
+Habitat = Urban
+#-------------------------------
+[DEDENNE]
+Habitat = Grassland
+#-------------------------------
+[CARBINK]
+Habitat = Cave
+#-------------------------------
+[GOOMY]
+Habitat = WatersEdge
+#-------------------------------
+[SLIGGOO]
+Habitat = WatersEdge
+#-------------------------------
+[GOODRA]
+Habitat = WatersEdge
+#-------------------------------
+[KLEFKI]
+Habitat = Urban
+#-------------------------------
+[PHANTUMP]
+Habitat = Forest
+#-------------------------------
+[TREVENANT]
+Habitat = Forest
+#-------------------------------
+[PUMPKABOO]
+Habitat = Forest
+#-------------------------------
+[GOURGEIST]
+Habitat = Forest
+#-------------------------------
+[BERGMITE]
+Habitat = Cave
+#-------------------------------
+[AVALUGG]
+Habitat = Cave
+#-------------------------------
+[NOIBAT]
+Habitat = Cave
+#-------------------------------
+[NOIVERN]
+Habitat = Cave
+#-------------------------------
+[XERNEAS]
+Habitat = Forest
+#-------------------------------
+[YVELTAL]
+Habitat = Mountain
+#-------------------------------
+[ZYGARDE]
+Habitat = Cave
+#-------------------------------
+[DIANCIE]
+Habitat = Cave
+#-------------------------------
+[HOOPA]
+Habitat = Rare
+#-------------------------------
+[VOLCANION]
+Habitat = Mountain
+#-------------------------------
+[ROWLET]
+Habitat = Forest
+#-------------------------------
+[DARTRIX]
+Habitat = Forest
+#-------------------------------
+[DECIDUEYE]
+Habitat = Forest
+#-------------------------------
+[LITTEN]
+Habitat = Urban
+#-------------------------------
+[TORRACAT]
+Habitat = Urban
+#-------------------------------
+[INCINEROAR]
+Habitat = Urban
+#-------------------------------
+[POPPLIO]
+Habitat = WatersEdge
+#-------------------------------
+[BRIONNE]
+Habitat = WatersEdge
+#-------------------------------
+[PRIMARINA]
+Habitat = WatersEdge
+#-------------------------------
+[PIKIPEK]
+Habitat = Forest
+#-------------------------------
+[TRUMBEAK]
+Habitat = Forest
+#-------------------------------
+[TOUCANNON]
+Habitat = Forest
+#-------------------------------
+[YUNGOOS]
+Habitat = Grassland
+#-------------------------------
+[GUMSHOOS]
+Habitat = Grassland
+#-------------------------------
+[GRUBBIN]
+Habitat = Forest
+#-------------------------------
+[CHARJABUG]
+Habitat = Forest
+#-------------------------------
+[VIKAVOLT]
+Habitat = Forest
+#-------------------------------
+[CRABRAWLER]
+Habitat = WatersEdge
+#-------------------------------
+[CRABOMINABLE]
+Habitat = Mountain
+#-------------------------------
+[ORICORIO]
+Habitat = Grassland
+#-------------------------------
+[CUTIEFLY]
+Habitat = Grassland
+#-------------------------------
+[RIBOMBEE]
+Habitat = Grassland
+#-------------------------------
+[ROCKRUFF]
+Habitat = Mountain
+#-------------------------------
+[LYCANROC]
+Habitat = Mountain
+#-------------------------------
+[WISHIWASHI]
+Habitat = Sea
+#-------------------------------
+[MAREANIE]
+Habitat = Sea
+#-------------------------------
+[TOXAPEX]
+Habitat = Sea
+#-------------------------------
+[MUDBRAY]
+Habitat = RoughTerrain
+#-------------------------------
+[MUDSDALE]
+Habitat = RoughTerrain
+#-------------------------------
+[DEWPIDER]
+Habitat = WatersEdge
+#-------------------------------
+[ARAQUANID]
+Habitat = WatersEdge
+#-------------------------------
+[FOMANTIS]
+Habitat = Forest
+#-------------------------------
+[LURANTIS]
+Habitat = Forest
+#-------------------------------
+[MORELULL]
+Habitat = Forest
+#-------------------------------
+[SHIINOTIC]
+Habitat = Forest
+#-------------------------------
+[SALANDIT]
+Habitat = Mountain
+#-------------------------------
+[SALAZZLE]
+Habitat = Mountain
+#-------------------------------
+[STUFFUL]
+Habitat = Forest
+#-------------------------------
+[BEWEAR]
+Habitat = Forest
+#-------------------------------
+[BOUNSWEET]
+Habitat = Forest
+#-------------------------------
+[STEENEE]
+Habitat = Forest
+#-------------------------------
+[TSAREENA]
+Habitat = Forest
+#-------------------------------
+[COMFEY]
+Habitat = Grassland
+#-------------------------------
+[ORANGURU]
+Habitat = Forest
+#-------------------------------
+[PASSIMIAN]
+Habitat = Forest
+#-------------------------------
+[WIMPOD]
+Habitat = Cave
+#-------------------------------
+[GOLISOPOD]
+Habitat = Cave
+#-------------------------------
+[SANDYGAST]
+Habitat = WatersEdge
+#-------------------------------
+[PALOSSAND]
+Habitat = WatersEdge
+#-------------------------------
+[PYUKUMUKU]
+Habitat = Sea
+#-------------------------------
+[TYPENULL]
+Habitat = Rare
+#-------------------------------
+[SILVALLY]
+Habitat = Urban
+#-------------------------------
+[MINIOR]
+Habitat = Mountain
+#-------------------------------
+[KOMALA]
+Habitat = Forest
+#-------------------------------
+[TURTONATOR]
+Habitat = Mountain
+#-------------------------------
+[TOGEDEMARU]
+Habitat = Forest
+#-------------------------------
+[MIMIKYU]
+Habitat = Forest
+#-------------------------------
+[BRUXISH]
+Habitat = Sea
+#-------------------------------
+[DRAMPA]
+Habitat = Cave
+#-------------------------------
+[DHELMISE]
+Habitat = Sea
+#-------------------------------
+[JANGMOO]
+Habitat = Mountain
+#-------------------------------
+[HAKAMOO]
+Habitat = Mountain
+#-------------------------------
+[KOMMOO]
+Habitat = Mountain
+#-------------------------------
+[TAPUKOKO]
+Habitat = Mountain
+#-------------------------------
+[TAPULELE]
+Habitat = Urban
+#-------------------------------
+[TAPUBULU]
+Habitat = Grassland
+#-------------------------------
+[TAPUFINI]
+Habitat = WatersEdge
+#-------------------------------
+[COSMOG]
+Habitat = UltraSpace
+#-------------------------------
+[COSMOEM]
+Habitat = UltraSpace
+#-------------------------------
+[SOLGALEO]
+Habitat = UltraSpace
+#-------------------------------
+[LUNALA]
+Habitat = UltraSpace
+#-------------------------------
+[NIHILEGO]
+Habitat = UltraSpace
+#-------------------------------
+[BUZZWOLE]
+Habitat = UltraSpace
+#-------------------------------
+[PHEROMOSA]
+Habitat = UltraSpace
+#-------------------------------
+[XURKITREE]
+Habitat = UltraSpace
+#-------------------------------
+[CELESTEELA]
+Habitat = UltraSpace
+#-------------------------------
+[KARTANA]
+Habitat = UltraSpace
+#-------------------------------
+[GUZZLORD]
+Habitat = UltraSpace
+#-------------------------------
+[NECROZMA]
+Habitat = UltraSpace
+#-------------------------------
+[MAGEARNA]
+Habitat = Urban
+#-------------------------------
+[MARSHADOW]
+Habitat = Urban
+#-------------------------------
+[POIPOLE]
+Habitat = UltraSpace
+#-------------------------------
+[NAGANADEL]
+Habitat = UltraSpace
+#-------------------------------
+[STAKATAKA]
+Habitat = UltraSpace
+#-------------------------------
+[BLACEPHALON]
+Habitat = UltraSpace
+#-------------------------------
+[ZERAORA]
+Habitat = Mountain
+#-------------------------------
+[MELTAN]
+Habitat = Urban
+#-------------------------------
+[MELMETAL]
+Habitat = Urban
+#-------------------------------
+[GROOKEY]
+Habitat = Forest
+#-------------------------------
+[THWACKEY]
+Habitat = Forest
+#-------------------------------
+[RILLABOOM]
+Habitat = Forest
+#-------------------------------
+[SCORBUNNY]
+Habitat = Grassland
+#-------------------------------
+[RABOOT]
+Habitat = Grassland
+#-------------------------------
+[CINDERACE]
+Habitat = Grassland
+#-------------------------------
+[SOBBLE]
+Habitat = WatersEdge
+#-------------------------------
+[DRIZZILE]
+Habitat = WatersEdge
+#-------------------------------
+[INTELEON]
+Habitat = WatersEdge
+#-------------------------------
+[SKWOVET]
+Habitat = Forest
+#-------------------------------
+[GREEDENT]
+Habitat = Forest
+#-------------------------------
+[ROOKIDEE]
+Habitat = Grassland
+#-------------------------------
+[CORVISQUIRE]
+Habitat = Grassland
+#-------------------------------
+[CORVIKNIGHT]
+Habitat = Grassland
+#-------------------------------
+[BLIPBUG]
+Habitat = Grassland
+#-------------------------------
+[DOTTLER]
+Habitat = Grassland
+#-------------------------------
+[ORBEETLE]
+Habitat = Grassland
+#-------------------------------
+[NICKIT]
+Habitat = Grassland
+#-------------------------------
+[THIEVUL]
+Habitat = Grassland
+#-------------------------------
+[GOSSIFLEUR]
+Habitat = Grassland
+#-------------------------------
+[ELDEGOSS]
+Habitat = Grassland
+#-------------------------------
+[WOOLOO]
+Habitat = Grassland
+#-------------------------------
+[DUBWOOL]
+Habitat = Grassland
+#-------------------------------
+[CHEWTLE]
+Habitat = WatersEdge
+#-------------------------------
+[DREDNAW]
+Habitat = WatersEdge
+#-------------------------------
+[YAMPER]
+Habitat = Urban
+#-------------------------------
+[BOLTUND]
+Habitat = Urban
+#-------------------------------
+[ROLYCOLY]
+Habitat = Cave
+#-------------------------------
+[CARKOL]
+Habitat = Cave
+#-------------------------------
+[COALOSSAL]
+Habitat = Cave
+#-------------------------------
+[APPLIN]
+Habitat = Forest
+#-------------------------------
+[FLAPPLE]
+Habitat = Forest
+#-------------------------------
+[APPLETUN]
+Habitat = Forest
+#-------------------------------
+[SILICOBRA]
+Habitat = RoughTerrain
+#-------------------------------
+[SANDACONDA]
+Habitat = RoughTerrain
+#-------------------------------
+[CRAMORANT]
+Habitat = WatersEdge
+#-------------------------------
+[ARROKUDA]
+Habitat = Sea
+#-------------------------------
+[BARRASKEWDA]
+Habitat = Sea
+#-------------------------------
+[TOXEL]
+Habitat = Urban
+#-------------------------------
+[TOXTRICITY]
+Habitat = Urban
+#-------------------------------
+[SIZZLIPEDE]
+Habitat = RoughTerrain
+#-------------------------------
+[CENTISKORCH]
+Habitat = RoughTerrain
+#-------------------------------
+[CLOBBOPUS]
+Habitat = Sea
+#-------------------------------
+[GRAPPLOCT]
+Habitat = Sea
+#-------------------------------
+[SINISTEA]
+Habitat = Urban
+#-------------------------------
+[POLTEAGEIST]
+Habitat = Urban
+#-------------------------------
+[HATENNA]
+Habitat = Urban
+#-------------------------------
+[HATTREM]
+Habitat = Urban
+#-------------------------------
+[HATTERENE]
+Habitat = Urban
+#-------------------------------
+[IMPIDIMP]
+Habitat = Forest
+#-------------------------------
+[MORGREM]
+Habitat = Forest
+#-------------------------------
+[GRIMMSNARL]
+Habitat = Forest
+#-------------------------------
+[OBSTAGOON]
+Habitat = Grassland
+#-------------------------------
+[PERRSERKER]
+Habitat = Urban
+#-------------------------------
+[CURSOLA]
+Habitat = Sea
+#-------------------------------
+[SIRFETCHD]
+Habitat = Grassland
+#-------------------------------
+[MRRIME]
+Habitat = Mountain
+#-------------------------------
+[RUNERIGUS]
+Habitat = Cave
+#-------------------------------
+[MILCERY]
+Habitat = Urban
+#-------------------------------
+[ALCREMIE]
+Habitat = Urban
+#-------------------------------
+[FALINKS]
+Habitat = RoughTerrain
+#-------------------------------
+[PINCURCHIN]
+Habitat = Sea
+#-------------------------------
+[SNOM]
+Habitat = Forest
+#-------------------------------
+[FROSMOTH]
+Habitat = Forest
+#-------------------------------
+[STONJOURNER]
+Habitat = Mountain
+#-------------------------------
+[EISCUE]
+Habitat = WatersEdge
+#-------------------------------
+[INDEEDEE]
+Habitat = Urban
+#-------------------------------
+[MORPEKO]
+Habitat = Forest
+#-------------------------------
+[CUFANT]
+Habitat = Mountain
+#-------------------------------
+[COPPERAJAH]
+Habitat = Mountain
+#-------------------------------
+[DRACOZOLT]
+Habitat = None
+#-------------------------------
+[ARCTOZOLT]
+Habitat = None
+#-------------------------------
+[DRACOVISH]
+Habitat = None
+#-------------------------------
+[ARCTOVISH]
+Habitat = None
+#-------------------------------
+[DURALUDON]
+Habitat = Mountain
+#-------------------------------
+[DREEPY]
+Habitat = Mountain
+#-------------------------------
+[DRAKLOAK]
+Habitat = Mountain
+#-------------------------------
+[DRAGAPULT]
+Habitat = Mountain
+#-------------------------------
+[ZACIAN]
+Habitat = Forest
+#-------------------------------
+[ZAMAZENTA]
+Habitat = Forest
+#-------------------------------
+[ETERNATUS]
+Habitat = Rare
+#-------------------------------
+[KUBFU]
+Habitat = Mountain
+#-------------------------------
+[URSHIFU]
+Habitat = Mountain
+#-------------------------------
+[ZARUDE]
+Habitat = Forest
+#-------------------------------
+[REGIELEKI]
+Habitat = Cave
+#-------------------------------
+[REGIDRAGO]
+Habitat = Cave
+#-------------------------------
+[GLASTRIER]
+Habitat = Grassland
+#-------------------------------
+[SPECTRIER]
+Habitat = Grassland
+#-------------------------------
+[CALYREX]
+Habitat = Forest
+#-------------------------------
+[WYRDEER]
+Habitat = Forest
+#-------------------------------
+[KLEAVOR]
+Habitat = Grassland
+#-------------------------------
+[URSALUNA]
+Habitat = Mountain
+#-------------------------------
+[BASCULEGION]
+Habitat = Sea
+#-------------------------------
+[SNEASLER]
+Habitat = Grassland
+#-------------------------------
+[OVERQWIL]
+Habitat = Sea
+#-------------------------------
+[ENAMORUS]
+Habitat = RoughTerrain
+#-------------------------------
+[RAICHU_1]
+Habitat = WatersEdge
+#-------------------------------
+[SANDSHREW_1]
+Habitat = Mountain
+#-------------------------------
+[SANDSLASH_1]
+Habitat = Mountain
+#-------------------------------
+[PONYTA_1]
+Habitat = Forest
+#-------------------------------
+[RAPIDASH_1]
+Habitat = Forest
+#-------------------------------
+[VOLTORB_1]
+Habitat = Grassland
+#-------------------------------
+[ELECTRODE_1]
+Habitat = Grassland
+#-------------------------------
+[MRMIME_1]
+Habitat = Mountain
+#-------------------------------
+[ARTICUNO_1]
+Habitat = Grassland
+#-------------------------------
+[ZAPDOS_1]
+Habitat = Grassland
+#-------------------------------
+[MOLTRES_1]
+Habitat = Grassland
+#-------------------------------
+[SNEASEL_1]
+Habitat = Grassland
+#-------------------------------
+[DARUMAKA_2]
+Habitat = Mountain
+#-------------------------------
+[DARMANITAN_2]
+Habitat = Mountain
+#-------------------------------
+[STUNFISK_1]
+Habitat = Cave

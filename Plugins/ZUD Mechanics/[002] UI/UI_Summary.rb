@@ -37,18 +37,19 @@ class PokemonSummary_Scene
   #-----------------------------------------------------------------------------
   alias zud_drawPageTwo drawPageTwo
   def drawPageTwo
-	if PluginManager.installed?("BW Summary Screen")
+    if PluginManager.installed?("BW Summary Screen")
       if @pokemon.dynamax_able? && !@pokemon.isSpecies?(:ETERNATUS) && !$game_switches[Settings::NO_DYNAMAX]
         path = "Graphics/Pictures/Summary/"
         meter = (SUMMARY_B2W2_STYLE) ? "overlay_dynamax_B2W2" : "overlay_dynamax"
-        imagepos = [[sprintf(path + meter), 0, 302]]
+        xpos = Graphics.width - 262
+        imagepos = [[sprintf(path + meter), xpos, 322]]
         overlay = @sprites["zud_overlay"].bitmap
-        pbSetSystemFont(overlay)
+        pbSetSmallFont(overlay)
         pbDrawImagePositions(overlay, imagepos)
         dlevel = @pokemon.dynamax_lvl
         levels = AnimatedBitmap.new(_INTL(path + "dynamax_bar"))
-        overlay.blt(82, 332, levels.bitmap, Rect.new(0, 0, dlevel * 16, 14))
-        pbDrawTextPositions(overlay, [ [_INTL("Dynamax Lv."), 42, 296, 0, Color.new(255, 255, 255), Color.new(123, 123, 123)] ])
+        overlay.blt(xpos + 82, 352, levels.bitmap, Rect.new(0, 0, dlevel * 16, 14))
+        pbDrawTextPositions(overlay, [ [_INTL("Dynamax Lv."), Graphics.width - 102, 324, 2, Color.new(255, 255, 255), Color.new(123, 123, 123)] ])
       end
     end
     zud_drawPageTwo

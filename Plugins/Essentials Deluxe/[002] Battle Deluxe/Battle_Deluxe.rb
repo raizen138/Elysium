@@ -368,12 +368,13 @@ def pbApplyWildAttributes(pkmn)
       #-------------------------------------------------------------------------
       # Sets plugin-specific attributes.
       #-------------------------------------------------------------------------
-      when :focus      then pokemon.focus_style   = pkmn_hash[:focus]      if PluginManager.installed?("Focus Meter System")
-      when :birthsign  then pokemon.birthsign     = pkmn_hash[:birthsign]  if PluginManager.installed?("Pokémon Birthsigns")
-      when :blessed    then pokemon.blessing      = pkmn_hash[:blessed]    if PluginManager.installed?("Pokémon Birthsigns")
-      when :celestial  then pokemon.celestial     = pkmn_hash[:celestial]  if PluginManager.installed?("Pokémon Birthsigns")
-      when :dynamaxlvl then pokemon.raid_dmax_lvl = pkmn_hash[:dynamaxlvl] if PluginManager.installed?("ZUD Mechanics")
-      when :gmaxfactor then pokemon.gmax_factor   = pkmn_hash[:gmaxfactor] if PluginManager.installed?("ZUD Mechanics")
+      when :focus      then pokemon.focus_style   = pkmn_hash[:focus]            if PluginManager.installed?("Focus Meter System")
+      when :birthsign  then pokemon.birthsign     = pkmn_hash[:birthsign]        if PluginManager.installed?("Pokémon Birthsigns")
+      when :blessed    then pokemon.blessing      = pkmn_hash[:blessed]          if PluginManager.installed?("Pokémon Birthsigns")
+      when :celestial  then pokemon.celestial     = pkmn_hash[:celestial]        if PluginManager.installed?("Pokémon Birthsigns")
+      when :dynamaxlvl then pokemon.raid_dmax_lvl = pkmn_hash[:dynamaxlvl]       if PluginManager.installed?("ZUD Mechanics")
+      when :gmaxfactor then pokemon.gmax_factor   = pkmn_hash[:gmaxfactor]       if PluginManager.installed?("ZUD Mechanics")
+      when :mastery    then pokemon.moves.each { |m| m.mastered = m.canMaster? } if PluginManager.installed?("PLA Battle Styles")
       end
     end
     #---------------------------------------------------------------------------

@@ -43,7 +43,7 @@ class Battle::Scene
       # When trigger is set to a String or Array, plays trainer speech if possible.
       #-------------------------------------------------------------------------
       when String, Array
-        pbMidbattleSpeech(idxTrainer, idxTarget, base_battler, midbattle[trigger])
+        pbMidbattleSpeech(base_trainer, idxTarget, base_battler, midbattle[trigger])
         $game_temp.dx_midbattle.delete(trigger) if !trigger.include?("_repeat")
       #-------------------------------------------------------------------------
       # When trigger is set to a proc (not implemented).
@@ -155,11 +155,6 @@ class Battle::Scene
   def pbMidbattleSpeech(idxTrainer, idxTarget, battler, speech = [], dialogue = true)
     return if speech.empty?
     pbWait(8)
-    if !@sprites.has_key?("blackbar")
-      pbAddSprite("blackbar", @sprites["cmdBar_bg"].x, @sprites["cmdBar_bg"].y, 
-                  "Graphics/Battle animations/black_bar", @viewport)
-    end
-    @sprites["blackbar"].visible = true
     if @battle.opponent.nil?
       trainer = @battle.player[idxTrainer]
       foe_trainer = false
@@ -172,6 +167,7 @@ class Battle::Scene
     end
     if foe_trainer
       pbToggleDataboxes
+      pbToggleBlackBars(true)
       pbShowOpponent(idxTrainer)
     end
     index = battler.index
@@ -199,9 +195,9 @@ class Battle::Scene
         @battle.pbDisplay(_INTL("#{speech}", battler.pbThis(lowercase)))
       end
     end
-    @sprites["blackbar"].visible = false
     if foe_trainer
       pbToggleDataboxes
+      pbToggleBlackBars
       pbHideOpponent(idxTrainer)
     end
   end
@@ -512,7 +508,10 @@ class Battle::Scene
     value.each do |eff|
       effect, setting, msg, user_msg = eff[0], eff[1], eff[2], eff[3]
       lowercase = (msg && msg.first == "{") ? false : true
-      index = (battler.opposes?) ? 1 : 0
+      case battler.idxOwnSide
+      when 0 then index = (battler.index.even?) ? 0 : 1
+      when 1 then index = (battler.index.odd?) ? 0 : 1
+      end
       ret = battler.apply_team_effects(effect, setting, index, skip_message, msg, lowercase, user_msg)
       skip_message.push(ret) if ret
     end

@@ -7,8 +7,8 @@
 CONFIG_URL = "https://gachapgd.000webhostapp.com/gacha/config.txt"
 
 TIERCOLORS = [Color.new(255,255,255),Color.new(112,112,112),Color.new(209,162,148),
-              Color.new(229,229,229),Color.new(255,197,41)]
-TIERSOUNDS = ["ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg"]
+              Color.new(229,229,229),Color.new(255,197,41),Color.new(62, 135, 211),Color.new(221, 28, 71)]
+TIERSOUNDS = ["ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg","ItemGet.ogg"]
 
 FRASES = ["Aprovecha que no tienes dinero y huye de este juego infernal. No merece la pena",
           "Vaya, no tienes monedas... pity! that´s bad",
@@ -51,7 +51,7 @@ class BannerReward < SpriteWrapper
     
     @starsSprite = Sprite.new(@viewport)
     starsBitmap = Bitmap.new("Graphics/Pictures/Gacha/Estrellas")
-    @starsSprite.bitmap = Bitmap.new(starsBitmap.width, starsBitmap.height/5)
+    @starsSprite.bitmap = Bitmap.new(starsBitmap.width, starsBitmap.height/7)
     starsY = @starsSprite.bitmap.height*@stars
     starsRect = Rect.new(0, starsY, @starsSprite.bitmap.width, @starsSprite.bitmap.height)
     @starsSprite.bitmap.blt(0, 0, starsBitmap, starsRect)

@@ -185,10 +185,16 @@ module Compiler
                 compiled = true
               end
             when "Flags"
-              if ability.flags != contents[key]
-                contents[key] = [contents[key]] if !contents[key].is_a?(Array)
-                contents[key].compact!
-                ability.flags = contents[key]
+              contents[key] = [contents[key]] if !contents[key].is_a?(Array)
+              contents[key].compact!
+              contents[key].each do |flag|
+                next if ability.flags.include?(flag)
+                if flag.include?("Remove_")
+                  string = flag.split("_")
+                  ability.flags.delete(string[1])
+                else
+                  ability.flags.push(flag)
+                end
                 compiled = true
               end
             end
@@ -304,10 +310,16 @@ module Compiler
                 compiled = true
               end
             when "Flags"
-              if item.flags != contents[key]
-                contents[key] = [contents[key]] if !contents[key].is_a?(Array)
-                contents[key].compact!
-                item.flags = contents[key]
+              contents[key] = [contents[key]] if !contents[key].is_a?(Array)
+              contents[key].compact!
+              contents[key].each do |flag|
+                next if item.flags.include?(flag)
+                if flag.include?("Remove_")
+                  string = flag.split("_")
+                  item.flags.delete(string[1])
+                else
+                  item.flags.push(flag)
+                end
                 compiled = true
               end
             when "Pocket"
@@ -423,10 +435,16 @@ module Compiler
                 move_descriptions.push(contents[key])
               end
             when "Flags"
-              if move.flags != contents[key]
-                contents[key] = [contents[key]] if !contents[key].is_a?(Array)
-                contents[key].compact!
-                move.flags = contents[key]
+              contents[key] = [contents[key]] if !contents[key].is_a?(Array)
+              contents[key].compact!
+              contents[key].each do |flag|
+                next if move.flags.include?(flag)
+                if flag.include?("Remove_")
+                  string = flag.split("_")
+                  move.flags.delete(string[1])
+                else
+                  move.flags.push(flag)
+                end
               end
             when "Type"         then move.type          = contents[key] if move.type          != contents[key]
             when "Category"     then move.category      = contents[key] if move.category      != contents[key]
@@ -536,24 +554,46 @@ module Compiler
           schema.keys.each do |key|
             if nil_or_empty?(contents[key])
               contents[key] = nil
-              next
             end
             FileLineData.setSection(species_id, key, contents[key])
-            value = pbGetCsvRecord(contents[key], key, schema[key])
-            value = nil if value.is_a?(Array) && value.length == 0
-            contents[key] = value
+            if !contents[key].nil?
+              value = pbGetCsvRecord(contents[key], key, schema[key])
+              value = nil if value.is_a?(Array) && value.length == 0
+              contents[key] = value
+            end
             case key
             when "GenderRatio"
+              next if contents[key].nil?
               species.gender_ratio = contents[key]
             when "Habitat"
+              next if contents[key].nil?
               species.habitat = contents[key]
+            when "EggGroups"
+              if species.form > 0 && contents[key].nil?
+                base_groups = GameData::Species.get(species.species).egg_groups
+                species.egg_groups = base_groups
+              else
+                next if contents[key].nil?
+                contents[key] = [contents[key]] if !contents[key].is_a?(Array)
+                contents[key].compact!
+                species.egg_groups = contents[key]
+              end
             when "Flags"
-              species.flags = contents[key]
-            when "EggMoves", "EggGroups", "Offspring"      
+              contents[key] = [contents[key]] if !contents[key].is_a?(Array)
+              contents[key].compact!
+              contents[key].each do |flag|
+                next if species.flags.include?(flag)
+                if flag.include?("Remove_")
+                  string = flag.split("_")
+                  species.flags.delete(string[1])
+                else
+                  species.flags.push(flag)
+                end
+              end
+            when "EggMoves", "Offspring"
               contents[key] = [contents[key]] if !contents[key].is_a?(Array)
               contents[key].compact!
               species.egg_moves  = contents[key] if key == "EggMoves"
-              species.egg_groups = contents[key] if key == "EggGroups"
               species.offspring  = contents[key] if key == "Offspring"
             end
           end
@@ -570,6 +610,8 @@ module Compiler
       GameData::Species.save
       Compiler.write_pokemon
       Compiler.write_pokemon_forms
+      Compiler.compile_pokemon
+      Compiler.compile_pokemon_forms
     end
   end
   

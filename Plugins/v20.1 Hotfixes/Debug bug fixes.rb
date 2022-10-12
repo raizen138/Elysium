@@ -319,3 +319,96 @@ MenuHandlers.add(:pokemon_debug_menu, :species_and_form, {
     next false
   }
 })
+
+#===============================================================================
+# Fixed crash when pressing the Action button in the Debug function "Roaming
+# Pokémon".
+#===============================================================================
+def pbDebugRoamers
+  viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
+  viewport.z = 99999
+  sprites = {}
+  sprites["cmdwindow"] = SpriteWindow_DebugRoamers.new(viewport)
+  cmdwindow = sprites["cmdwindow"]
+  cmdwindow.active = true
+  loop do
+    Graphics.update
+    Input.update
+    pbUpdateSpriteHash(sprites)
+    if cmdwindow.index < cmdwindow.roamerCount
+      pkmn = Settings::ROAMING_SPECIES[cmdwindow.index]
+    else
+      pkmn = nil
+    end
+    if Input.trigger?(Input::ACTION) && cmdwindow.index < cmdwindow.roamerCount &&
+       (pkmn[2] <= 0 || $game_switches[pkmn[2]]) &&
+       $PokemonGlobal.roamPokemon[cmdwindow.index] != true
+      # Roam selected Pokémon
+      pbPlayDecisionSE
+      if Input.press?(Input::CTRL)   # Roam to current map
+        if $PokemonGlobal.roamPosition[cmdwindow.index] == pbDefaultMap
+          $PokemonGlobal.roamPosition[cmdwindow.index] = nil
+        else
+          $PokemonGlobal.roamPosition[cmdwindow.index] = pbDefaultMap
+        end
+      else   # Roam to a random other map
+        oldmap = $PokemonGlobal.roamPosition[cmdwindow.index]
+        pbRoamPokemonOne(cmdwindow.index)
+        if $PokemonGlobal.roamPosition[cmdwindow.index] == oldmap
+          $PokemonGlobal.roamPosition[cmdwindow.index] = nil
+          pbRoamPokemonOne(cmdwindow.index)
+        end
+        $PokemonGlobal.roamedAlready = false
+      end
+      cmdwindow.refresh
+    elsif Input.trigger?(Input::BACK)
+      pbPlayCancelSE
+      break
+    elsif Input.trigger?(Input::USE)
+      if cmdwindow.index < cmdwindow.roamerCount
+        pbPlayDecisionSE
+        # Toggle through roaming, not roaming, defeated
+        if pkmn[2] > 0 && !$game_switches[pkmn[2]]
+          # not roaming -> roaming
+          $game_switches[pkmn[2]] = true
+        elsif $PokemonGlobal.roamPokemon[cmdwindow.index] != true
+          # roaming -> defeated
+          $PokemonGlobal.roamPokemon[cmdwindow.index] = true
+          $PokemonGlobal.roamPokemonCaught[cmdwindow.index] = false
+        elsif $PokemonGlobal.roamPokemon[cmdwindow.index] == true &&
+              !$PokemonGlobal.roamPokemonCaught[cmdwindow.index]
+          # defeated -> caught
+          $PokemonGlobal.roamPokemonCaught[cmdwindow.index] = true
+        elsif pkmn[2] > 0
+          # caught -> not roaming (or roaming if Switch ID is 0)
+          $game_switches[pkmn[2]] = false if pkmn[2] > 0
+          $PokemonGlobal.roamPokemon[cmdwindow.index] = nil
+          $PokemonGlobal.roamPokemonCaught[cmdwindow.index] = false
+        end
+        cmdwindow.refresh
+      elsif cmdwindow.index == cmdwindow.itemCount - 2   # All roam
+        if Settings::ROAMING_SPECIES.length == 0
+          pbPlayBuzzerSE
+        else
+          pbPlayDecisionSE
+          pbRoamPokemon
+          $PokemonGlobal.roamedAlready = false
+          cmdwindow.refresh
+        end
+      else   # Clear all roaming locations
+        if Settings::ROAMING_SPECIES.length == 0
+          pbPlayBuzzerSE
+        else
+          pbPlayDecisionSE
+          Settings::ROAMING_SPECIES.length.times do |i|
+            $PokemonGlobal.roamPosition[i] = nil
+          end
+          $PokemonGlobal.roamedAlready = false
+          cmdwindow.refresh
+        end
+      end
+    end
+  end
+  pbDisposeSpriteHash(sprites)
+  viewport.dispose
+end

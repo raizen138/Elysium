@@ -77,24 +77,6 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
-  # Edited to reduce base move PP when Power Move PP is used.
-  #-----------------------------------------------------------------------------
-  def pbReducePP(move)
-    return true if usingMultiTurnAttack?
-    return true if move.pp < 0
-    return true if move.total_pp <= 0
-    return false if move.pp == 0
-    if move.pp > 0
-      pbSetPP(move, move.pp - 1)
-      if move.powerMove?
-        c = @power_index
-        pbSetPP(@base_moves[c], @base_moves[c].pp - 1)
-      end
-    end
-    return true
-  end
-  
-  #-----------------------------------------------------------------------------
   # Aliased for Z-Move usage.
   #-----------------------------------------------------------------------------
   # Registers if selected move is a Z-Move, and triggers the use of that Z-Move.
@@ -190,7 +172,7 @@ class Battle::Battler
   alias zud_pbTransform pbTransform
   def pbTransform(target)
     zud_pbTransform(target)
-    if target.dynamax?
+    if target.dynamax? && !target.base_moves.empty?
       @moves.clear
       target.moves.each_with_index do |m, i|
         basemove  = target.base_moves[i].id

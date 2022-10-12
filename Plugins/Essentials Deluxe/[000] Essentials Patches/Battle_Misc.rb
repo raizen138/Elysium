@@ -67,6 +67,27 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
+  # Edited to reduce appropriate move PP when using certain plugin mechanics.
+  #-----------------------------------------------------------------------------
+  def pbReducePP(move)
+    return true if usingMultiTurnAttack?
+    return true if move.pp < 0
+    return true if move.total_pp <= 0
+    return false if move.pp == 0
+    if move.pp > 0
+      pbSetPP(move, move.pp - 1)
+      if PluginManager.installed?("ZUD Mechanics") && move.powerMove?
+        c = @power_index
+        pbSetPP(@base_moves[c], @base_moves[c].pp - 1)
+      end
+      if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
+        pbSetPP(move, move.pp - 1) if move.pp > 0
+      end
+    end
+    return true
+  end
+  
+  #-----------------------------------------------------------------------------
   # Reverts to base moves. Used by plugins that change moves mid-battle.
   #-----------------------------------------------------------------------------
   def display_base_moves
@@ -91,6 +112,7 @@ class Battle::Battler
   def hasGmax?;        return false; end
   def gmax?;           return false; end
   def gmax_factor?;    return false; end
+  def hasStyles?;      return false; end
   def hasZodiacPower?; return false; end
   def celestial?;      return false; end
 end
@@ -116,6 +138,7 @@ class Battle::FakeBattler
   def dynamax?;        return false; end
   def gmax?;           return false; end
   def gmax_factor?;    return false; end
+  def hasStyles?;      return false; end
   def hasZodiacPower?; return false; end
   def celestial?;      return false; end
 end
@@ -156,7 +179,9 @@ class Battle::Move
     end
     return true if c > 50
     return true if user.effects[PBEffects::LaserFocus] > 0
-    c += 1 if highCriticalRate?
+    if highCriticalRate?
+      c += (PluginManager.installed?("PLA Battle Styles") && user.strong_style?) ? 2 : 1
+    end
     c += user.effects[PBEffects::FocusEnergy]
     c += user.effects[PBEffects::CriticalBoost]
     c += 1 if user.inHyperMode? && @type == :SHADOW

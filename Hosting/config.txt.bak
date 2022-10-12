@@ -3,7 +3,7 @@
               "name" => "Prueba de banner",
               "bg" => "Graphics/Pictures/Gacha/Fondo1.png",
               "rewards" => ["Graphics/Banners/Viola.png","Graphics/Banners/Milo.png","Graphics/Banners/Ilima.png"],
-              "stars" => [4, 5, 4],
+              "stars" => [4, 5, 3],
               "url" => "http://gachapgd.000webhostapp.com/gacha/banner_1.txt",
               "descr" =>  "Esto es una prueba"
               }

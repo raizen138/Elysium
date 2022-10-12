@@ -7,7 +7,7 @@ module Settings
   #-----------------------------------------------------------------------------
   # Enables the Party menu display of ball icons that match each Pokemon's ball.
   #-----------------------------------------------------------------------------
-  SHOW_PARTY_BALL = false
+  SHOW_PARTY_BALL = true
   
   #-----------------------------------------------------------------------------
   # Shiny Leaf
@@ -31,6 +31,13 @@ module Settings
   #-----------------------------------------------------------------------------
   # Enables the display of icons indicating a Pokemon's Egg Groups in the Summary/Pokedex screens.
   #-----------------------------------------------------------------------------
-  SUMMARY_EGG_GROUPS = false
+  SUMMARY_EGG_GROUPS = true
   POKEDEX_EGG_GROUPS = true
+  
+  #-----------------------------------------------------------------------------
+  # Battle Move Window
+  #-----------------------------------------------------------------------------
+  # The button used to toggle the display of the move window in battle.
+  #-----------------------------------------------------------------------------
+  MOVE_INFO_KEY = :M
 end
