@@ -5,14 +5,14 @@ class PokemonPokedexInfo_Scene
   #-----------------------------------------------------------------------------
   # Adds G-Max forms to a species's form list.
   #-----------------------------------------------------------------------------
-  def pbAddGmaxForms(species, form_array, index)
+  def pbAddGmaxForms(species, form_array)
     if GameData::PowerMove.species_list("G-Max").include?(species.id)
       case species.species
         when :TOXTRICITY then gmax_form = 1
         when :ALCREMIE   then gmax_form = 62
         else                  gmax_form = species.form
       end
-      return form_array, index if gmax_form > species.form
+      return form_array if gmax_form > species.form
       gmax_name = (species.gmax_form_name) ? species.gmax_form_name : _INTL("Gigantamax #{species.name}")
       #-------------------------------------------------------------------------
       # G-Max
@@ -20,8 +20,7 @@ class PokemonPokedexInfo_Scene
       if $player.pokedex.seen_form?(@species, 0, species.form, false, true) || 
          $player.pokedex.seen_form?(@species, 1, species.form, false, true) || Settings::DEX_SHOWS_ALL_FORMS
         data = [gmax_name, 99, gmax_form, false, true]
-        form_array[index + 1] = data if !form_array.include?(data)
-        index = form_array.length
+        form_array.push(data) if !form_array.include?(data)
       end
       #-------------------------------------------------------------------------
       # Shiny G-Max
@@ -30,12 +29,11 @@ class PokemonPokedexInfo_Scene
         if $player.pokedex.seen_form?(@species, 0, species.form, true, true) || 
            $player.pokedex.seen_form?(@species, 1, species.form, true, true)
           data = [gmax_name, 99, gmax_form, true, true]
-          form_array[index + 1] = data if !form_array.include?(data)
-          index = form_array.length
+          form_array.push(data) if !form_array.include?(data)
         end
       end
     end
-    return form_array, index
+    return form_array
   end
 
   #-----------------------------------------------------------------------------

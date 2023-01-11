@@ -1,0 +1,4 @@
+Name         = Roaming Icon on Map
+Version      = 1.1.2
+Website      = https://reliccastle.com/resources/1073/
+Credits      = -FL- 

@@ -165,7 +165,7 @@ class MaxLairEventScene
               pbClearAll
               pbDrawSwapScreen
               pbMessage(_INTL("\\se[]{1} was added to the party!\\se[Pkmn move learnt]", pokemon.name))
-              pbMessage(_INTL("{1}'s {2} was given to {3}.", oldpoke.name, GameData::Item.get(olditem).name, pokemon.name)) if !olditem.nil?
+              pbMessage(_INTL("{1}'s {2} was given to {3}.", oldpoke.name, GameData::Item.get(olditem).portion_name, pokemon.name)) if !olditem.nil?
               break
             end
           #---------------------------------------------------------------------
@@ -195,15 +195,54 @@ class MaxLairEventScene
   #=============================================================================
   def pbItemSelect
     items    = []
-    itempool = [:FOCUSSASH, :WIDELENS, :SCOPELENS, :QUICKCLAW,
-                :ROCKYHELMET, :PROTECTIVEPADS, :SAFETYGOGGLES,
-                :CHOICESCARF, :LIFEORB, :EXPERTBELT, :ASSAULTVEST, 
-                :BRIGHTPOWDER, :WHITEHERB, :WEAKNESSPOLICY,
-                :LEFTOVERS, :SHELLBELL, :SITRUSBERRY, :LUMBERRY, :LEPPABERRY,
-                :ELECTRICSEED, :GRASSYSEED, :MISTYSEED, :PSYCHICSEED]
-    items.push(:EVIOLITE) if $player.party.any? { |p| p&.species_data.get_evolutions(true).length > 0 }
+    #---------------------------------------------------------------------------
+    # General item pool.
+    #---------------------------------------------------------------------------
+    itempool = [:ABILITYSHIELD,   :AIRBALLOON,     :ASSAULTVEST, :BRIGHTPOWDER,
+                :CHOICESCARF,     :CLEARAMULET,    :COVERTCLOAK, :EXPERTBELT,  
+                :FOCUSBAND,       :FOCUSSASH,      :LEFTOVERS,   :LIFEORB,     
+                :LIGHTCLAY,       :MIRRORHERB,     :POWERHERB,   :PROTECTIVEPADS,
+                :PUNCHINGGLOVE,   :QUICKCLAW,      :RAZORCLAW,   :ROCKYHELMET,
+                :SAFETYGOGGLES,   :SCOPELENS,      :SHELLBELL,   :STICKYBARB,
+                :UTILITYUMBRELLA, :WEAKNESSPOLICY, :WHITEHERB,   :WIDELENS,
+                :ZOOMLENS,        :SITRUSBERRY,    :LUMBERRY,    :LEPPABERRY,     
+                :ELECTRICSEED,    :GRASSYSEED,     :MISTYSEED,   :PSYCHICSEED]
+    #---------------------------------------------------------------------------
+    # Adds type-specific items to item pool based on the party's types.
+    #---------------------------------------------------------------------------
+    GameData::Type.each do |type|
+      next if !$player.has_pokemon_of_type?(type.id)
+      case type.id
+      when :NORMAL   then itempool.push(:NORMALGEM, :SILKSCARF)
+      when :FIGHTING then itempool.push(:BLACKBELT)
+      when :FLYING   then itempool.push(:SHARPBEAK)
+      when :POISON   then itempool.push(:POISONBARB, :BLACKSLUDGE)
+      when :BUG      then itempool.push(:SILVERPOWDER)
+      when :GROUND   then itempool.push(:SOFTSAND)
+      when :ROCK     then itempool.push(:HARDROCK)
+      when :GHOST    then itempool.push(:SPELLTAG)
+      when :STEEL    then itempool.push(:METALCOAT)
+      when :FIRE     then itempool.push(:CHARCOAL)
+      when :WATER    then itempool.push(:MYSTICWATER)
+      when :GRASS    then itempool.push(:MIRACLESEED)
+      when :ELECTRIC then itempool.push(:MAGNET)
+      when :PSYCHIC  then itempool.push(:TWISTEDSPOON)
+      when :ICE      then itempool.push(:NEVERMELTICE)
+      when :DRAGON   then itempool.push(:DRAGONFANG)
+      when :DARK     then itempool.push(:BLACKGLASSES)
+      when :FAIRY    then itempool.push(:PIXIEPLATE)
+      end
+    end
+    #---------------------------------------------------------------------------
+    # Allows for certain items to appear depending on the party.
+    #---------------------------------------------------------------------------
+    items.push(:LIGHTBALL) if $player.has_species?(:PIKACHU) && GameData::Item.exists?(:LIGHTBALL)
+    items.push(:THICKCLUB) if $player.has_species?(:MAROWAK) && GameData::Item.exists?(:THICKCLUB)
+    items.push(:LEEK)      if ($player.has_species?(:FARFETCHD) || $player.has_species?(:SIRFETCHD)) && GameData::Item.exists?(:LEEK)
+    items.push(:EVIOLITE)  if $player.party.any? { |p| p&.species_data.get_evolutions(true).length > 0 }
     itempool.push(:CHOICEBAND, :MUSCLEBAND)   if $player.party.any? { |p| p&.ev[:ATTACK] > 0 }
     itempool.push(:CHOICESPECS, :WISEGLASSES) if $player.party.any? { |p| p&.ev[:SPECIAL_ATTACK] > 0 }
+    #---------------------------------------------------------------------------
     loop do
       break if itempool.empty?
       randitem = itempool.sample
@@ -234,9 +273,8 @@ class MaxLairEventScene
         maxindex = items.length - 1
         pbMessage(_INTL("Select an item to give to {1}.", pkmn.name))
         if pkmn.item
-          olditem = GameData::Item.get(pkmn.item).name
-          text = (pkmn.hasItem?(:LEFTOVERS)) ? "some" : (olditem.starts_with_vowel?) ? "an" : "a"
-          text = "a pair of" if [:WISEGLASSES, :CHOICESPECS, :SAFETYGOGGLES, :PROTECTIVEPADS].include?(pkmn.item_id)
+          olditem = GameData::Item.get(pkmn.item).portion_name
+          text = (olditem.starts_with_vowel?) ? "an" : "a"
           text = _INTL("{1} is already holding {2} {3}.", pkmn.name, text, olditem)
           next if !pbConfirmMessage(_INTL("{1}\nReplace this item?", text))
         end
@@ -280,6 +318,7 @@ class MaxLairEventScene
                                   _INTL("Next"), 
                                   _INTL("Exit")], 0)
             itemname = GameData::Item.get(items[index]).name
+            itemportion = GameData::Item.get(items[index]).portion_name
             case cmd
             #-------------------------------------------------------------------
             # Equips the selected hold item.
@@ -288,10 +327,10 @@ class MaxLairEventScene
               if pkmn.hasItem?(items[index])
                 pbMessage(_INTL("{1}", text))
               else
-                if pbConfirmMessage(_INTL("Give the {1} to {2}?", itemname, pkmn.name))
+                if pbConfirmMessage(_INTL("Give the {1} to {2}?", itemportion, pkmn.name))
                   pkmn.play_cry
                   pbWait(25)
-                  pbMessage(_INTL("{1} was given the {2}.", pkmn.name, itemname))
+                  pbMessage(_INTL("{1} was given the {2}.", pkmn.name, itemportion))
                   @sprites["partyitem#{i}"].item    = items[index]
                   @sprites["partyitem#{i}"].visible = true
                   @sprites["rightarrow"].visible    = false
@@ -311,7 +350,7 @@ class MaxLairEventScene
             # Checks the decription of the selected item.
             #-------------------------------------------------------------------
             when 1
-              pbMessage(_INTL("{1}:\n{2}", itemname, GameData::Item.get(items[index]).description))
+              pbMessage(_INTL("{1}:\n{2}", itemname, GameData::Item.get(items[index]).held_description))
             #-------------------------------------------------------------------
             # Skips to the next Pokemon.
             #-------------------------------------------------------------------
@@ -794,10 +833,24 @@ class MaxLairEventScene
         when 0
           pkmn = prizes[index]
           if pbConfirmMessage(_INTL("So, you'd like to take {1} with you?", pkmn.name))
-            pkmn.play_cry
-            pbWait(25)
-            pbMessage(_INTL("You returned any remaining captured Pokémon and your rental party."))
+            was_owned = $player.owned?(pkmn.species)
+            $player.pokedex.set_seen(pkmn.species)
+            $player.pokedex.set_owned(pkmn.species)
+            $player.pokedex.register(pkmn)
+            if Settings::SHOW_NEW_SPECIES_POKEDEX_ENTRY_MORE_OFTEN && !was_owned && $player.has_pokedex
+              pbMessage(_INTL("{1}'s data was added to the Pokédex.", pkmn.speciesName))
+              $player.pokedex.register_last_seen(pkmn)
+              pbFadeOutIn {
+                scene = PokemonPokedexInfo_Scene.new
+                screen = PokemonPokedexInfoScreen.new(scene)
+                screen.pbDexEntry(pkmn.species)
+              }
+            else
+              pkmn.play_cry
+              pbWait(25)
+            end
             pbNicknameAndStore(pkmn)
+            pbMessage(_INTL("You returned any remaining captured Pokémon and your rental party."))
             break
           end
         #-----------------------------------------------------------------------
@@ -807,14 +860,18 @@ class MaxLairEventScene
           pbSummary(prizes, index, @sprites)
         end
       elsif Input.trigger?(Input::BACK)
-        if pbConfirmMessage(_INTL("Leave without taking any captured Pokémon with you?"))
-          break
-        end
+        break if pbConfirmMessage(_INTL("Leave without taking any captured Pokémon with you?"))
       end
     end
     if loot.has_key?(:DYNITEORE)
+      item = GameData::Item.get(:DYNITEORE)
+      case loot[:DYNITEORE]
+      when 1 then itemname = item.portion_name
+      else        itemname = item.portion_name_plural
+      end
       pbMessage(_INTL("You found {1} {2} during your adventure!", loot[:DYNITEORE], itemname))
-      pbMessage(_INTL("The collected {1} was added to your bag.", itemname))
+      pbMessage(_INTL("You put the {1} in\\nyour Bag's <icon=bagPocket{2}>\\c[1]{3}\\c[0] pocket.",
+                      itemname, item.pocket, PokemonBag.pocket_names[item.pocket - 1]))
       $bag.add(:DYNITEORE, loot[:DYNITEORE])
       pbDynamaxAdventure.loot.delete(:DYNITEORE)
     end

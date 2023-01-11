@@ -15,6 +15,7 @@ class Battle::Scene::Animation::ToggleDataBoxes < Battle::Scene::Animation
   def createProcesses
     delay = 0
     @battlers.each do |b|
+	  next if b.fainted?
       if @sprites["dataBox_#{b.index}"]
         toggle = !@sprites["dataBox_#{b.index}"].visible
         box = addSprite(@sprites["dataBox_#{b.index}"])

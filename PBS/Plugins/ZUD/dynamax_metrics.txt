@@ -5550,6 +5550,684 @@ DmaxFrontSprite = 0,0
 DmaxShadowX     = 0
 DmaxShadowSize  = 3
 #-------------------------------
+[SPRIGATITO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FLORAGATO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[MEOWSCARADA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FUECOCO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CROCALOR]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SKELEDIRGE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[QUAXLY]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[QUAXWELL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[QUAQUAVAL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[LECHONK]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[OINKOLOGNE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[OINKOLOGNE_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TAROUNTULA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SPIDOPS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[NYMBLE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[LOKIX]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[PAWMI]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[PAWMO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[PAWMOT]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TANDEMAUS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[MAUSHOLD]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[MAUSHOLD_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FIDOUGH]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[DACHSBUN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SMOLIV]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[DOLLIV]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ARBOLIVA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SQUAWKABILLY]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SQUAWKABILLY_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SQUAWKABILLY_2]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SQUAWKABILLY_3]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[NACLI]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[NACLSTACK]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GARGANACL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CHARCADET]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ARMAROUGE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CERULEDGE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TADBULB]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[BELLIBOLT]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[WATTREL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[KILOWATTREL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[MASCHIFF]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[MABOSSTIFF]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SHROODLE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GRAFAIAI]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[BRAMBLIN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[BRAMBLEGHAST]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TOEDSCOOL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TOEDSCRUEL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[KLAWF]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CAPSAKID]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SCOVILLAIN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[RELLOR]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[RABSCA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FLITTLE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ESPATHRA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TINKATINK]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TINKATUFF]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TINKATON]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[WIGLETT]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[WUGTRIO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[BOMBIRDIER]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FINIZEN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[PALAFIN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[PALAFIN_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[VAROOM]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[REVAVROOM]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CYCLIZAR]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ORTHWORM]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GLIMMET]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GLIMMORA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GREAVARD]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[HOUNDSTONE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FLAMIGO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CETODDLE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CETITAN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[VELUZA]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[DONDOZO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TATSUGIRI]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TATSUGIRI,1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TATSUGIRI,2]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ANNIHILAPE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CLODSIRE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FARIGIRAF]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[DUDUNSPARCE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[DUDUNSPARCE_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[KINGAMBIT]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GREATTUSK]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SCREAMTAIL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[BRUTEBONNET]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FLUTTERMANE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SLITHERWING]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[SANDYSHOCKS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONTREADS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONBUNDLE]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONHANDS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONJUGULIS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONMOTH]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONTHORNS]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[FRIGIBAX]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ARCTIBAX]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[BAXCALIBUR]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GIMMIGHOUL]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GIMMIGHOUL_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[GHOLDENGO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[WOCHIEN]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CHIENPAO]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TINGLU]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[CHIYU]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[ROARINGMOON]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[IRONVALIANT]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[KORAIDON]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[MIRAIDON]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
 [RATTATA_1]
 DmaxBackSprite  = 0,0
 DmaxFrontSprite = -3,35
@@ -5736,6 +6414,24 @@ DmaxFrontSprite = 0,22
 DmaxShadowX     = 0
 DmaxShadowSize  = 3
 #-------------------------------
+[TAUROS_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TAUROS_2]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[TAUROS_3]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
 [ARTICUNO_1]
 DmaxBackSprite  = 0,0
 DmaxFrontSprite = 6,12
@@ -5757,6 +6453,12 @@ DmaxShadowSize  = 3
 [TYPHLOSION_1]
 DmaxBackSprite  = 0,0
 DmaxFrontSprite = -4,6
+DmaxShadowX     = 0
+DmaxShadowSize  = 3
+#-------------------------------
+[WOOPER_1]
+DmaxBackSprite  = 0,0
+DmaxFrontSprite = 0,0
 DmaxShadowX     = 0
 DmaxShadowSize  = 3
 #-------------------------------

@@ -101,21 +101,21 @@ end
 #-------------------------------------------------------------------------------
 ItemHandlers::UseOnPokemon.addIf(proc { |item| GameData::Item.get(item).is_z_crystal? },
   proc { |item, qty, pkmn, scene|
-    crystal    = GameData::Item.get(item).name
+    crystal    = GameData::Item.get(item).portion_name
     compatible = pkmn.compat_zmove?(pkmn.moves, item) || pkmn.compat_ultra?(item)
     if pkmn.shadowPokemon? || pkmn.egg?
       scene.pbDisplay(_INTL("It won't have any effect."))
       next false
     elsif pkmn.item == item
-      scene.pbDisplay(_INTL("{1} is already holding {2}.", pkmn.name, crystal))
+      scene.pbDisplay(_INTL("{1} is already holding a {2}.", pkmn.name, crystal))
       next false
     elsif !compatible && !scene.pbConfirm(_INTL("This Pokémon currently can't use this crystal's Z-Power. Is that OK?"))
       next false
     end
     scene.pbDisplay(_INTL("The {1} will be given to the Pokémon so that the Pokémon can use its Z-Power!", crystal))
     if pkmn.item
-      itemname = GameData::Item.get(pkmn.item).name
-      text = (pkmn.item == :LEFTOVERS) ? "some" : (itemname.starts_with_vowel?) ? "an" : "a"
+      itemname = GameData::Item.get(pkmn.item).portion_name
+      text = (itemname.starts_with_vowel?) ? "an" : "a"
       scene.pbDisplay(_INTL("{1} is already holding {2} {3}.\1", pkmn.name, text, itemname))
       if scene.pbConfirm(_INTL("Would you like to switch the two items?"))
         if !$bag.can_add?(pkmn.item)
@@ -131,7 +131,7 @@ ItemHandlers::UseOnPokemon.addIf(proc { |item| GameData::Item.get(item).is_z_cry
     end
     pkmn.item = item
     pbSEPlay("Pkmn move learnt")
-    scene.pbDisplay(_INTL("Your Pokémon is now holding {1}!", crystal))
+    scene.pbDisplay(_INTL("Your Pokémon is now holding a {1}!", crystal))
     next true
   }
 )
@@ -339,7 +339,7 @@ ItemHandlers::CanUseInBattle.add(:ZBOOSTER, proc { |item, pokemon, battler, move
     next false
   elsif battle.zMove[side][owner] == -1
     if showMessages
-      scene.pbDisplay(_INTL("Your {1} doesn't require recharging!", ring))
+      scene.pbDisplay(_INTL("You don't need to recharge your {1} yet!", ring))
     end
     next false
   end
@@ -349,9 +349,10 @@ ItemHandlers::CanUseInBattle.add(:ZBOOSTER, proc { |item, pokemon, battler, move
 ItemHandlers::UseInBattle.add(:ZBOOSTER, proc { |item, battler, battle|
   ring    = battle.pbGetZRingName(battler.index)
   trainer = battle.pbGetOwnerName(battler.index)
+  item    = GameData::Item.get(item).portion_name
   battle.pbSetBattleMechanicUsage(battler.index, "Z-Move", -1)
   pbSEPlay(sprintf("Anim/Lucky Chant"))
-  battle.pbDisplayPaused(_INTL("{1}'s {2} was fully recharged!\nZ-Moves are now usable again!", trainer, ring))
+  battle.pbDisplayPaused(_INTL("The {1} fully recharged {2}'s {3}!\n{2} can use Z-Moves again!", item, trainer, ring))
 })
 
 
@@ -377,7 +378,7 @@ ItemHandlers::CanUseInBattle.add(:WISHINGSTAR, proc { |item, pokemon, battler, m
     next false
   elsif dmax || battle.dynamax[side][owner] == -1
     if showMessages
-      scene.pbDisplay(_INTL("Your {1} doesn't require recharging!", band))
+      scene.pbDisplay(_INTL("You don't need to recharge your {1} yet!", band))
     end
     next false
   end
@@ -387,7 +388,8 @@ ItemHandlers::CanUseInBattle.add(:WISHINGSTAR, proc { |item, pokemon, battler, m
 ItemHandlers::UseInBattle.add(:WISHINGSTAR, proc { |item, battler, battle|
   band    = battle.pbGetDynamaxBandName(battler.index)
   trainer = battle.pbGetOwnerName(battler.index)
+  item    = GameData::Item.get(item).portion_name
   battle.pbSetBattleMechanicUsage(battler.index, "Dynamax", -1)
   pbSEPlay(sprintf("Anim/Lucky Chant"))
-  battle.pbDisplayPaused(_INTL("{1}'s {2} was fully recharged!\nDynamax is now usable again!", trainer, band))
+  battle.pbDisplayPaused(_INTL("The {1} fully recharged {2}'s {3}!\n{2} can use Dynamax again!", item, trainer, band))
 })

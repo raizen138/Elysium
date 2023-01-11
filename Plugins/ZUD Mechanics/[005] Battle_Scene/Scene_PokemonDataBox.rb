@@ -47,7 +47,7 @@ class Battle::Scene::PokemonDataBox < SpriteWrapper
   def draw_name
     if @battler.effects[PBEffects::MaxRaidBoss]
       name_base   = Color.new(248, 248, 248)
-      name_shadow = Color.new(248, 32, 32)
+      name_shadow = (@battler.isSpecies?(:CALYREX)) ? Color.new(48, 206, 216) : Color.new(248, 32, 32)
       pbDrawTextPositions(self.bitmap,
         [[@battler.name, 26, 6, false, name_base, name_shadow]]
       )

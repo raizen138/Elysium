@@ -282,15 +282,6 @@ class Pokemon
     self.calc_stats
   end
   
-  def baseStats
-    v = MultipleForms.call("baseStats", self)
-    return v if !v.nil?
-    this_base_stats = species_data.base_stats
-    ret = {}
-    GameData::Stat.each_main { |s| ret[s.id] = this_base_stats[s.id] }
-    return ret
-  end
-  
   alias zud_initialize initialize  
   def initialize(*args)
     @dynamax_lvl  = 0

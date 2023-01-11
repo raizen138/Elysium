@@ -6,7 +6,7 @@
 # https://github.com/Maruno17/pokemon-essentials
 #===============================================================================
 
-Essentials::ERROR_TEXT += "[v20.1 Hotfixes 1.0.5]\r\n"
+Essentials::ERROR_TEXT += "[v20.1 Hotfixes 1.0.7]\r\n"
 
 #===============================================================================
 # Fixed the "See ya!" option in the PC menu not working properly.
@@ -572,14 +572,10 @@ def drawSingleFormattedChar(bitmap, ch)
     graphic.dispose
     return
   end
-  bitmap.font.bold = ch[6] if bitmap.font.bold != ch[6]
-  bitmap.font.italic = ch[7] if bitmap.font.italic != ch[7]
-  bitmap.font.name = ch[12] if bitmap.font.name != ch[12]
   bitmap.font.size = ch[13] if bitmap.font.size != ch[13]
   if ch[9]   # shadow
     if ch[10]   # underline
-      bitmap.fill_rect(ch[1], ch[2] + ch[4] - [(ch[4] - bitmap.font.size) / 2, 0].max - 2,
-      ch[3], 4, ch[9])
+      bitmap.fill_rect(ch[1], ch[2] + ch[4] - [(ch[4] - bitmap.font.size) / 2, 0].max - 2, ch[3], 4, ch[9])
     end
     if ch[11]   # strikeout
       bitmap.fill_rect(ch[1], ch[2] + 2 + (ch[4] / 2), ch[3], 4, ch[9])
@@ -588,6 +584,9 @@ def drawSingleFormattedChar(bitmap, ch)
   if ch[0] == "\n" || ch[0] == "\r" || ch[0] == " " || isWaitChar(ch[0])
     bitmap.font.color = ch[8] if bitmap.font.color != ch[8]
   else
+    bitmap.font.bold = ch[6] if bitmap.font.bold != ch[6]
+    bitmap.font.italic = ch[7] if bitmap.font.italic != ch[7]
+    bitmap.font.name = ch[12] if bitmap.font.name != ch[12]
     offset = 0
     if ch[9]   # shadow
       bitmap.font.color = ch[9]
@@ -621,8 +620,7 @@ def drawSingleFormattedChar(bitmap, ch)
     bitmap.draw_text(ch[1] + offset, ch[2] + offset, ch[3], ch[4], ch[0])
   end
   if ch[10]   # underline
-    bitmap.fill_rect(ch[1], ch[2] + ch[4] - [(ch[4] - bitmap.font.size) / 2, 0].max - 2,
-                     ch[3] - 2, 2, ch[8])
+    bitmap.fill_rect(ch[1], ch[2] + ch[4] - [(ch[4] - bitmap.font.size) / 2, 0].max - 2, ch[3] - 2, 2, ch[8])
   end
   if ch[11]   # strikeout
     bitmap.fill_rect(ch[1], ch[2] + 2 + (ch[4] / 2), ch[3] - 2, 2, ch[8])
@@ -713,6 +711,7 @@ end
 class DayCare
   module EggGenerator
     module_function
+
     def inherit_ability(egg, mother, father)
       # mother = [mother, mother_ditto, mother_in_family]
       # father = [father, father_ditto, father_in_family]
@@ -729,11 +728,83 @@ class DayCare
 end
 
 #===============================================================================
+# Fixed IV inheritance when breeding.
+#===============================================================================
+class DayCare
+  module EggGenerator
+    module_function
+
+    def inherit_IVs(egg, mother, father)
+      # Get all stats
+      stats = []
+      GameData::Stat.each_main { |s| stats.push(s.id) }
+      # Get the number of stats to inherit (includes ones inherited via Power items)
+      inherit_count = 3
+      if Settings::MECHANICS_GENERATION >= 6
+        inherit_count = 5 if mother.hasItem?(:DESTINYKNOT) || father.hasItem?(:DESTINYKNOT)
+      end
+      # Inherit IV because of Power items (if both parents have the same Power
+      # item, then the parent that passes that Power item's stat down is chosen
+      # randomly)
+      power_items = [
+        [:POWERWEIGHT, :HP],
+        [:POWERBRACER, :ATTACK],
+        [:POWERBELT,   :DEFENSE],
+        [:POWERLENS,   :SPECIAL_ATTACK],
+        [:POWERBAND,   :SPECIAL_DEFENSE],
+        [:POWERANKLET, :SPEED]
+      ]
+      power_stats = {}
+      [mother, father].each do |parent|
+        power_items.each do |item|
+          next if !parent.hasItem?(item[0])
+          power_stats[item[1]] ||= []
+          power_stats[item[1]].push(parent.iv[item[1]])
+          break
+        end
+      end
+      power_stats.each_pair do |stat, new_stats|
+        next if !new_stats || new_stats.length == 0
+        new_stat = new_stats.sample
+        egg.iv[stat] = new_stat
+        stats.delete(stat)   # Don't try to inherit this stat's IV again
+        inherit_count -= 1
+      end
+      # Inherit the rest of the IVs
+      chosen_stats = stats.sample(inherit_count)
+      chosen_stats.each { |stat| egg.iv[stat] = [mother, father].sample.iv[stat] }
+    end
+  end
+end
+
+#===============================================================================
 # Fixed roaming Pokémon not remembering whether they have been caught.
 #===============================================================================
 class PokemonGlobalMetadata
   def roamPokemonCaught
     @roamPokemonCaught = [] if !@roamPokemonCaught
     return @roamPokemonCaught
+  end
+end
+
+#===============================================================================
+# Fixed entering a map always restarting the BGM if that map's BGM has a night
+# version, even if it ends up playing the same music.
+#===============================================================================
+class Scene_Map
+  def autofade(mapid)
+    playingBGM = $game_system.playing_bgm
+    playingBGS = $game_system.playing_bgs
+    return if !playingBGM && !playingBGS
+    map = load_data(sprintf("Data/Map%03d.rxdata", mapid))
+    if playingBGM && map.autoplay_bgm
+      test_filename = map.bgm.name
+      test_filename += "_n" if PBDayNight.isNight? && FileTest.audio_exist?("Audio/BGM/" + test_filename + "_n")
+      pbBGMFade(0.8) if playingBGM.name != test_filename
+    end
+    if playingBGS && map.autoplay_bgs && playingBGS.name != map.bgs.name
+      pbBGMFade(0.8)
+    end
+    Graphics.frame_reset
   end
 end

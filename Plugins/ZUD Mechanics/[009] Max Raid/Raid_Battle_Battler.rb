@@ -80,6 +80,7 @@ class Battle::Battler
   def raid_UseBaseMoves(choice)
     return if !@effects[PBEffects::MaxRaidBoss]
     return if @effects[PBEffects::ShieldCounter] > 0
+	return if choice[0] != :UseMove
     return if choice[2].statusMove?
     return if @base_moves.empty?
     self.display_base_moves
@@ -87,6 +88,7 @@ class Battle::Battler
     strikes.times do |i|
       break if @battle.pbAllFainted?
       break if @battle.decision > 0
+      break if i + 1 >= @battle.pbAbleCount
       @battle.battleAI.pbChooseMoves(self.index)
       choice = @battle.choices[self.index]
       PBDebug.log("[Move usage] #{pbThis} started using #{choice[2].name}")

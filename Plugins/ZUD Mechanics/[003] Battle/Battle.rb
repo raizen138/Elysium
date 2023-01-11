@@ -21,10 +21,10 @@ class Battle
   def pbGetZRingName(idxBattler)
     if !@z_rings.empty?
       if pbOwnedByPlayer?(idxBattler)
-        @z_rings.each { |item| return GameData::Item.get(item).name if $bag.has?(item) }
+        @z_rings.each { |item| return GameData::Item.get(item).portion_name if $bag.has?(item) }
       else
         trainer_items = pbGetOwnerItems(idxBattler)
-        @z_rings.each { |item| return GameData::Item.get(item).name if trainer_items&.include?(item) }
+        @z_rings.each { |item| return GameData::Item.get(item).portion_name if trainer_items&.include?(item) }
       end
     end
     return _INTL("Z-Ring")
@@ -50,7 +50,7 @@ class Battle
         @dynamax_bands.each { |item| return GameData::Item.get(item).name if $bag.has?(item) }
       else
         trainer_items = pbGetOwnerItems(idxBattler)
-        @dynamax_bands.each { |item| return GameData::Item.get(item).name if trainer_items&.include?(item) }
+        @dynamax_bands.each { |item| return GameData::Item.get(item).portion_name if trainer_items&.include?(item) }
       end
     end
     return _INTL("Dynamax Band")
@@ -89,19 +89,19 @@ class Battle
     battler = @battlers[idxBattler]
     side    = battler.idxOwnSide
     owner   = pbGetOwnerIndexFromBattlerIndex(idxBattler)
-    powerspot  = $game_map && Settings::POWERSPOTS.include?($game_map.map_id)
-    eternaspot = $game_map && Settings::ETERNASPOT.include?($game_map.map_id)
-    return false if $game_switches[Settings::NO_DYNAMAX]       # No Dynamax if switch enabled.
-    return false if !battler.hasDynamax?                       # No Dynamax if ineligible.
-    return false if battler.wild?                              # No Dynamax for wild Pokemon.
-    return true  if $DEBUG && Input.press?(Input::CTRL)        # Allows Dynamax with CTRL in Debug.
-    return false if @dynamax[side][owner] != -1                # No Dynamax if already used.
-    return false if battler.effects[PBEffects::SkyDrop] >= 0   # No Dynamax if in Sky Drop.
-    return false if !pbHasDynamaxBand?(idxBattler)             # No Dynamax if no Dynamax Band.
-    return false if battler.canEmax? && !eternaspot            # No Eternamax if not on an Eternaspot map.
-    return true  if @raid_battle                               # Allows Dynamax in Max Raid battles.
-    return false if !Settings::CAN_DYNAMAX_WILD && wildBattle? # No Dynamax in wild battles unless switch is on.
-    return false if !powerspot && !Settings::DYNAMAX_ANY_MAP   # No Dynamax if not on a Dynamax map.
+    powerspot  = $game_map && GameData::MapMetadata.get($game_map.map_id)&.has_flag?("PowerSpot")
+    eternaspot = $game_map && GameData::MapMetadata.get($game_map.map_id)&.has_flag?("EternaSpot")
+    return false if $game_switches[Settings::NO_DYNAMAX]                       # No Dynamax if switch enabled.
+    return false if !battler.hasDynamax?                                       # No Dynamax if ineligible.
+    return false if battler.wild?                                              # No Dynamax for wild Pokemon.
+    return true  if $DEBUG && Input.press?(Input::CTRL)                        # Allows Dynamax with CTRL in Debug.
+    return false if @dynamax[side][owner] != -1                                # No Dynamax if already used.
+    return false if battler.effects[PBEffects::SkyDrop] >= 0                   # No Dynamax if in Sky Drop.
+    return false if !pbHasDynamaxBand?(idxBattler)                             # No Dynamax if no Dynamax Band.
+    return false if battler.canEmax? && !eternaspot                            # No Eternamax if not on an Eternaspot map.
+    return true  if @raid_battle                                               # Allows Dynamax in Max Raid battles.
+    return false if !$game_switches[Settings::CAN_DYNAMAX_WILD] && wildBattle? # No Dynamax in wild battles unless switch is on.
+    return false if !powerspot && !$game_switches[Settings::DYNAMAX_ANY_MAP]   # No Dynamax if not on a Dynamax map.
     return @dynamax[side][owner] == -1
   end
   
@@ -119,7 +119,7 @@ class Battle
       Battle::AbilityEffects.triggerOnBeingHit(battler.ability, nil, battler, nil, self)
     end
     pbDisplay(_INTL("Bright light is about to burst out of {1}!", battler.pbThis(true)))    
-    @scene.pbShowUltraBurst(idxBattler, self) if Settings::SHOW_ULTRA_ANIM
+    @scene.pbShowUltraBurst(idxBattler, self) if Settings::SHOW_ZUD_ANIM
     battler.pokemon.makeUltra
     battler.form = battler.pokemon.form
     battler.pbUpdate(true)
@@ -153,7 +153,7 @@ class Battle
     # Cramorant resets its form for some reason.
     battler.pokemon.form = 0 if battler.isSpecies?(:CRAMORANT)
     back = !opposes?(idxBattler)
-    if Settings::SHOW_DYNAMAX_ANIM && $PokemonSystem.battlescene == 0
+    if Settings::SHOW_ZUD_ANIM && $PokemonSystem.battlescene == 0
       @scene.pbShowDynamax(idxBattler, self)
       battler.pokemon.dynamax = true
       battler.set_changed_sprite

@@ -8,6 +8,7 @@ class Battle::AI
   # The AI will immediately use Ultra Burst, if possible.
   #-----------------------------------------------------------------------------
   def pbEnemyShouldUltraBurst?(idxBattler)
+    return false if @battle.pbScriptedMechanic?(idxBattler, :dynamax)
     battler = @battle.battlers[idxBattler]
     if @battle.pbCanUltraBurst?(idxBattler)
       PBDebug.log("[AI] #{battler.pbThis} (#{idxBattler}) will Ultra Burst")
@@ -25,6 +26,7 @@ class Battle::AI
   # immediately Dynamax whichever Pokemon is on the field first.
   #-----------------------------------------------------------------------------
   def pbEnemyShouldDynamax?(idxBattler)
+    return false if @battle.pbScriptedMechanic?(idxBattler, :dynamax)
     battler = @battle.battlers[idxBattler]
     if @battle.pbCanDynamax?(idxBattler) && (battler.ace? || @battle.pbAbleCount(idxBattler) == 1)
       battler.display_power_moves("Max Move") if !@battle.pbOwnedByPlayer?(idxBattler)
@@ -46,7 +48,7 @@ class Battle::AI
   def pbChooseMoves(idxBattler)
     # Adds every eligible Z-Move to the user's movepool selection if the user has
     # the Z-Move option available to use.
-    if @battle.pbCanZMove?(idxBattler)
+    if @battle.pbCanZMove?(idxBattler) && !@battle.pbScriptedMechanic?(idxBattler, :zmove)
       new_moves = []
       user = @battle.battlers[idxBattler]
       user.base_moves.clear

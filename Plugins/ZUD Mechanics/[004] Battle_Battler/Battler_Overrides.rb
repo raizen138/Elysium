@@ -181,7 +181,7 @@ class Battle::Battler
         @moves[i].total_pp = 5
       end
     end
-    display_base_moves("Max Move") if dynamax?
+    display_base_moves if dynamax?
     @effects[PBEffects::TransformPokemon] = target.pokemon
     @battle.scene.pbRefreshOne(@index)
   end

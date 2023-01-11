@@ -40,6 +40,18 @@ class Battle::Move
     end
     return 1
   end
+  
+  #-----------------------------------------------------------------------------
+  # Edited to prevent Z-Moves from being affected by type-changing Abilities.
+  #-----------------------------------------------------------------------------
+  def pbBaseType(user)
+    ret = @type
+    return ret if user.selectedMoveIsZMove
+    if ret && user.abilityActive?
+      ret = Battle::AbilityEffects.triggerModifyMoveBaseType(user.ability, user, self, ret)
+    end
+    return ret
+  end
 
   #-----------------------------------------------------------------------------
   # Displays animation and messages when using a Z-Move in battle.
@@ -51,7 +63,7 @@ class Battle::Move
     if zMove? && !@specialUseZMove
 	  trigger = (user.pbOwnedByPlayer?) ? "zmove" : (user.opposes?) ? "zmove_foe" : "zmove_ally"
 	  @battle.scene.dx_midbattle(user.index, nil, trigger)
-      if Settings::SHOW_ZMOVE_ANIM && $PokemonSystem.battlescene == 0
+      if Settings::SHOW_ZUD_ANIM && $PokemonSystem.battlescene == 0
         @battle.scene.pbShowZMove(user.index, @id, @battle)
       end
       if statusMove? && @zmove_flag

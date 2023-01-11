@@ -87,6 +87,9 @@ module EssentialsDeluxe
     "mega"                  => [:Self, "Trigger: 'mega'\nYou initiate Mega Evolution."],
     "mega_foe"              => [:Self, "Trigger: 'mega_foe'\nI initiate Mega Evolution."],
     "mega_ally"             => [:Self, "Trigger: 'mega_ally'\nYour partner initiates Mega Evolution."],
+	#---------------------------------------------------------------------------
+    # Plugin Triggers
+    #---------------------------------------------------------------------------
     "zmove"                 => [:Self, "Trigger: 'zmove'\nYou initiate a Z-Move."],
     "zmove_foe"             => [:Self, "Trigger: 'zmove_foe'\nI initiate a Z-Move."],
     "zmove_ally"            => [:Self, "Trigger: 'zmove_ally'\nYour partner initiates a Z-Move."],
@@ -96,13 +99,25 @@ module EssentialsDeluxe
     "dynamax"               => [:Self, "Trigger: 'dynamax'\nYou initiate Dynamax."],
     "dynamax_foe"           => [:Self, "Trigger: 'dynamax_foe'\nI initiate Dynamax."],
     "dynamax_ally"          => [:Self, "Trigger: 'dynamax_ally'\nYour partner initiates Dynamax."],
+	"strongStyle"           => [:Self, "Trigger: 'strongStyle'\nYou initiate Strong Style."],
+	"strongStyle_foe"       => [:Self, "Trigger: 'strongStyle_foe'\nOpponent initiates Strong Style."],
+	"strongStyle_ally"      => [:Self, "Trigger: 'strongStyle_ally'\nYour partner initiates Strong Style."],
+	"agileStyle"            => [:Self, "Trigger: 'agileStyle'\nYou initiate Agile Style."],
+	"agileStyle_foe"        => [:Self, "Trigger: 'agileStyle_foe'\nOpponent initiates Agile Style."],
+	"agileStyle_ally"       => [:Self, "Trigger: 'agileStyle_ally'\nYour partner initiates Agile Style."],
+	"styleEnd"              => [:Self, "Trigger: 'styleEnd'\nYour style cooldown expired."],
+	"styleEnd_foe"          => [:Self, "Trigger: 'styleEnd_foe'\nOpponent style cooldown expired."],
+	"styleEnd_ally"         => [:Self, "Trigger: 'styleEnd_ally'\nYour partner's style cooldown expired."],
     "zodiac"                => [:Self, "Trigger: 'zodiac'\nYou initiate a Zodiac Power."],
     "zodiac_foe"            => [:Self, "Trigger: 'zodiac_foe'\nI initiate a Zodiac Power."],
     "zodiac_ally"           => [:Self, "Trigger: 'zodiac_ally'\nYour partner initiates a Zodiac Power."],
     "focus"                 => [:Self, "Trigger: 'focus'\nYour Pokémon harnesses its focus."],
     "focus_foe"             => [:Self, "Trigger: 'focus_foe'", "{1} harnesses its focus."],
     "focus_ally"            => [:Self, "Trigger: 'focus_ally'\nYour partner's Pokémon harnesses its focus."],
-    "focus_boss"            => [:Self, "Trigger: 'focus_boss'", "{1} harnesses its focus with the Enraged style."],  
+    "focus_boss"            => [:Self, "Trigger: 'focus_boss'", "{1} harnesses its focus with the Enraged style."],
+	"focusEnd"              => [:Self, "Trigger: 'focusEnd'", "Your Pokemon's Focus was used."],
+	"focusEnd_foe"          => [:Self, "Trigger: 'focusEnd_foe'", "Opponent Pokemon's Focus was used."],
+	"focusEnd_ally"         => [:Self, "Trigger: 'focusEnd_ally'", "Your partner Pokemon's Focus was used."],
     #---------------------------------------------------------------------------
     # Player-only Triggers
     #---------------------------------------------------------------------------
@@ -190,5 +205,58 @@ module EssentialsDeluxe
       :stats   => [:DEFENSE, 2, :SPECIAL_DEFENSE, 2]
     },
     "loss" => "Haha...you'll never make it out alive!"
+  }
+  
+  
+  #-----------------------------------------------------------------------------
+  # Demo trainer speech when triggering ZUD Mechanics.
+  #-----------------------------------------------------------------------------
+  DEMO_ZUD_MECHANICS = {
+    # Z-Moves
+    "zmove_foe" => ["Alright, {1}!", "Time to unleash our Z-Power!"],
+    # Ultra Burst
+    "ultra_foe" => "Hah! Prepare to witness my {1}'s ultimate form!",
+    # Dynamax
+    "dynamax_foe" => ["No holding back!", "It's time to Dynamax!"]
+  }
+  
+  
+  #-----------------------------------------------------------------------------
+  # Demo trainer speech when triggering the Focus Meter.
+  #-----------------------------------------------------------------------------
+  DEMO_FOCUS_METER = {
+    # Opponent Focus
+    "focus_foe" => "Focus, {1}!\nWe got this!", 
+    "focus_foe_repeat" => {
+      :delay  => "focusEnd_foe",
+      :speech => "Keep your eye on the prize, {1}!"
+    },
+    # Focused Rage (boss)
+    "focus_boss" => "It's time to let loose, {1}!",
+    "focus_boss_repeat" => {
+      :delay  => "focusEnd_foe",
+      :speech => "No mercy! Show them your rage, {1}!"
+    }
+  }
+
+
+  #-----------------------------------------------------------------------------
+  # Demo trainer speech when triggering PLA Battle Styles.
+  #-----------------------------------------------------------------------------
+  DEMO_BATTLE_STYLES = {
+    # Strong Style
+    "strongStyle_foe" => "Let's strike 'em down with all your strength, {1}!",
+    "strongStyle_foe_repeat" => {
+      :delay  => "styleEnd_foe",
+      :speech => ["Let's keep up the pressure!", 
+                  "Hit 'em with your Strong Style, {1}!"]
+    },
+    # Agile Style
+    "agileStyle_foe" => "Let's strike 'em down before they know what hit 'em, {1}!",
+    "agileStyle_foe_repeat" => {
+      :delay  => "styleEnd_foe",
+      :speech => ["Let's keep them on their toes!", 
+                  "Hit 'em with your Agile Style, {1}!"]
+    }
   }
 end

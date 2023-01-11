@@ -1,7 +1,10 @@
 #===============================================================================
-# Additions to Battle::Scene to allow for Dynamax sprites.
+# Battle scene Dynamax visuals.
 #===============================================================================
 class Battle::Scene
+  #-----------------------------------------------------------------------------
+  # Edited to allow for enlarged/colored Dynamax sprites.
+  #-----------------------------------------------------------------------------
   def pbAnimationCore(animation, user, target, oppMove = false)
     return if !animation
     @briefMessage = false
@@ -12,7 +15,7 @@ class Battle::Scene
     oldTargetX = (targetSprite) ? targetSprite.x : oldUserX
     oldTargetY = (targetSprite) ? targetSprite.y : oldUserY
     #---------------------------------------------------------------------------
-    # Used for Enlarged Dynamax sprites.
+    # Applies Dynamax effects to sprites.
     #---------------------------------------------------------------------------
     if Settings::SHOW_DYNAMAX_SIZE
       oldUserZoomX   = (userSprite)   ? userSprite.zoom_x   : 1
@@ -53,7 +56,7 @@ class Battle::Scene
     loop do
       animPlayer.update
       #-------------------------------------------------------------------------
-      # Used for Enlarged Dynamax sprites.
+      # Updates Dynamax effects on sprites.
       #-------------------------------------------------------------------------
       if Settings::SHOW_DYNAMAX_SIZE
         userSprite.zoom_x   = oldUserZoomX   if userSprite
@@ -82,9 +85,9 @@ class Battle::Scene
     end
   end
 
-#-------------------------------------------------------------------------------
-# Changes a battler's sprite. Recalculates if Dynamax effects should apply.
-#-------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
+  # Edited to change a battler's sprite. Checks if Dynamax effects should apply.
+  #-----------------------------------------------------------------------------
   def pbChangePokemon(idxBattler, pkmn)
     idxBattler   = idxBattler.index if idxBattler.respond_to?("index")
     battler      = @battle.battlers[idxBattler]
@@ -102,5 +105,55 @@ class Battle::Scene
     shadowSprite.setPokemonBitmap(pkmn)
     shadowSprite.visible = pkmn.species_data.shows_shadow? if shadowSprite && !back
     pkmnSprite.unDynamax if !battler.dynamax? && !pbInSafari?
+  end
+  
+  
+#===============================================================================
+# Fight Menu toggles.
+#===============================================================================
+  
+  #-----------------------------------------------------------------------------
+  # Toggles the use of Z-Moves in the Fight Menu.
+  #-----------------------------------------------------------------------------
+  def pbFightMenu_ZMove(battler, cw)
+    battler.power_trigger = !battler.power_trigger
+    if battler.power_trigger
+      battler.display_power_moves("Z-Move")
+      pbPlayBattleButton
+    else
+      battler.display_base_moves
+      pbPlayCancelSE
+    end
+    pbUpdateMoveInfoWindow(battler, cw.index) if defined?(@moveUIToggle)
+    return Settings::MENU_TRIGGER_Z_MOVE, true
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Toggles the use of Ultra Burst in the Fight Menu.
+  #-----------------------------------------------------------------------------
+  def pbFightMenu_UltraBurst(battler, cw)
+    battler.power_trigger = !battler.power_trigger
+    if battler.power_trigger
+      pbPlayBattleButton
+    else
+      pbPlayCancelSE
+    end
+    return Settings::MENU_TRIGGER_ULTRA_BURST, false
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Toggles the use of Dynamax in the Fight Menu.
+  #-----------------------------------------------------------------------------
+  def pbFightMenu_Dynamax(battler, cw)
+    battler.power_trigger = !battler.power_trigger
+    if battler.power_trigger
+      battler.display_power_moves("Max Move")
+      pbPlayBattleButton
+    else
+      battler.display_base_moves
+      pbPlayCancelSE
+    end
+    pbUpdateMoveInfoWindow(battler, cw.index) if defined?(@moveUIToggle)
+    return Settings::MENU_TRIGGER_DYNAMAX, true
   end
 end

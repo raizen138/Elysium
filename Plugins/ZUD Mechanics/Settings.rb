@@ -2,38 +2,16 @@
 # ZUD Settings.
 #===============================================================================
 module Settings
-################################################################################  
-# Switch Settings
-################################################################################
-# Switch Numbers for toggling off battle mechanics. Setting these game switch
-# numbers to "false" in an event will disable that particular mechanic.
-#===============================================================================
-  NO_Z_MOVE      = 36
-  NO_ULTRA_BURST = 37
-  NO_DYNAMAX     = 38
-  
-  
 ################################################################################
 # Visual Settings
 ################################################################################
 # These settings control how ZUD mechanics are visually represented in battle.
 #===============================================================================
-# Plays the Z-Move animation when selected in battle. The animation will not
-# play if this setting is set to "false", or if the player disabled battle 
-# animations in the Options.
+# Plays the special use animation when a ZUD mechanic is selected in battle. 
+# The animation will not play if this setting is set to "false", or if the player
+# disabled battle animations in the Options.
 #-------------------------------------------------------------------------------
-  SHOW_ZMOVE_ANIM = true
-#-------------------------------------------------------------------------------  
-# Plays the Ultra Burst animation when triggered in battle. The animation will 
-# not play if this setting is set to "false".
-#-------------------------------------------------------------------------------
-  SHOW_ULTRA_ANIM = true
-#-------------------------------------------------------------------------------  
-# Plays the Dynamax animation when triggered in battle. The animation will not
-# play if this setting is set to "false", or if the player disabled battle 
-# animations in the Options.
-#-------------------------------------------------------------------------------
-  SHOW_DYNAMAX_ANIM = true
+  SHOW_ZUD_ANIM = true
 #-------------------------------------------------------------------------------
 # Increases the size of Dynamax Pokemon's sprites and party icons by 50%.
 # Note: Party icons larger than 64 pixels tall will not be enlarged.
@@ -64,32 +42,10 @@ module Settings
 #-------------------------------------------------------------------------------
   DYNAMAX_TURNS = 3
 #-------------------------------------------------------------------------------
-# An array of map ID's that are to be considered "Power Spots", and capable of
-# supporting Dynamax. You can only trigger Dynamax when on one of these maps.
-# By default, this array contains the map ID's for the Pokemon Gym, Pokemon League, 
-# and Battle Facilities found in Essential's default maps.
-#-------------------------------------------------------------------------------
-  POWERSPOTS = [10, 37, 56, 59, 61, 64]
-#-------------------------------------------------------------------------------
-# Similar to the POWERSPOTS array, except this array contains map ID's that are
-# exclusively used to Dynamax Eternatus into Eternamax Eternatus. This Pokemon
-# cannot use Dynamax on any map that isn't listed here. By default, this array
-# contains no map ID's, because Eternamax Eternatus is not normally available to 
-# the player.
-#------------------------------------------------------------------------------- 
-  ETERNASPOT = []
-#-------------------------------------------------------------------------------
-# This setting may be used to override the POWERSPOTS array, and flag all maps
-# in the game as a Power Spot, allowing you to Dynamax anywhere. (Default false)
-# Note that an ETERNASPOT map is still required for Eternatus.
-#-------------------------------------------------------------------------------
-  DYNAMAX_ANY_MAP = false
-#-------------------------------------------------------------------------------
-# This setting may be used to allow Dynamax to be available in wild battles.
-# Normally, Dynamax is only available in Trainer battles or Max Raid battles. 
-# (Default false)
-#-------------------------------------------------------------------------------
-  CAN_DYNAMAX_WILD = false
+# An array of all the move types that receive a reduced boost in their base power
+# when converted into Max Moves, due to the strength of their effects.
+#-------------------------------------------------------------------------------  
+  MOVE_TYPES_TO_WEAKEN = [:FIGHTING, :POISON]
 #-------------------------------------------------------------------------------
 # An array of species ID's that are flagged as incapable of Dynamaxing. You may
 # set any species here if you do not wish for that species to be able to Dynamax.
@@ -174,7 +130,7 @@ module Settings
 # This setting is set to Generation 5 by default, since Essentials only includes
 # sprites up to that generation.
 #-------------------------------------------------------------------------------
-  GENERATION_LIMIT = (PluginManager.installed?("Generation 8 Pack Scripts")) ? 8 : 5
+  GENERATION_LIMIT = (PluginManager.installed?("Generation 9 Pack")) ? 9 : (PluginManager.installed?("Generation 8 Pack Scripts")) ? 8 : 5
 #-------------------------------------------------------------------------------
 # An array containing additional arrays, which each contain a regional form name 
 # and a region number for that regional form. This will allow for those regional 
@@ -189,6 +145,7 @@ module Settings
   REGIONAL_FORMS = [
     ["Alolan",   1],
     ["Galarian", 1],
-    ["Hisuian",  1]
+    ["Hisuian",  1],
+    ["Paldean",  1]
   ]
 end

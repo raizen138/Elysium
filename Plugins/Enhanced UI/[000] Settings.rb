@@ -7,7 +7,7 @@ module Settings
   #-----------------------------------------------------------------------------
   # Enables the Party menu display of ball icons that match each Pokemon's ball.
   #-----------------------------------------------------------------------------
-  SHOW_PARTY_BALL = true
+  SHOW_PARTY_BALL = false
   
   #-----------------------------------------------------------------------------
   # Shiny Leaf
@@ -35,9 +35,17 @@ module Settings
   POKEDEX_EGG_GROUPS = true
   
   #-----------------------------------------------------------------------------
-  # Battle Move Window
+  # Battle UI Windows
   #-----------------------------------------------------------------------------
-  # The button used to toggle the display of the move window in battle.
+  # Keys used to toggle the display of in-battle UI windows.
   #-----------------------------------------------------------------------------
-  MOVE_INFO_KEY = :M
+  MOVE_INFO_KEY   = :M
+  BATTLE_INFO_KEY = :N
+  
+  #-----------------------------------------------------------------------------
+  # Type Displays (Battle UI)
+  #-----------------------------------------------------------------------------
+  # Toggles whether type displays for unregistered species are shown in battle UI's.
+  #-----------------------------------------------------------------------------
+  ALWAYS_DISPLAY_TYPES = false
 end

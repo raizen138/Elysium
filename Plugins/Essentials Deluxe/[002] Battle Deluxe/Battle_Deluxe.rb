@@ -31,7 +31,31 @@ class Game_Temp
   end
   
   def dx_clear
-    @dx_rules.clear if dx_rules?
+    if dx_rules?
+      @dx_rules.keys.each do |key|
+        case key
+        when :nomega then $game_switches[Settings::NO_MEGA_EVOLUTION] = false
+        when :nozmove, :noultra, :nodynamax
+          next if !PluginManager.installed?("ZUD Mechanics")
+          $game_switches[Settings::NO_Z_MOVE]      = false if key == :nozmove
+          $game_switches[Settings::NO_ULTRA_BURST] = false if key == :noultra
+          $game_switches[Settings::NO_DYNAMAX]     = false if key == :nodynamax
+        when :nozodiac
+          next if !PluginManager.installed?("Pokemon Birthsigns")
+          $game_switches[Settings::NO_ZODIAC_POWER] = false
+        when :nofocus
+          next if !PluginManager.installed?("Focus Meter System")
+          $game_switches[Settings::NO_FOCUS_MECHANIC] = false
+        when :nostyles
+          next if !PluginManager.installed?("PLA Battle Styles")
+          $game_switches[Settings::NO_STYLE_MOVES] = false
+        when :notera
+          next if !PluginManager.installed?("ScarletVioletGimmick_TDW")
+          $game_switches[TDWSettings::TERA_ITEM_ENABLED_SWITCH] = true
+        end
+      end
+      @dx_rules.clear
+    end
     @dx_midbattle.clear if dx_midbattle?
     @dx_pokemon.clear if dx_pokemon?
     $PokemonGlobal.nextBattleBGM = nil
@@ -99,7 +123,7 @@ def pbApplyBattleRules(foeside, wildbattle = false)
   #-----------------------------------------------------------------------------
   # General rules.
   #-----------------------------------------------------------------------------
-  setBattleRule("setStyle")            if rules[:setstyle]
+  setBattleRule("setStyle")            if rules[:setmode]
   setBattleRule("canLose")             if rules[:canlose]
   setBattleRule("noexp")               if rules[:noexp]
   setBattleRule("nomoney")             if rules[:nomoney]
@@ -116,14 +140,17 @@ def pbApplyBattleRules(foeside, wildbattle = false)
   #-----------------------------------------------------------------------------
   if rules[:partner].is_a?(Array)
     pbRegisterPartner(*rules[:partner])
-	setBattleRule("double")
+    setBattleRule("double")
   end
   #-----------------------------------------------------------------------------
   # Sets the battle size.
   # Caps out at 3, and scales down if the player doesn't have enough viable
   # Pokemon to meet the set size.
   #-----------------------------------------------------------------------------
-  if rules[:size]
+  case rules[:size]
+  when String
+    setBattleRule(rules[:size])
+  when Numeric
     rules[:size] = 1 if rules[:size] < 1
     rules[:size] = 3 if rules[:size] > 3
     if rules[:size] > $player.able_pokemon_count
@@ -189,7 +216,7 @@ def pbApplyBattleRules(foeside, wildbattle = false)
   #-----------------------------------------------------------------------------
   # Sets raid battle rules.
   #-----------------------------------------------------------------------------
-  if rules[:rank]
+  if PluginManager.installed?("ZUD Mechanics") && rules[:rank]
     pokemon = $game_temp.dx_pokemon
     if !rules[:bgm]
       raid_music = (rules[:rank] == 6) ? "Battle! Legendary Raid" : "Battle! Max Raid"
@@ -217,6 +244,27 @@ def pbApplyBattleRules(foeside, wildbattle = false)
   end
   rules[:hard] = nil if rules[:hard] && !rules[:rank]
   $PokemonGlobal.nextBattleBGM = rules[:bgm] if rules[:bgm].is_a?(String)
+  #-----------------------------------------------------------------------------
+  # Sets rules for special battle mechanics.
+  #-----------------------------------------------------------------------------
+  $game_switches[Settings::NO_MEGA_EVOLUTION] = true if rules[:nomega]
+  if PluginManager.installed?("ZUD Mechanics")
+    $game_switches[Settings::NO_Z_MOVE]      = true if rules[:nozmove]
+    $game_switches[Settings::NO_ULTRA_BURST] = true if rules[:noultra]
+    $game_switches[Settings::NO_DYNAMAX]     = true if rules[:nodynamax]
+  end
+  if PluginManager.installed?("Pokemon Birthsigns") && rules[:nozodiac]
+    $game_switches[Settings::NO_ZODIAC_POWER]   = true
+  end
+  if PluginManager.installed?("Focus Meter System") && rules[:nofocus]
+    $game_switches[Settings::NO_FOCUS_MECHANIC] = true
+  end
+  if PluginManager.installed?("PLA Battle Styles") && rules[:nostyles]
+    $game_switches[Settings::NO_STYLE_MOVES]    = true
+  end
+  if PluginManager.installed?("ScarletVioletGimmick_TDW") && rules[:notera]
+    $game_switches[TDWSettings::TERA_ITEM_ENABLED_SWITCH] = false
+  end
 end
 
 
@@ -368,13 +416,13 @@ def pbApplyWildAttributes(pkmn)
       #-------------------------------------------------------------------------
       # Sets plugin-specific attributes.
       #-------------------------------------------------------------------------
-      when :focus      then pokemon.focus_style   = pkmn_hash[:focus]            if PluginManager.installed?("Focus Meter System")
-      when :birthsign  then pokemon.birthsign     = pkmn_hash[:birthsign]        if PluginManager.installed?("Pokémon Birthsigns")
-      when :blessed    then pokemon.blessing      = pkmn_hash[:blessed]          if PluginManager.installed?("Pokémon Birthsigns")
-      when :celestial  then pokemon.celestial     = pkmn_hash[:celestial]        if PluginManager.installed?("Pokémon Birthsigns")
-      when :dynamaxlvl then pokemon.raid_dmax_lvl = pkmn_hash[:dynamaxlvl]       if PluginManager.installed?("ZUD Mechanics")
-      when :gmaxfactor then pokemon.gmax_factor   = pkmn_hash[:gmaxfactor]       if PluginManager.installed?("ZUD Mechanics")
-      when :mastery    then pokemon.moves.each { |m| m.mastered = m.canMaster? } if PluginManager.installed?("PLA Battle Styles")
+      when :focus      then pokemon.focus_style   = pkmn_hash[:focus]      if PluginManager.installed?("Focus Meter System")
+      when :birthsign  then pokemon.birthsign     = pkmn_hash[:birthsign]  if PluginManager.installed?("Pokémon Birthsigns")
+      when :blessed    then pokemon.blessing      = pkmn_hash[:blessed]    if PluginManager.installed?("Pokémon Birthsigns")
+      when :celestial  then pokemon.celestial     = pkmn_hash[:celestial]  if PluginManager.installed?("Pokémon Birthsigns")
+      when :dynamaxlvl then pokemon.raid_dmax_lvl = pkmn_hash[:dynamaxlvl] if PluginManager.installed?("ZUD Mechanics")
+      when :gmaxfactor then pokemon.gmax_factor   = pkmn_hash[:gmaxfactor] if PluginManager.installed?("ZUD Mechanics")
+      when :mastery    then pokemon.master_moveset                         if PluginManager.installed?("PLA Battle Styles")
       end
     end
     #---------------------------------------------------------------------------

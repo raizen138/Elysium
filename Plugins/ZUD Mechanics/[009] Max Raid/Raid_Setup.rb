@@ -250,25 +250,29 @@ def raid_GenerateMovelists(pkmn, rental = false)
   # Forces certain moves onto specific species's movelists.
   #-----------------------------------------------------------------------------
   case pkmn
-  when :SNORLAX;    status_moves.push(:REST)
-  when :SHUCKLE;    status_moves.push(:POWERTRICK)
-  when :SLAKING;    stab_moves.push(:GIGAIMPACT)
-  when :CASTFORM;   stab_moves.push(:WEATHERBALL)
-  when :ROTOM_1;    stab_moves.push(:OVERHEAT)
-  when :ROTOM_2;    stab_moves.push(:HYDROPUMP)
-  when :ROTOM_3;    stab_moves.push(:BLIZZARD)
-  when :ROTOM_4;    stab_moves.push(:AIRSLASH)
-  when :ROTOM_5;    stab_moves.push(:LEAFSTORM)
-  when :DARKRAI;    status_moves.push(:DARKVOID)
-  when :GENESECT;   coverage_moves.push(:TECHNOBLAST)  
-  when :ORICORIO;   coverage_moves.push(:REVELATIONDANCE)
-  when :ORICORIO_1; coverage_moves.push(:REVELATIONDANCE)
-  when :ORICORIO_2; coverage_moves.push(:REVELATIONDANCE)
-  when :ORICORIO_3; coverage_moves.push(:REVELATIONDANCE)
-  when :MELMETAL;   stab_moves.push(:DOUBLEIRONBASH)
-  when :SIRFETCHD;  stab_moves.push(:METEORASSAULT)
-  when :DRAGAPULT;  spread_moves.push(:DRAGONDARTS)
-  when :URSHIFU_1;  stab_moves.push(:SURGINGSTRIKES)
+  when :SNORLAX    then status_moves.push(:REST)
+  when :SHUCKLE    then status_moves.push(:POWERTRICK)
+  when :SLAKING    then stab_moves.push(:GIGAIMPACT)
+  when :CASTFORM   then stab_moves.push(:WEATHERBALL)
+  when :ROTOM_1    then stab_moves.push(:OVERHEAT)
+  when :ROTOM_2    then stab_moves.push(:HYDROPUMP)
+  when :ROTOM_3    then stab_moves.push(:BLIZZARD)
+  when :ROTOM_4    then stab_moves.push(:AIRSLASH)
+  when :ROTOM_5    then stab_moves.push(:LEAFSTORM)
+  when :DARKRAI    then status_moves.push(:DARKVOID)
+  when :GENESECT   then coverage_moves.push(:TECHNOBLAST)  
+  when :ORICORIO   then coverage_moves.push(:REVELATIONDANCE)
+  when :ORICORIO_1 then coverage_moves.push(:REVELATIONDANCE)
+  when :ORICORIO_2 then coverage_moves.push(:REVELATIONDANCE)
+  when :ORICORIO_3 then coverage_moves.push(:REVELATIONDANCE)
+  when :MELMETAL   then stab_moves.push(:DOUBLEIRONBASH)
+  when :SIRFETCHD  then stab_moves.push(:METEORASSAULT)
+  when :DRAGAPULT  then spread_moves.push(:DRAGONDARTS)
+  when :URSHIFU_1  then stab_moves.push(:SURGINGSTRIKES)
+  when :MAUSHOLD   then stab_moves.push(:POPULATIONBOMB)
+  when :MAUSHOLD_1 then stab_moves.push(:POPULATIONBOMB)
+  when :PALAFIN_1  then stab_moves.push(:JETPUNCH)
+  when :ANNIHILAPE then stab_moves.push(:RAGEFIST)
   end
   return [stab_moves, coverage_moves, spread_moves, status_moves]
 end
@@ -446,22 +450,23 @@ def raid_Rewards(species, rank = 1, bonus = 1, loot = nil)
   if bonus > 2
     case GameData::Species.get(species).species
     # Max Honey
-    when :VESPIQUEN
+    when :VESPIQUEN, :URSARING, :URSALUNA
       rewards.push([:MAXHONEY, 1])
     # Max Mushrooms
-    when :PARASECT, :BRELOOM, :AMOONGUS, :SHIINOTIC
+    when :PARASECT, :BRELOOM, :AMOONGUS, :SHIINOTIC, :TOEDSCRUEL
       rewards.push([:MAXMUSHROOMS, 1])
     # Max Eggs
     when :CHANSEY, :BLISSEY
       rewards.push([:MAXEGGS, 1])
     # Max Scales
-    when :GYARADOS, :KINGDRA, :MILOTIC, :LUVDISC, :SALAMENCE
+    when :GYARADOS, :KINGDRA, :MILOTIC, :LUVDISC, :SALAMENCE, :GARCHOMP
       rewards.push([:MAXSCALES, 1])
     # Max Plumage
     when :PIDGEOT, :FEAROW, :DODRIO, :ARTICUNO, :NOCTOWL, :XATU, :HOOH, 
          :SWELLOW, :PELIPPER, :STARAPTOR, :HONCHKROW, :CHATOT, :UNFEZANT, 
          :SWANNA, :BRAVIARY, :MANDIBUZZ, :ARCHEOPS, :TALONFLAME, :HAWLUCHA, 
-         :DECIDUEYE, :TOUCANNON, :ORICORIO, :CORVIKNIGHT, :CRAMORANT
+         :DECIDUEYE, :TOUCANNON, :ORICORIO, :CORVIKNIGHT, :CRAMORANT, 
+         :KILOWATTREL, :BOMBIRDIER, :SQUAWKABILLY
       rewards.push([:MAXPLUMAGE, 1])
     # Wishing Star
     when :ETERNATUS

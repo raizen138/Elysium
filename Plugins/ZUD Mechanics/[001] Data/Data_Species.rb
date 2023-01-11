@@ -180,12 +180,3 @@ module GameData
     end
   end
 end
-
-
-#-------------------------------------------------------------------------------
-# Defines message types for G-Max form names, and G-Max Pokedex entries.
-#-------------------------------------------------------------------------------
-module MessageTypes
-  GMaxNames   = 100
-  GMaxEntries = 101
-end

@@ -55,8 +55,8 @@ def pbSetRaidSpecies(table1 = [], table2 = [])
   if raid_pkmn == 0 && table2.length > 0
     item = GameData::Item.get(:DYNAMAXCRYSTAL)
     if $bag.has?(item.id)
-      pbMessage(_INTL("Oh? The Pokémon den seems to be reacting to your {1}!", item.name))
-      if pbConfirmMessage(_INTL("Want to throw in a {1} to lure a special Pokémon?", item.name))
+      pbMessage(_INTL("Oh? The Pokémon den seems to be reacting to your {1}!", item.portion_name))
+      if pbConfirmMessage(_INTL("Want to throw in a {1} to lure a special Pokémon?", item.portion_name))
         $bag.remove(item.id)
         interp.setVariable(nil)
         this_event.turn_up
@@ -80,10 +80,10 @@ EventHandlers.add(:on_frame_update, :raid_den_reset,
       map = load_data(sprintf("Data/Map%03d.rxdata", key[0]))
       event = map.events[key[1]]
       next if !event || !event.name[/raidden/i]
-      $PokemonGlobal.raid_timer = Time.now
       $PokemonGlobal.eventvars[key] = nil
-      $game_map.update
     end
+    $PokemonGlobal.raid_timer = Time.now
+    $game_map.update
   }
 )
 
@@ -117,14 +117,14 @@ def pbRaidDenReset(interp, this_event)
   else
     item = GameData::Item.get(:WISHINGPIECE)
     pbMessage(_INTL("There doesn't seem to be anything in the den..."))
-    if pbConfirmMessage(_INTL("Want to throw in a {1} to lure a Pokémon?", item.name))
+    if pbConfirmMessage(_INTL("Want to throw in a {1} to lure a Pokémon?", item.portion_name))
       if $bag.has?(item.id)
-        pbMessage(_INTL("You threw a {1} into the den!", item.name))
+        pbMessage(_INTL("You threw a {1} into the den!", item.portion_name))
         $bag.remove(item.id)
         interp.setVariable(nil)
         this_event.turn_up
       else
-        pbMessage(_INTL("But you don't have any {1}...", item.name_plural))
+        pbMessage(_INTL("But you don't have any {1}...", item.portion_name_plural))
       end
     end
   end

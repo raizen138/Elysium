@@ -94,7 +94,7 @@ class Battle::PowerMove < Battle::Move
     damage   = @old_move.baseDamage
     function = @old_move.function 
     return 0 if @old_move.statusMove?
-    weaken = [:FIGHTING, :POISON].include?(@old_move.type)
+    weaken = Settings::MOVE_TYPES_TO_WEAKEN.include?(@old_move.type)
     case function
     when "PowerHigherWithUserHP"                        # Eruption, Water Spout, etc.
       return (weaken) ? 100 : 150

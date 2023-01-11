@@ -52,7 +52,7 @@ Name = Cedolan City
 MapPosition = 0,13,10
 BattleBack = indoor3
 Environment = Rock
-Flags = DisableBoxLink
+Flags = DisableBoxLink,PowerSpot
 #-------------------------------
 [011]   # Pokémon Institute
 Name = Cedolan City
@@ -159,22 +159,22 @@ BattleBack = cave1
 Environment = Cave
 Flags = IceRock
 #-------------------------------
-[035]   # Ingido Plateau outside
+[035]   # Ingido Plateau
 Name = Ingido Plateau
 Outdoor = true
 ShowArea = true
 MapPosition = 0,13,6
 #-------------------------------
-[036]   # Pokémon League entrance
+[036]   # Pokémon League
 Name = Ingido Plateau
 HealingSpot = 35,17,7
 MapPosition = 0,13,6
 #-------------------------------
-[037]   # Pokémon League room 1
+[037]   # Pokémon League
 Name = Ingido Plateau
 MapPosition = 0,13,6
 BattleBack = elite1
-Flags = DisableBoxLink
+Flags = DisableBoxLink,PowerSpot
 #-------------------------------
 [038]   # Hall of Fame
 Name = Ingido Plateau
@@ -189,7 +189,7 @@ MapPosition = 0,11,6
 BattleBack = field
 MapSize = 2,11
 #-------------------------------
-[040]   # Route 4 Cycling Road
+[040]   # Route 4
 Name = Route 4
 Outdoor = true
 ShowArea = true
@@ -212,14 +212,14 @@ MapPosition = 0,11,10
 BattleBack = field
 MapSize = 2,11
 #-------------------------------
-[045]   # Route 6 Cycling Road
+[045]   # Route 6
 Name = Route 6
 Outdoor = true
 ShowArea = true
 BicycleAlways = true
 MapPosition = 0,11,10
 #-------------------------------
-[046]   # Route 4 Cycling Road gate
+[046]   # Cycling Road gate
 Name = Route 4
 Bicycle = true
 MapPosition = 0,12,6
@@ -234,7 +234,7 @@ BattleBack = rocky
 MapSize = 2,11
 Environment = Rock
 #-------------------------------
-[049]   # Rock Cave 1F
+[049]   # Rock Cave
 Name = Route 7
 Bicycle = true
 MapPosition = 0,16,10
@@ -242,7 +242,7 @@ BattleBack = cave1
 Environment = Cave
 Flags = Magnetic,DistortionWorld
 #-------------------------------
-[050]   # Rock Cave B1F
+[050]   # Rock Cave
 Name = Route 7
 Bicycle = true
 MapPosition = 0,16,10
@@ -284,7 +284,7 @@ MapPosition = 0,17,10
 Name = Battle Frontier
 MapPosition = 0,17,10
 BattleBack = indoor1
-Flags = DisableBoxLink
+Flags = DisableBoxLink,PowerSpot
 #-------------------------------
 [057]   # Stadium Cup lobby
 Name = Battle Frontier
@@ -298,7 +298,7 @@ MapPosition = 0,17,10
 Name = Battle Frontier
 MapPosition = 0,17,10
 BattleBack = indoor1
-Flags = DisableBoxLink
+Flags = DisableBoxLink,PowerSpot
 #-------------------------------
 [060]   # Battle Arena
 Name = Battle Frontier
@@ -308,7 +308,7 @@ MapPosition = 0,17,10
 Name = Battle Frontier
 MapPosition = 0,17,10
 BattleBack = indoor1
-Flags = DisableBoxLink
+Flags = DisableBoxLink,PowerSpot
 #-------------------------------
 [062]   # Battle Factory
 Name = Battle Frontier
@@ -323,14 +323,14 @@ Flags = DisableBoxLink
 Name = Battle Frontier
 MapPosition = 0,17,10
 BattleBack = indoor1
-Flags = DisableBoxLink
+Flags = DisableBoxLink,PowerSpot
 #-------------------------------
 [065]   # Battle Factory corridor
 Name = Battle Frontier
 MapPosition = 0,17,10
 Flags = DisableBoxLink
 #-------------------------------
-[066]   # Safari Zone outside
+[066]   # Safari Zone
 Name = Safari Zone
 Outdoor = true
 ShowArea = true
@@ -358,13 +358,13 @@ MapPosition = 0,13,13
 DiveMap = 70
 BattleBack = field
 #-------------------------------
-[070]   # Route 8 underwater
+[070]   # Underwater
 Name = Route 8
 MapPosition = 0,13,13
 BattleBack = underwater
 Environment = Underwater
 #-------------------------------
-[071]   # Route 8 harbor
+[071]   # Harbor
 Name = Route 8
 MapPosition = 0,13,13
 #-------------------------------
@@ -385,7 +385,7 @@ MapPosition = 0,22,16
 BattleBack = field
 Flags = DistortionWorld
 #-------------------------------
-[074]   # Route 6 Cycling Road gate
+[074]   # Cycling Road gate
 Name = Route 6
 Bicycle = true
 MapPosition = 0,12,10

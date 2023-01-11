@@ -14,6 +14,52 @@ class Battle
   def initialize(*args)
     @raid_battle = false
     dx_initialize(*args)
+    @scriptedMechanics = {}
+    if $game_temp.dx_rules? && $game_temp.dx_rules.has_key?(:scripted)
+      rule = $game_temp.dx_rules[:scripted]
+      rule.each do |mechanic, trainers|
+        @scriptedMechanics[mechanic] = [
+          [false] * (@player ? @player.length : 1),
+          [false] * (@opponent ? @opponent.length : 1)
+        ]
+        trainers.each do |trainer|
+          case trainer
+          when :Player, :Ally
+            side = 0
+            case trainer
+            when :Player   then owner = 0
+            when :Ally     then owner = 1
+            end
+            next if !@scriptedMechanics[mechanic][side][owner]
+            @scriptedMechanics[mechanic][side][owner] = true
+          when :PlayerSide, :AllySide
+            @player.length.times { |owner| @scriptedMechanics[mechanic][0][owner] = true }
+          when :Foe, :FoeAlly, :FoeAlly1, :FoeAlly2
+            side = 1
+            case trainer
+            when :Foe      then owner = 0
+            when :FoeAlly  then owner = 1
+            when :FoeAlly1 then owner = 1
+            when :FoeAlly2 then owner = 2
+            end
+            next if !@scriptedMechanics[mechanic][side][owner]
+            @scriptedMechanics[mechanic][side][owner] = true
+          when :FoeSide
+            @opponent.length.times { |owner| @scriptedMechanics[mechanic][1][owner] = true }
+          end
+        end		
+      end
+    end
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Checks if certain battle mechanics only trigger as part of a scripted battle.
+  #-----------------------------------------------------------------------------
+  def pbScriptedMechanic?(idxBattler, mechanic)
+    return false if !@scriptedMechanics[mechanic]
+    side  = @battlers[idxBattler].idxOwnSide
+    owner = pbGetOwnerIndexFromBattlerIndex(idxBattler)
+    return @scriptedMechanics[mechanic][side][owner]
   end
   
   #-----------------------------------------------------------------------------
@@ -65,6 +111,7 @@ class Battle
     if PluginManager.installed?("Focus Meter System")
       return true if pbCanUseFocus?(idxBattler)
     end
+    return true if pbCanCustom?(idxBattler)
     return false
   end
   
@@ -93,6 +140,7 @@ class Battle
     pbUnregisterStyle(idxBattler)       if PluginManager.installed?("PLA Battle Styles")
     pbUnregisterZodiacPower(idxBattler) if PluginManager.installed?("Pokémon Birthsigns")
     pbUnregisterFocus(idxBattler)       if PluginManager.installed?("Focus Meter System")
+    pbUnregisterCustom(idxBattler)
     pbClearChoice(idxBattler)
   end
   
@@ -115,7 +163,7 @@ class Battle
   # Considers a variety of battle mechanics during the command phase.
   #-----------------------------------------------------------------------------
   def pbCommandPhase
-    @scene.dx_midbattle(nil, nil, "turnCommand", "turnCommand_" + @turnCount.to_s)
+    @scene.dx_midbattle(nil, nil, "turnCommand", "turnCommand_" + (1 + @turnCount).to_s)
     @scene.pbBeginCommandPhase
     @battlers.each_with_index do |b, i|
       next if !b
@@ -151,6 +199,9 @@ class Battle
           @focusMeter[side][i] = -1 if meter >= 0
         end
       end
+      @custom[side].each_with_index do |custom, i|
+        @custom[side][i] = -1 if custom >= 0
+      end
     end
     pbCommandPhaseLoop(true)
     return if @decision != 0
@@ -161,8 +212,8 @@ class Battle
   # Considers a variety of battle mechanics during the attack phase.
   #-----------------------------------------------------------------------------
   def pbAttackPhase
-    @scene.dx_midbattle(nil, nil, "turnAttack", "turnAttack_" + @turnCount.to_s)
     @scene.pbBeginAttackPhase
+    @scene.dx_midbattle(nil, nil, "turnAttack", "turnAttack_" + (1 + @turnCount).to_s)
     @battlers.each_with_index do |b, i|
       next if !b
       b.turnCount += 1 if !b.fainted?
@@ -187,9 +238,10 @@ class Battle
     pbAttackPhaseUltraBurst
     pbAttackPhaseZMoves
     pbAttackPhaseDynamax
+    pbAttackPhaseCustom
+    pbAttackPhaseStyles
     pbAttackPhaseRaidBoss
     pbAttackPhaseCheer
-    pbAttackPhaseStyles
     pbAttackPhaseMoves
   end
 end
@@ -200,6 +252,7 @@ end
 #-------------------------------------------------------------------------------
 class Battle::Scene
   def pbCommandMenuEx(idxBattler, texts, mode = 0)
+    has_info  = PluginManager.installed?("Enhanced UI")
     can_focus = PluginManager.installed?("Focus Meter System")
     pbShowWindow(COMMAND_BOX)
     cw = @sprites["commandWindow"]
@@ -224,18 +277,22 @@ class Battle::Scene
         pbPlayDecisionSE
         ret = cw.index
         @lastCmd[idxBattler] = ret
-        pbToggleFocusPanel(false) if can_focus && ret > 0
+        pbHidePluginUI if can_focus && ret > 0
         break
       elsif Input.trigger?(Input::BACK) && mode > 0
         pbPlayCancelSE
         break
       elsif Input.trigger?(Input::F9) && $DEBUG
         pbPlayDecisionSE
-        pbToggleFocusPanel(false) if can_focus
+        pbHidePluginUI
         ret = -2
         break
+      elsif has_info && Input.triggerex?(Settings::BATTLE_INFO_KEY)
+        pbHideFocusPanel
+        pbToggleBattleInfo
       elsif can_focus && Input.triggerex?(Settings::FOCUS_PANEL_KEY)
-        pbToggleFocusPanel 
+        pbHideBattleInfo
+        pbToggleFocusPanel
       end
     end
     return ret
@@ -251,13 +308,12 @@ class Battle::AI
     return if pbEnemyShouldUseItem?(idxBattler)
     return if pbEnemyShouldWithdraw?(idxBattler)
     return if @battle.pbAutoFightMenu(idxBattler)
-    @battle.pbRegisterMegaEvolution(idxBattler) if pbEnemyShouldMegaEvolve?(idxBattler)
+    if !@battle.pbScriptedMechanic?(idxBattler, :mega) && pbEnemyShouldMegaEvolve?(idxBattler)
+      @battle.pbRegisterMegaEvolution(idxBattler)
+    end
     if PluginManager.installed?("ZUD Mechanics")
       @battle.pbRegisterUltraBurst(idxBattler) if pbEnemyShouldUltraBurst?(idxBattler)
       @battle.pbRegisterDynamax(idxBattler) if pbEnemyShouldDynamax?(idxBattler)
-    end
-    if PluginManager.installed?("PLA Battle Styles")
-      @battle.pbRegisterStyle(idxBattler) if pbEnemyShouldUseStyle?(idxBattler)
     end
     if PluginManager.installed?("Pokémon Birthsigns")
       @battle.pbRegisterZodiacPower(idxBattler) if pbEnemyShouldZodiacPower?(idxBattler)
@@ -265,6 +321,12 @@ class Battle::AI
     if PluginManager.installed?("Focus Meter System")
       @battle.pbRegisterFocus(idxBattler) if pbEnemyShouldFocus?(idxBattler)
     end
+    if !@battle.pbScriptedMechanic?(idxBattler, :custom) && pbEnemyShouldCustom?(idxBattler)
+      @battle.pbRegisterCustom(idxBattler)
+    end
     pbChooseMoves(idxBattler)
+    if PluginManager.installed?("PLA Battle Styles") # Purposefully set after move selection.
+      @battle.pbRegisterStyle(idxBattler) if pbEnemyShouldUseStyle?(idxBattler)
+    end
   end
 end

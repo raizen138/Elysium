@@ -69,7 +69,7 @@ class Battle
   #-----------------------------------------------------------------------------
   alias zud_pbItemUsesAllActions? pbItemUsesAllActions?
   def pbItemUsesAllActions?(item)
-    return true if item == :WISHINGSTAR || :ZBOOSTER
+    return true if GameData::Item.get(item).has_flag?("UsesAllBattleActions")
     return zud_pbItemUsesAllActions?(item)
   end
   

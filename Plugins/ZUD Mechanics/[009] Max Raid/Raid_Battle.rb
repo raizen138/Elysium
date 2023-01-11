@@ -65,6 +65,14 @@ class RaidBattle < Battle
     end
   end
   
+  def pbRecordAndStoreCaughtPokemon
+    @caughtPokemon.each do |pkmn|
+      pbSetSeen(pkmn)
+      pbStorePokemon(pkmn)
+    end
+    @caughtPokemon.clear
+  end
+  
   #-----------------------------------------------------------------------------
   # Raid Pokemon effects during the Attack Phase (before using a move).
   #-----------------------------------------------------------------------------
@@ -92,7 +100,7 @@ class RaidBattle < Battle
         end
         b.eachOpposing do |p|
           p.effects[PBEffects::GastroAcid] = true
-          GameData::Stat.each_battle { |s| p.stages[s.id] = 0 if p.stages[s.id] >0 }
+          GameData::Stat.each_battle { |s| p.stages[s.id] = 0 if p.stages[s.id] > 0 }
         end
       end
       #-------------------------------------------------------------------------
@@ -184,13 +192,13 @@ class RaidBattle < Battle
     #---------------------------------------------------------------------------
     # Builds hash of possible Cheer effects for a single Cheer.
     #---------------------------------------------------------------------------
-    #	:reflect     => No Reflect and party size is 1 or Pokemon fainted.
-    #	:lightscreen => No Light Screen and party size is 1 or Pokemon fainted.
-    #	:shieldbreak => Raid Shield active and party size is 1 and turn count < 5.
-    #	:dynamax     => Dynamax used and party size is 1 and turn count < 5.
-    #	:heal        => Party Pokemon have low HP and party size is 1 and turn count < 5.
+    # :reflect     => No Reflect and party size is 1 or Pokemon fainted.
+    # :lightscreen => No Light Screen and party size is 1 or Pokemon fainted.
+    # :shieldbreak => Raid Shield active and party size is 1 and turn count < 5.
+    # :dynamax     => Dynamax used and party size is 1 and turn count < 5.
+    # :heal        => Party Pokemon have low HP and party size is 1 and turn count < 5.
     # :none        => No above effects qualify and party size > 1.
-    #	:boost       => Always available.
+    # :boost       => Always available.
     #---------------------------------------------------------------------------
     when 1
       if rules[:size] == 1 
@@ -220,11 +228,11 @@ class RaidBattle < Battle
     #---------------------------------------------------------------------------
     # Builds hash of possible Cheer effects for a double Cheer.
     #---------------------------------------------------------------------------
-    #	:heal        => Party Pokemon have low HP and Pokemon fainted or turn count < 5.
+    # :heal        => Party Pokemon have low HP and Pokemon fainted or turn count < 5.
     # :timer       => Party size > 2 and turn count is 1.
-    #	:shieldbreak => Raid Shield active and party size is 2 and Pokemon fainted or turn count < 5.
-    #	:dynamax     => Dynamax used and party size is 2 and Pokemon fainted or turn count < 5.
-    #	:boost       => No above effects qualify.
+    # :shieldbreak => Raid Shield active and party size is 2 and Pokemon fainted or turn count < 5.
+    # :dynamax     => Dynamax used and party size is 2 and Pokemon fainted or turn count < 5.
+    # :boost       => No above effects qualify.
     #---------------------------------------------------------------------------
     when 2
       if !rules[:perfect_bonus] || boss.effects[PBEffects::Dynamax] < 5
@@ -244,18 +252,18 @@ class RaidBattle < Battle
     #---------------------------------------------------------------------------
     # Builds hash of possible Cheer effects for a triple+ Cheer.
     #---------------------------------------------------------------------------
-    #	:shieldbreak => Raid Shield active and Pokemon fainted.
-    #	:dynamax     => Dynamax used and Pokemon fainted.
+    # :shieldbreak => Raid Shield active and Pokemon fainted.
+    # :dynamax     => Dynamax used and Pokemon fainted.
     # :kocount     => KO count is 1.
-    #	:heal        => No above effects qualify and party Pokemon have low HP.
-    #	:boost       => No above effects qualify.
+    # :heal        => No above effects qualify and party Pokemon have low HP.
+    # :boost       => No above effects qualify.
     #---------------------------------------------------------------------------
     else
       if !rules[:perfect_bonus] || boss.effects[PBEffects::Dynamax] < 5
 	    cheerEffects[:shieldbreak] = true if boss.effects[PBEffects::RaidShield] > 0
         cheerEffects[:dynamax] = true if !dmaxInUse && @dynamax[side][owner] != -1
       end
-      cheerEffects[:kocount] = true if boss.effects[PBEffects::KnockOutCount] == 1 && !inMaxLair
+      cheerEffects[:kocount] = true if boss.effects[PBEffects::KnockOutCount] == 1 && !inMaxLair?
       if cheerEffects.empty?
         eachSameSideBattler(battler) do |b|
           cheerEffects[:heal] = true if b.hp <= b.totalhp / 2
@@ -392,7 +400,7 @@ class RaidBattle < Battle
       when partyPriority.last
         pbSetBattleMechanicUsage(battler.index, "Dynamax", -1)
         pbSEPlay(sprintf("Anim/Lucky Chant"))
-        pbDisplayPaused(_INTL("{1}'s {2} was fully recharged!\nDynamax is now usable again!", trainerName, item))
+        pbDisplayPaused(_INTL("The absorbed Dynamax energy fully recharged {1}'s {2}!\n{1} can use Dynamax again!", trainerName, item))
       # First Cheer user.
       when partyPriority.first
         pbDisplay(_INTL("{1}'s {2} absorbed a little of the surrounding Dynamax Energy!", trainerName, item))
@@ -502,19 +510,6 @@ class Battle
     end
   end
   
-  #-----------------------------------------------------------------------------
-  # Resets Dynamax attributes on captured Pokemon.
-  #-----------------------------------------------------------------------------
-  alias zud_pbStorePokemon pbStorePokemon
-  def pbStorePokemon(pkmn)
-    if pkmn.isSpecies?(:ETERNATUS) || !pkmn.dynamax_able?
-      pkmn.gmax_factor = false
-      pkmn.dynamax_lvl = 0
-    end
-    raid_ResetPokemon(pkmn) if pkmn.dynamax?
-    zud_pbStorePokemon(pkmn)
-  end
-  
   def raid_ResetPokemon(pkmn)
     pkmn.dynamax = false
     pkmn.calc_stats
@@ -523,5 +518,21 @@ class Battle
       pkmn.dynamax_lvl /= 10
       pkmn.dynamax_lvl += rand(5)
     end
+  end
+end
+
+
+#===============================================================================
+# Resets Dynamax attributes on captured Pokemon.
+#===============================================================================
+module Battle::CatchAndStoreMixin
+  alias zud_pbStorePokemon pbStorePokemon
+  def pbStorePokemon(pkmn)
+    if pkmn.isSpecies?(:ETERNATUS) || !pkmn.dynamax_able?
+      pkmn.gmax_factor = false
+      pkmn.dynamax_lvl = 0
+    end
+    raid_ResetPokemon(pkmn) if pkmn.dynamax?
+    zud_pbStorePokemon(pkmn)
   end
 end
