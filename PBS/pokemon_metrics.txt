@@ -1399,12 +1399,10 @@ ShadowX = 0
 ShadowSize = 1
 #-------------------------------
 [PICHU,2]
-BackSprite = 0,8
-FrontSprite = 2,24
+BackSprite = 0,48
+FrontSprite = 4,36
 ShadowX = 0
 ShadowSize = 1
-FrontSpriteScale = 1
-BackSpriteScale = 1
 #-------------------------------
 [CLEFFA]
 BackSprite = 0,58
