@@ -325,6 +325,31 @@ class Battle
       # Learn all moves learned at this level
       moveList = pkmn.getMoveList
       moveList.each { |m| pbLearnMove(idxParty, m[1]) if m[0] == curLevel }
+      newspecies=pkmn.check_evolution_on_level_up
+      old_item=pkmn.item
+      if newspecies
+        pbFadeOutInWithMusic(99999){
+        evo=PokemonEvolutionScene.new
+        evo.pbStartScreen(pkmn,newspecies)
+        evo.pbEvolution
+        evo.pbEndScreen
+        if battler
+          @scene.pbChangePokemon(@battlers[battler.index],@battlers[battler.index].pokemon)
+          battler.name=pkmn.name
+        end
+      }
+      if battler
+        pkmn.moves.each_with_index do |m,i|
+          battler.moves[i] = Battle::Move.from_pokemon_move(self,m)
+        end
+        battler.pbCheckFormOnMovesetChange
+        if pkmn.item!=old_item
+          battler.item=pkmn.item
+          battler.setInitialItem(pkmn.item)
+          battler.setRecycleItem(pkmn.item)
+        end
+      end
+    end
     end
   end
 end

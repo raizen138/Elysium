@@ -42,7 +42,7 @@ Pokemon = EKANS,11
 #-------------------------------
 [CAMPER,Jeff]
 LoseText = A very good battle, indeed!
-Pokemon = SPEAROW,16
+Pokemon = DOLLIV,16
 Pokemon = SENTRET,16
 #-------------------------------
 [CAMPER,Jeff,1]

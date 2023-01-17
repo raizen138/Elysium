@@ -85,7 +85,7 @@ Pokemon = CHIMCHAR,19
 LoseText = ...
 Pokemon = COMBUSKEN,19
 #-------------------------------
-[SWIMMER2_F,Ariel]
+[SWIMMER_F,Ariel]
 LoseText = Washed out!
 Pokemon = STARYU,15
 Pokemon = GOLDEEN,11
