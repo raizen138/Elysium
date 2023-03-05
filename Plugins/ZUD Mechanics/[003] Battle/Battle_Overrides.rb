@@ -63,17 +63,6 @@ class Battle
   end
   
   #-----------------------------------------------------------------------------
-  # Aliased for Z-Booster and Max Crystal.
-  #-----------------------------------------------------------------------------
-  # Using thes items uses up the player's entire turn.
-  #-----------------------------------------------------------------------------
-  alias zud_pbItemUsesAllActions? pbItemUsesAllActions?
-  def pbItemUsesAllActions?(item)
-    return true if GameData::Item.get(item).has_flag?("UsesAllBattleActions")
-    return zud_pbItemUsesAllActions?(item)
-  end
-  
-  #-----------------------------------------------------------------------------
   # Edited for Encore.
   #-----------------------------------------------------------------------------
   # Returns the user's Encore state after executing a Z-Move.

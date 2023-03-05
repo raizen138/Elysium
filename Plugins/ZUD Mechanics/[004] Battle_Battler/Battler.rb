@@ -3,7 +3,6 @@
 #===============================================================================
 class Battle::Battler
   attr_accessor :power_index         # Saves the move index of a selected Power Move.
-  attr_accessor :power_trigger       # Flags whether the button for Z-Moves/Ultra Burst/Dynamax was toggled on or off.
   attr_accessor :ignore_dynamax      # Flags whether HP changing effects should factor in the user's Dynamax HP or not.
   attr_accessor :selectedMoveIsZMove # Checks if the user's selected move is considered a Z-Move.
   attr_accessor :lastMoveUsedIsZMove # Checks if a Z-Move was the user's last selected move (even if it failed to trigger).
@@ -27,55 +26,25 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   def real_hp;       return @pokemon&.real_hp;       end
   def real_totalhp;  return @pokemon&.real_totalhp;  end
-
-  #-----------------------------------------------------------------------------
-  # Mega Evolution
-  #-----------------------------------------------------------------------------
-  # Returns false if:
-  #   -User is Transformed.
-  #   -User is a Shadow Pokemon.
-  #   -User has an available Z-Move.
-  #   -User is in Primal form, or able to Primal Revert.
-  #   -User is in Ultra form, or able to Ultra Burst.
-  #   -User is currently Dynamaxed.
-  #   -User is currently in a battle style. (PLA Battle Styles)
-  #   -User is in Celestial form. (Pokemon Birthsigns)
-  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
-  #   -User doesn't have a Mega form.
-  #-----------------------------------------------------------------------------
-  def hasMega?
-    return false if @effects[PBEffects::Transform]
-    return false if shadowPokemon?
-    return false if hasZMove?
-    return false if primal? || hasPrimal?
-    return false if ultra?  || hasUltra?
-    return false if dynamax?
-    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
-    return false if celestial? || hasZodiacPower?
-    return @pokemon&.hasMegaForm?
-  end
   
   #-----------------------------------------------------------------------------
-  # Z-Move
+  # Z-Moves
   #-----------------------------------------------------------------------------
-  # Returns false if:
-  #   -User is Transformed.
-  #   -User is a Shadow Pokemon.
-  #   -User is in Primal form, or able to Primal Revert.
-  #   -User is able to Ultra Burst first.
-  #   -User is currently Dynamaxed.
-  #   -User is currently in a battle style. (PLA Battle Styles)
-  #   -User is in Celestial form. (Pokemon Birthsigns)
-  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
-  #   -User doesn't have a compatible Z-Move.
+  # Higher priority than:
+  #   -Mega Evolution
+  #   -Dynamax
+  #   -Battle Styles
+  #   -Terastallization
+  #
+  # Lower priority than:
+  #   -Primal Reversion
+  #   -Zodiac Powers
+  #   -Ultra Burst
   #-----------------------------------------------------------------------------
   def hasZMove?
     return false if shadowPokemon?
-    return false if primal? || hasPrimal?
-    return false if hasUltra?
-    return false if dynamax?
-    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
-    return false if celestial? || hasZodiacPower?
+    return false if mega? || primal? || dynamax? || inStyle? || tera? || celestial?
+    return false if hasPrimal? || hasUltra? || hasZodiacPower?
     return hasCompatibleZMove?(@moves)
   end
   
@@ -91,59 +60,56 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   # Ultra Burst
   #-----------------------------------------------------------------------------
-  # Returns false if:
-  #   -User is Transformed.
-  #   -User is a Shadow Pokemon.
-  #   -User is in Primal form, or able to Primal Revert.
-  #   -User is in Mega form.
-  #   -User is already in Ultra form.
-  #   -User is currently Dynamaxed.
-  #   -User is currently in a battle style. (PLA Battle Styles)
-  #   -User is in Celestial form. (Pokemon Birthsigns)
-  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
-  #   -User doesn't have an Ultra form.
+  # Higher priority than:
+  #   -Mega Evolution
+  #   -Z-Moves
+  #   -Dynamax
+  #   -Battle Styles
+  #   -Terastallization
+  #
+  # Lower priority than:
+  #   -Primal Reversion
+  #   -Zodiac Powers
   #-----------------------------------------------------------------------------
   def hasUltra?
-    return false if @effects[PBEffects::Transform]
-    return false if shadowPokemon?
-    return false if primal? || hasPrimal?
-    return false if mega? || ultra? || dynamax?
-    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
-    return false if celestial? || hasZodiacPower?
+    return false if shadowPokemon? || @effects[PBEffects::Transform]
+    return false if mega? || primal? || ultra? || dynamax? || inStyle? || tera? || celestial?
+    return false if hasPrimal? || hasZodiacPower?
     return @pokemon&.hasUltraForm?
   end
   
   #-----------------------------------------------------------------------------
   # Dynamax
   #-----------------------------------------------------------------------------
-  # Returns false if:
-  #   -User is already Dynamaxed.
-  #   -User has an available Z-Move.
-  #   -User is currently in a battle style. (PLA Battle Styles)
-  #   -User is in Mega form, or able to Mega Evolve.
-  #   -User is in Primal form, or able to Primal Revert.
-  #   -User is in Ultra form, or able to Ultra Burst.
-  #   -User is Transformed into a species already in a Mega, Primal, or Ultra form.
-  #   -User has an available Zodiac Power. (Pokemon Birthsigns)
-  #   -User is a Shadow Pokemon.
-  #   -User is in Celestial form. (Pokemon Birthsigns)
-  #   -User is a species that is unable to Dynamax.
-  #   -User is Transformed into a species that is unable to Dynamax.
+  # Higher priority than:
+  #   -Battle Styles
+  #   -Terastallization
+  #
+  # Lower priority than:
+  #   -Primal Reversion
+  #   -Zodiac Powers
+  #   -Ultra Burst
+  #   -Z-Moves
+  #   -Mega Evolution
   #-----------------------------------------------------------------------------
   def hasDynamax?
-    return false if dynamax?
-    return false if hasZMove?
-    return false if PluginManager.installed?("PLA Battle Styles") && @battle_style > 0
-    return false if hasZodiacPower?
-    transform  = @effects[PBEffects::Transform]        || @effects[PBEffects::Illusion]
-    newpoke    = @effects[PBEffects::TransformPokemon] if @effects[PBEffects::Transform]
-    newpoke    = @effects[PBEffects::Illusion]         if @effects[PBEffects::Illusion]
-    pokemon    = transform ? newpoke : @pokemon
-    return false if pokemon.mega?   || hasMega?
-    return false if pokemon.primal? || hasPrimal?
-    return false if pokemon.ultra?  || hasUltra?
-    return true if canEmax? && !transform
-    return pokemon&.dynamax_able? && !isSpecies?(:ETERNATUS)
+    return false if shadowPokemon?
+    return false if mega? || primal? || ultra? || dynamax? || inStyle? || tera? || celestial?
+    return false if hasMega? || hasPrimal? || hasZMove? || hasUltra? || hasZodiacPower?
+    return true if canEmax?
+    pokemon = @effects[PBEffects::TransformPokemon] || self.displayPokemon
+    return pokemon&.dynamax_able? && !pokemon.isSpecies?(:ETERNATUS)
+  end
+  
+  def hasDynamaxAvail?
+    return false if !hasDynamax?
+    return false if !pbOwnedByPlayer? && !@battle.pbHasDynamaxBand?(@index)
+    map_data = GameData::MapMetadata.try_get($game_map.map_id)
+    return false if canEmax? && !($game_map && map_data&.has_flag?("EternaSpot"))
+    return true if @battle.raid_battle && @battle.pbHasDynamaxBand?(@index)
+    return false if @battle.wildBattle? && !$game_switches[Settings::CAN_DYNAMAX_WILD]
+    return true if $game_switches[Settings::DYNAMAX_ANY_MAP] && @battle.pbHasDynamaxBand?(@index)
+    return $game_map && map_data&.has_flag?("PowerSpot") && @battle.pbHasDynamaxBand?(@index)
   end
   
   def hasGmax?
@@ -156,25 +122,8 @@ class Battle::Battler
   end
   
   def canEmax?
+    return false if @effects[PBEffects::Transform] || @effects[PBEffects::Illusion]
     return @pokemon&.canEmax?
-  end
-  
-  #-----------------------------------------------------------------------------
-  # Determines the correct sprite to set when going in and out of Dynamax.
-  #-----------------------------------------------------------------------------
-  def set_changed_sprite
-    pkmn = @pokemon
-    back = !@battle.opposes?(@index)
-    if @effects[PBEffects::Transform]
-      pkmn = @effects[PBEffects::TransformPokemon]
-      @battle.scene.sprites["pokemon_#{@index}"].setPokemonBitmap(pkmn, back, self)
-    elsif @effects[PBEffects::Illusion]
-      pkmn = @effects[PBEffects::Illusion]
-      @battle.scene.sprites["pokemon_#{@index}"].setPokemonBitmap(pkmn, back, self)
-    else
-      @battle.scene.sprites["pokemon_#{@index}"].setPokemonBitmap(pkmn, back)
-    end
-    @battle.scene.sprites["shadow_#{@index}"].setPokemonBitmap(pkmn)
   end
   
   #-----------------------------------------------------------------------------
@@ -182,19 +131,15 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   def unmax
     @pokemon.dynamax = false
-    pbUpdate(false)
+    pbUpdate
     @pokemon.reversion = false
     if !@effects[PBEffects::MaxRaidBoss]
-      display_base_moves
-      @effects[PBEffects::Dynamax] = 0
-      @power_trigger = false
+	  self.display_base_moves
+	  @power_trigger = false
+	  @effects[PBEffects::Dynamax] = 0
+	  @battle.scene.pbRefreshOne(@index)
       @battle.scene.pbRevertDynamax(@index)
-      self.form = @effects[PBEffects::NonGMaxForm] if isSpecies?(:ALCREMIE)
-      set_changed_sprite
-      @battle.scene.pbChangePokemon(self, @pokemon)
-      @battle.scene.pbRevertDynamax2(@index)
       @battle.scene.pbHPChanged(self, totalhp) if !fainted?
-      @battle.scene.pbRefresh
     end
   end
 end

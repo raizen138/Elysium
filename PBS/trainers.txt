@@ -62,7 +62,7 @@ Pokemon = PERSIAN,32
 LoseText = You're too good for me!
 Pokemon = MACHOP,19
 #-------------------------------
-[FISHERMAN,Andrew]
+[FISHER_M,Andrew]
 LoseText = Washed out!
 Pokemon = MAGIKARP,14
 Pokemon = MAGIKARP,18
@@ -81,7 +81,7 @@ LoseText = Our teamwork failed!
 Pokemon = TURTWIG,19
 Pokemon = CHIMCHAR,19
 #-------------------------------
-[POKEMONTRAINER_May,May]
+[PROT_May,May]
 LoseText = ...
 Pokemon = COMBUSKEN,19
 #-------------------------------

@@ -21,7 +21,7 @@ GameData::Evolution.register({
   :parameter     => Integer,
   :minimum_level        => 1,   # Needs any level up
   :level_up_proc        => proc { |pkmn, parameter|
-    next pkmn.step_count >= parameter
+    next pkmn.step_count && pkmn.step_count >= parameter
   },
 })
 GameData::Evolution.register({

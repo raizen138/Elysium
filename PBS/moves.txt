@@ -1664,7 +1664,7 @@ Accuracy = 100
 TotalPP = 30
 Target = NearOther
 FunctionCode = None
-Flags = CanProtect,CanMirrorMove,Slicing
+Flags = CanProtect,CanMirrorMove,Slicing,Wind
 Description = The user stirs up a fairy wind and strikes the target with it.
 #-------------------------------
 [NATURESMADNESS]
@@ -8747,7 +8747,7 @@ Accuracy = 80
 TotalPP = 5
 Target = AllNearFoes
 FunctionCode = LowerTargetAttack1
-Flags = CanProtect
+Flags = CanProtect,Wind
 EffectChance = 30
 Description = The user attacks by wrapping opposing Pokémon in fierce winds brimming with love and hate. This may also lower their Attack stats.
 #-------------------------------
@@ -8781,7 +8781,7 @@ Name = Chloroblast
 Type = GRASS
 Category = Special
 Power = 150
-Accuracy = 100
+Accuracy = 95
 TotalPP = 5
 Target = NearOther
 FunctionCode = RecoilHalfOfDamageDealt
@@ -8875,7 +8875,7 @@ Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
 FunctionCode = LowerTargetSpeed1
-Flags = CanProtect,CanMirrorMove
+Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 30
 Description = The user attacks with savagely cold winds that cause both body and spirit to tremble. This may also lower the Speed stats of opposing Pokémon.
 #-------------------------------
@@ -8888,7 +8888,7 @@ Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
 FunctionCode = ParalyzeTarget
-Flags = CanProtect,CanMirrorMove
+Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 20
 Description = The user summons a thunderous tempest and savagely attacks with lightning and wind. This may also leave opposing Pokémon with paralysis.
 #-------------------------------
@@ -8901,7 +8901,7 @@ Accuracy = 80
 TotalPP = 10
 Target = AllNearFoes
 FunctionCode = BurnTarget
-Flags = CanProtect,CanMirrorMove
+Flags = CanProtect,CanMirrorMove,Wind
 EffectChance = 20
 Description = The user attacks by wrapping opposing Pokémon in fierce winds and searingly hot sand. This may also leave them with a burn.
 #-------------------------------
@@ -8942,12 +8942,13 @@ Description = The user swaps its Attack and Defense stats.
 Name = Stone Axe
 Type = ROCK
 Category = Physical
-Power = 80
-Accuracy = 100
+Power = 65
+Accuracy = 90
 TotalPP = 15
 Target = NearOther
 FunctionCode = AddStealthRocksToFoeSide
-Flags = Contact,CanProtect,HighCriticalHitRate,Slicing
+Flags = Contact,CanProtect,Slicing
+EffectChance = 100
 Description = The user swings its stone axes at the target, aiming to land a critical hit. Stone splinters left behind by this attack float around the target.
 #-------------------------------
 [MYSTICALPOWER]
@@ -9008,6 +9009,7 @@ TotalPP = 15
 Target = NearOther
 FunctionCode = AddSpikesToFoeSide
 Flags = Contact,CanProtect,Slicing
+EffectChance = 100
 Description = The user slashes its shell blade at the target, aiming to land a critical hit. Shell splinters left behind by this attack remain scattered under the target as spikes.
 #-------------------------------
 [TAKEHEART]
@@ -9257,7 +9259,7 @@ Power = 80
 Accuracy = 100
 TotalPP = 15
 Target = NearOther
-FunctionCode = RemoveTerrain
+FunctionCode = RemoveTerrainIceSpinner
 Flags = Contact,CanProtect,CanMirrorMove
 Description = The user covers its feet in thin ice and twirls around, slamming into the target. This move's spinning motion also destroys the terrain.
 #-------------------------------
@@ -9521,7 +9523,7 @@ TotalPP = 10
 Target = NearOther
 FunctionCode = CategoryDependsOnHigherDamageTera
 Flags = CanProtect,CanMirrorMove
-Description = If the user has Terastallized, it unleashes energy of its Tera Type. This move uses the higher of the user's Attack or Sp. Atk stat.
+Description = Move type changes to match a Terastallized user's Tera Type. Deals damage based on user's higher stat.
 #-------------------------------
 [TIDYUP]
 Name = Tidy Up
@@ -9596,6 +9598,31 @@ FunctionCode = SleepTarget
 Flags = CanProtect
 EffectChance = 10
 Description = This move is only used by a Starmobile.
+#-------------------------------
+[HYDROSTEAM]
+Name = Hydro Steam
+Type = WATER
+Category = Special
+Power = 80
+Accuracy = 100
+TotalPP = 15
+Target = NearOther
+FunctionCode = BPRaiseWhileSunny
+Flags = CanProtect,CanMirrorMove
+Description = The user blasts the target with boiling-hot water. This move's power is not lowered in harsh sunlight but rather boosted by 50 percent.
+#-------------------------------
+[PSYBLADE]
+Name = Psyblade
+Type = PSYCHIC
+Category = Physical
+Power = 80
+Accuracy = 100
+TotalPP = 15
+Target = NearOther
+FunctionCode = BPRaiseWhileElectricTerrain
+Flags = CanProtect,CanMirrorMove,Slicing
+EffectChance = 10
+Description = The user rends the target with an ethereal blade. This move's power is boosted by 50 percent if the user is on Electric Terrain.
 #-------------------------------
 [BREAKNECKBLITZ]
 Name = Breakneck Blitz

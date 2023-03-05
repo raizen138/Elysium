@@ -432,21 +432,12 @@ Battle::AbilityEffects::DamageCalcFromUser.add(:SHARPNESS,
 class Game_Temp
   attr_accessor :fainted_member
 end
-# EventHandlers.add(:on_start_battle, :fainted_member_count,
-#   proc {
-#     fainted = 0
-#     $player.party.each{|p|
-#       next if !p || !p.fainted?
-#       fainted += 1
-#     }
-#     $game_temp.fainted_member = [fainted,0] # used for last respect and maybe supreme overlord
-#   }
-# )
+
 Battle::AbilityEffects::DamageCalcFromUser.add(:SUPREMEOVERLORD,
   proc { |ability, user, target, move, mults, baseDmg, type|
     next if user.effects[PBEffects::SupremeOverlord] <= 0
     mult = 1
-    mult += 0.1 * battler.effects[PBEffects::SupremeOverlord]
+    mult += 0.1 * user.effects[PBEffects::SupremeOverlord]
     mults[:base_damage_multiplier] *= mult
   }
 )
@@ -456,8 +447,6 @@ Battle::AbilityEffects::OnSwitchIn.add(:SUPREMEOVERLORD,
   numFainted = 5 if numFainted > 5
   next if numFainted <= 0
   battle.pbShowAbilitySplash(battler)
-  # numFainted = 0
-  # battler.battle.pbParty(battler.idxOwnSide).each { |b| numFainted += 1 if b.fainted? }
   battle.pbDisplay(_INTL("{1} gained strength from the fallen!", battler.pbThis))
   battler.effects[PBEffects::SupremeOverlord] = numFainted
   battle.pbHideAbilitySplash(battler)

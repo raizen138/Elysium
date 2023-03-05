@@ -54,7 +54,7 @@ class Battle::Scene::Animation::RaidShield < Battle::Scene::Animation
       end
       bar.moveColor(1, delay, Color.new(255, 255, 255, 150))
       bar.setXY(delay, xpos, ypos)
-      bar.setSE(delay + 1, sprintf("Anim/Crash"))
+      bar.setSE(delay + 1, "Anim/Crash")
       bar.moveOpacity(delay, 4, 0)
     end
   end
@@ -90,7 +90,7 @@ class Battle::Scene::Animation::WaveAttack < Battle::Scene::Animation
     zpos  = @sprites["pokemon_#{@index}"].z
     color = @sprites["pokemon_#{@index}"].color
     battler = addSprite(@sprites["pokemon_#{@index}"], PictureOrigin::BOTTOM)
-    wave = addNewSprite(xpos, ypos - 60, "Graphics/Battle animations/ballBurst_ring1", PictureOrigin::CENTER)
+    wave = addNewSprite(xpos, ypos - 60, "Graphics/Plugins/Essentials Deluxe/Animations/pulse", PictureOrigin::CENTER)
     wave.setColor(delay, color)
     wave.setZoom(delay, 0)
     wave.setZ(delay, zpos)
@@ -98,7 +98,7 @@ class Battle::Scene::Animation::WaveAttack < Battle::Scene::Animation
     8.times do |i|
       battler.moveXY(delay, t, xpos + 4, ypos)
       battler.moveXY(delay + t, t, xpos - 4, ypos)
-      battler.setSE(delay + t, sprintf("Anim/fog2")) if i == 0
+      battler.setSE(delay + t, "Anim/fog2") if i == 0
       delay = battler.totalDuration
     end
     wave.moveZoom(delay, 5, 800)

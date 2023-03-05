@@ -8,6 +8,7 @@ class Battle
   # Z-Rings
   #-----------------------------------------------------------------------------
   def pbHasZRing?(idxBattler)
+    return true if @battlers[idxBattler].wild?
     if pbOwnedByPlayer?(idxBattler)
       @z_rings.each { |item| return true if $bag.has?(item) }
     else
@@ -34,6 +35,7 @@ class Battle
   # Dynamax Bands
   #-----------------------------------------------------------------------------
   def pbHasDynamaxBand?(idxBattler)
+    return true if @battlers[idxBattler].wild?
     if pbOwnedByPlayer?(idxBattler)
       @dynamax_bands.each { |item| return true if $bag.has?(item) }
     else
@@ -61,12 +63,11 @@ class Battle
   #-----------------------------------------------------------------------------
   def pbCanZMove?(idxBattler)
     battler = @battlers[idxBattler]
-    return false if $game_switches[Settings::NO_Z_MOVE]       # No Z-Moves if switch enabled.
-    return false if !battler.hasZMove?                        # No Z-Moves if ineligible.
-    return false if battler.wild?                             # No Z-Moves for wild Pokemon.
-    return true  if $DEBUG && Input.press?(Input::CTRL)       # Allows Z-Moves with CTRL in Debug.
-    return false if battler.effects[PBEffects::SkyDrop] >= 0  # No Z-Moves if in Sky Drop.
-    return false if !pbHasZRing?(idxBattler)                  # No Z-Moves if no Z-Ring.
+    return false if $game_switches[Settings::NO_Z_MOVE]                    # No Z-Moves if switch enabled.
+    return false if !battler.hasZMove?                                     # No Z-Moves if ineligible.
+    return true  if $DEBUG && Input.press?(Input::CTRL) && !battler.wild?  # Allows Z-Moves with CTRL in Debug.
+    return false if battler.effects[PBEffects::SkyDrop] >= 0               # No Z-Moves if in Sky Drop.
+    return false if !pbHasZRing?(idxBattler)                               # No Z-Moves if no Z-Ring.
     side  = battler.idxOwnSide
     owner = pbGetOwnerIndexFromBattlerIndex(idxBattler)
     return @zMove[side][owner] == -1
@@ -74,12 +75,11 @@ class Battle
   
   def pbCanUltraBurst?(idxBattler)
     battler = @battlers[idxBattler]
-    return false if $game_switches[Settings::NO_ULTRA_BURST]  # No Ultra Burst if switch enabled.
-    return false if !battler.hasUltra?                        # No Ultra Burst if ineligible.
-    return false if battler.wild?                             # No Ultra Burst for wild Pokemon.
-    return true  if $DEBUG && Input.press?(Input::CTRL)       # Allows Ultra Burst with CTRL in Debug.
-    return false if battler.effects[PBEffects::SkyDrop] >= 0  # No Ultra Burst if in Sky Drop.
-    return false if !pbHasZRing?(idxBattler)                  # No Ultra Burst if no Z-Ring.
+    return false if $game_switches[Settings::NO_ULTRA_BURST]               # No Ultra Burst if switch enabled.
+    return false if !battler.hasUltra?                                     # No Ultra Burst if ineligible.
+    return true  if $DEBUG && Input.press?(Input::CTRL) && !battler.wild?  # Allows Ultra Burst with CTRL in Debug.
+    return false if battler.effects[PBEffects::SkyDrop] >= 0               # No Ultra Burst if in Sky Drop.
+    return false if !pbHasZRing?(idxBattler)                               # No Ultra Burst if no Z-Ring.
     side  = battler.idxOwnSide
     owner = pbGetOwnerIndexFromBattlerIndex(idxBattler)
     return @ultraBurst[side][owner] == -1
@@ -89,19 +89,21 @@ class Battle
     battler = @battlers[idxBattler]
     side    = battler.idxOwnSide
     owner   = pbGetOwnerIndexFromBattlerIndex(idxBattler)
-    powerspot  = $game_map && GameData::MapMetadata.get($game_map.map_id)&.has_flag?("PowerSpot")
-    eternaspot = $game_map && GameData::MapMetadata.get($game_map.map_id)&.has_flag?("EternaSpot")
-    return false if $game_switches[Settings::NO_DYNAMAX]                       # No Dynamax if switch enabled.
-    return false if !battler.hasDynamax?                                       # No Dynamax if ineligible.
-    return false if battler.wild?                                              # No Dynamax for wild Pokemon.
-    return true  if $DEBUG && Input.press?(Input::CTRL)                        # Allows Dynamax with CTRL in Debug.
-    return false if @dynamax[side][owner] != -1                                # No Dynamax if already used.
-    return false if battler.effects[PBEffects::SkyDrop] >= 0                   # No Dynamax if in Sky Drop.
-    return false if !pbHasDynamaxBand?(idxBattler)                             # No Dynamax if no Dynamax Band.
-    return false if battler.canEmax? && !eternaspot                            # No Eternamax if not on an Eternaspot map.
-    return true  if @raid_battle                                               # Allows Dynamax in Max Raid battles.
-    return false if !$game_switches[Settings::CAN_DYNAMAX_WILD] && wildBattle? # No Dynamax in wild battles unless switch is on.
-    return false if !powerspot && !$game_switches[Settings::DYNAMAX_ANY_MAP]   # No Dynamax if not on a Dynamax map.
+    map_data = GameData::MapMetadata.try_get($game_map.map_id)
+    powerspot  = $game_map && map_data&.has_flag?("PowerSpot")
+    eternaspot = $game_map && map_data&.has_flag?("EternaSpot")
+    anyMapAllowed = $game_switches[Settings::DYNAMAX_ANY_MAP]
+    wildAllowed = $game_switches[Settings::CAN_DYNAMAX_WILD]
+    return false if $game_switches[Settings::NO_DYNAMAX]                   # No Dynamax if switch enabled.
+    return false if !battler.hasDynamax?                                   # No Dynamax if ineligible.
+    return true  if $DEBUG && Input.press?(Input::CTRL) && !battler.wild?  # Allows Dynamax with CTRL in Debug.
+    return false if @dynamax[side][owner] != -1                            # No Dynamax if already used.
+    return false if battler.effects[PBEffects::SkyDrop] >= 0               # No Dynamax if in Sky Drop.
+    return false if !pbHasDynamaxBand?(idxBattler)                         # No Dynamax if no Dynamax Band.
+    return false if battler.canEmax? && !eternaspot                        # No Eternamax if not on an Eternaspot map.
+    return true  if @raid_battle                                           # Allows Dynamax in Max Raid battles.
+    return false if wildBattle? && !wildAllowed                            # No Dynamax in wild battles unless switch is on.
+    return false if !powerspot && !anyMapAllowed                           # No Dynamax if not on a Dynamax map.
     return @dynamax[side][owner] == -1
   end
   
@@ -112,18 +114,27 @@ class Battle
     battler = @battlers[idxBattler]
     return if !battler || !battler.pokemon
     return if !battler.hasUltra? || battler.ultra?
-    trigger = (battler.pbOwnedByPlayer?) ? "ultra" : (battler.opposes?) ? "ultra_foe" : "ultra_ally"
-    @scene.dx_midbattle(idxBattler, nil, trigger)
+    triggers = ["ultra", "ultra" + battler.species.to_s]
+    battler.pokemon.types.each { |t| triggers.push("ultra" + t.to_s) }
+    @scene.pbDeluxeTriggers(idxBattler, nil, triggers)
     old_ability = battler.ability_id
     if battler.hasActiveAbility?(:ILLUSION)
       Battle::AbilityEffects.triggerOnBeingHit(battler.ability, nil, battler, nil, self)
     end
     pbDisplay(_INTL("Bright light is about to burst out of {1}!", battler.pbThis(true)))    
-    @scene.pbShowUltraBurst(idxBattler, self) if Settings::SHOW_ZUD_ANIM
-    battler.pokemon.makeUltra
-    battler.form = battler.pokemon.form
-    battler.pbUpdate(true)
-    @scene.pbChangePokemon(battler, battler.pokemon)
+    if Settings::SHOW_ZUD_ANIM && $PokemonSystem.battlescene == 0
+      @scene.pbShowUltraBurst(idxBattler)
+      battler.pokemon.makeUltra
+      battler.form = battler.pokemon.form
+      @scene.pbChangePokemon(battler, battler.pokemon)
+    else
+      @scene.pbRevertBattlerStart(idxBattler)
+      battler.pokemon.makeUltra
+      battler.form = battler.pokemon.form
+      @scene.pbChangePokemon(battler, battler.pokemon)
+      @scene.pbRevertBattlerEnd
+    end
+    battler.pbUpdate(true)    
     @scene.pbRefreshOne(idxBattler)
     pbDisplay(_INTL("{1} regained its true power with Ultra Burst!", battler.pbThis))    
     side  = battler.idxOwnSide
@@ -139,9 +150,13 @@ class Battle
     return if !battler || !battler.pokemon
     return if !battler.hasDynamax? || battler.dynamax?
     return if @choices[idxBattler][2]==@struggle
-    trigger = (battler.pbOwnedByPlayer?) ? "dynamax" : (battler.opposes?) ? "dynamax_foe" : "dynamax_ally"
-    @scene.dx_midbattle(idxBattler, nil, trigger)
-    trainerName = pbGetOwnerName(idxBattler)
+    triggers = ["dynamax", "dynamax" + battler.species.to_s]
+    battler.pokemon.types.each { |t| triggers.push("dynamax" + t.to_s) }
+    if battler.canGmax?
+      triggers += ["gmax", "gmax" + battler.species.to_s]
+      battler.pokemon.types.each { |t| triggers.push("gmax" + t.to_s) }
+    end
+    @scene.pbDeluxeTriggers(idxBattler, nil, triggers)
     battler.effects[PBEffects::Dynamax]     = Settings::DYNAMAX_TURNS
     battler.effects[PBEffects::NonGMaxForm] = battler.form
     battler.effects[PBEffects::Encore]      = 0
@@ -152,35 +167,36 @@ class Battle
     battler.pokemon.form = 0 if battler.isSpecies?(:ALCREMIE) && battler.gmax_factor?
     # Cramorant resets its form for some reason.
     battler.pokemon.form = 0 if battler.isSpecies?(:CRAMORANT)
-    back = !opposes?(idxBattler)
+    changePoke = battler.effects[PBEffects::TransformPokemon] || battler.displayPokemon
     if Settings::SHOW_ZUD_ANIM && $PokemonSystem.battlescene == 0
-      @scene.pbShowDynamax(idxBattler, self)
+      @scene.pbShowDynamax(idxBattler)
       battler.pokemon.dynamax = true
-      battler.set_changed_sprite
+      @scene.pbChangePokemon(idxBattler, changePoke)
     else
-      pbDisplay(_INTL("{1} recalled {2}!", trainerName, battler.pbThis(true)))
-      @scene.pbRecall(idxBattler)
       text = (battler.canEmax?) ? "Eternamax" : (battler.canGmax?) ? "Gigantamax" : "Dynamax"
-      pbDisplay(_INTL("{1}'s ball surges with {2} energy!", battler.pbThis, text))
-      party = pbParty(idxBattler)
-      idxPartyStart, idxPartyEnd = pbTeamIndexRangeFromBattlerIndex(idxBattler)
-      for i in idxPartyStart...idxPartyEnd
-        if party[i] == battler.pokemon
-          battler.pokemon.dynamax = true
-          pbSendOut([ [idxBattler, party[i]] ])
-          battler.set_changed_sprite
-          break
-        end
+      if battler.wild?
+        pbDisplay(_INTL("{1} surrounded itself in {2} energy!", battler.pbThis, text))
+        battler.pokemon.dynamax = true
+        @scene.pbRevertDynamax(idxBattler, false)
+        msg = _INTL("{1} entered its {2} form!", battler.pbThis, text)
+      else
+        trainerName = pbGetOwnerName(idxBattler)
+        pbDisplay(_INTL("{1} recalled {2}!", trainerName, battler.pbThis(true)))
+        xpos, ypos = @scene.sprites["pokemon_#{idxBattler}"].x, @scene.sprites["pokemon_#{idxBattler}"].y
+        @scene.pbRecall(idxBattler)
+        pbDisplay(_INTL("{1}'s ball surges with {2} energy!", battler.pbThis, text))
+        @scene.pbDynamaxSendOut(idxBattler, xpos, ypos)
       end
     end
-    @scene.pbRefresh
+    oldhp = battler.hp
+    battler.pbUpdate
+    @scene.pbRefreshOne(idxBattler)
+    @scene.pbHPChanged(battler, oldhp)
+    pbDisplay(msg) if msg
+    battler.pokemon.reversion = true
     side  = battler.idxOwnSide
     owner = pbGetOwnerIndexFromBattlerIndex(idxBattler)
     @dynamax[side][owner] = -2
-    oldhp = battler.hp
-    battler.pbUpdate(false)
-    @scene.pbHPChanged(battler, oldhp)
-    battler.pokemon.reversion = true
   end
   
   #-----------------------------------------------------------------------------
@@ -216,7 +232,7 @@ class Battle
   
   def pbAttackPhaseZMoves
     pbPriority.each do |b|
-      next if b.wild?
+      next if b.wild? && !b.ace?
       next unless @choices[b.index][0] == :UseMove && !b.fainted?
       owner = pbGetOwnerIndexFromBattlerIndex(b.index)
       next if @zMove[b.idxOwnSide][owner] != b.index
@@ -257,16 +273,13 @@ class Battle
   
   def pbAttackPhaseUltraBurst
     pbPriority.each do |b|
-      next if b.wild?
+      next if b.wild? && !b.ace?
       next unless @choices[b.index][0] == :UseMove && !b.fainted?
       owner = pbGetOwnerIndexFromBattlerIndex(b.index)
       next if @ultraBurst[b.idxOwnSide][owner] != b.index
       pbUltraBurst(b.index)
     end
   end
-
-  def pbAttackPhaseCheer;    end # Placeholder for normal battles.
-  def pbAttackPhaseRaidBoss; end # Placeholder for normal battles.
 
   #-----------------------------------------------------------------------------
   # Registering Dynamax
@@ -301,7 +314,7 @@ class Battle
   
   def pbAttackPhaseDynamax
     pbPriority.each do |b|
-      next if b.wild?
+      next if b.wild? && !b.ace?
       next unless @choices[b.index][0] == :UseMove && !b.fainted?
       owner = pbGetOwnerIndexFromBattlerIndex(b.index)
       next if @dynamax[b.idxOwnSide][owner] != b.index

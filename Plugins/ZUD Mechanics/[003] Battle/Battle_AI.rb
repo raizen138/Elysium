@@ -8,9 +8,10 @@ class Battle::AI
   # The AI will immediately use Ultra Burst, if possible.
   #-----------------------------------------------------------------------------
   def pbEnemyShouldUltraBurst?(idxBattler)
-    return false if @battle.pbScriptedMechanic?(idxBattler, :dynamax)
+    return false if @battle.pbScriptedMechanic?(idxBattler, :ultra)
     battler = @battle.battlers[idxBattler]
-    if @battle.pbCanUltraBurst?(idxBattler)
+    elig = (battler.wild?) ? battler.ace? : true
+    if @battle.pbCanUltraBurst?(idxBattler) && elig
       PBDebug.log("[AI] #{battler.pbThis} (#{idxBattler}) will Ultra Burst")
       return true
     end
@@ -28,7 +29,8 @@ class Battle::AI
   def pbEnemyShouldDynamax?(idxBattler)
     return false if @battle.pbScriptedMechanic?(idxBattler, :dynamax)
     battler = @battle.battlers[idxBattler]
-    if @battle.pbCanDynamax?(idxBattler) && (battler.ace? || @battle.pbAbleCount(idxBattler) == 1)
+    ace = (battler.wild?) ? battler.ace? : (battler.ace? || @battle.pbAbleCount(idxBattler) == 1)
+    if @battle.pbCanDynamax?(idxBattler) && ace
       battler.display_power_moves("Max Move") if !@battle.pbOwnedByPlayer?(idxBattler)
       PBDebug.log("[AI] #{battler.pbThis} (#{idxBattler}) will Dynamax")
       return true
@@ -48,9 +50,10 @@ class Battle::AI
   def pbChooseMoves(idxBattler)
     # Adds every eligible Z-Move to the user's movepool selection if the user has
     # the Z-Move option available to use.
-    if @battle.pbCanZMove?(idxBattler) && !@battle.pbScriptedMechanic?(idxBattler, :zmove)
+    user = @battle.battlers[idxBattler]
+    elig = (user.wild?) ? user.ace? : true 
+    if @battle.pbCanZMove?(idxBattler) && elig && !@battle.pbScriptedMechanic?(idxBattler, :zmove)
       new_moves = []
-      user = @battle.battlers[idxBattler]
       user.base_moves.clear
       species = (user.effects[PBEffects::Transform]) ? user.effects[PBEffects::TransformPokemon].species_data.id : nil
       user.eachMoveWithIndex do |m, i|

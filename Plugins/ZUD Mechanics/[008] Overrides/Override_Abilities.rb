@@ -54,32 +54,6 @@ Battle::AbilityEffects::OnSwitchIn.add(:FOREWARN,
 
 
 #===============================================================================
-# Imposter
-#===============================================================================
-# Ability fails to trigger if the user is Dynamaxed, and the transform target
-# is a species that is unable to have a Dynamax form.
-#-------------------------------------------------------------------------------
-Battle::AbilityEffects::OnSwitchIn.add(:IMPOSTER,
-  proc { |ability, battler, battle, switch_in|
-    next if !switch_in || battler.effects[PBEffects::Transform]
-    choice = battler.pbDirectOpposing
-    next if choice.fainted?
-    next if battler.dynamax? && !choice.dynamax_able?
-    next if choice.effects[PBEffects::Transform] ||
-            choice.effects[PBEffects::Illusion] ||
-            choice.effects[PBEffects::Substitute] > 0 ||
-            choice.effects[PBEffects::SkyDrop] >= 0 ||
-            choice.semiInvulnerable?
-    battle.pbShowAbilitySplash(battler, true)
-    battle.pbHideAbilitySplash(battler)
-    battle.pbAnimation(:TRANSFORM, battler, choice)
-    battle.scene.pbChangePokemon(battler, choice.pokemon)
-    battler.pbTransform(choice)
-  }
-)
-
-
-#===============================================================================
 # Cursed Body
 #===============================================================================
 # Ability fails to trigger if the attacker is a Dynamaxed Pokemon.

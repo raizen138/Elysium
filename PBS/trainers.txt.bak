@@ -42,7 +42,7 @@ Pokemon = EKANS,11
 #-------------------------------
 [CAMPER,Jeff]
 LoseText = A very good battle, indeed!
-Pokemon = SPEAROW,16
+Pokemon = DOLLIV,16
 Pokemon = SENTRET,16
 #-------------------------------
 [CAMPER,Jeff,1]
@@ -62,7 +62,7 @@ Pokemon = PERSIAN,32
 LoseText = You're too good for me!
 Pokemon = MACHOP,19
 #-------------------------------
-[FISHERMAN,Andrew]
+[FISHER_M,Andrew]
 LoseText = Washed out!
 Pokemon = MAGIKARP,14
 Pokemon = MAGIKARP,18

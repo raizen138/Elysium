@@ -13,8 +13,8 @@ SurfBGM = Surfing
 BicycleBGM = Bicycle
 #-------------------------------
 [1]
-TrainerType = POKEMONTRAINER_Red
-WalkCharset = trainer_POKEMONTRAINER_Red
+TrainerType = POKEMONTRAINER_Gold
+WalkCharset = trainer_POKEMONTRAINER_Gold
 RunCharset = boy_run
 CycleCharset = boy_bike
 SurfCharset = boy_surf

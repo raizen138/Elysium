@@ -47,7 +47,7 @@ module GameData
     def regionalVariant?
       regional = false
       for i in Settings::REGIONAL_FORMS
-	    break if !@real_form_name
+        break if !@real_form_name
         break if @real_form_name.include?("Zen Mode")
         if @real_form_name.include?(i[0])
           regional = true
@@ -120,8 +120,13 @@ module GameData
         ret = new_ret if new_ret
       end
       if dynamax
-        path = "Graphics/Pokemon/Shadow/dynamax"
-        ret  = pbResolveBitmap(path)
+        path += "_dmax"
+        new_ret = pbResolveBitmap(path)
+        ret = new_ret if new_ret
+        if !ret
+          path = "Graphics/Pokemon/Shadow/dynamax"
+          ret  = pbResolveBitmap(path)
+        end
       end
       if !ret
         metrics_data = GameData::SpeciesMetrics.get_species_form(species_data.species, form)
@@ -135,8 +140,8 @@ module GameData
       return (filename) ? AnimatedBitmap.new(filename) : nil
     end
 
-    def self.shadow_bitmap_from_pokemon(pkmn)
-      filename = self.shadow_filename(pkmn.species, pkmn.form, pkmn.dynamax?)
+    def self.shadow_bitmap_from_pokemon(pkmn, dynamax = false)
+      filename = self.shadow_filename(pkmn.species, pkmn.form, dynamax || pkmn.dynamax?)
       return (filename) ? AnimatedBitmap.new(filename) : nil
     end
   end

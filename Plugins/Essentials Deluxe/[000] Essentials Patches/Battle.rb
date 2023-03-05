@@ -15,39 +15,51 @@ class Battle
     @raid_battle = false
     dx_initialize(*args)
     @scriptedMechanics = {}
-    if $game_temp.dx_rules? && $game_temp.dx_rules.has_key?(:scripted)
-      rule = $game_temp.dx_rules[:scripted]
-      rule.each do |mechanic, trainers|
-        @scriptedMechanics[mechanic] = [
-          [false] * (@player ? @player.length : 1),
-          [false] * (@opponent ? @opponent.length : 1)
-        ]
-        trainers.each do |trainer|
-          case trainer
-          when :Player, :Ally
-            side = 0
+    if $game_temp.dx_rules?
+      @controlPlayer = true if $game_temp.dx_rules[:autobattle]
+      @internalBattle = false if $game_temp.dx_rules[:compbattle]
+      if @opponent
+        if $game_temp.dx_rules[:wintext]
+          @opponent.each_with_index { |t, i| t.win_text = $game_temp.dx_rules[:wintext][i] }
+        end
+        if $game_temp.dx_rules[:losetext]
+          @opponent.each_with_index { |t, i| t.lose_text = $game_temp.dx_rules[:losetext][i] }
+        end	
+      end
+      if $game_temp.dx_rules.has_key?(:scripted)
+        rule = $game_temp.dx_rules[:scripted]
+        rule.each do |mechanic, trainers|
+          @scriptedMechanics[mechanic] = [
+            [false] * (@player ? @player.length : 1),
+            [false] * (@opponent ? @opponent.length : 1)
+          ]
+          trainers.each do |trainer|
             case trainer
-            when :Player   then owner = 0
-            when :Ally     then owner = 1
+            when :Player, :Ally
+              side = 0
+              case trainer
+              when :Player   then owner = 0
+              when :Ally     then owner = 1
+              end
+              next if !@scriptedMechanics[mechanic][side][owner]
+              @scriptedMechanics[mechanic][side][owner] = true
+            when :PlayerSide, :AllySide
+              @player.length.times { |owner| @scriptedMechanics[mechanic][0][owner] = true }
+            when :Foe, :FoeAlly, :FoeAlly1, :FoeAlly2
+              side = 1
+              case trainer
+              when :Foe      then owner = 0
+              when :FoeAlly  then owner = 1
+              when :FoeAlly1 then owner = 1
+              when :FoeAlly2 then owner = 2
+              end
+              next if !@scriptedMechanics[mechanic][side][owner]
+              @scriptedMechanics[mechanic][side][owner] = true
+            when :FoeSide
+              @opponent.length.times { |owner| @scriptedMechanics[mechanic][1][owner] = true }
             end
-            next if !@scriptedMechanics[mechanic][side][owner]
-            @scriptedMechanics[mechanic][side][owner] = true
-          when :PlayerSide, :AllySide
-            @player.length.times { |owner| @scriptedMechanics[mechanic][0][owner] = true }
-          when :Foe, :FoeAlly, :FoeAlly1, :FoeAlly2
-            side = 1
-            case trainer
-            when :Foe      then owner = 0
-            when :FoeAlly  then owner = 1
-            when :FoeAlly1 then owner = 1
-            when :FoeAlly2 then owner = 2
-            end
-            next if !@scriptedMechanics[mechanic][side][owner]
-            @scriptedMechanics[mechanic][side][owner] = true
-          when :FoeSide
-            @opponent.length.times { |owner| @scriptedMechanics[mechanic][1][owner] = true }
-          end
-        end		
+          end		
+        end
       end
     end
   end
@@ -65,14 +77,15 @@ class Battle
   #-----------------------------------------------------------------------------
   # Compatibility across multiple plugins.
   #-----------------------------------------------------------------------------
-  def pbAttackPhaseZMoves;      end
-  def pbAttackPhaseUltraBurst;  end
-  def pbAttackPhaseDynamax;     end
-  def pbAttackPhaseRaidBoss;    end
-  def pbAttackPhaseCheer;       end
-  def pbAttackPhaseStyles;      end
-  def pbAttackPhaseZodiacPower; end
-  def pbAttackPhaseFocus;       end
+  def pbAttackPhaseZMoves;       end
+  def pbAttackPhaseUltraBurst;   end
+  def pbAttackPhaseDynamax;      end
+  def pbAttackPhaseRaidBoss;     end
+  def pbAttackPhaseCheer;        end
+  def pbAttackPhaseStyles;       end
+  def pbAttackPhaseTerastallize; end
+  def pbAttackPhaseZodiacPower;  end
+  def pbAttackPhaseFocus;        end
 
   #-----------------------------------------------------------------------------
   # Tool for resetting a variety of specific battle mechanics.
@@ -88,7 +101,9 @@ class Battle
     when 2, "Ultra"   then @ultraBurst[side][owner]    = set
     when 3, "Dynamax" then @dynamax[side][owner]       = set
     when 4, "Style"   then @battleStyle[side][owner]   = set
-    when 5, "Zodiac"  then @zodiac[side][owner]        = set
+    when 5, "Tera"    then @terastallize[side][owner]  = set
+    when 6, "Zodiac"  then @zodiac[side][owner]        = set
+    when 7, "Custom"  then @custom[side][owner]        = set
     end
   end
 
@@ -105,6 +120,9 @@ class Battle
     if PluginManager.installed?("PLA Battle Styles")
       return true if pbCanUseStyle?(idxBattler)
     end
+    if PluginManager.installed?("Terastal Phenomenon")
+      return true if pbCanTerastallize?(idxBattler)
+    end
     if PluginManager.installed?("Pokémon Birthsigns")
       return true if pbCanZodiacPower?(idxBattler)
     end
@@ -113,6 +131,15 @@ class Battle
     end
     return true if pbCanCustom?(idxBattler)
     return false
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Aliased for new item flag.
+  #-----------------------------------------------------------------------------
+  alias zud_pbItemUsesAllActions? pbItemUsesAllActions?
+  def pbItemUsesAllActions?(item)
+    return true if GameData::Item.get(item).has_flag?("UsesAllBattleActions")
+    return zud_pbItemUsesAllActions?(item)
   end
   
   #-----------------------------------------------------------------------------
@@ -137,9 +164,10 @@ class Battle
         @battlers[idxBattler].display_base_moves
       end
     end
-    pbUnregisterStyle(idxBattler)       if PluginManager.installed?("PLA Battle Styles")
-    pbUnregisterZodiacPower(idxBattler) if PluginManager.installed?("Pokémon Birthsigns")
-    pbUnregisterFocus(idxBattler)       if PluginManager.installed?("Focus Meter System")
+    pbUnregisterStyle(idxBattler)        if PluginManager.installed?("PLA Battle Styles")
+    pbUnregisterTerastallize(idxBattler) if PluginManager.installed?("Terastal Phenomenon")
+    pbUnregisterZodiacPower(idxBattler)  if PluginManager.installed?("Pokémon Birthsigns")
+    pbUnregisterFocus(idxBattler)        if PluginManager.installed?("Focus Meter System")
     pbUnregisterCustom(idxBattler)
     pbClearChoice(idxBattler)
   end
@@ -163,7 +191,8 @@ class Battle
   # Considers a variety of battle mechanics during the command phase.
   #-----------------------------------------------------------------------------
   def pbCommandPhase
-    @scene.dx_midbattle(nil, nil, "turnCommand", "turnCommand_" + (1 + @turnCount).to_s)
+    triggers = ["turnCommand", "turnCommand_" + (1 + @turnCount).to_s]
+    @scene.pbDeluxeTriggers(nil, nil, triggers)
     @scene.pbBeginCommandPhase
     @battlers.each_with_index do |b, i|
       next if !b
@@ -189,6 +218,11 @@ class Battle
           @battleStyle[side][i] = -1 if style >= 0
         end
       end
+      if PluginManager.installed?("Terastal Phenomenon")
+        @terastallize[side].each_with_index do |tera, i|
+          @terastallize[side][i] = -1 if tera >= 0
+        end
+      end
       if PluginManager.installed?("Pokémon Birthsigns")
         @zodiacPower[side].each_with_index do |zodiac, i|
           @zodiacPower[side][i] = -1 if zodiac >= 0
@@ -209,11 +243,43 @@ class Battle
   end
   
   #-----------------------------------------------------------------------------
+  # Ensures certain battle mechanics trigger prior to using Pursuit.
+  #-----------------------------------------------------------------------------
+  def pbPursuit(idxSwitcher)
+    @switching = true
+    pbPriority.each do |b|
+      next if b.fainted? || !b.opposes?(idxSwitcher)
+      next if b.movedThisRound? || !pbChoseMoveFunctionCode?(b.index, "PursueSwitchingFoe")
+      next unless pbMoveCanTarget?(b.index, idxSwitcher, @choices[b.index][2].pbTarget(b))
+      next unless pbCanChooseMove?(b.index, @choices[b.index][1], false)
+      next if b.status == :SLEEP || b.status == :FROZEN
+      next if b.effects[PBEffects::SkyDrop] >= 0
+      next if b.hasActiveAbility?(:TRUANT) && b.effects[PBEffects::Truant]
+      owner = pbGetOwnerIndexFromBattlerIndex(b.index)
+      pbMegaEvolve(b.index) if @megaEvolution[b.idxOwnSide][owner] == b.index
+      if PluginManager.installed?("ZUD Mechanics")
+        pbUltraBurst(b.index) if @ultraBurst[b.idxOwnSide][owner] == b.index
+      end
+      if PluginManager.installed?("PLA Battle Styles")
+        pbBattleStyle(b.index) if @battleStyle[b.idxOwnSide][owner] == b.index
+      end
+      if PluginManager.installed?("Terastal Phenomenon")
+        pbTerastallize(b.index) if @terastallize[b.idxOwnSide][owner] == b.index
+      end
+      @choices[b.index][3] = idxSwitcher
+      b.pbProcessTurn(@choices[b.index], false)
+      break if @decision > 0 || @battlers[idxSwitcher].fainted?
+    end
+    @switching = false
+  end
+  
+  #-----------------------------------------------------------------------------
   # Considers a variety of battle mechanics during the attack phase.
   #-----------------------------------------------------------------------------
   def pbAttackPhase
     @scene.pbBeginAttackPhase
-    @scene.dx_midbattle(nil, nil, "turnAttack", "turnAttack_" + (1 + @turnCount).to_s)
+    triggers = ["turnAttack", "turnAttack_" + (1 + @turnCount).to_s]
+    @scene.pbDeluxeTriggers(nil, nil, triggers)
     @battlers.each_with_index do |b, i|
       next if !b
       b.turnCount += 1 if !b.fainted?
@@ -238,11 +304,67 @@ class Battle
     pbAttackPhaseUltraBurst
     pbAttackPhaseZMoves
     pbAttackPhaseDynamax
+    pbAttackPhaseTerastallize
     pbAttackPhaseCustom
     pbAttackPhaseStyles
     pbAttackPhaseRaidBoss
     pbAttackPhaseCheer
     pbAttackPhaseMoves
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Edited to allow for battle intro text to be customized.
+  #-----------------------------------------------------------------------------
+  def pbStartBattleSendOut(sendOuts)
+    foes = @opponent || pbParty(1)
+    if $game_temp.dx_rules? && $game_temp.dx_rules[:introtext]
+      foe_names = []
+      foes.each do |foe|
+        name = (wildBattle?) ? foe.name : foe.full_name
+        foe_names.push(name)
+      end
+      pbDisplayPaused(_INTL("#{$game_temp.dx_rules[:introtext]}", *foe_names))
+    else
+      msg = (wildBattle?) ? "Oh! A wild " : "You are challenged by "
+      foes.each_with_index do |foe, i|
+        if i > 0
+          msg += (i == foes.length - 1) ? " and " : ", "
+        end
+        msg += (wildBattle?) ? foe.name : foe.full_name
+      end
+      msg += (wildBattle?) ? " appeared!" : "!"
+      pbDisplayPaused(_INTL("{1}", msg))
+    end
+    [1, 0].each do |side|
+      next if side == 1 && wildBattle?
+      msg = ""
+      toSendOut = []
+      trainers = (side == 0) ? @player.reverse : @opponent
+      trainers.each_with_index do |t, i|
+        msg += "\r\n" if msg.length > 0
+        if side == 0 && i == trainers.length - 1
+          msg += "Go! "
+          sent = sendOuts[side][trainers.length - 1]
+        else
+          msg += "#{t.full_name} sent out "
+          sent = sendOuts[side][i]
+        end
+        sent.each_with_index do |idxBattler, j|
+          if j > 0
+            msg += (j == sent.length - 1) ? " and " : ", "
+          end
+          msg += @battlers[idxBattler].name
+        end
+        msg += "!"
+        toSendOut.concat(sent)
+      end
+      pbDisplayBrief(_INTL("{1}", msg)) if msg.length > 0
+      animSendOuts = []
+      toSendOut.each do |idxBattler|
+        animSendOuts.push([idxBattler, @battlers[idxBattler].pokemon])
+      end
+      pbSendOut(animSendOuts, true)
+    end
   end
 end
 
@@ -308,12 +430,13 @@ class Battle::AI
     return if pbEnemyShouldUseItem?(idxBattler)
     return if pbEnemyShouldWithdraw?(idxBattler)
     return if @battle.pbAutoFightMenu(idxBattler)
-    if !@battle.pbScriptedMechanic?(idxBattler, :mega) && pbEnemyShouldMegaEvolve?(idxBattler)
-      @battle.pbRegisterMegaEvolution(idxBattler)
-    end
+    @battle.pbRegisterMegaEvolution(idxBattler) if pbEnemyShouldMegaEvolve?(idxBattler)
     if PluginManager.installed?("ZUD Mechanics")
       @battle.pbRegisterUltraBurst(idxBattler) if pbEnemyShouldUltraBurst?(idxBattler)
       @battle.pbRegisterDynamax(idxBattler) if pbEnemyShouldDynamax?(idxBattler)
+    end
+    if PluginManager.installed?("Terastal Phenomenon")
+      @battle.pbRegisterTerastallize(idxBattler) if pbEnemyShouldTerastallize?(idxBattler)
     end
     if PluginManager.installed?("Pokémon Birthsigns")
       @battle.pbRegisterZodiacPower(idxBattler) if pbEnemyShouldZodiacPower?(idxBattler)

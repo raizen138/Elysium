@@ -12,24 +12,18 @@ module Settings
 # disabled battle animations in the Options.
 #-------------------------------------------------------------------------------
   SHOW_ZUD_ANIM = true
+  
 #-------------------------------------------------------------------------------
 # Increases the size of Dynamax Pokemon's sprites and party icons by 50%.
 # Note: Party icons larger than 64 pixels tall will not be enlarged.
 #-------------------------------------------------------------------------------
   SHOW_DYNAMAX_SIZE = true
+  
 #-------------------------------------------------------------------------------
 # Applies a colored overlay on Dynamax Pokemon's sprites and icons.
 # Note: Calyrex is a special case, and uses its own unique color.
 #-------------------------------------------------------------------------------
   SHOW_DYNAMAX_COLOR = true
-#-------------------------------------------------------------------------------
-# The color used for Dynamax Pokemon when SHOW_DYNAMAX_COLOR is enabled.
-#-------------------------------------------------------------------------------
-  DYNAMAX_COLOR = Color.new(196, 44, 100, 128) # Reddish
-#-------------------------------------------------------------------------------
-# The color used for Dynamax Calyrex when SHOW_DYNAMAX_COLOR is enabled.
-#-------------------------------------------------------------------------------
-  CALYREX_COLOR = Color.new(56, 160, 193, 128) # Blueish
 
    
 ################################################################################
@@ -41,11 +35,13 @@ module Settings
 # Sets the number of turns Dynamax lasts before expiring. (Default 3)
 #-------------------------------------------------------------------------------
   DYNAMAX_TURNS = 3
+  
 #-------------------------------------------------------------------------------
 # An array of all the move types that receive a reduced boost in their base power
 # when converted into Max Moves, due to the strength of their effects.
 #-------------------------------------------------------------------------------  
   MOVE_TYPES_TO_WEAKEN = [:FIGHTING, :POISON]
+  
 #-------------------------------------------------------------------------------
 # An array of species ID's that are flagged as incapable of Dynamaxing. You may
 # set any species here if you do not wish for that species to be able to Dynamax.
@@ -72,16 +68,19 @@ module Settings
 # (Default 3)
 #-------------------------------------------------------------------------------
   MAXRAID_SIZE = 3
+  
 #-------------------------------------------------------------------------------
 # The base number of KO's a Max Raid Pokemon needs to eject you from the den. 
 # (Default 4)
 #-------------------------------------------------------------------------------
   MAXRAID_KOS = 4
+  
 #-------------------------------------------------------------------------------
 # The base number of turns you have in a Max Raid battle before being ejected. 
 # (Default 10)
 #-------------------------------------------------------------------------------
   MAXRAID_TIMER = 10
+  
 #-------------------------------------------------------------------------------
 # The base number of hit points Max Raid shields have when they are raised. 
 # (Default 2)
@@ -110,6 +109,7 @@ module Settings
 # encounters a Max Raid battle for the first time.
 #-------------------------------------------------------------------------------
   UNLOCK_DATABASE_FROM_RAIDS = true
+  
 #-------------------------------------------------------------------------------
 # When true, only species that have been seen by the player will be displayed
 # in the Max Raid Database.
@@ -131,6 +131,7 @@ module Settings
 # sprites up to that generation.
 #-------------------------------------------------------------------------------
   GENERATION_LIMIT = (PluginManager.installed?("Generation 9 Pack")) ? 9 : (PluginManager.installed?("Generation 8 Pack Scripts")) ? 8 : 5
+  
 #-------------------------------------------------------------------------------
 # An array containing additional arrays, which each contain a regional form name 
 # and a region number for that regional form. This will allow for those regional 

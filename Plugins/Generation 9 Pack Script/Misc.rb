@@ -228,7 +228,7 @@ class Battle::Move
       when :FIRE
         multipliers[:final_damage_multiplier] *= 1.5
       when :WATER
-        multipliers[:final_damage_multiplier] /= 2
+        multipliers[:final_damage_multiplier] /= 2 if @function != "BPRaiseWhileSunny"
       end
     when :Rain, :HeavyRain
       case type

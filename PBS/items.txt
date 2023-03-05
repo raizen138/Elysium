@@ -6819,7 +6819,7 @@ Pocket = 1
 Price = 2100
 FieldUse = OnPokemon
 Flags = Fling_30,EvolutionStone
-Description = A block of muddy material that can be used as fuel for burning when it is dried. It’s loved by a certain Pokémon.
+Description = A block of muddy material that is for fuel. It’s loved by a certain Pokémon.
 #-------------------------------
 [LINKINGCORD]
 Name = Linking Cord
@@ -6828,7 +6828,7 @@ Pocket = 1
 Price = 2100
 FieldUse = OnPokemon
 Flags = Fling_30,EvolutionStone
-Description = A string exuding a mysterious energy that makes you feel a strange sense of connection. It’s loved by certain Pokémon.
+Description = A string exuding a mysterious energy of connection. It’s loved by certain Pokémon.
 #-------------------------------
 [ADAMANTCRYSTAL]
 Name = Adamant Crystal
@@ -6899,7 +6899,7 @@ Pocket = 3
 Price = 900
 BattleUse = OnFoe
 Flags = PokeBall
-Description = A mysterious ball that provides a higher success rate for catching Pokémon than a standard Poké Ball.
+Description = A mysterious ball that provides a higher success catch rate than a standard Poké Ball.
 #-------------------------------
 [HISUIANULTRABALL]
 Name = Ultra Ball
@@ -6908,7 +6908,7 @@ Pocket = 3
 Price = 1500
 BattleUse = OnFoe
 Flags = PokeBall
-Description = A mysterious ball that provides an even higher success rate for catching Pokémon than a Great Ball does.
+Description = A mysterious ball that provides an even higher success catch rate than a Great Ball does.
 #-------------------------------
 [FEATHERBALL]
 Name = Feather Ball
@@ -6944,7 +6944,7 @@ Pocket = 3
 Price = 700
 BattleUse = OnFoe
 Flags = PokeBall
-Description = A ball that is too heavy to fly high or far, but it is highly effective if you manage to hit an unsuspecting Pokémon.
+Description = A ball that is too heavy to throw, but it is highly effective to an unsuspecting Pokémon.
 #-------------------------------
 [LEADENBALL]
 Name = Leaden Ball
@@ -6971,7 +6971,7 @@ Pocket = 3
 Price = 0
 BattleUse = OnFoe
 Flags = PokeBall
-Description = A singular and irreplicable Poké Ball that can be used to catch the frenzied Pokémon raging at the Temple of Sinnoh.
+Description = An irreplicable Poké Ball that was once used to catch the frenzied Pokémon raging at the Temple of Sinnoh.
 #-------------------------------
 [STRANGEBALL]
 Name = Strange Ball
@@ -6989,7 +6989,7 @@ Pocket = 1
 Price = 3000
 FieldUse = OnPokemon
 Flags = EvolutionStone,Fling_30
-Description = A peculiar set of armor that can make a certain species of Pokémon evolve. Auspicious wishes live within it.
+Description = A peculiar set of armor that can make a certain Pokémon evolve. Auspicious wishes live within it.
 #-------------------------------
 [MALICIOUSARMOR]
 Name = Malicious Armor
@@ -6998,7 +6998,7 @@ Pocket = 1
 Price = 3000
 FieldUse = OnPokemon
 Flags = EvolutionStone,Fling_31
-Description = A peculiar set of armor that can make a certain species of Pokémon evolve. Malicious will lurks within it.
+Description = A peculiar set of armor that can make a certain Pokémon evolve. Malicious will lurks within it.
 #-------------------------------
 [SCROLLOFDARKNESS]
 Name = Scroll of Darkness
@@ -7007,7 +7007,7 @@ Pocket = 1
 Price = 0
 FieldUse = OnPokemon
 Flags = EvolutionStone,Fling_32
-Description = A peculiar scroll that can make a certain Pokémon evolve. Written upon it are the true secrets of the path of darkness.
+Description = A scroll that evolves certain Pokémon. Written on it are the true secrets of the path of darkness.
 #-------------------------------
 [SCROLLOFWATERS]
 Name = Scroll of Waters
@@ -7016,14 +7016,14 @@ Pocket = 1
 Price = 0
 FieldUse = OnPokemon
 Flags = EvolutionStone,Fling_33
-Description = A peculiar scroll that can make a certain Pokémon evolve. Written upon it are the true secrets of the path of water.
+Description = A scroll that evolves certain Pokémon. Written on it are the true secrets of the path of water.
 #-------------------------------
 [LEADERSCREST]
 Name = Leader's Crest
 NamePlural = Leader's Crests
 Pocket = 1
 Price = 3000
-Description = A shard of what appears to be an old blade of some sort. It is held only by Bisharp that head up a group of Pawniard.
+Description = A shard of what appears to be an old blade of some sort. It is held only by a head of certain Pokémon group.
 #-------------------------------
 [BOOSTERENERGY]
 Name = Booster Energy
@@ -7044,28 +7044,28 @@ Name = Clear Amulet
 NamePlural = Clear Amulets
 Pocket = 1
 Price = 30000
-Description = An item to be held by a Pokémon. It protects the holder from having its stats lowered by moves or Pokémon's Abilities.
+Description = An item to be held by a Pokémon. It protects the holder from having its stats lowered.
 #-------------------------------
 [MIRRORHERB]
 Name = Mirror Herb
 NamePlural = Mirror Herbs
 Pocket = 1
 Price = 30000
-Description = An item to be held by a Pokémon. This herb will allow the holder to mirror an opponent's stat increases-but only once.
+Description = An item to be held by a Pokémon. This herb will allow the holder to mirror an opponent's stat increases once.
 #-------------------------------
 [PUNCHINGGLOVE]
 Name = Punching Glove
 NamePlural = Punching Gloves
 Pocket = 1
 Price = 15000
-Description = An item to be held by a Pokémon. It boosts the holder's punching moves and prevents direct contact with targets.
+Description = An item to be held by a Pokémon. It boosts the holder's punching moves and prevents direct contact.
 #-------------------------------
 [COVERTCLOAK]
 Name = Covert Cloak
 NamePlural = Covert Cloaks
 Pocket = 1
 Price = 20000
-Description = An item to be held by a Pokémon. It conceals the holder, protecting it from the additional effects of moves.
+Description = An item to be held by a Pokémon. It conceals the holder, protecting it from move's additional effects.
 #-------------------------------
 [LOADEDDICE]
 Name = Loaded Dice
@@ -7109,7 +7109,7 @@ NamePlural = Scarlet Books
 Pocket = 8
 Price = 0
 Flags = KeyItem
-Description = A record of the Heath's expedition on the Great Crater of Paldea. The book has the name "Sada" written in clumsy handwriting.
+Description = A record of the Heath's expedition on the Great Crater of Paldea. It has the name "Sada" written on it.
 #-------------------------------
 [VIOLETBOOK]
 Name = Violet Book
@@ -7117,21 +7117,31 @@ NamePlural = Violet Books
 Pocket = 8
 Price = 0
 Flags = KeyItem
-Description = A record of the Heath's expedition on the Great Crater of Paldea. The book has the name "Turo" written in clumsy handwriting.
+Description = A record of the Heath's expedition on the Great Crater of Paldea. It has the name "Turo" written on it.
+#-------------------------------
+[SANDWICH]
+Name = Sandwich
+NamePlural = Sandwiches
+Pocket = 8
+Price = 0
+Flags = KeyItem
+Description = A dish made by sandwiching vegetables, meat, or other ingredients between two pieces of bread.
 #-------------------------------
 [TERAORB]
 Name = Tera Orb
 NamePlural = Tera Orbs
 Pocket = 8
 Price = 0
-Flags = KeyItem
-Description = An orb that holds the power to crystallize. When it is charged, it can be used on Pokémon to Terastallize.
+Flags = KeyItem,TeraOrb
+Description = An orb that holds the power to crystallize. When charged, it allows Pokémon to Terastallize.
 #-------------------------------
 [NORMALTERASHARD]
 Name = Normal Tera Shard
 NamePlural = Normal Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_NORMAL
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [FIGHTINGTERASHARD]
@@ -7139,6 +7149,8 @@ Name = Fighting Tera Shard
 NamePlural = Fighting Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_FIGHTING
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [FLYINGTERASHARD]
@@ -7146,6 +7158,8 @@ Name = Flying Tera Shard
 NamePlural = Flying Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_FLYING
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [POISONTERASHARD]
@@ -7153,6 +7167,8 @@ Name = Poison Tera Shard
 NamePlural = Poison Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_POISON
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [GROUNDTERASHARD]
@@ -7160,6 +7176,8 @@ Name = Ground Tera Shard
 NamePlural = Ground Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_GROUND
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [ROCKTERASHARD]
@@ -7167,6 +7185,8 @@ Name = Rock Tera Shard
 NamePlural = Rock Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_ROCK
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [BUGTERASHARD]
@@ -7174,6 +7194,8 @@ Name = Bug Tera Shard
 NamePlural = Bug Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_BUG
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [GHOSTTERASHARD]
@@ -7181,6 +7203,8 @@ Name = Ghost Tera Shard
 NamePlural = Ghost Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_GHOST
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [STEELTERASHARD]
@@ -7188,6 +7212,8 @@ Name = Steel Tera Shard
 NamePlural = Steel Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_STEEL
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [FIRETERASHARD]
@@ -7195,6 +7221,8 @@ Name = Fire Tera Shard
 NamePlural = Fire Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_FIRE
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [WATERTERASHARD]
@@ -7202,6 +7230,8 @@ Name = Water Tera Shard
 NamePlural = Water Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_WATER
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [GRASSTERASHARD]
@@ -7209,6 +7239,8 @@ Name = Grass Tera Shard
 NamePlural = Grass Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_GRASS
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [ELECTRICTERASHARD]
@@ -7216,6 +7248,8 @@ Name = Electric Tera Shard
 NamePlural = Electric Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_ELECTRIC
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [PSYCHICTERASHARD]
@@ -7223,6 +7257,8 @@ Name = Psychic Tera Shard
 NamePlural = Psychic Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_PSYCHIC
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [ICETERASHARD]
@@ -7230,6 +7266,8 @@ Name = Ice Tera Shard
 NamePlural = Ice Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_ICE
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [DRAGONTERASHARD]
@@ -7237,6 +7275,8 @@ Name = Dragon Tera Shard
 NamePlural = Dragon Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_DRAGON
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [DARKTERASHARD]
@@ -7244,6 +7284,8 @@ Name = Dark Tera Shard
 NamePlural = Dark Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_DARK
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
 #-------------------------------
 [FAIRYTERASHARD]
@@ -7251,7 +7293,18 @@ Name = Fairy Tera Shard
 NamePlural = Fairy Tera Shards
 Pocket = 1
 Price = 2000
+FieldUse = OnPokemon
+Flags = Fling_30,TeraShard_FAIRY
 Description = On rare occasions, these shards form when a Tera Pokémon falls in battle and its Tera Jewel shatters.
+#-------------------------------
+[VIALOFGLITTER]
+Name = Vial of Glitter
+NamePlural = Vials of Glitter
+Pocket = 1
+Price = 15000
+FieldUse = OnPokemon
+Flags = Fling_30
+Description = If this item is used, the pokemon's colour is turned different.
 #-------------------------------
 [ZRING]
 Name = Z-Ring
@@ -7731,200 +7784,29 @@ Price = 10
 Flags = Fling_30
 Description = Throw one into certain Pokémon Dens, and it may lure a rare wild Dynamaxed Pokémon.
 #-------------------------------
-[TERAITEM]
-Name = Tera Orb
-NamePlural = Tera Orbs
-Pocket = 8
-Price = 0
-FieldUse = Direct
-Flags = KeyItem
-Description = Allows Pokémon to Terastallize.
-#-------------------------------
-[TERASWAPITEM]
-Name = Tera Swap Capsule
-NamePlural = Tera Swap Capsules
+[MYSTERYTERAJEWEL]
+Name = Mystery Tera Jewel
+NamePlural = Mystery Tera Jewels
 Pocket = 1
 Price = 10000
 FieldUse = OnPokemon
-Flags = Fling_30
-Description = A capsule that swaps a Pokémon's Tera Type between its two original types, or sets to its single type.
+Flags = Fling_60,TeraShard_Random
+Description = A mostly in-tact Tera Jewel. Its awkward shape makes it hard to tell what Tera Type it may unlock.
 #-------------------------------
-[TERARANDOMITEM]
-Name = Tera Random Capsule
-NamePlural = Tera Random Capsules
+[MASTERTERAJEWEL]
+Name = Master Tera Jewel
+NamePlural = Master Tera Jewels
 Pocket = 1
-Price = 10000
+Price = 100000
 FieldUse = OnPokemon
-Flags = Fling_30
-Description = A capsule that changes a Pokémon's Tera Type to a random type.
+Flags = Fling_60,TeraShard_Choose
+Description = A perfectly hexogonal Tera Jewel. Using this can unlock any Tera Type that the user desires.
 #-------------------------------
-[TERACHOOSEITEM]
-Name = Tera Choice Capsule
-NamePlural = Tera Choice Capsules
-Pocket = 1
-Price = 30000
-FieldUse = OnPokemon
-Flags = Fling_30
-Description = A capsule that changes a Pokémon's Tera Type to a type of your choice.
-#-------------------------------
-[TERASETNORMAL]
-Name = Normal Tera Gem
-NamePlural = Normal Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Normal-type.
-#-------------------------------
-[TERASETFIRE]
-Name = Fire Tera Gem
-NamePlural = Fire Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Fire-type.
-#-------------------------------
-[TERASETWATER]
-Name = Water Tera Gem
-NamePlural = Water Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Water-type.
-#-------------------------------
-[TERASETGRASS]
-Name = Grass Tera Gem
-NamePlural = Grass Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Grass-type.
-#-------------------------------
-[TERASETELECTRIC]
-Name = Electric Tera Gem
-NamePlural = Electric Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Electric-type.
-#-------------------------------
-[TERASETICE]
-Name = Ice Tera Gem
-NamePlural = Ice Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Ice-type.
-#-------------------------------
-[TERASETFIGHTING]
-Name = Fighting Tera Gem
-NamePlural = Fighting Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Fighting-type.
-#-------------------------------
-[TERASETPOISON]
-Name = Poison Tera Gem
-NamePlural = Poison Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Poison-type.
-#-------------------------------
-[TERASETGROUND]
-Name = Ground Tera Gem
-NamePlural = Ground Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Ground-type.
-#-------------------------------
-[TERASETFLYING]
-Name = Flying Tera Gem
-NamePlural = Flying Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Flying-type.
-#-------------------------------
-[TERASETPSYCHIC]
-Name = Psychic Tera Gem
-NamePlural = Psychic Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Psychic-type.
-#-------------------------------
-[TERASETBUG]
-Name = Bug Tera Gem
-NamePlural = Bug Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Bug-type.
-#-------------------------------
-[TERASETROCK]
-Name = Rock Tera Gem
-NamePlural = Rock Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Rock-type.
-#-------------------------------
-[TERASETGHOST]
-Name = Ghost Tera Gem
-NamePlural = Ghost Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Ghost-type.
-#-------------------------------
-[TERASETDARK]
-Name = Dark Tera Gem
-NamePlural = Dark Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Dark-type.
-#-------------------------------
-[TERASETDRAGON]
-Name = Dragon Tera Gem
-NamePlural = Dragon Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Dragon-type.
-#-------------------------------
-[TERASETSTEEL]
-Name = Steel Tera Gem
-NamePlural = Steel Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Steel-type.
-#-------------------------------
-[TERASETFAIRY]
-Name = Fairy Tera Gem
-NamePlural = Fairy Tera Gems
-Pocket = 1
-Price = 10000
-FieldUse = OnPokemon
-Flags = Fling_20
-Description = A gem with an tera energy. When used, it changes a Pokémon's Tera Type to Fairy-type.
+[RADIANTTERAJEWEL]
+Name = Radiant Tera Jewel
+NamePlural = Radiant Tera Jewels
+Pocket = 7
+Price = 4000
+BattleUse = Direct
+Flags = Fling_50,UsesAllBattleActions
+Description = A jewel glistening with Tera energy. It can fully recharge your Tera Orb in battle.

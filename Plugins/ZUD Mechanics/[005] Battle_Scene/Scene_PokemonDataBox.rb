@@ -107,24 +107,17 @@ class Battle::Scene::PokemonDataBox < SpriteWrapper
   
   #-----------------------------------------------------------------------------
   # Edited to allow Ultra Burst and Dynamax icons to display.
-  #----------------------------------------------------------------------------- 
+  #-----------------------------------------------------------------------------
+  alias zud_draw_special_form_icon draw_special_form_icon
   def draw_special_form_icon
     return if @battler.effects[PBEffects::MaxRaidBoss]
     specialX = (@battler.opposes?(0)) ? 208 : -28
-    if @battler.mega?
-      pbDrawImagePositions(self.bitmap, [["Graphics/Pictures/Battle/icon_mega", @spriteBaseX + 8, 34]])
-    elsif @battler.primal?
-      filename = nil
-      if @battler.isSpecies?(:GROUDON)
-        filename = "Graphics/Pictures/Battle/icon_primal_Groudon"
-      elsif @battler.isSpecies?(:KYOGRE)
-        filename = "Graphics/Pictures/Battle/icon_primal_Kyogre"
-      end
-      pbDrawImagePositions(self.bitmap, [[filename, @spriteBaseX + specialX, 4]]) if filename
-    elsif @battler.ultra?
+    if @battler.ultra?
       pbDrawImagePositions(self.bitmap, [["Graphics/Plugins/ZUD/Battle/icon_ultra", @spriteBaseX + specialX, 4]])
     elsif @battler.dynamax?
       pbDrawImagePositions(self.bitmap, [["Graphics/Plugins/ZUD/Battle/icon_dynamax", @spriteBaseX + specialX, 4]])
+    else
+      zud_draw_special_form_icon
     end
   end
   

@@ -422,7 +422,7 @@ class MaxRaidScene
       end
       if @rules[:loot]
         if @rules[:loot].is_a?(Array)
-          rewards.push([@rules[:loot][0], @rules[:loot][1]]) 
+          rewards.push([@rules[:loot][0], @rules[:loot][1] || 1]) 
         else 
           rewards.push([@rules[:loot], 1])
         end

@@ -7,7 +7,7 @@ module Settings
   #-----------------------------------------------------------------------------
   # Enables the Party menu display of ball icons that match each Pokemon's ball.
   #-----------------------------------------------------------------------------
-  SHOW_PARTY_BALL = false
+  SHOW_PARTY_BALL = true
   
   #-----------------------------------------------------------------------------
   # Shiny Leaf

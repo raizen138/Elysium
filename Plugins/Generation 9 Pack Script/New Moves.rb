@@ -198,9 +198,9 @@ class Battle::Move::DoubleNextReceiveDamageAndNeverMiss < Battle::Move
 end
 #===============================================================================
 # Inflict damage and removes the current terrain.
-# (Ice Spinner, Steel Roller)
+# (Ice Spinner)
 #===============================================================================
-class Battle::Move::RemoveTerrain < Battle::Move
+class Battle::Move::RemoveTerrainIceSpinner < Battle::Move
   def pbEffectGeneral(user)
     case @battle.field.terrain
     when :Electric
@@ -604,4 +604,23 @@ end
 class Battle::Move::HitThreeTimes < Battle::Move
   def multiHitMove?;            return true; end
   def pbNumHits(user, targets); return 3;    end
+end
+#===============================================================================
+# Increase Base Power while Sunny (Hydro Steam)
+#===============================================================================
+class Battle::Move::BPRaiseWhileSunny < Battle::Move
+  def pbBaseDamage(baseDmg, user, target)
+    baseDmg *= 1.5 if [:Sun, :HarshSun].include?(user.effectiveWeather)
+    return baseDmg
+  end
+end
+
+#===============================================================================
+# Increase Base Power while Electric Terrain (Psyblade)
+#===============================================================================
+class Battle::Move::BPRaiseWhileElectricTerrain < Battle::Move
+  def pbBaseDamage(baseDmg, user, target)
+    baseDmg *= 1.5 if @battle.field.terrain == :Electric
+    return baseDmg
+  end
 end

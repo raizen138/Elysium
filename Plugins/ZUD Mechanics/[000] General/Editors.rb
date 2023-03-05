@@ -125,6 +125,10 @@ class SpritePositioner
     @sprites["pokemon_0"].setSpeciesBitmap(@species, 0, @form, false, false, true, false, @dynamax_mode, @gmax)
     @sprites["pokemon_1"].setSpeciesBitmap(@species, 0, @form, false, false, false, false, @dynamax_mode, @gmax)
     @sprites["shadow_1"].setBitmap(GameData::Species.shadow_filename(@species, @form, @dynamax_mode))
+    if @dynamax_mode
+      @sprites["pokemon_0"].applyDynamax(@species)
+      @sprites["pokemon_1"].applyDynamax(@species)
+    end
   end
   
   def pbShadowSize

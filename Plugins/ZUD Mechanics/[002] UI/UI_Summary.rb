@@ -3,11 +3,11 @@
 #===============================================================================
 class PokemonSummary_Scene
   #-----------------------------------------------------------------------------
-  # Displays G-Max Factor. Will not display if the NO_DYNAMAX switch is active.
+  # Displays G-Max Factor.
   #-----------------------------------------------------------------------------
   alias zud_drawPage drawPage
   def drawPage(page)
-    @sprites["pokemon"].unDynamax
+    @sprites["pokemon"].unDynamax if @pokemon.dynamax?
     if !@sprites["zud_overlay"]
       @sprites["zud_overlay"] = BitmapSprite.new(Graphics.width, Graphics.height, @viewport)
     else
@@ -86,40 +86,7 @@ end
 # Draws the icon for G-Max Factor on a UI overlay.
 #===============================================================================
 def pbDisplayGmaxFactor(pokemon, overlay, xpos, ypos)
-  return if $game_switches[Settings::NO_DYNAMAX]
   return if !pokemon.gmax_factor? || pokemon.isSpecies?(:ETERNATUS)
   path = (PluginManager.installed?("BW Party Screen")) ? "Graphics/Pictures/Summary/gfactor" : "Graphics/Plugins/ZUD/UI/gfactor"
   pbDrawImagePositions(overlay, [ [path, xpos, ypos] ])
-end
-
-
-#===============================================================================
-# Applies Dynamax visuals to icon sprites in the Party menu.
-#===============================================================================
-class PokemonPartyPanel < Sprite
-  alias zud_initialize initialize
-  def initialize(*args)
-    zud_initialize(*args)
-    @pkmnsprite.applyDynamaxIcon
-  end
-  
-  def pokemon=(value)
-    @pokemon = value
-    if @pkmnsprite && !@pkmnsprite.disposed?
-      @pkmnsprite.pokemon = value
-      @pkmnsprite.applyDynamaxIcon
-    end
-    @helditemsprite.pokemon = value if @helditemsprite && !@helditemsprite.disposed?
-    @refreshBitmap = true
-    refresh
-  end
-  
-  alias zud_refresh_pokemon_icon refresh_pokemon_icon
-  def refresh_pokemon_icon
-    zud_refresh_pokemon_icon
-    if @pkmnsprite && !@pkmnsprite.disposed?
-      @pkmnsprite.unDynamax
-      @pkmnsprite.applyDynamaxIcon
-    end
-  end
 end

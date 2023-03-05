@@ -59,12 +59,13 @@ class Battle::Move
   # Z-Moves that are used due to calling them with other moves, such as with
   # Sleep Talk, will not trigger the animation or special messages.
   #-----------------------------------------------------------------------------
+  alias zud_pbDisplayUseMessage pbDisplayUseMessage
   def pbDisplayUseMessage(user)
     if zMove? && !@specialUseZMove
-	  trigger = (user.pbOwnedByPlayer?) ? "zmove" : (user.opposes?) ? "zmove_foe" : "zmove_ally"
-	  @battle.scene.dx_midbattle(user.index, nil, trigger)
+      triggers = ["zmove", "zmove" + user.species.to_s, "zmove" + @type.to_s]
+      @battle.scene.pbDeluxeTriggers(user.index, nil, triggers)
       if Settings::SHOW_ZUD_ANIM && $PokemonSystem.battlescene == 0
-        @battle.scene.pbShowZMove(user.index, @id, @battle)
+        @battle.scene.pbShowZMove(user.index, @id)
       end
       if statusMove? && @zmove_flag
         status_zmove_effect(user)
@@ -73,7 +74,7 @@ class Battle::Move
       end
       @battle.pbDisplayBrief(_INTL("{1} unleashed its full force Z-Move!", user.pbThis))
     end
-    @battle.pbDisplayBrief(_INTL("{1} used {2}!", user.pbThis, @name))
+    zud_pbDisplayUseMessage(user)
   end
   
   #-----------------------------------------------------------------------------

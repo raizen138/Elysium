@@ -99,6 +99,10 @@ class Battle::Scene
     ypos = 94
     move = battler.moves[index]
     type = move.pbCalcType(battler)
+    if PluginManager.installed?("Terastal Phenomenon") && 
+	   battler.power_trigger && move.function == "CategoryDependsOnHigherDamageTera"
+      type = battler.tera_type
+    end
     #---------------------------------------------------------------------------
     # Draws images.
     typenumber = GameData::Type.get(type).icon_position
@@ -115,7 +119,17 @@ class Battle::Scene
     @dmg_base   = @acc_base   = @eff_base   = BASE_LIGHT
     @dmg_shadow = @acc_shadow = @eff_shadow = SHADOW_LIGHT
     damage = base_dmg = calc_dmg = move.baseDamage
-    stab = (battler.pbHasType?(type)) ? 1.5 : 1
+    stab = 1
+    if PluginManager.installed?("Terastal Phenomenon") && 
+       battler.tera? || (battler.power_trigger && @sprites["fightWindow"].teraType > 0)
+      if battler.tera_type == type && battler.pokemon.types.include?(type)
+        stab = 2
+      elsif battler.tera_type == type || battler.pokemon.types.include?(type)
+        stab = 1.5
+      end
+    else
+      stab = 1.5 if battler.pbHasType?(type)
+    end
     if move.damagingMove?
       if pbVariablePowerFunctions.include?(move.function) ||
          # Natural Gift called here specifically to check for a berry first.
@@ -186,7 +200,7 @@ class Battle::Scene
         @sprites["battler_icon#{b.index}"].y = 68
         @sprites["battler_icon#{b.index}"].zoom_x = 1
         @sprites["battler_icon#{b.index}"].zoom_y = 1
-        @sprites["battler_icon#{b.index}"].applyDynamaxIcon(true)
+        @sprites["battler_icon#{b.index}"].applyIconEffects
         idx += 1
       else
         @sprites["battler_icon#{b.index}"].visible = false
@@ -289,6 +303,8 @@ class Battle::Scene
       when "Pulse"               then idx = 12
       when "Powder"              then idx = 13
       when "Dance"               then idx = 14
+      when "Slicing"             then idx = 15
+      when "Wind"                then idx = 16
       end
       next if idx < 0
       images.push([@path + "move_icons", flagX + (images.length * 26), flagY, idx * 26, 0, 26, 28])
@@ -360,6 +376,12 @@ class Battle::Scene
           addText.push([_INTL("Agile Style: The amount of recoil taken is reduced."), xpos + 10, ypos + 128, 0, BASE_RAISED, SHADOW_RAISED])
         end
       end
+    #---------------------------------------------------------------------------
+    # Sets up additional text for moves affected by Terastallization. (Terastal)
+    #---------------------------------------------------------------------------
+    elsif PluginManager.installed?("Terastal Phenomenon") && 
+          battler.tera? && battler.tera_type == move.pbCalcType(battler)
+      addText.push([_INTL("Tera Type: Power boosted by Terastallization."), xpos + 10, ypos + 128, 0, BASE_RAISED, SHADOW_RAISED])
     end
     return addText
   end
@@ -518,7 +540,7 @@ class Battle::Scene
           end
           iconY = ypos + 38
           nameX = iconX + 82
-		      if index == [side, i]
+          if index == [side, i]
             base, shadow = BASE_LIGHT, SHADOW_LIGHT
             if b.dynamax?
               shadow = (b.isSpecies?(:CALYREX)) ? Color.new(48, 206, 216) : Color.new(248, 32, 32)
@@ -655,7 +677,7 @@ class Battle::Scene
                 [@path + "battle_info_ui", 0, 0],
                 [@path + "battler_gender", xpos + 146, ypos + 24, poke.gender * 22, 0, 22, 20]]
     textPos  = [[_INTL("{1}", poke.name), iconX + 83, iconY - 16, 2, BASE_DARK, SHADOW_DARK],
-                [_INTL("Lv. {1}", battler.level), xpos + 17, ypos + 100, 0, BASE_LIGHT, SHADOW_LIGHT],
+                [_INTL("Lv. {1}", battler.level), xpos + 17, ypos + 106, 0, BASE_LIGHT, SHADOW_LIGHT],
                 [_INTL("Turn {1}", @battle.turnCount + 1), Graphics.width - xpos - 32, ypos + 6, 2, BASE_LIGHT, SHADOW_LIGHT]]
     #---------------------------------------------------------------------------
     # Battler icon.
@@ -678,10 +700,10 @@ class Battle::Scene
     # Battler status.
     if battler.status != :NONE
       iconPos = GameData::Status.get(battler.status).icon_position
-      imagePos.push(["Graphics/Pictures/statuses", xpos + 79, ypos + 99, 0, iconPos * 16, 44, 16])
+      imagePos.push(["Graphics/Pictures/statuses", xpos + 86, ypos + 105, 0, iconPos * 16, 44, 16])
     end
     # Shininess
-    imagePos.push(["Graphics/Pictures/shiny", xpos - 3, ypos + 99]) if poke.shiny?
+    imagePos.push(["Graphics/Pictures/shiny", xpos + 143, ypos + 105]) if poke.shiny?
     # Owner
     if !battler.wild?
       imagePos.push([@path + "battler_owner", xpos - 34, ypos + 4])
@@ -689,22 +711,23 @@ class Battle::Scene
     end
     # Battler's last move used.
     if battler.lastMoveUsed
-      move = GameData::Move.get(battler.lastMoveUsed).name
-      textPos.push([_INTL("Used: #{move}"), xpos + 314, ypos + 100, 2, BASE_LIGHT, SHADOW_LIGHT])
+      movename = GameData::Move.get(battler.lastMoveUsed).name
+	  movename = movename[0..12] + "..." if movename.length > 16
+      textPos.push([_INTL("Used: #{movename}"), xpos + 348, ypos + 106, 2, BASE_LIGHT, SHADOW_LIGHT])
     end
     #---------------------------------------------------------------------------
     # Battler info for player-owned Pokemon.
     if battler.pbOwnedByPlayer?
       imagePos.push(
         [@path + "battler_owner", xpos + 36, iconY + 11],
-        [@path + "battle_info_panel", panelX, 63, 0, 0, 218, 24],
-        [@path + "battle_info_panel", panelX, 87, 0, 0, 218, 24]
+        [@path + "battle_info_panel", panelX, 65, 0, 0, 218, 24],
+        [@path + "battle_info_panel", panelX, 89, 0, 0, 218, 24]
       )
       textPos.push(
-        [_INTL("Abil."), xpos + 272, ypos + 42, 2, BASE_LIGHT, SHADOW_LIGHT],
-        [_INTL("Item"), xpos + 272, ypos + 66, 2, BASE_LIGHT, SHADOW_LIGHT],
-        [_INTL("{1}", battler.abilityName), xpos + 375, ypos + 42, 2, BASE_DARK, SHADOW_DARK],
-        [_INTL("{1}", battler.itemName), xpos + 375, ypos + 66, 2, BASE_DARK, SHADOW_DARK],
+        [_INTL("Abil."), xpos + 272, ypos + 44, 2, BASE_LIGHT, SHADOW_LIGHT],
+        [_INTL("Item"), xpos + 272, ypos + 68, 2, BASE_LIGHT, SHADOW_LIGHT],
+        [_INTL("{1}", battler.abilityName), xpos + 375, ypos + 44, 2, BASE_DARK, SHADOW_DARK],
+        [_INTL("{1}", battler.itemName), xpos + 375, ypos + 68, 2, BASE_DARK, SHADOW_DARK],
         [sprintf("%d/%d", battler.hp, battler.totalhp), iconX + 73, iconY + 13, 2, BASE_LIGHT, SHADOW_LIGHT]
       )
     end
@@ -754,7 +777,7 @@ class Battle::Scene
         @sprites["battler_icon#{b.index}"].setOffset(PictureOrigin::CENTER)
         @sprites["battler_icon#{b.index}"].zoom_x = 1
         @sprites["battler_icon#{b.index}"].zoom_y = 1
-        @sprites["battler_icon#{b.index}"].applyDynamaxIcon(true)
+        @sprites["battler_icon#{b.index}"].applyIconEffects
         color = (!b.dynamax?) ? Color.white : (b.isSpecies?(:CALYREX)) ? Color.new(36, 243, 243) : Color.new(250, 57, 96)
       else
         @sprites["battler_icon#{b.index}"].visible = false
@@ -770,7 +793,10 @@ class Battle::Scene
   # Draws the typing for each Pokemon in the Battle Info UI.
   #-----------------------------------------------------------------------------
   def pbAddTypesDisplay(xpos, ypos, battler, poke)
-    if battler.effects[PBEffects::Illusion] && !battler.pbOwnedByPlayer?
+    illusion = battler.effects[PBEffects::Illusion] && !battler.pbOwnedByPlayer?
+    if battler.tera?
+      displayTypes = (illusion) ? poke.types : battler.pokemon.types
+    elsif illusion
       displayTypes = poke.types
       displayTypes.push(battler.effects[PBEffects::Type3]) if battler.effects[PBEffects::Type3]
     else
@@ -785,12 +811,18 @@ class Battle::Scene
     unknown_species = true if battler.celestial?
     # Displays the "???" type on newly encountered species, or battlers with no typing.
     displayTypes = [:QMARKS] if unknown_species || displayTypes.empty?
-    typeY = (displayTypes.length == 3) ? ypos + 7 : ypos + 37
+    typeY = (displayTypes.length == 3) ? ypos + 7 : ypos + 35
     typebitmap = AnimatedBitmap.new(_INTL("Graphics/Pictures/types"))
     displayTypes.each_with_index do |type, i|
       type_number = GameData::Type.get(type).icon_position
       type_rect = Rect.new(0, type_number * 28, 64, 28)
       @infoUIOverlay1.blt(xpos + 171, typeY + (i * 30), typebitmap.bitmap, type_rect)
+    end
+    #---------------------------------------------------------------------------
+    # Tera Types
+    if PluginManager.installed?("Terastal Phenomenon")
+      poke = battler if !illusion
+      pbDisplayTeraType(poke, @infoUIOverlay1, xpos + 187, ypos + 98)
     end
   end
   
@@ -820,14 +852,14 @@ class Battle::Scene
             end
           end
         end
-        addText.push([stat[1], xpos + 17, ypos + 135 + (i * 24), 0, BASE_LIGHT, color])
+        addText.push([stat[1], xpos + 17, ypos + 139 + (i * 24), 0, BASE_LIGHT, color])
         stage = battler.stages[stat[0]]
       else
-        addText.push([stat, xpos + 17, ypos + 135 + (i * 24), 0, BASE_LIGHT, SHADOW_LIGHT])
+        addText.push([stat, xpos + 17, ypos + 139 + (i * 24), 0, BASE_LIGHT, SHADOW_LIGHT])
         stage = [battler.effects[PBEffects::FocusEnergy] + battler.effects[PBEffects::CriticalBoost], 4].min
       end
       arrow = (stage > 0) ? 0 : 1
-      stage.abs.times { |t| images.push([@path + "battler_stats", xpos + 105 + (t * 18), ypos + 135 + (i * 24), arrow * 18, 0, 18, 18]) }
+      stage.abs.times { |t| images.push([@path + "battler_stats", xpos + 105 + (t * 18), ypos + 139 + (i * 24), arrow * 18, 0, 18, 18]) }
     end
     return images, addText
   end
@@ -928,9 +960,9 @@ class Battle::Scene
     # Draws panels and text for all relevant battle effects affecting the battler.
     effects.each_with_index do |effect, i|
       break if i == 8
-      images.push([@path + "battle_info_panel", panelX, ypos + 132 + (i * 24), 0, 24, 218, 24])
-      addText.push([effect[0], xpos + 321, ypos + 136 + (i * 24), 2, BASE_DARK, SHADOW_DARK],
-                   [effect[1], xpos + 425, ypos + 136 + (i * 24), 2, BASE_LIGHT, SHADOW_LIGHT])
+      images.push([@path + "battle_info_panel", panelX, ypos + 136 + (i * 24), 0, 24, 218, 24])
+      addText.push([effect[0], xpos + 321, ypos + 140 + (i * 24), 2, BASE_DARK, SHADOW_DARK],
+                   [effect[1], xpos + 425, ypos + 140 + (i * 24), 2, BASE_LIGHT, SHADOW_LIGHT])
     end
     return images, addText
   end

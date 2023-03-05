@@ -113,30 +113,35 @@ module GameData
 			pkmn    = params[0]
 			back    = params[1]
 			species = params[2]
-			target  = params[3]
+			setDmax = params[3]
 			species = pkmn.species if !species
 			species = GameData::Species.get(species).species
 			return self.egg_sprite_bitmap(species, pkmn.form) if pkmn.egg?
-			gmax   = (target) ? (target.gmax_factor? && target.dynamax? && pkmn.dynamax?) : pkmn.gmax?
-			sprite = [species, pkmn.form, pkmn.gender, pkmn.shiny?, pkmn.shadowPokemon?, back, pkmn.egg?, pkmn.dynamax?, gmax, pkmn.celestial?, pkmn.super_shiny?]
-			ret    = (back) ? self.back_sprite_bitmap(*sprite) : self.front_sprite_bitmap(*sprite)
+			case setDmax
+			when :none then dmax = gmax = false
+			when :dmax then dmax = true; gmax = false
+			when :gmax then dmax = true; gmax = true
+			else dmax = pkmn.dynamax?; gmax = pkmn.gmax?
+			end
+			sprite = [species, pkmn.form, pkmn.gender, pkmn.shiny?, pkmn.shadowPokemon?, back, pkmn.egg?, dmax, gmax, pkmn.celestial?, pkmn.super_shiny?]
+			ret = (back) ? self.back_sprite_bitmap(*sprite) : self.front_sprite_bitmap(*sprite)
 			if PluginManager.installed?("Generation 8 Pack Scripts")
-				alter_bitmap_function = (ret && ret.total_frames == 1) ? MultipleForms.getFunction(species, "alterBitmap") : nil
-				if ret && alter_bitmap_function
-					ret.prepare_strip
-					for i in 0...ret.total_frames
-						alter_bitmap_function.call(pkmn, ret.alter_bitmap(i))
-					end
-					ret.compile_strip
+			  alter_bitmap_function = (ret && ret.total_frames == 1) ? MultipleForms.getFunction(species, "alterBitmap") : nil
+			  if ret && alter_bitmap_function
+				ret.prepare_strip
+				for i in 0...ret.total_frames
+				  alter_bitmap_function.call(pkmn, ret.alter_bitmap(i))
 				end
+				ret.compile_strip
+			  end
 			else
-				alter_bitmap_function = MultipleForms.getFunction(species, "alterBitmap")
-				if ret && alter_bitmap_function
-					new_ret = ret.copy
-					ret.dispose
-					new_ret.each { |bitmap| alter_bitmap_function.call(pkmn, bitmap) }
-					ret = new_ret
-				end
+			  alter_bitmap_function = MultipleForms.getFunction(species, "alterBitmap")
+			  if ret && alter_bitmap_function
+				new_ret = ret.copy
+				ret.dispose
+				new_ret.each { |bitmap| alter_bitmap_function.call(pkmn, bitmap) }
+				ret = new_ret
+			  end
 			end
 			return ret
 		end
@@ -445,3 +450,19 @@ class PokemonSummary_Scene
 		end
 	end
 end
+
+
+#====================================================================
+#== Custom Item							                           ==
+#====================================================================
+
+ItemHandlers::UseOnPokemon.add(:VIALOFGLITTER, proc { |item, qty, pkmn, scene|
+	if pkmn.super_shiny? == false
+		pbSEPlay('Item Used', 100, 100)
+		pbMessage(_INTL("The sparkled glitter changed the color of your pokemon!"))
+		pkmn.super_shiny = true
+	elsif pkmn.super_shiny? == true
+		pbMessage(_INTL("The sparkled glitter won't have any effect."))
+		next false
+	end
+})

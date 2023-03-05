@@ -39,12 +39,21 @@ class Battle::PowerMove < Battle::Move
   #-----------------------------------------------------------------------------
   def pbModifyDamage(damageMult, user, target)
     return damageMult if @function == "ZUDBypassProtect" # G-Max One Blow/Rapid Flow
+    protected = false
     if target.effects[PBEffects::Protect]       || 
        target.effects[PBEffects::KingsShield]   ||
        target.effects[PBEffects::SpikyShield]   ||
        target.effects[PBEffects::BanefulBunker] ||
        target.effects[PBEffects::Obstruct]      ||
        target.pbOwnSide.effects[PBEffects::MatBlock]
+      protected = true
+    elsif defined?(PBEffects::SilkTrap) && target.effects[PBEffects::SilkTrap]
+      protected = true
+    elsif GameData::Target.get(@target).num_targets > 1 &&
+          target.pbOwnSide.effects[PBEffects::WideGuard]
+      protected = true
+    end
+    if protected
       @battle.pbDisplay(_INTL("{1} couldn't fully protect itself!", target.pbThis))
       return damageMult / 4
     end

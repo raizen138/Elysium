@@ -30,5 +30,23 @@ module PBEffects
   Steelsurge       = 205  # The hazard effect of G-Max Steelsurge.
 end
 
+
+#===============================================================================
+# Allows the setting of newly-added effects in the battle Debug menu.
+#===============================================================================
+module Battle::DebugVariables
+  BATTLER_EFFECTS[PBEffects::MaxGuard] = { name: "Max Guard applies this round",          default: false }
+  POSITION_EFFECTS[PBEffects::ZHeal]   = { name: "Whether Z-Healing is waiting to apply", default: false }
+  SIDE_EFFECTS[PBEffects::VineLash]    = { name: "G-Max Vine Lash duration",              default: 0     }
+  SIDE_EFFECTS[PBEffects::Wildfire]    = { name: "G-Max Wildfire duration",               default: 0     }
+  SIDE_EFFECTS[PBEffects::Cannonade]   = { name: "G-Max Cannonade duration",              default: 0     }
+  SIDE_EFFECTS[PBEffects::Volcalith]   = { name: "G-Max Volcalith duration",              default: 0     }
+  SIDE_EFFECTS[PBEffects::Steelsurge]  = { name: "G-Max Steelsurge exists",               default: false }
+end
+
+
+#===============================================================================
+# Allows newly-added effects to be utilized in a Deluxe battle hash.
+#===============================================================================
 $DELUXE_BATTLE_EFFECTS[:team_default_false] += [PBEffects::Steelsurge]
 $DELUXE_BATTLE_EFFECTS[:team_default_zero]  += [PBEffects::Cannonade, PBEffects::VineLash, PBEffects::Volcalith, PBEffects::Wildfire]
