@@ -7,7 +7,21 @@ module Settings
   #-----------------------------------------------------------------------------
   # Enables the Party menu display of ball icons that match each Pokemon's ball.
   #-----------------------------------------------------------------------------
-  SHOW_PARTY_BALL = true
+  SHOW_PARTY_BALL = false
+  
+  #-----------------------------------------------------------------------------
+  # QoL Improvements
+  #-----------------------------------------------------------------------------
+  # Improves Summary control and options with QoL features found in modern games.
+  #-----------------------------------------------------------------------------
+  SUMMARY_MODERN_QoL = true
+  
+  #-----------------------------------------------------------------------------
+  # Happiness Meter
+  #-----------------------------------------------------------------------------
+  # Enables the display of a happiness meter in the Pokemon's Summary screen.
+  #-----------------------------------------------------------------------------
+  SUMMARY_HAPPINESS_METER = true
   
   #-----------------------------------------------------------------------------
   # Shiny Leaf
@@ -20,7 +34,7 @@ module Settings
   #-----------------------------------------------------------------------------
   # IV Ratings
   #-----------------------------------------------------------------------------
-  # Enables the display of star ratings for a Pokemon's IV's in the Summary/Storage screens.
+  # Enables the display of ratings for a Pokemon's IV's in the Summary/Storage screens.
   #-----------------------------------------------------------------------------
   SUMMARY_IV_RATINGS = true
   STORAGE_IV_RATINGS = true
@@ -33,6 +47,21 @@ module Settings
   #-----------------------------------------------------------------------------
   SUMMARY_EGG_GROUPS = true
   POKEDEX_EGG_GROUPS = true
+  
+  #-----------------------------------------------------------------------------
+  # Body Shapes
+  #-----------------------------------------------------------------------------
+  # Enables the display of icons indicating a Pokemon's Body Shape in the Pokedex screen.
+  #-----------------------------------------------------------------------------
+  POKEDEX_BODY_SHAPES = true
+  SHAPE_DISPLAY_STYLE = 0  # 0 = Modern, 1 = Retro
+  
+  #-----------------------------------------------------------------------------
+  # Habitats
+  #-----------------------------------------------------------------------------
+  # Enables the display of icons indicating a Pokemon's Habitat in the Pokedex menu.
+  #-----------------------------------------------------------------------------
+  POKEDEX_HABITAT_ICONS = true
   
   #-----------------------------------------------------------------------------
   # Battle UI Windows

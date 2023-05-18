@@ -123,6 +123,7 @@ Abilities = SNOWCLOAK
 HiddenAbilities = SLUSHRUSH
 Moves = 1,SCRATCH,1,DEFENSECURL,3,BIDE,5,POWDERSNOW,7,ICEBALL,9,RAPIDSPIN,11,FURYCUTTER,14,METALCLAW,17,SWIFT,20,FURYSWIPES,23,IRONDEFENSE,26,SLASH,30,IRONHEAD,34,GYROBALL,38,SWORDSDANCE,42,HAIL,46,BLIZZARD
 TutorMoves = AERIALACE,AQUATAIL,ATTRACT,AURORAVEIL,BLIZZARD,BRICKBREAK,BULLDOZE,CONFIDE,COVET,DOUBLETEAM,EARTHQUAKE,FACADE,FLING,FOCUSPUNCH,FROSTBREATH,FRUSTRATION,GYROBALL,HAIL,HIDDENPOWER,ICEPUNCH,ICYWIND,IRONDEFENSE,IRONHEAD,IRONTAIL,KNOCKOFF,LEECHLIFE,POISONJAB,PROTECT,REST,RETURN,ROCKSLIDE,ROUND,SAFEGUARD,SHADOWCLAW,SLEEPTALK,SNORE,STEALTHROCK,SUBSTITUTE,SUNNYDAY,SUPERFANG,SWAGGER,SWORDSDANCE,THIEF,THROATCHOP,TOXIC,WORKUP,XSCISSOR
+EggMoves = AMNESIA,CHIPAWAY,COUNTER,CRUSHCLAW,CURSE,ENDURE,FLAIL,HONECLAWS,ICICLECRASH,ICICLESPEAR,METALCLAW,NIGHTSLASH
 Height = 0.7
 Weight = 40.0
 Color = White
@@ -340,7 +341,6 @@ FormName = Galarian
 Types = PSYCHIC
 Abilities = GLUTTONY,OWNTEMPO
 Moves = 1,TACKLE,1,CURSE,3,GROWL,6,ACID,9,YAWN,12,CONFUSION,15,DISABLE,18,WATERPULSE,21,HEADBUTT,24,ZENHEADBUTT,27,AMNESIA,30,SURF,33,SLACKOFF,36,PSYCHIC,39,PSYCHUP,42,RAINDANCE,45,HEALPULSE
-EggMoves = STOMP,BELLYDRUM,BLOCK,BELCH
 Pokedex = Although this Pokémon is normally zoned out, its expression abruptly sharpens on occasion. The cause for this seems to lie in Slowpoke's diet.
 Generation = 8
 Flags = InheritFormWithEverStone
@@ -440,7 +440,6 @@ Pokedex = As it grew taller and taller, it outgrew its reliance on psychic power
 Generation = 7
 #-------------------------------
 [CUBONE,1]
-EggMoves = ANCIENTPOWER,BELLYDRUM,CURSE,DETECT,DOUBLEKICK,IRONHEAD,LEER,PERISHSONG,SCREECH,SKULLBASH
 Generation = 7
 Evolutions = MAROWAK,LevelNight,28
 #-------------------------------
@@ -476,7 +475,6 @@ BaseStats = 105,125,100,100,60,100
 BaseExp = 207
 Abilities = PARENTALBOND
 HiddenAbilities = PARENTALBOND
-EggMoves = CIRCLETHROW,COUNTER,CRUSHCLAW,DISABLE,DOUBLEEDGE,ENDEAVOR,FOCUSENERGY,HAMMERARM,STOMP,UPROAR
 Weight = 100.0
 Pokedex = The explosive energy the child is bathed in causes temporary growth. The mother is beside herself with worry about it.
 Generation = 6
@@ -508,7 +506,6 @@ BaseStats = 65,155,120,105,65,90
 BaseExp = 210
 Abilities = AERILATE
 HiddenAbilities = AERILATE
-EggMoves = BUGBITE,CLOSECOMBAT,FEINT,FLAIL,FURYATTACK,QUICKATTACK,SUPERPOWER,THRASH
 Height = 1.7
 Weight = 59.0
 Shape = MultiWinged
@@ -534,7 +531,6 @@ BaseStats = 80,135,85,150,70,95
 BaseExp = 215
 Abilities = TOUGHCLAWS
 HiddenAbilities = TOUGHCLAWS
-EggMoves = ASSURANCE,CURSE,DRAGONBREATH,TAILWIND,WHIRLWIND,WIDEGUARD
 Height = 2.1
 Weight = 79.0
 Pokedex = When it Mega Evolves, it becomes more vicious than ever before. Some say that's because its excess of power is causing it pain.
@@ -616,7 +612,6 @@ Generation = 6
 #-------------------------------
 [PICHU,2]
 FormName = Spiky-Eared
-EggMoves = FLAIL,PRESENT,FAKEOUT,CHARGE,WISH,TICKLE,DISARMINGVOICE
 Generation = 4
 Evolutions = PIKACHU,None,
 #-------------------------------
@@ -757,7 +752,6 @@ BaseStats = 80,185,115,75,40,105
 BaseExp = 210
 Abilities = SKILLLINK
 HiddenAbilities = SKILLLINK
-EggMoves = DOUBLEEDGE,SEISMICTOSS,HARDEN,FLAIL,FEINT,NIGHTSLASH
 Height = 1.7
 Weight = 62.5
 Pokedex = A tremendous influx of energy builds it up, but when Mega Evolution ends, Heracross is bothered by terrible soreness in its muscles.
@@ -870,7 +864,6 @@ BaseStats = 50,85,125,20,85,115
 BaseExp = 168
 Abilities = MAGICBOUNCE
 HiddenAbilities = MAGICBOUNCE
-EggMoves = RECOVER,TORMENT,FLATTER,FEINT,METALBURST,SUCKERPUNCH
 Weight = 161.0
 Pokedex = Supporting a giant heavy jewel, it can't change direction very nimbly and is vulnerable to attack from behind.
 Generation = 6
@@ -882,7 +875,6 @@ BaseStats = 50,105,125,50,55,95
 BaseExp = 168
 Abilities = HUGEPOWER
 HiddenAbilities = HUGEPOWER
-EggMoves = ANCIENTPOWER,FIREFANG,GUARDSWAP,ICEFANG,METALBURST,MISTYTERRAIN,POISONFANG,POWERUPPUNCH,SEISMICTOSS,SLAM,SUCKERPUNCH,THUNDERFANG,TICKLE
 Height = 1.0
 Weight = 23.5
 Pokedex = Its two sets of jaws thrash about violently as if they each had a will of their own. One gnash from them can turn a boulder to dust.
@@ -956,7 +948,6 @@ Generation = 6
 [CASTFORM,1]
 FormName = Sunny Form
 Types = FIRE
-EggMoves = AMNESIA,CLEARSMOG,COSMICPOWER,DISABLE,FUTURESIGHT,GUARDSWAP,HEX,REFLECTTYPE
 Color = Red
 Habitat = Grassland
 Pokedex = This is the form Castform takes on the brightest of days. Its skin is unexpectedly hot to the touch, so approach with care.
@@ -964,7 +955,6 @@ Pokedex = This is the form Castform takes on the brightest of days. Its skin is 
 [CASTFORM,2]
 FormName = Rainy Form
 Types = WATER
-EggMoves = AMNESIA,CLEARSMOG,COSMICPOWER,DISABLE,FUTURESIGHT,GUARDSWAP,HEX,REFLECTTYPE
 Color = Blue
 Habitat = Grassland
 Pokedex = This is the form Castform takes when soaked with rain. When its body is compressed, water will seep out as if from a sponge.
@@ -972,7 +962,6 @@ Pokedex = This is the form Castform takes when soaked with rain. When its body i
 [CASTFORM,3]
 FormName = Snowy Form
 Types = ICE
-EggMoves = AMNESIA,CLEARSMOG,COSMICPOWER,DISABLE,FUTURESIGHT,GUARDSWAP,HEX,REFLECTTYPE
 Color = White
 Habitat = Grassland
 Pokedex = This is the form Castform takes when covered in snow. Its body becomes an ice-like material, with a temperature near -5 degrees Celsius.
@@ -996,7 +985,6 @@ BaseStats = 65,150,60,115,115,60
 BaseExp = 198
 Abilities = MAGICBOUNCE
 HiddenAbilities = MAGICBOUNCE
-EggMoves = ASSURANCE,BATONPASS,BITE,CURSE,DOUBLEEDGE,FEINT,HEX,MAGICCOAT,MEANLOOK,MEGAHORN,PERISHSONG,PLAYROUGH,SUCKERPUNCH,ZENHEADBUTT
 Weight = 49.0
 Pokedex = When this Pokémon whips the winglike fur on its back as though beating its wings, it sends an intimidating aura flying at its opponents.
 Generation = 6
@@ -1142,7 +1130,6 @@ Pokedex = After absorbing plenty of sunlight, Cherrim takes this form. It's full
 #-------------------------------
 [SHELLOS,1]
 FormName = East Sea
-EggMoves = MIST,COUNTER,SLUDGE,ACIDARMOR,CURSE,MIRRORCOAT,STOCKPILE,SPITUP,SWALLOW,YAWN,CLEARSMOG
 Color = Blue
 Pokedex = Its appearance changes depending on the environment. One theory suggests that living in cold seas causes Shellos to take on this form.
 #-------------------------------
@@ -1342,7 +1329,6 @@ BaseStats = 103,60,126,50,80,126
 BaseExp = 425
 Abilities = HEALER
 HiddenAbilities = HEALER
-EggMoves = HEALINGWISH,SWEETKISS,WISH,YAWN
 Height = 1.5
 Weight = 32.0
 Color = White
@@ -1351,7 +1337,6 @@ Generation = 6
 [BASCULIN,1]
 FormName = Blue-Striped
 Abilities = ROCKHEAD,ADAPTABILITY
-EggMoves = BUBBLEBEAM,ENDEAVOR
 Pokedex = Even Basculin, which devours everything it can with its huge jaws, is nothing more than food to organisms stronger than itself.
 WildItemUncommon = DEEPSEASCALE
 #-------------------------------
@@ -1360,6 +1345,7 @@ FormName = Galarian
 Types = ICE
 Moves = 1,POWDERSNOW,1,TACKLE,4,TAUNT,8,BITE,12,AVALANCHE,16,WORKUP,20,ICEFANG,24,HEADBUTT,28,ICEPUNCH,32,UPROAR,36,BELLYDRUM,40,BLIZZARD,44,THRASH,48,SUPERPOWER
 TutorMoves = ATTRACT,AVALANCHE,BLIZZARD,BRICKBREAK,DIG,ENCORE,ENDURE,FACADE,FIREBLAST,FIREFANG,FIREPUNCH,FIRESPIN,FLAMETHROWER,FLAREBLITZ,FLING,FOCUSENERGY,GRASSKNOT,GYROBALL,HEATWAVE,HIDDENPOWER,ICEBEAM,ICEFANG,ICEPUNCH,MEGAKICK,MEGAPUNCH,OVERHEAT,PROTECT,REST,ROCKSLIDE,ROCKTOMB,ROUND,SLEEPTALK,SNORE,SOLARBEAM,SUBSTITUTE,SUNNYDAY,SUPERPOWER,TAUNT,THIEF,UPROAR,UTURN,WILLOWISP,WORKUP,ZENHEADBUTT
+EggMoves = FLAMEWHEEL,FOCUSPUNCH,FREEZEDRY,HAMMERARM,INCINERATE,POWERUPPUNCH,TAKEDOWN,YAWN
 Height = 0.7
 Weight = 40.0
 Color = White
@@ -1415,7 +1401,6 @@ BaseStats = 38,55,85,30,30,65
 Abilities = WANDERINGSPIRIT
 Moves = 1,ASTONISH,1,PROTECT,4,HAZE,8,NIGHTSHADE,12,DISABLE,16,BRUTALSWING,20,CRAFTYSHIELD,24,HEX,28,MEANLOOK,32,SLAM,36,CURSE,40,SHADOWBALL,44,EARTHQUAKE,48,POWERSPLIT,48,GUARDSPLIT,52,DESTINYBOND
 TutorMoves = ALLYSWITCH,ATTRACT,BRUTALSWING,CALMMIND,DARKPULSE,EARTHPOWER,EARTHQUAKE,ENDURE,ENERGYBALL,FACADE,FAKETEARS,HEX,HIDDENPOWER,IMPRISON,IRONDEFENSE,NASTYPLOT,PAYBACK,POLTERGEIST,PROTECT,PSYCHIC,RAINDANCE,REST,ROCKSLIDE,ROCKTOMB,ROUND,SAFEGUARD,SANDSTORM,SHADOWBALL,SLEEPTALK,SNORE,SUBSTITUTE,THIEF,TOXICSPIKES,TRICKROOM,WILLOWISP,WONDERROOM,ZENHEADBUTT
-EggMoves = MEMENTO
 Pokedex = A clay slab with cursed engravings took possession of a Yamask. The slab is said to be absorbing the Yamask's dark power.
 Generation = 8
 Flags = InheritFormWithEverStone
@@ -1423,17 +1408,14 @@ Evolutions = RUNERIGUS,EventAfterDamageTaken,2
 #-------------------------------
 [DEERLING,1]
 FormName = Summer Form
-EggMoves = HEADBUTT,AGILITY,SLEEPTALK,BATONPASS,SYNTHESIS,FAKETEARS,WORRYSEED
 Color = Green
 #-------------------------------
 [DEERLING,2]
 FormName = Autumn Form
-EggMoves = HEADBUTT,AGILITY,SLEEPTALK,BATONPASS,SYNTHESIS,FAKETEARS,WORRYSEED
 Color = Red
 #-------------------------------
 [DEERLING,3]
 FormName = Winter Form
-EggMoves = HEADBUTT,AGILITY,SLEEPTALK,BATONPASS,SYNTHESIS,FAKETEARS,WORRYSEED
 Color = Brown
 #-------------------------------
 [SAWSBUCK,1]
@@ -1453,6 +1435,7 @@ Abilities = MIMICRY
 HiddenAbilities = MIMICRY
 Moves = 1,MUDSLAP,1,TACKLE,1,WATERGUN,1,METALCLAW,5,ENDURE,10,MUDSHOT,15,REVENGE,20,METALSOUND,25,SUCKERPUNCH,30,IRONDEFENSE,35,BOUNCE,40,MUDDYWATER,45,SNAPTRAP,50,FLAIL,55,FISSURE
 TutorMoves = ATTRACT,BOUNCE,BULLDOZE,CRUNCH,DIG,EARTHPOWER,EARTHQUAKE,ENDURE,FACADE,FLASHCANNON,FOULPLAY,HIDDENPOWER,ICEFANG,IRONDEFENSE,LASHOUT,MUDDYWATER,MUDSHOT,PAYBACK,PROTECT,RAINDANCE,REST,REVENGE,ROCKSLIDE,ROCKTOMB,ROUND,SANDSTORM,SCALD,SCREECH,SLEEPTALK,SLUDGEBOMB,SLUDGEWAVE,SNORE,STEALTHROCK,STEELBEAM,STOMPINGTANTRUM,STONEEDGE,SUBSTITUTE,SURF,TERRAINPULSE,THUNDERWAVE,UPROAR
+EggMoves = ASTONISH,BIND,COUNTER,CURSE,PAINSPLIT,REFLECTTYPE,SPITE,YAWN
 Weight = 20.5
 Color = Green
 Habitat = Cave
@@ -1620,19 +1603,15 @@ FormName = Poké Ball Pattern
 #-------------------------------
 [FLABEBE,1]
 FormName = Yellow Flower
-EggMoves = CAMOUFLAGE,CAPTIVATE,COPYCAT,TEARFULLOOK
 #-------------------------------
 [FLABEBE,2]
 FormName = Orange Flower
-EggMoves = CAMOUFLAGE,CAPTIVATE,COPYCAT,TEARFULLOOK
 #-------------------------------
 [FLABEBE,3]
 FormName = Blue Flower
-EggMoves = CAMOUFLAGE,CAPTIVATE,COPYCAT,TEARFULLOOK
 #-------------------------------
 [FLABEBE,4]
 FormName = White Flower
-EggMoves = CAMOUFLAGE,CAPTIVATE,COPYCAT,TEARFULLOOK
 #-------------------------------
 [FLOETTE,1]
 FormName = Yellow Flower
@@ -1669,39 +1648,30 @@ FormName = White Flower
 #-------------------------------
 [FURFROU,1]
 FormName = Heart Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,2]
 FormName = Star Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,3]
 FormName = Diamond Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,4]
 FormName = Debutante Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,5]
 FormName = Matron Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,6]
 FormName = Dandy Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,7]
 FormName = La Reine Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,8]
 FormName = Kabuki Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [FURFROU,9]
 FormName = Pharaoh Trim
-EggMoves = CAPTIVATE,MIMIC,REFRESH,ROLEPLAY,WORKUP
 #-------------------------------
 [MEOWSTIC,1]
 FormName = Female
@@ -1720,7 +1690,6 @@ Pokedex = Once upon a time, a king with an Aegislash reigned over the land. His 
 FormName = Average Size
 BaseStats = 49,66,70,51,44,55
 HiddenAbilities = INSOMNIA
-EggMoves = CURSE,DESTINYBOND,DISABLE
 Height = 0.4
 Weight = 5.0
 Pokedex = Spirits that wander this world are placed into Pumpkaboo's body. They're then moved on to the afterlife.
@@ -1728,7 +1697,6 @@ Pokedex = Spirits that wander this world are placed into Pumpkaboo's body. They'
 [PUMPKABOO,2]
 FormName = Large Size
 BaseStats = 54,66,70,46,44,55
-EggMoves = CURSE,DESTINYBOND,DISABLE
 Height = 0.5
 Weight = 7.5
 Pokedex = When taking spirits to the afterlife, large Pumpkaboo prefer the spirits of adults to those of children.
@@ -1737,7 +1705,6 @@ Pokedex = When taking spirits to the afterlife, large Pumpkaboo prefer the spiri
 FormName = Super Size
 BaseStats = 59,66,70,41,44,55
 HiddenAbilities = INSOMNIA
-EggMoves = CURSE,DESTINYBOND,DISABLE
 Height = 0.8
 Weight = 15.0
 Pokedex = Massive Pumpkaboo are said to be the product of areas where a great number of lost souls lingered.
@@ -1832,28 +1799,24 @@ Shape = BipedalTail
 [ORICORIO,1]
 FormName = Pom-Pom Style
 Types = ELECTRIC,FLYING
-EggMoves = ATTRACT,SAFEGUARD,PLUCK,DEFOG,QUIVERDANCE
 Color = Yellow
 Pokedex = It creates an electric charge by rubbing its feathers together. It dances over to its enemies and delivers shocking electrical punches.
 #-------------------------------
 [ORICORIO,2]
 FormName = Pa'u Style
 Types = PSYCHIC,FLYING
-EggMoves = ATTRACT,SAFEGUARD,PLUCK,DEFOG,QUIVERDANCE
 Color = Pink
 Pokedex = This Oricorio relaxes by swaying gently. This increases its psychic energy, which it then fires at its enemies.
 #-------------------------------
 [ORICORIO,3]
 FormName = Sensu Style
 Types = GHOST,FLYING
-EggMoves = ATTRACT,SAFEGUARD,PLUCK,DEFOG,QUIVERDANCE
 Color = Purple
 Pokedex = It summons the dead with its dreamy dancing. From their malice, it draws power with which to curse its enemies.
 #-------------------------------
 [ROCKRUFF,2]
 Abilities = OWNTEMPO
 HiddenAbilities = OWNTEMPO
-EggMoves = THRASH,ENDEAVOR,LASTRESORT
 Flags = InheritFormFromMother
 Evolutions = LYCANROC,LevelEvening,25
 #-------------------------------
@@ -1883,7 +1846,6 @@ Flags = InheritFormFromMother
 FormName = School Form
 BaseStats = 45,140,130,30,140,135
 BaseExp = 217
-EggMoves = MIST,TAKEDOWN,WATERPULSE
 Height = 8.2
 Weight = 78.6
 Shape = MultiBody
@@ -2034,7 +1996,6 @@ Flags = InheritFormFromMother
 #-------------------------------
 [MIMIKYU,1]
 FormName = Busted Form
-EggMoves = CURSE,DESTINYBOND
 Pokedex = Sad that its true identity may be exposed, Mimikyu will mercilessly seek revenge on any opponent that breaks its neck.
 #-------------------------------
 [NECROZMA,1]
@@ -2088,12 +2049,10 @@ Pokedex = This gorgeous Magearna looks as it did at the time of its invention. I
 #-------------------------------
 [CRAMORANT,1]
 FormName = Gulping Form
-EggMoves = AERIALACE,AQUARING,DEFOG,FEATHERDANCE,ROOST
 Pokedex = Cramorant's gluttony led it to try to swallow an Arrokuda whole, which in turn led to Cramorant getting an Arrokuda stuck in its throat.
 #-------------------------------
 [CRAMORANT,2]
 FormName = Gorging Form
-EggMoves = AERIALACE,AQUARING,DEFOG,FEATHERDANCE,ROOST
 Pokedex = This Cramorant has accidentally gotten a Pikachu lodged in its gullet. Cramorant is choking a little, but it isn't really bothered.
 #-------------------------------
 [TOXTRICITY,1]
@@ -2296,7 +2255,6 @@ PokedexForm = 56
 [EISCUE,1]
 FormName = Noice Face
 BaseStats = 75,80,70,130,65,50
-EggMoves = DOUBLEEDGE,BELLYDRUM,AQUARING,HEADSMASH,SOAK,ICICLECRASH
 Pokedex = The ice covering this Pokémon's face has shattered, revealing a slightly worried expression that many people are enamored with.
 #-------------------------------
 [INDEEDEE,1]
@@ -2311,7 +2269,6 @@ Pokedex = They diligently serve people and Pokémon so they can gather feelings 
 #-------------------------------
 [MORPEKO,1]
 FormName = Hangry Mode
-EggMoves = CHARGE,FAKEOUT,PARTINGSHOT,QUASH,RAPIDSPIN,SUPERFANG,SWAGGER,TICKLE
 Color = Purple
 Pokedex = Hunger hormones affect its temperament. Until its hunger is appeased, it gets up to all manner of evil deeds.
 #-------------------------------
@@ -2403,6 +2360,7 @@ FormName = Hisuian Form
 Types = ELECTRIC,GRASS
 Moves = 1,CHARGE,1,TACKLE,4,THUNDERSHOCK,6,STUNSPORE,9,BULLETSEED,11,ROLLOUT,13,SCREECH,16,CHARGEBEAM,20,SWIFT,22,ELECTROBALL,26,SELFDESTRUCT,29,ENERGYBALL,34,SEEDBOMB,34,DISCHARGE,41,EXPLOSION,46,GYROBALL,50,GRASSYTERRAIN
 TutorMoves = TAKEDOWN,SOLARBEAM,THUNDERBOLT,THUNDERWAVE,THUNDER,AGILITY,REFLECT,SWIFT,REST,SUBSTITUTE,THIEF,PROTECT,GIGADRAIN,ENDURE,SLEEPTALK,RAINDANCE,FACADE,TAUNT,BULLETSEED,SEEDBOMB,ENERGYBALL,LEAFSTORM,GRASSKNOT,CHARGEBEAM,ELECTROBALL,FOULPLAY,VOLTSWITCH,WILDCHARGE,GRASSYTERRAIN,ELECTRICTERRAIN
+EggMoves = LEECHSEED,RECYCLE,WORRYSEED
 Weight = 13.0
 Habitat = Grassland
 Category = Sphere
@@ -2493,7 +2451,6 @@ Generation = 8
 Flags = InheritFormWithEverStone
 #-------------------------------
 [PETILIL,1]
-EggMoves = SWEETSCENT,INGRAIN,HEALINGWISH,WORRYSEED
 Flags = InheritFormWithEverStone
 #-------------------------------
 [LILLIGANT,1]
@@ -2565,7 +2522,6 @@ Generation = 8
 Flags = InheritFormWithEverStone
 #-------------------------------
 [GOOMY,1]
-EggMoves = COUNTER,LIFEDEW
 Flags = InheritFormWithEverStone
 #-------------------------------
 [SLIGGOO,1]
@@ -2597,7 +2553,6 @@ Generation = 8
 Flags = InheritFormWithEverStone
 #-------------------------------
 [BERGMITE,1]
-EggMoves = MIST,MIRRORCOAT,AURORAVEIL
 Flags = InheritFormWithEverStone
 #-------------------------------
 [AVALUGG,1]
@@ -2644,12 +2599,10 @@ FormName = Female
 BaseStats = 115,90,70,65,59,90
 Abilities = AROMAVEIL,GLUTTONY
 Moves = 1,TACKLE,1,TAILWHIP,3,DISARMINGVOICE,5,ECHOEDVOICE,9,MUDSHOT,12,COVET,15,DIG,17,HEADBUTT,23,YAWN,28,TAKEDOWN,30,WORKUP,34,UPROAR,39,DOUBLEEDGE,45,EARTHPOWER,51,BELCH
-EggMoves = STOCKPILE,SPITUP,SWALLOW,ENDEAVOR,STUFFCHEEKS
 Pokedex = This is a meticulous Pokémon that likes to keep things tidy. It shrouds itself in a floral aroma that soothes the Pokémon around it.
 #-------------------------------
 [DUDUNSPARCE,1]
 FormName = Three-Segment Form
-EggMoves = HEADBUTT,BITE,CURSE,ASTONISH,LASTRESORT,AQUATAIL
 Height = 4.5
 Weight = 47.4
 #-------------------------------
@@ -2657,75 +2610,63 @@ Weight = 47.4
 FormName = Hero Form
 BaseStats = 100,160,97,100,106,87
 BaseExp = 228
-EggMoves = COUNTER,HAZE,TICKLE,BOUNCE,BOOMBURST
 Height = 1.8
 Weight = 97.4
 Category = Hero
 #-------------------------------
 [MAUSHOLD,1]
 FormName = Family of Three
-EggMoves = BITE,BATONPASS,TICKLE,FEINT,SWITCHEROO,AFTERYOU
 Weight = 2.3
 #-------------------------------
 [REVAVROOM,1]
 FormName = Schedar Starmobile
 Types = FIRE
 Abilities = SPEEDBOOST
-EggMoves = TOXIC,HAZE,SELFDESTRUCT,TORMENT,PARTINGSHOT
 #-------------------------------
 [REVAVROOM,2]
 FormName = Ruchbah Starmobile
 Types = FAIRY
 Abilities = MISTYSURGE
-EggMoves = TOXIC,HAZE,SELFDESTRUCT,TORMENT,PARTINGSHOT
 #-------------------------------
 [REVAVROOM,3]
 FormName = CAPH Starmobile
 Types = FIGHTING
 Abilities = STAMINA
-EggMoves = TOXIC,HAZE,SELFDESTRUCT,TORMENT,PARTINGSHOT
 #-------------------------------
 [REVAVROOM,4]
 FormName = NAVI Starmobile
 Types = POISON
 Abilities = TOXICDEBRIS
-EggMoves = TOXIC,HAZE,SELFDESTRUCT,TORMENT,PARTINGSHOT
 #-------------------------------
 [REVAVROOM,5]
 FormName = Segin Starmobile
 Types = DARK
 Abilities = INTIMIDATE
-EggMoves = TOXIC,HAZE,SELFDESTRUCT,TORMENT,PARTINGSHOT
 #-------------------------------
 [TATSUGIRI,1]
 FormName = Droopy Form
-EggMoves = COUNTER,BATONPASS,RAPIDSPIN
 Color = Red
 Pokedex = This species’ differing colors and patterns are apparently the result of Tatsugiri changing itself to suit the preferences of the prey it lures in.
 #-------------------------------
 [TATSUGIRI,2]
 FormName = Stretchy Form
-EggMoves = COUNTER,BATONPASS,RAPIDSPIN
 Color = Yellow
 Pokedex = Bird Pokémon are its main prey. This Pokémon knows it’s weak, so it hunts with a partner.
 #-------------------------------
 [SQUAWKABILLY,1]
 FormName = Blue Plumage
-EggMoves = DOUBLEEDGE,FLATTER,FINALGAMBIT,PARTINGSHOT
 Color = Blue
 Pokedex = Blue-feathered Squawkabilly view their green- feathered counterparts as rivals, since the latter make up the largest, most powerful groups.
 #-------------------------------
 [SQUAWKABILLY,2]
 FormName = Yellow Plumage
 HiddenAbilities = SHEERFORCE
-EggMoves = DOUBLEEDGE,FLATTER,FINALGAMBIT,PARTINGSHOT
 Color = Yellow
 Pokedex = The yellow Squawkabilly are especially fierce. They've even been known to drive other bird Pokémon out of town.
 #-------------------------------
 [SQUAWKABILLY,3]
 FormName = White Plumage
 HiddenAbilities = SHEERFORCE
-EggMoves = DOUBLEEDGE,FLATTER,FINALGAMBIT,PARTINGSHOT
 Color = White
 Pokedex = Though these Squawkabilly are the fewest in number, they have no trouble living in towns since they blend in with the white buildings.
 #-------------------------------

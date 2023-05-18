@@ -6,17 +6,13 @@
 # Z-Crystal and Ultra Item properties
 #-------------------------------------------------------------------------------
 module GameData
-  class << Item
-    alias zud_held_icon_filename held_icon_filename
-  end
-	
   class Item
     def is_z_crystal?; return has_flag?("ZCrystal"); end
     def is_ultra_item?; return has_flag?("UltraItem"); end
       
+    alias zud_is_important? is_important? 
     def is_important?
-      return true if is_key_item? || is_HM? || is_TM? || is_z_crystal?
-      return false
+      return zud_is_important? || is_z_crystal?
     end
 	
     alias zud_unlosable? unlosable?
@@ -25,6 +21,7 @@ module GameData
       zud_unlosable?(*args)
     end
     
+	Item.singleton_class.alias_method :zud_held_icon_filename, :held_icon_filename
     def self.held_icon_filename(item)
       item_data = self.try_get(item)
       return nil if !item_data
@@ -53,23 +50,22 @@ module GameData
   end
 end
 
+
 #-------------------------------------------------------------------------------
 # Adds Z-Crystal pocket to the bag.
 #-------------------------------------------------------------------------------
 module Settings
-  class << Settings
-    alias bag_pocket_names_zud bag_pocket_names
-  end
-  
+  Settings.singleton_class.alias_method :zud_bag_pocket_names, :bag_pocket_names
   def self.bag_pocket_names
-    names = self.bag_pocket_names_zud
-    names += [_INTL("Z-Crystals")]
+    names = self.zud_bag_pocket_names
+    names.push(_INTL("Z-Crystals"))
     return names
   end
    
-  BAG_MAX_POCKET_SIZE  += [-1]
-  BAG_POCKET_AUTO_SORT += [true]
+  BAG_MAX_POCKET_SIZE.push(-1)
+  BAG_POCKET_AUTO_SORT.push(true)
 end
+
 
 #-------------------------------------------------------------------------------
 # Fix to prevent Z-Crystals from duplicating in the bag.
@@ -152,9 +148,11 @@ ItemHandlers::UseOnPokemon.add(:DYNAMAXCANDY, proc { |item, qty, pkmn, scene|
     pbSEPlay("Pkmn move learnt")
     if item == :DYNAMAXCANDYXL
       scene.pbDisplay(_INTL("{1}'s Dynamax level was increased to 10!", pkmn.name))
+      $stats.total_dynamax_lvls_gained += (10 - pkmn.dynamax_lvl)
       pkmn.dynamax_lvl = 10
     else
       scene.pbDisplay(_INTL("{1}'s Dynamax level was increased by 1!", pkmn.name))
+      $stats.total_dynamax_lvls_gained += 1
       pkmn.dynamax_lvl += 1
     end
     scene.pbHardRefresh
@@ -186,6 +184,7 @@ ItemHandlers::UseOnPokemon.add(:MAXSOUP, proc { |item, qty, pkmn, scene|
     else
       pbSEPlay("Pkmn move learnt")
       pkmn.gmax_factor = true
+      $stats.total_gmax_factors_given += 1
       scene.pbDisplay(_INTL("{1} is now bursting with Gigantamax energy!", pkmn.name))
     end
     scene.pbHardRefresh

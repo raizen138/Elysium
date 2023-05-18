@@ -80,7 +80,7 @@ class Battle::Battler
   def raid_UseBaseMoves(choice)
     return if !@effects[PBEffects::MaxRaidBoss]
     return if @effects[PBEffects::ShieldCounter] > 0
-	return if choice[0] != :UseMove
+    return if choice[0] != :UseMove
     return if choice[2].statusMove?
     return if @base_moves.empty?
     self.display_base_moves
@@ -135,6 +135,7 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   def raid_KOCounter(target)
     if target.effects[PBEffects::MaxRaidBoss]
+	  return if !target || target.fainted?
       pbDynamaxAdventure.knockouts -= 1 if inMaxLair?
       target.effects[PBEffects::KnockOutCount] -= 1
       $game_temp.dx_rules[:perfect_bonus] = false
@@ -150,9 +151,17 @@ class Battle::Battler
         koboost = true
       else
         @battle.pbDisplay(_INTL("The storm around {1} grew out of control!", target.pbThis(true)))
-        @battle.pbDisplay(_INTL("You were blown out of the den!"))
-        pbSEPlay("Battle flee")
-        @battle.decision = 3
+        more_to_faint = false
+        @battle.battlers.each do |b|
+          next if !b || !b.opposes?(target) || b.hp > 0 || b.fainted
+          more_to_faint = true
+        end
+        if !more_to_faint
+          @battle.pbDisplay(_INTL("You were blown out of the den!"))
+          pbSEPlay("Battle flee")
+          @battle.decision = 3
+          return
+        end
       end
       #-------------------------------------------------------------------------
       # Hard Mode Bonuses (KO Boost).
@@ -167,80 +176,5 @@ class Battle::Battler
         end
       end
     end
-  end
-  
-  #-----------------------------------------------------------------------------
-  # Capturing a Max Raid Pokemon.
-  #-----------------------------------------------------------------------------
-  def raid_CatchPokemon(target)
-    pbBGMFade(0.2)
-    pbWait((0.2 * 60).round)
-    pbBGMPlay("Battle Raid Capture")
-    @battle.pbDisplayPaused(_INTL("{1} is weak!\nThrow a Poké Ball now!", target.pbThis))
-    pbWait(30)
-    cmd = 0
-    cmd = @battle.pbShowCommands("", ["Catch", "Don't Catch"], 1)
-    case cmd
-    #---------------------------------------------------------------------------
-    # Player chooses "Catch"
-    #---------------------------------------------------------------------------
-    when 0
-	  pbPlayDecisionSE
-      #-------------------------------------------------------------------------
-      # No room left in the PC (Pokemon flees)
-      #-------------------------------------------------------------------------
-      if $PokemonStorage.full?
-        @battle.pbDisplay(_INTL("But there is no room left in the PC!"))
-        raid_PokemonFlees(target)
-      else
-        #-----------------------------------------------------------------------
-        # Opens bag for ball selection.
-        #-----------------------------------------------------------------------
-        scene  = PokemonBag_Scene.new
-        screen = PokemonBagScreen.new(scene, $bag)
-        ball   = screen.pbChooseItemScreen(Proc.new{ |item| GameData::Item.get(item).is_poke_ball? })
-        $game_temp.battle_rules["disablePokeBalls"] = false
-        if ball
-          $bag.remove(ball, 1)
-          if @battle.hard_mode
-            randcapture = rand(100)
-            #-------------------------------------------------------------------
-            # Hard Mode capture (20% unless Master Ball)
-            #-------------------------------------------------------------------
-            if randcapture < 20 || ball == :MASTERBALL || ($DEBUG && Input.press?(Input::CTRL))
-              @battle.pbThrowPokeBall(target.index, ball, 9999, true)
-            else
-              @battle.pbThrowPokeBall(target.index, ball, 0, true)
-              raid_PokemonFlees(target)
-            end
-          else
-            #-------------------------------------------------------------------
-            # Normal Mode capture (100%)
-            #-------------------------------------------------------------------
-            @battle.pbThrowPokeBall(target.index, ball, 9999, true)
-          end
-        else
-          #---------------------------------------------------------------------
-          # No ball was selected (Pokemon flees)
-          #---------------------------------------------------------------------
-          raid_PokemonFlees(target)
-        end
-      end
-    #---------------------------------------------------------------------------
-    # Player chooses "Don't Catch"
-    #---------------------------------------------------------------------------
-    else
-      pbPlayDecisionSE
-      raid_PokemonFlees(target)
-    end
-  end
-  
-  #-----------------------------------------------------------------------------
-  # Called when a Max Raid Pokemon isn't captured.
-  #-----------------------------------------------------------------------------
-  def raid_PokemonFlees(target)
-    @battle.pbDisplayPaused(_INTL("{1} disappeared somewhere into the den...", target.pbThis))
-    pbSEPlay("Battle flee")
-    @battle.decision = 1
   end
 end

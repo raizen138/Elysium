@@ -1,4 +1,4 @@
-Name         = Customizable Level Cap
+Name         = Customizable Level Caps
 Version      = 1.2
 Essentials = 20.1
 Website      = https://reliccastle.com/members/7217/

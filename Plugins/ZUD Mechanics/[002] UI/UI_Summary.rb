@@ -8,27 +8,15 @@ class PokemonSummary_Scene
   alias zud_drawPage drawPage
   def drawPage(page)
     @sprites["pokemon"].unDynamax if @pokemon.dynamax?
-    if !@sprites["zud_overlay"]
+	if !@sprites["zud_overlay"]
       @sprites["zud_overlay"] = BitmapSprite.new(Graphics.width, Graphics.height, @viewport)
     else
       @sprites["zud_overlay"].bitmap.clear
     end
-    overlay = @sprites["zud_overlay"].bitmap
+	zud_drawPage(page)
+	overlay = @sprites["overlay"].bitmap
     coords = (PluginManager.installed?("BW Summary Screen")) ? [454, 82] : [88, 95]
     pbDisplayGmaxFactor(@pokemon, overlay, coords[0], coords[1])
-    zud_drawPage(page)
-  end
-  
-  alias zud_drawPageFour drawPageFour
-  def drawPageFour
-    @sprites["zud_overlay"].visible = true if @sprites["zud_overlay"]
-    zud_drawPageFour
-  end
-  
-  alias zud_drawSelectedMove drawSelectedMove
-  def drawSelectedMove(*args)
-    @sprites["zud_overlay"].visible = false if @sprites["zud_overlay"] 
-    zud_drawSelectedMove(*args)
   end
   
   #-----------------------------------------------------------------------------
@@ -69,15 +57,6 @@ class PokemonSummary_Scene
       end
     end
     zud_drawPageThree
-  end
-  
-  #-----------------------------------------------------------------------------
-  # Resets displays when changing Pokemon.
-  #-----------------------------------------------------------------------------
-  alias zud_pbChangePokemon pbChangePokemon
-  def pbChangePokemon
-    @sprites["zud_overlay"].bitmap.clear
-    zud_pbChangePokemon
   end
 end
 

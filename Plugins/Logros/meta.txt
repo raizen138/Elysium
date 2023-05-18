@@ -1,0 +1,4 @@
+Name = Sistema de logros en rejilla
+Version = 1.1.0
+Credits = Polectron y Caeles, Bezier 
+Website = https://pokeliberty.net/resources/51
