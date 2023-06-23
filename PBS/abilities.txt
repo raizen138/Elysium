@@ -1194,3 +1194,9 @@ Description = Boosts Attack in Tailwind or by wind damage.
 [ZEROTOHERO]
 Name = Zero to Hero
 Description = Transforms into its Hero Form when it switches out.
+#-------------------------------
+#------------INVENT-------------
+#-------------------------------
+[ZONAIEMITTER]
+Name = Zonai Emitter
+Description = Powers up Fire, Ice and Electric-type moves.

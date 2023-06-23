@@ -1,0 +1,374 @@
+Error Log Entry : 
+23:07:30 lunes, 29 de mayo de 2023
+:
+Missing File: \PBS\abilities.txt
+Missing File: \PBS\types.txt
+Missing File: \PBS\moves.txt
+Missing File: \PBS\items.txt
+Missing File: \PBS\trainer_types.txt
+Missing File: \PBS\pokemon.txt
+Missing File: \PBS\pokemon_forms.txt
+Missing File: \PBS\trainers.txt
+Missing File: \PBS\encounters.txt
+-------------------
+Error Log Entry : 
+23:08:05 lunes, 29 de mayo de 2023
+:
+Moves: (XSCISSOR): Slicing isn't a valid Flag.
+Moves: (FURYCUTTER): Slicing isn't a valid Flag.
+Moves: (NIGHTSLASH): Slicing isn't a valid Flag.
+Moves: (TWISTER): Wind isn't a valid Flag.
+Moves: (FAIRYWIND): Slicing isn't a valid Flag.
+Moves: (FAIRYWIND): Wind isn't a valid Flag.
+Moves: (SACREDSWORD): Slicing isn't a valid Flag.
+Moves: (SECRETSWORD): Slicing isn't a valid Flag.
+Moves: (HEATWAVE): Wind isn't a valid Flag.
+Moves: (HURRICANE): Wind isn't a valid Flag.
+Moves: (AIRSLASH): Slicing isn't a valid Flag.
+Moves: (AERIALACE): Slicing isn't a valid Flag.
+Moves: (AIRCUTTER): Slicing isn't a valid Flag.
+Moves: (AIRCUTTER): Wind isn't a valid Flag.
+Moves: (GUST): Wind isn't a valid Flag.
+Moves: (TAILWIND): Wind isn't a valid Flag.
+Moves: (SOLARBLADE): Slicing isn't a valid Flag.
+Moves: (LEAFBLADE): Slicing isn't a valid Flag.
+Moves: (PETALBLIZZARD): Wind isn't a valid Flag.
+Moves: (RAZORLEAF): Slicing isn't a valid Flag.
+Moves: (BLIZZARD): Wind isn't a valid Flag.
+Moves: (ICYWIND): Wind isn't a valid Flag.
+Moves: (SLASH): Slicing isn't a valid Flag.
+Moves: (CUT): Slicing isn't a valid Flag.
+Moves: (WHIRLWIND): Wind isn't a valid Flag.
+Moves: (CROSSPOISON): Slicing isn't a valid Flag.
+Moves: (PSYCHOCUT): Slicing isn't a valid Flag.
+Moves: (SANDSTORM): Wind isn't a valid Flag.
+Moves: (BEHEMOTHBLADE): Slicing isn't a valid Flag.
+Moves: (RAZORSHELL): Slicing isn't a valid Flag.
+Moves: (SPRINGTIDESTORM): Wind isn't a valid Flag.
+Moves: (BLEAKWINDSTORM): Wind isn't a valid Flag.
+Moves: (WILDBOLTSTORM): Wind isn't a valid Flag.
+Moves: (SANDSEARSTORM): Wind isn't a valid Flag.
+Moves: (STONEAXE): Slicing isn't a valid Flag.
+Moves: (CEASELESSEDGE): Slicing isn't a valid Flag.
+Moves: (AQUACUTTER): Slicing isn't a valid Flag.
+Moves: (BITTERBLADE): Slicing isn't a valid Flag.
+Moves: (KOWTOWCLEAVE): Slicing isn't a valid Flag.
+Moves: (POPULATIONBOMB): Slicing isn't a valid Flag.
+Moves: (PSYBLADE): Slicing isn't a valid Flag.
+Items: (BLACKFLUTE): Flute isn't a valid Item Flag.
+Items: (WHITEFLUTE): Flute isn't a valid Item Flag.
+Items: (REDSHARD): Shard isn't a valid Item Flag.
+Items: (YELLOWSHARD): Shard isn't a valid Item Flag.
+Items: (BLUESHARD): Shard isn't a valid Item Flag.
+Items: (GREENSHARD): Shard isn't a valid Item Flag.
+Items: (FOSSILIZEDBIRD): FossilHalf isn't a valid Item Flag.
+Items: (FOSSILIZEDFISH): FossilHalf isn't a valid Item Flag.
+Items: (FOSSILIZEDDRAKE): FossilHalf isn't a valid Item Flag.
+Items: (FOSSILIZEDDINO): FossilHalf isn't a valid Item Flag.
+Items: (REDNECTAR): Nectar isn't a valid Item Flag.
+Items: (YELLOWNECTAR): Nectar isn't a valid Item Flag.
+Items: (PINKNECTAR): Nectar isn't a valid Item Flag.
+Items: (PURPLENECTAR): Nectar isn't a valid Item Flag.
+Items: (MACHOBRACE): EVBooster isn't a valid Item Flag.
+Items: (POWERWEIGHT): EVBooster isn't a valid Item Flag.
+Items: (POWERBRACER): EVBooster isn't a valid Item Flag.
+Items: (POWERBELT): EVBooster isn't a valid Item Flag.
+Items: (POWERLENS): EVBooster isn't a valid Item Flag.
+Items: (POWERBAND): EVBooster isn't a valid Item Flag.
+Items: (POWERANKLET): EVBooster isn't a valid Item Flag.
+Items: (LAXINCENSE): Incense isn't a valid Item Flag.
+Items: (FULLINCENSE): Incense isn't a valid Item Flag.
+Items: (LUCKINCENSE): Incense isn't a valid Item Flag.
+Items: (PUREINCENSE): Incense isn't a valid Item Flag.
+Items: (SEAINCENSE): Incense isn't a valid Item Flag.
+Items: (WAVEINCENSE): Incense isn't a valid Item Flag.
+Items: (ROSEINCENSE): Incense isn't a valid Item Flag.
+Items: (ODDINCENSE): Incense isn't a valid Item Flag.
+Items: (ROCKINCENSE): Incense isn't a valid Item Flag.
+Items: (FLAMEPLATE): Plate isn't a valid Item Flag.
+Items: (SPLASHPLATE): Plate isn't a valid Item Flag.
+Items: (ZAPPLATE): Plate isn't a valid Item Flag.
+Items: (MEADOWPLATE): Plate isn't a valid Item Flag.
+Items: (ICICLEPLATE): Plate isn't a valid Item Flag.
+Items: (FISTPLATE): Plate isn't a valid Item Flag.
+Items: (TOXICPLATE): Plate isn't a valid Item Flag.
+Items: (EARTHPLATE): Plate isn't a valid Item Flag.
+Items: (SKYPLATE): Plate isn't a valid Item Flag.
+Items: (MINDPLATE): Plate isn't a valid Item Flag.
+Items: (INSECTPLATE): Plate isn't a valid Item Flag.
+Items: (STONEPLATE): Plate isn't a valid Item Flag.
+Items: (SPOOKYPLATE): Plate isn't a valid Item Flag.
+Items: (DRACOPLATE): Plate isn't a valid Item Flag.
+Items: (DREADPLATE): Plate isn't a valid Item Flag.
+Items: (IRONPLATE): Plate isn't a valid Item Flag.
+Items: (PIXIEPLATE): Plate isn't a valid Item Flag.
+Items: (DOUSEDRIVE): Drive isn't a valid Item Flag.
+Items: (SHOCKDRIVE): Drive isn't a valid Item Flag.
+Items: (BURNDRIVE): Drive isn't a valid Item Flag.
+Items: (CHILLDRIVE): Drive isn't a valid Item Flag.
+Items: (FIREMEMORY): Memory isn't a valid Item Flag.
+Items: (WATERMEMORY): Memory isn't a valid Item Flag.
+Items: (ELECTRICMEMORY): Memory isn't a valid Item Flag.
+Items: (GRASSMEMORY): Memory isn't a valid Item Flag.
+Items: (ICEMEMORY): Memory isn't a valid Item Flag.
+Items: (FIGHTINGMEMORY): Memory isn't a valid Item Flag.
+Items: (POISONMEMORY): Memory isn't a valid Item Flag.
+Items: (GROUNDMEMORY): Memory isn't a valid Item Flag.
+Items: (FLYINGMEMORY): Memory isn't a valid Item Flag.
+Items: (PSYCHICMEMORY): Memory isn't a valid Item Flag.
+Items: (BUGMEMORY): Memory isn't a valid Item Flag.
+Items: (ROCKMEMORY): Memory isn't a valid Item Flag.
+Items: (GHOSTMEMORY): Memory isn't a valid Item Flag.
+Items: (DRAGONMEMORY): Memory isn't a valid Item Flag.
+Items: (DARKMEMORY): Memory isn't a valid Item Flag.
+Items: (STEELMEMORY): Memory isn't a valid Item Flag.
+Items: (FAIRYMEMORY): Memory isn't a valid Item Flag.
+Items: (STRAWBERRYSWEET): Sweet isn't a valid Item Flag.
+Items: (LOVESWEET): Sweet isn't a valid Item Flag.
+Items: (BERRYSWEET): Sweet isn't a valid Item Flag.
+Items: (CLOVERSWEET): Sweet isn't a valid Item Flag.
+Items: (FLOWERSWEET): Sweet isn't a valid Item Flag.
+Items: (STARSWEET): Sweet isn't a valid Item Flag.
+Items: (RIBBONSWEET): Sweet isn't a valid Item Flag.
+Items: (POTION): Medicine isn't a valid Item Flag.
+Items: (SUPERPOTION): Medicine isn't a valid Item Flag.
+Items: (HYPERPOTION): Medicine isn't a valid Item Flag.
+Items: (MAXPOTION): Medicine isn't a valid Item Flag.
+Items: (FULLRESTORE): Medicine isn't a valid Item Flag.
+Items: (AWAKENING): Medicine isn't a valid Item Flag.
+Items: (ANTIDOTE): Medicine isn't a valid Item Flag.
+Items: (BURNHEAL): Medicine isn't a valid Item Flag.
+Items: (PARALYZEHEAL): Medicine isn't a valid Item Flag.
+Items: (ICEHEAL): Medicine isn't a valid Item Flag.
+Items: (FULLHEAL): Medicine isn't a valid Item Flag.
+Items: (REVIVE): Medicine isn't a valid Item Flag.
+Items: (MAXREVIVE): Medicine isn't a valid Item Flag.
+Items: (ENERGYPOWDER): Remedy isn't a valid Item Flag.
+Items: (ENERGYROOT): Remedy isn't a valid Item Flag.
+Items: (HEALPOWDER): Remedy isn't a valid Item Flag.
+Items: (REVIVALHERB): Remedy isn't a valid Item Flag.
+Items: (ETHER): Medicine isn't a valid Item Flag.
+Items: (MAXETHER): Medicine isn't a valid Item Flag.
+Items: (ELIXIR): Medicine isn't a valid Item Flag.
+Items: (MAXELIXIR): Medicine isn't a valid Item Flag.
+Items: (PPUP): Vitamin isn't a valid Item Flag.
+Items: (PPMAX): Vitamin isn't a valid Item Flag.
+Items: (HPUP): Vitamin isn't a valid Item Flag.
+Items: (PROTEIN): Vitamin isn't a valid Item Flag.
+Items: (IRON): Vitamin isn't a valid Item Flag.
+Items: (CALCIUM): Vitamin isn't a valid Item Flag.
+Items: (ZINC): Vitamin isn't a valid Item Flag.
+Items: (CARBOS): Vitamin isn't a valid Item Flag.
+Items: (HEALTHFEATHER): Feather isn't a valid Item Flag.
+Items: (MUSCLEFEATHER): Feather isn't a valid Item Flag.
+Items: (RESISTFEATHER): Feather isn't a valid Item Flag.
+Items: (GENIUSFEATHER): Feather isn't a valid Item Flag.
+Items: (CLEVERFEATHER): Feather isn't a valid Item Flag.
+Items: (SWIFTFEATHER): Feather isn't a valid Item Flag.
+Items: (LONELYMINT): Mint isn't a valid Item Flag.
+Items: (ADAMANTMINT): Mint isn't a valid Item Flag.
+Items: (NAUGHTYMINT): Mint isn't a valid Item Flag.
+Items: (BRAVEMINT): Mint isn't a valid Item Flag.
+Items: (BOLDMINT): Mint isn't a valid Item Flag.
+Items: (IMPISHMINT): Mint isn't a valid Item Flag.
+Items: (LAXMINT): Mint isn't a valid Item Flag.
+Items: (RELAXEDMINT): Mint isn't a valid Item Flag.
+Items: (MODESTMINT): Mint isn't a valid Item Flag.
+Items: (MILDMINT): Mint isn't a valid Item Flag.
+Items: (RASHMINT): Mint isn't a valid Item Flag.
+Items: (QUIETMINT): Mint isn't a valid Item Flag.
+Items: (CALMMINT): Mint isn't a valid Item Flag.
+Items: (GENTLEMINT): Mint isn't a valid Item Flag.
+Items: (CAREFULMINT): Mint isn't a valid Item Flag.
+Items: (SASSYMINT): Mint isn't a valid Item Flag.
+Items: (TIMIDMINT): Mint isn't a valid Item Flag.
+Items: (HASTYMINT): Mint isn't a valid Item Flag.
+Items: (JOLLYMINT): Mint isn't a valid Item Flag.
+Items: (NAIVEMINT): Mint isn't a valid Item Flag.
+Items: (SERIOUSMINT): Mint isn't a valid Item Flag.
+Items: (EXPCANDYXS): ExpCandy isn't a valid Item Flag.
+Items: (EXPCANDYS): ExpCandy isn't a valid Item Flag.
+Items: (EXPCANDYM): ExpCandy isn't a valid Item Flag.
+Items: (EXPCANDYL): ExpCandy isn't a valid Item Flag.
+Items: (EXPCANDYXL): ExpCandy isn't a valid Item Flag.
+Items: (TM024): Fling_35 isn't a valid Item Flag.
+Items: (CHERIBERRY): StatusBerry isn't a valid Item Flag.
+Items: (CHESTOBERRY): StatusBerry isn't a valid Item Flag.
+Items: (PECHABERRY): StatusBerry isn't a valid Item Flag.
+Items: (RAWSTBERRY): StatusBerry isn't a valid Item Flag.
+Items: (ASPEARBERRY): StatusBerry isn't a valid Item Flag.
+Items: (ORANBERRY): HealBerry isn't a valid Item Flag.
+Items: (PERSIMBERRY): StatusBerry isn't a valid Item Flag.
+Items: (LUMBERRY): StatusBerry isn't a valid Item Flag.
+Items: (SITRUSBERRY): HealBerry isn't a valid Item Flag.
+Items: (FIGYBERRY): HealBerry isn't a valid Item Flag.
+Items: (FIGYBERRY): FlavorBerry isn't a valid Item Flag.
+Items: (WIKIBERRY): HealBerry isn't a valid Item Flag.
+Items: (WIKIBERRY): FlavorBerry isn't a valid Item Flag.
+Items: (MAGOBERRY): HealBerry isn't a valid Item Flag.
+Items: (MAGOBERRY): FlavorBerry isn't a valid Item Flag.
+Items: (AGUAVBERRY): HealBerry isn't a valid Item Flag.
+Items: (AGUAVBERRY): FlavorBerry isn't a valid Item Flag.
+Items: (IAPAPABERRY): HealBerry isn't a valid Item Flag.
+Items: (IAPAPABERRY): FlavorBerry isn't a valid Item Flag.
+Items: (POMEGBERRY): EVReduceBerry isn't a valid Item Flag.
+Items: (KELPSYBERRY): EVReduceBerry isn't a valid Item Flag.
+Items: (QUALOTBERRY): EVReduceBerry isn't a valid Item Flag.
+Items: (HONDEWBERRY): EVReduceBerry isn't a valid Item Flag.
+Items: (GREPABERRY): EVReduceBerry isn't a valid Item Flag.
+Items: (OCCABERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (PASSHOBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (WACANBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (RINDOBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (YACHEBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (CHOPLEBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (KEBIABERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (SHUCABERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (COBABERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (PAYAPABERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (TANGABERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (CHARTIBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (KASIBBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (HABANBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (COLBURBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (BABIRIBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (ROSELIBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (CHILANBERRY): TypeReduceBerry isn't a valid Item Flag.
+Items: (LIECHIBERRY): PinchBerry isn't a valid Item Flag.
+Items: (GANLONBERRY): PinchBerry isn't a valid Item Flag.
+Items: (SALACBERRY): PinchBerry isn't a valid Item Flag.
+Items: (PETAYABERRY): PinchBerry isn't a valid Item Flag.
+Items: (APICOTBERRY): PinchBerry isn't a valid Item Flag.
+Items: (LANSATBERRY): PinchBerry isn't a valid Item Flag.
+Items: (STARFBERRY): PinchBerry isn't a valid Item Flag.
+Items: (MICLEBERRY): PinchBerry isn't a valid Item Flag.
+Items: (CUSTAPBERRY): PinchBerry isn't a valid Item Flag.
+Items: (XATTACK): BattleEnhancer isn't a valid Item Flag.
+Items: (XATTACK2): BattleEnhancer isn't a valid Item Flag.
+Items: (XATTACK3): BattleEnhancer isn't a valid Item Flag.
+Items: (XATTACK6): BattleEnhancer isn't a valid Item Flag.
+Items: (XDEFENSE): BattleEnhancer isn't a valid Item Flag.
+Items: (XDEFENSE2): BattleEnhancer isn't a valid Item Flag.
+Items: (XDEFENSE3): BattleEnhancer isn't a valid Item Flag.
+Items: (XDEFENSE6): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPATK): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPATK2): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPATK3): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPATK6): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPDEF): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPDEF2): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPDEF3): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPDEF6): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPEED): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPEED2): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPEED3): BattleEnhancer isn't a valid Item Flag.
+Items: (XSPEED6): BattleEnhancer isn't a valid Item Flag.
+Items: (XACCURACY): BattleEnhancer isn't a valid Item Flag.
+Items: (XACCURACY2): BattleEnhancer isn't a valid Item Flag.
+Items: (XACCURACY3): BattleEnhancer isn't a valid Item Flag.
+Items: (XACCURACY6): BattleEnhancer isn't a valid Item Flag.
+Items: (MAXMUSHROOMS): BattleEnhancer isn't a valid Item Flag.
+Items: (DIREHIT): BattleEnhancer isn't a valid Item Flag.
+Items: (DIREHIT2): BattleEnhancer isn't a valid Item Flag.
+Items: (DIREHIT3): BattleEnhancer isn't a valid Item Flag.
+Items: (GUARDSPEC): BattleEnhancer isn't a valid Item Flag.
+Items: (RESETURGE): BattleEnhancer isn't a valid Item Flag.
+Items: (ABILITYURGE): BattleEnhancer isn't a valid Item Flag.
+Items: (ITEMURGE): BattleEnhancer isn't a valid Item Flag.
+Items: (ITEMDROP): BattleEnhancer isn't a valid Item Flag.
+Items: (BLUEFLUTE): Flute isn't a valid Item Flag.
+Items: (YELLOWFLUTE): Flute isn't a valid Item Flag.
+Items: (REDFLUTE): Flute isn't a valid Item Flag.
+Items: (LEGENDPLATE): Plate isn't a valid Item Flag.
+Items: (BLANKPLATE): Plate isn't a valid Item Flag.
+Items: (MALICIOUSARMOR): Fling_31 isn't a valid Item Flag.
+Items: (SCROLLOFDARKNESS): Fling_32 isn't a valid Item Flag.
+Items: (SCROLLOFWATERS): Fling_33 isn't a valid Item Flag.
+Items: (TERAORB): TeraOrb isn't a valid Item Flag.
+Items: (NORMALTERASHARD): TeraShard_NORMAL isn't a valid Item Flag.
+Items: (FIGHTINGTERASHARD): TeraShard_FIGHTING isn't a valid Item Flag.
+Items: (FLYINGTERASHARD): TeraShard_FLYING isn't a valid Item Flag.
+Items: (POISONTERASHARD): TeraShard_POISON isn't a valid Item Flag.
+Items: (GROUNDTERASHARD): TeraShard_GROUND isn't a valid Item Flag.
+Items: (ROCKTERASHARD): TeraShard_ROCK isn't a valid Item Flag.
+Items: (BUGTERASHARD): TeraShard_BUG isn't a valid Item Flag.
+Items: (GHOSTTERASHARD): TeraShard_GHOST isn't a valid Item Flag.
+Items: (STEELTERASHARD): TeraShard_STEEL isn't a valid Item Flag.
+Items: (FIRETERASHARD): TeraShard_FIRE isn't a valid Item Flag.
+Items: (WATERTERASHARD): TeraShard_WATER isn't a valid Item Flag.
+Items: (GRASSTERASHARD): TeraShard_GRASS isn't a valid Item Flag.
+Items: (ELECTRICTERASHARD): TeraShard_ELECTRIC isn't a valid Item Flag.
+Items: (PSYCHICTERASHARD): TeraShard_PSYCHIC isn't a valid Item Flag.
+Items: (ICETERASHARD): TeraShard_ICE isn't a valid Item Flag.
+Items: (DRAGONTERASHARD): TeraShard_DRAGON isn't a valid Item Flag.
+Items: (DARKTERASHARD): TeraShard_DARK isn't a valid Item Flag.
+Items: (FAIRYTERASHARD): TeraShard_FAIRY isn't a valid Item Flag.
+Items: (MYSTERYTERAJEWEL): TeraShard_Random isn't a valid Item Flag.
+Items: (MASTERTERAJEWEL): TeraShard_Choose isn't a valid Item Flag.
+TrainerTypes: (LEADER_Brock): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Brock): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Misty): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Misty): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Surge): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Surge): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Erika): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Erika): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Koga): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Koga): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Sabrina): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Sabrina): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Blaine): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Blaine): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Giovanni): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Giovanni): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lorelei): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lorelei): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Bruno): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Bruno): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Agatha): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Agatha): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lance): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lance): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (CHAMPION): Battle Champion doesn't exist in \Audio\BGM\.
+TrainerTypes: (CHAMPION): Battle victory leader doesn't exist in \Audio\BGM\.
+Pokemons: (PRIMEAPE): Evolutions: LevelUseMoveCount is invalid.
+Pokemons: (STANTLER): Evolutions: LevelUseMoveCount is invalid.
+Pokemons: (BISHARP): Evolutions: LevelDefeatItsKindWithItem is invalid.
+Pokemons: (PAWMO): Evolutions: Walk is invalid.
+Pokemons: (TANDEMAUS): Evolutions: BattleLevelSkipEvoScene is invalid.
+Pokemons: (BRAMBLIN): Evolutions: Walk is invalid.
+Pokemons: (RELLOR): Evolutions: Walk is invalid.
+Pokemons: (FINIZEN): Evolutions: LevelWithPartner is invalid.
+Pokemons: (GIMMIGHOUL): Evolutions: CollectItems is invalid.
+PokemonForms: (BASCULIN_2): Evolutions: LevelRecoilDamage is invalid.
+-------------------
+Error Log Entry : 
+23:25:11 lunes, 29 de mayo de 2023
+:
+TrainerTypes: (LEADER_Brock): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Brock): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Misty): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Misty): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Surge): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Surge): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Erika): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Erika): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Koga): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Koga): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Sabrina): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Sabrina): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Blaine): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Blaine): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Giovanni): Battle Gym Leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (LEADER_Giovanni): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lorelei): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lorelei): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Bruno): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Bruno): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Agatha): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Agatha): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lance): Battle Elite doesn't exist in \Audio\BGM\.
+TrainerTypes: (ELITEFOUR_Lance): Battle victory leader doesn't exist in \Audio\BGM\.
+TrainerTypes: (CHAMPION): Battle Champion doesn't exist in \Audio\BGM\.
+TrainerTypes: (CHAMPION): Battle victory leader doesn't exist in \Audio\BGM\.
+-------------------
