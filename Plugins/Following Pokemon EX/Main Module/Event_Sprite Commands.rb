@@ -81,12 +81,12 @@ module FollowingPkmn
       anim_id   = FollowingPkmn.const_get(anim_name) if FollowingPkmn.const_defined?(anim_name)
       if event && anim_id
         $scene.spriteset.addUserAnimation(anim_id, event.x, event.y, false, 1)
-        pbMoveRoute($game_player, [PBMoveRoute::Wait, 2])
-        pbWait(Graphics.frame_rate/5)
+        pbMoveRoute($game_player, [PBMoveRoute::WAIT, 2])
+        pbWait(0.2)
       end
     end
     FollowingPkmn.change_sprite(first_pkmn) if ret
-    FollowingPkmn.move_route([(ret ? PBMoveRoute::StepAnimeOn : PBMoveRoute::StepAnimeOff)]) if FollowingPkmn::ALWAYS_ANIMATE
+    FollowingPkmn.move_route([(ret ? PBMoveRoute::STEP_ANIME_ON : PBMoveRoute::STEP_ANIME_OFF)]) if FollowingPkmn::ALWAYS_ANIMATE
     event&.calculate_bush_depth
     $PokemonGlobal.time_taken = 0 if !ret
     return ret

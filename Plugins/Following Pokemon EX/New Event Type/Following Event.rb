@@ -36,11 +36,11 @@ class Game_FollowingPkmn < Game_Follower
       @anime_count = 0
       return
     end
-    frames_per_pattern = Game_Map::REAL_RES_X / (512.0 / Graphics.frame_rate * 1.5)
-    frames_per_pattern *= 2 if move_speed > 5
-    return if @anime_count < frames_per_pattern
+    pattern_time = pattern_update_speed / 4   # 4 frames per cycle in a charset
+    return if @anime_count < pattern_time
+    # Advance to the next animation frame
     @pattern = (@pattern + 1) % 4
-    @anime_count -= frames_per_pattern
+    @anime_count -= pattern_time
   end
   #-----------------------------------------------------------------------------
   # Don't turn off walk animation when sliding on ice if the following pokemon
@@ -48,7 +48,7 @@ class Game_FollowingPkmn < Game_Follower
   #-----------------------------------------------------------------------------
   alias __followingpkmn__walk_anime walk_anime= unless method_defined?(:__followingpkmn__walk_anime)
   def walk_anime=(value)
-    return if $PokemonGlobal.sliding && (!FollowingPkmn.active? || FollowingPkmn.airborne_follower?)
+    return if $PokemonGlobal.ice_sliding && (!FollowingPkmn.active? || FollowingPkmn.airborne_follower?)
     __followingpkmn__walk_anime(value)
   end
   #-----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ class Game_FollowingPkmn < Game_Follower
   #-----------------------------------------------------------------------------
   alias __followingpkmn__straighten straighten unless method_defined?(:__followingpkmn__straighten)
   def straighten
-    return if $PokemonGlobal.sliding && (!FollowingPkmn.active? || FollowingPkmn.airborne_follower?)
+    return if $PokemonGlobal.ice_sliding && (!FollowingPkmn.active? || FollowingPkmn.airborne_follower?)
     __followingpkmn__straighten
   end
   #-----------------------------------------------------------------------------
@@ -123,12 +123,13 @@ class Game_FollowingPkmn < Game_Follower
     return if FollowingPkmn.active? && !FollowingPkmn::ALWAYS_FACE_PLAYER
     pbTurnTowardEvent(self, leader)
   end
-  #-----------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------
   # Updating the method which controls event position to includes changes to
   # work with Marin and Boonzeets side stairs
   #-----------------------------------------------------------------------------
   def follow_leader(leader, instant = false, leaderIsTrueLeader = true)
 	return if @move_route_forcing
+    end_movement
     maps_connected = $map_factory.areConnected?(leader.map.map_id, self.map.map_id)
     target = nil
     # Get the target tile that self wants to move to
@@ -220,7 +221,7 @@ class FollowerData
     if !@common_event_id
       event = args[0]
       $game_map.refresh if $game_map.need_refresh
-      event.lock
+	  event.lock
       FollowingPkmn.talk
       event.unlock
     elsif FollowingPkmn.can_talk?

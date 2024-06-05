@@ -3,14 +3,14 @@
 # overworld
 #-------------------------------------------------------------------------------
 alias __followingpkmn__pbHiddenMoveAnimation pbHiddenMoveAnimation unless defined?(__followingpkmn__pbHiddenMoveAnimation)
-def pbHiddenMoveAnimation(pokemon, field_move = false)
+def pbHiddenMoveAnimation(pokemon, field_move = true)
   no_field_move = !field_move || $game_temp.no_follower_field_move
-  FollowingPkmn.move_route([PBMoveRoute::Wait, 60]) if pokemon && FollowingPkmn.active?
+  FollowingPkmn.move_route([PBMoveRoute::WAIT, 1]) if pokemon && FollowingPkmn.active?
   ret = __followingpkmn__pbHiddenMoveAnimation(pokemon)
   return ret if !ret || no_field_move || !FollowingPkmn.active? || pokemon != FollowingPkmn.get_pokemon
   initial_dir  = $game_player.direction
   pbTurnTowardEvent(FollowingPkmn.get_event, $game_player)
-  pbWait(Graphics.frame_rate / 5)
+  pbWait(0.2)
   moved_dir    = 0
   possible_dir = []
   possible_dir.push($game_player.direction)
@@ -24,15 +24,15 @@ def pbHiddenMoveAnimation(pokemon, field_move = false)
   if moved_dir > 0
     FollowingPkmn.get_event.move_toward_player
     pbMoveRoute($game_player, [(moved_dir) / 2], true)
-    pbWait(Graphics.frame_rate / 4)
+    pbWait(0.2)
     pbTurnTowardEvent($game_player, FollowingPkmn.get_event)
-    pbWait(Graphics.frame_rate / 4)
+    pbWait(0.2)
     FollowingPkmn.move_route([15 + (initial_dir / 2)])
-    pbWait(Graphics.frame_rate / 5)
+    pbWait(0.2)
   end
   pbSEPlay("Player jump")
   FollowingPkmn.move_route([PBMoveRoute::JUMP, 0, 0])
-  pbWait(Graphics.frame_rate / 5)
+  pbWait(0.2)
   return ret
 end
 
@@ -67,7 +67,7 @@ class Battle::Scene::Animation::PokeballPlayerSendOut < Battle::Scene::Animation
     delay = 5 if @showingTrainer
     batSprite = @sprites["pokemon_#{@battler.index}"]
     shaSprite = @sprites["shadow_#{@battler.index}"]
-    battlerY = batSprite.y
+    batSprite.y
     battler = addSprite(batSprite, PictureOrigin::BOTTOM)
     battler.setVisible(delay, true)
     battler.setZoomXY(delay, 100, 100)

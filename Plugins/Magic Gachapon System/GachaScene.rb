@@ -18,7 +18,7 @@ FRASES = ["Aprovecha que no tienes dinero y huye de este juego infernal. No mere
           ]
 
 #BannerReward###################################################################
-class BannerReward < SpriteWrapper
+class BannerReward < Sprite
   def initialize(id,reward,stars,viewport=nil)
     super(viewport)
     @viewport = viewport
@@ -107,7 +107,7 @@ end
 
 #BANNER#########################################################################
 
-class BannerSprite < SpriteWrapper
+class BannerSprite < Sprite
   def initialize(bg,rewards,stars,viewport=nil)
     super(viewport)
     @viewport = viewport

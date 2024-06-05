@@ -1,3 +1,0 @@
-[ZONAIEMITTER]
-Name = Zonai Emitter
-Description = Powers up Fire, Ice and Electric-type moves.

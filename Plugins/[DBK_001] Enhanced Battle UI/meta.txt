@@ -1,0 +1,6 @@
+Name         = [DBK] Enhanced Battle UI
+Version      = 2.0
+Essentials   = 21.1
+Requires     = Deluxe Battle Kit,1.1.4
+Website      = https://www.pokecommunity.com/threads/enhanced-battle-ui-dbk-add-on-v21-1.525837/
+Credits      = Lucidious89

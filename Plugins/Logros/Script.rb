@@ -99,7 +99,7 @@ end
 ######## ESCENA ########
 
 # Sprite de logro 
-class LogroIcon < SpriteWrapper
+class LogroIcon < Sprite
   attr_reader :index
 
   def initialize(viewport, index, status)

@@ -10,14 +10,13 @@ ShowArea = true
 MapPosition = 0,13,12
 BattleBack = field
 #-------------------------------
-[003]   # \PN's house
+[003]   # Player's house
 Name = \PN's house
 HealingSpot = 2,8,8
 MapPosition = 0,13,12
 #-------------------------------
 [004]   # Pokémon Lab
 Name = Pokémon Lab
-ShowArea = false
 MapPosition = 0,13,12
 #-------------------------------
 [005]   # Route 1
@@ -132,16 +131,18 @@ Outdoor = true
 ShowArea = true
 MapPosition = 0,16,8
 BattleBack = field
-Flags = MossRock
+Flags = MossRock,BugContest
 #-------------------------------
 [029]   # Natural Park Entrance
 Name = Natural Park
 Bicycle = true
 MapPosition = 0,16,8
+Flags = BugContestReception
 #-------------------------------
 [030]   # Natural Park Pavillion
 Name = Natural Park
 MapPosition = 0,16,8
+Flags = BugContestReception
 #-------------------------------
 [031]   # Route 3
 Name = Route 3
@@ -151,13 +152,6 @@ MapPosition = 0,14,6
 BattleBack = field
 MapSize = 2,1101
 #-------------------------------
-[032]   # Lappet Town HG
-Name = Lappet Town HG
-Outdoor = true
-ShowArea = true
-Bicycle = true
-BicycleAlways = false
-#-------------------------------
 [034]   # Ice Cave
 Name = Route 3
 Bicycle = true
@@ -166,18 +160,18 @@ BattleBack = cave1
 Environment = Cave
 Flags = IceRock
 #-------------------------------
-[035]   # Ingido Plateau
+[035]   # Ingido Plateau outside
 Name = Ingido Plateau
 Outdoor = true
 ShowArea = true
 MapPosition = 0,13,6
 #-------------------------------
-[036]   # Pokémon League
+[036]   # Pokémon League entrance
 Name = Ingido Plateau
 HealingSpot = 35,17,7
 MapPosition = 0,13,6
 #-------------------------------
-[037]   # Pokémon League
+[037]   # Pokémon League room 1
 Name = Ingido Plateau
 MapPosition = 0,13,6
 BattleBack = elite1
@@ -196,7 +190,7 @@ MapPosition = 0,11,6
 BattleBack = field
 MapSize = 2,11
 #-------------------------------
-[040]   # Route 4
+[040]   # Route 4 Cycling Road
 Name = Route 4
 Outdoor = true
 ShowArea = true
@@ -211,12 +205,6 @@ BicycleAlways = true
 MapPosition = 0,11,7
 MapSize = 1,111
 #-------------------------------
-[042]   # Red House
-Name = Red House
-Outdoor = false
-ShowArea = false
-Bicycle = false
-#-------------------------------
 [044]   # Route 6
 Name = Route 6
 Outdoor = true
@@ -225,14 +213,14 @@ MapPosition = 0,11,10
 BattleBack = field
 MapSize = 2,11
 #-------------------------------
-[045]   # Route 6
+[045]   # Route 6 Cycling Road
 Name = Route 6
 Outdoor = true
 ShowArea = true
 BicycleAlways = true
 MapPosition = 0,11,10
 #-------------------------------
-[046]   # Cycling Road gate
+[046]   # Route 4 Cycling Road gate
 Name = Route 4
 Bicycle = true
 MapPosition = 0,12,6
@@ -247,7 +235,7 @@ BattleBack = rocky
 MapSize = 2,11
 Environment = Rock
 #-------------------------------
-[049]   # Rock Cave
+[049]   # Rock Cave 1F
 Name = Route 7
 Bicycle = true
 MapPosition = 0,16,10
@@ -255,7 +243,7 @@ BattleBack = cave1
 Environment = Cave
 Flags = Magnetic,DistortionWorld
 #-------------------------------
-[050]   # Rock Cave
+[050]   # Rock Cave B1F
 Name = Route 7
 Bicycle = true
 MapPosition = 0,16,10
@@ -271,7 +259,7 @@ MapPosition = 0,16,10
 Dungeon = true
 BattleBack = cave2
 Environment = Cave
-Flags = Magnetic,DistortionWorld
+Flags = Magnetic,DistortionWorld,ScaleWildEncounterLevels
 #-------------------------------
 [052]   # Battle Frontier
 Name = Battle Frontier
@@ -343,7 +331,7 @@ Name = Battle Frontier
 MapPosition = 0,17,10
 Flags = DisableBoxLink
 #-------------------------------
-[066]   # Safari Zone
+[066]   # Safari Zone outside
 Name = Safari Zone
 Outdoor = true
 ShowArea = true
@@ -371,13 +359,13 @@ MapPosition = 0,13,13
 DiveMap = 70
 BattleBack = field
 #-------------------------------
-[070]   # Underwater
+[070]   # Route 8 underwater
 Name = Route 8
 MapPosition = 0,13,13
 BattleBack = underwater
 Environment = Underwater
 #-------------------------------
-[071]   # Harbor
+[071]   # Route 8 harbor
 Name = Route 8
 MapPosition = 0,13,13
 #-------------------------------
@@ -398,7 +386,7 @@ MapPosition = 0,22,16
 BattleBack = field
 Flags = DistortionWorld
 #-------------------------------
-[074]   # Cycling Road gate
+[074]   # Route 6 Cycling Road gate
 Name = Route 6
 Bicycle = true
 MapPosition = 0,12,10

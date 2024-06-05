@@ -161,7 +161,7 @@ module BattleCreationHelperMethods
     alias __followingpkmn__after_battle after_battle unless method_defined?(:__followingpkmn__after_battle)
   end
 
-  def after_battle(*args)
+  def self.after_battle(*args)
     __followingpkmn__after_battle(*args)
     FollowingPkmn.refresh(false)
     $PokemonGlobal.call_refresh = true

@@ -24,23 +24,23 @@ EventHandlers.add(:following_pkmn_talk, :status, proc { |pkmn, _random_val|
   case pkmn.status
   when :POISON
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_POISON)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     pbMessage(_INTL("{1} is shivering with the effects of being poisoned.", pkmn.name))
   when :BURN
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     pbMessage(_INTL("{1}'s burn looks painful.", pkmn.name))
   when :FROZEN
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     pbMessage(_INTL("{1} seems very cold. It's frozen solid!", pkmn.name))
   when :SLEEP
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     pbMessage(_INTL("{1} seems really tired.", pkmn.name))
   when :PARALYSIS
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     pbMessage(_INTL("{1} is standing still and twitching.", pkmn.name))
   end
   next true if pkmn.status != :NONE
@@ -51,7 +51,7 @@ EventHandlers.add(:following_pkmn_talk, :status, proc { |pkmn, _random_val|
 EventHandlers.add(:following_pkmn_talk, :pokemon_lab, proc { |pkmn, _random_val|
   if $game_map.metadata&.has_flag?("PokemonLab")
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} is touching some kind of switch."),
       _INTL("{1} has a cord in its mouth!"),
@@ -68,7 +68,7 @@ EventHandlers.add(:following_pkmn_talk, :pokemon_lab, proc { |pkmn, _random_val|
 EventHandlers.add(:following_pkmn_talk, :player_house, proc { |pkmn, _random_val|
   if $game_map.name.include?($player.name)
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} is sniffing around the room."),
       _INTL("{1} noticed {2}'s mom is nearby."),
@@ -84,7 +84,7 @@ EventHandlers.add(:following_pkmn_talk, :player_house, proc { |pkmn, _random_val
 EventHandlers.add(:following_pkmn_talk, :pokemon_center, proc { |pkmn, _random_val|
   if $game_map.metadata&.has_flag?("PokeCenter")
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} looks happy to see the nurse."),
       _INTL("{1} looks a little better just being in the Pokémon Center."),
@@ -106,7 +106,7 @@ EventHandlers.add(:following_pkmn_talk, :pokemon_center, proc { |pkmn, _random_v
 EventHandlers.add(:following_pkmn_talk, :gym, proc { |pkmn, _random_val|
   if $game_map.metadata&.has_flag?("GymMap")
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} looks eager to battle!"),
       _INTL("{1} is looking at {2} with a determined gleam in its' eye."),
@@ -131,7 +131,7 @@ EventHandlers.add(:following_pkmn_talk, :storm_weather, proc { |pkmn, _random_va
   if :Storm == $game_screen.weather_type
     if pkmn.hasType?(:ELECTRIC)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is staring up at the sky."),
         _INTL("The storm seems to be making {1} excited."),
@@ -142,7 +142,7 @@ EventHandlers.add(:following_pkmn_talk, :storm_weather, proc { |pkmn, _random_va
       ]
     else
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is staring up at the sky."),
         _INTL("The storm seems to be making {1} a bit nervous."),
@@ -164,7 +164,7 @@ EventHandlers.add(:following_pkmn_talk, :snow_weather, proc { |pkmn, _random_val
   if :Snow == $game_screen.weather_type
     if pkmn.hasType?(:ICE)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is watching the snow fall."),
         _INTL("{1} is thrilled by the snow!"),
@@ -174,7 +174,7 @@ EventHandlers.add(:following_pkmn_talk, :snow_weather, proc { |pkmn, _random_val
       ]
     else
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is watching the snow fall."),
         _INTL("{1} is nipping at the falling snowflakes."),
@@ -196,7 +196,7 @@ EventHandlers.add(:following_pkmn_talk, :blizzard_weather, proc { |pkmn, _random
   if :Blizzard == $game_screen.weather_type
     if pkmn.hasType?(:ICE)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is watching the hail fall."),
         _INTL("{1} isn't bothered at all by the hail."),
@@ -206,7 +206,7 @@ EventHandlers.add(:following_pkmn_talk, :blizzard_weather, proc { |pkmn, _random
       ]
     else
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is getting pelted by hail!"),
         _INTL("{1} wants to avoid the hail."),
@@ -227,7 +227,7 @@ EventHandlers.add(:following_pkmn_talk, :sandstorm_weather, proc { |pkmn, _rando
   if :Sandstorm == $game_screen.weather_type
     if [:ROCK, :GROUND].any? { |type| pkmn.hasType?(type) }
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is coated in sand."),
         _INTL("The weather doesn't seem to bother {1} at all!"),
@@ -236,7 +236,7 @@ EventHandlers.add(:following_pkmn_talk, :sandstorm_weather, proc { |pkmn, _rando
       ]
     elsif pkmn.hasType?(:STEEL)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is coated in sand, but doesn't seem to mind."),
         _INTL("{1} seems unbothered by the sandstorm."),
@@ -245,7 +245,7 @@ EventHandlers.add(:following_pkmn_talk, :sandstorm_weather, proc { |pkmn, _rando
       ]
     else
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is covered in sand..."),
         _INTL("{1} spat out a mouthful of sand!"),
@@ -263,7 +263,7 @@ EventHandlers.add(:following_pkmn_talk, :sandstorm_weather, proc { |pkmn, _rando
 EventHandlers.add(:following_pkmn_talk, :forest_map, proc { |pkmn, _random_val|
   if $game_map.metadata&.has_flag?("Forest")
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_MUSIC)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     if [:BUG, :GRASS].any? { |type| pkmn.hasType?(type) }
       messages = [
         _INTL("{1} seems highly interested in the trees."),
@@ -299,7 +299,7 @@ EventHandlers.add(:following_pkmn_talk, :rainy_weather, proc { |pkmn, _random_va
   if [:Rain, :HeavyRain].include?($game_screen.weather_type)
     if pkmn.hasType?(:FIRE) || pkmn.hasType?(:GROUND) || pkmn.hasType?(:ROCK)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} seems very upset the weather."),
         _INTL("{1} is shivering..."),
@@ -311,7 +311,7 @@ EventHandlers.add(:following_pkmn_talk, :rainy_weather, proc { |pkmn, _random_va
       ]
     elsif pkmn.hasType?(:WATER) || pkmn.hasType?(:GRASS)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} seems to be enjoying the weather."),
         _INTL("{1} seems to be happy about the rain!"),
@@ -323,7 +323,7 @@ EventHandlers.add(:following_pkmn_talk, :rainy_weather, proc { |pkmn, _random_va
       ]
     else
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is staring up at the sky."),
         _INTL("{1} looks a bit surprised to see rain."),
@@ -343,7 +343,7 @@ EventHandlers.add(:following_pkmn_talk, :rainy_weather, proc { |pkmn, _random_va
 EventHandlers.add(:following_pkmn_talk, :beach_map, proc { |pkmn, _random_val|
   if $game_map.metadata&.has_flag?("Beach")
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} seems to be enjoying the scenery."),
       _INTL("{1} seems to enjoy the sound of the waves moving the sand."),
@@ -369,7 +369,7 @@ EventHandlers.add(:following_pkmn_talk, :sunny_weather, proc { |pkmn, _random_va
   if :Sun == $game_screen.weather_type
     if pkmn.hasType?(:GRASS)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} seems pleased to be out in the sunshine."),
         _INTL("{1} is soaking up the sunshine."),
@@ -380,7 +380,7 @@ EventHandlers.add(:following_pkmn_talk, :sunny_weather, proc { |pkmn, _random_va
       ]
     elsif pkmn.hasType?(:FIRE)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} seems to be happy about the great weather!"),
         _INTL("The bright sunlight doesn't seem to bother {1} at all."),
@@ -391,7 +391,7 @@ EventHandlers.add(:following_pkmn_talk, :sunny_weather, proc { |pkmn, _random_va
       ]
     elsif pkmn.hasType?(:DARK)
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is glaring up at the sky."),
         _INTL("{1} seems personally offended by the sunshine."),
@@ -402,7 +402,7 @@ EventHandlers.add(:following_pkmn_talk, :sunny_weather, proc { |pkmn, _random_va
       ]
     else
       FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
       messages = [
         _INTL("{1} is squinting in the bright sunshine."),
         _INTL("{1} is starting to sweat."),

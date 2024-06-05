@@ -8,7 +8,7 @@
 EventHandlers.add(:following_pkmn_talk, :music_generic, proc { |pkmn, random_val|
   if random_val == 0
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_MUSIC)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} seems to want to play with {2}."),
       _INTL("{1} is singing and humming."),
@@ -43,81 +43,81 @@ EventHandlers.add(:following_pkmn_talk, :music_generic, proc { |pkmn, random_val
     case value
     # Special move route to go along with some of the dialogue
     when 3, 9
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 80])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 80])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0
       ])
     when 4, 5
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 40])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 40])
       FollowingPkmn.move_route([
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0
       ])
     when 6, 17
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 40])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 40])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP
       ])
     when 7, 28
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 60])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 60])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0
       ])
     when 21, 22
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 50])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 50])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0
       ])
     end
     pbMessage(_INTL(messages[value], pkmn.name, $player.name))
@@ -130,7 +130,7 @@ EventHandlers.add(:following_pkmn_talk, :music_generic, proc { |pkmn, random_val
 EventHandlers.add(:following_pkmn_talk, :angry_generic, proc { |pkmn, random_val|
   if random_val == 1
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ANGRY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} let out a roar!"),
       _INTL("{1} is making a face like it's angry!"),
@@ -147,11 +147,11 @@ EventHandlers.add(:following_pkmn_talk, :angry_generic, proc { |pkmn, random_val
     # Special move route to go along with some of the dialogue
     case value
     when 6, 7, 8
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 25])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 25])
       FollowingPkmn.move_route([
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0
       ])
     end
     pbMessage(_INTL(messages[value], pkmn.name, $player.name))
@@ -164,7 +164,7 @@ EventHandlers.add(:following_pkmn_talk, :angry_generic, proc { |pkmn, random_val
 EventHandlers.add(:following_pkmn_talk, :ellipses_generic, proc { |pkmn, random_val|
   if random_val == 2
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_ELIPSES)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} is looking down steadily."),
       _INTL("{1} is sniffing around."),
@@ -204,15 +204,15 @@ EventHandlers.add(:following_pkmn_talk, :ellipses_generic, proc { |pkmn, random_
     # Special move route to go along with some of the dialogue
     case value
     when 1, 5, 7, 20, 21
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 35])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 35])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnDown
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_DOWN
       ])
     end
     pbMessage(_INTL(messages[value], pkmn.name, $player.name))
@@ -225,7 +225,7 @@ EventHandlers.add(:following_pkmn_talk, :ellipses_generic, proc { |pkmn, random_
 EventHandlers.add(:following_pkmn_talk, :happy_generic, proc { |pkmn, random_val|
   if random_val == 3
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HAPPY)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} began poking {2}."),
       _INTL("{1} looks very happy."),
@@ -260,28 +260,28 @@ EventHandlers.add(:following_pkmn_talk, :happy_generic, proc { |pkmn, random_val
     # Special move route to go along with some of the dialogue
     case value
     when 3
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 45])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 45])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0
       ])
     when 11, 16, 17, 24
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 40])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 40])
       FollowingPkmn.move_route([
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::JUMP, 0, 0
       ])
     end
     pbMessage(_INTL(messages[value], pkmn.name, $player.name))
@@ -294,7 +294,7 @@ EventHandlers.add(:following_pkmn_talk, :happy_generic, proc { |pkmn, random_val
 EventHandlers.add(:following_pkmn_talk, :heart_generic, proc { |pkmn, random_val|
   if random_val == 4
     FollowingPkmn.animation(FollowingPkmn::ANIMATION_EMOTE_HEART)
-    pbMoveRoute($game_player, [PBMoveRoute::Wait, 20])
+    pbMoveRoute($game_player, [PBMoveRoute::WAIT, 20])
     messages = [
       _INTL("{1} suddenly started walking closer to {2}."),
       _INTL("Woah! {1} suddenly hugged {2}."),
@@ -322,9 +322,9 @@ EventHandlers.add(:following_pkmn_talk, :heart_generic, proc { |pkmn, random_val
     value = rand(messages.length)
     case value
     when 1, 6,
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 10])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 10])
       FollowingPkmn.move_route([
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::JUMP, 0, 0
       ])
     end
     pbMessage(_INTL(messages[value], pkmn.name, $player.name))
@@ -366,58 +366,58 @@ EventHandlers.add(:following_pkmn_talk, :generic,  proc { |pkmn, random_val|
     # Special move route to go along with some of the dialogue
     case value
     when 0
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 15])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 15])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN
       ])
     when 2, 4
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 35])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 35])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 10,
-        PBMoveRoute::TurnDown
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 10,
+        PBMoveRoute::TURN_DOWN
       ])
     when 14
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 50])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 50])
       FollowingPkmn.move_route([
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnRight,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnUp,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnLeft,
-        PBMoveRoute::Wait, 4,
-        PBMoveRoute::TurnDown
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_RIGHT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_UP,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_LEFT,
+        PBMoveRoute::WAIT, 4,
+        PBMoveRoute::TURN_DOWN
       ])
     when 22, 23
-      pbMoveRoute($game_player, [PBMoveRoute::Wait, 10])
+      pbMoveRoute($game_player, [PBMoveRoute::WAIT, 10])
       FollowingPkmn.move_route([
-        PBMoveRoute::Jump, 0, 0
+        PBMoveRoute::JUMP, 0, 0
       ])
     end
     pbMessage(_INTL(messages[value], pkmn.name, $player.name))

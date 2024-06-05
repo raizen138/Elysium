@@ -334,8 +334,3 @@ Yield = 1,5
 HoursPerStage = 24
 DryingPerHour = 7
 Yield = 1,5
-#-------------------------------
-[NEVEABERRY]
-HoursPerStage = 24
-DryingPerHour = 7
-Yield = 1,5

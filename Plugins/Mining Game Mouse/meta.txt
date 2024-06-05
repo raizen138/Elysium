@@ -1,5 +1,0 @@
-Name       = Mining Game Mouse
-Website    = https://reliccastle.com/resources/1250/
-Essentials = 20.1, 20
-Version    = 1.0
-Credits    = TechSkylander1518

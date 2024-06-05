@@ -1,0 +1,6 @@
+﻿Name       = [DBK] SOS Battles
+Version    = 1.0.4
+Essentials = 21.1
+Requires   = Deluxe Battle Kit,1.1.2
+Website    = https://www.pokecommunity.com/threads/sos-battles-dbk-add-on-v21-1.525882/
+Credits    = Lucidious89

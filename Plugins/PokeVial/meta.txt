@@ -1,4 +1,0 @@
-Name         = POKEVIAL
-Version      = 1.0.0
-Website      = https://twitter.com/Skyflyer_R
-Credits      = SKYFLYER

@@ -117,7 +117,7 @@ end
 alias __followingpkmn__pbWaterfall pbWaterfall unless defined?(__followingpkmn__pbWaterfall)
 def pbWaterfall(*args)
   $game_temp.no_follower_field_move = true
-  pkmn = $player.get_pokemon_with_move(:WATERFALL)
+  $player.get_pokemon_with_move(:WATERFALL)
   ret = __followingpkmn__pbWaterfall(*args)
   $game_temp.no_follower_field_move = false
   return ret

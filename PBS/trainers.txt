@@ -1,4 +1,4 @@
-# See the documentation on the wiki to learn how to edit this file.
+﻿# See the documentation on the wiki to learn how to edit this file.
 #-------------------------------
 [CAMPER,Liam]
 LoseText = A very good battle, indeed!
@@ -9,31 +9,31 @@ Pokemon = BONSLY,11
 Items = FULLRESTORE,FULLRESTORE
 LoseText = Very good.
 Pokemon = GEODUDE,12
-    Gender = male
     Moves = DEFENSECURL,HEADSMASH,ROCKPOLISH,ROCKTHROW
     AbilityIndex = 0
+    Gender = male
     IV = 20,20,20,20,20,20
 Pokemon = ONIX,14
     Name = Rocky
-    Gender = male
-    Shiny = yes
     Moves = HEADSMASH,ROCKTHROW,RAGE,ROCKTOMB
     AbilityIndex = 0
     Item = SITRUSBERRY
+    Gender = male
     IV = 20,20,20,20,20,20
+    Shiny = true
     Ball = HEAVYBALL
 #-------------------------------
 [TEAMROCKET_M,Grunt,1]
 LoseText = You're too good for me!
 Pokemon = WEEPINBELL,21
-    Shadow = yes
+    Shadow = true
 #-------------------------------
 [TEAMROCKET_F,Grunt,1]
 LoseText = You're too good for me!
 Pokemon = BURMY,19
 Pokemon = WINGULL,19
 Pokemon = ELECTABUZZ,20
-    Shadow = yes
+    Shadow = true
 #-------------------------------
 [YOUNGSTER,Ben]
 LoseText = Aww, I lost.
@@ -42,7 +42,7 @@ Pokemon = EKANS,11
 #-------------------------------
 [CAMPER,Jeff]
 LoseText = A very good battle, indeed!
-Pokemon = DOLLIV,16
+Pokemon = SPEAROW,16
 Pokemon = SENTRET,16
 #-------------------------------
 [CAMPER,Jeff,1]
@@ -62,7 +62,7 @@ Pokemon = PERSIAN,32
 LoseText = You're too good for me!
 Pokemon = MACHOP,19
 #-------------------------------
-[FISHER_M,Andrew]
+[FISHERMAN,Andrew]
 LoseText = Washed out!
 Pokemon = MAGIKARP,14
 Pokemon = MAGIKARP,18
@@ -81,11 +81,11 @@ LoseText = Our teamwork failed!
 Pokemon = TURTWIG,19
 Pokemon = CHIMCHAR,19
 #-------------------------------
-[PROT_May,May]
+[POKEMONTRAINER_May,May]
 LoseText = ...
 Pokemon = COMBUSKEN,19
 #-------------------------------
-[SWIMMER_F,Ariel]
+[SWIMMER2_F,Ariel]
 LoseText = Washed out!
 Pokemon = STARYU,15
 Pokemon = GOLDEEN,11
