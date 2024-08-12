@@ -81,28 +81,21 @@ if ARMSettings::PROGRESS_COUNTER && ARMSettings::PROGRESS_COUNT_ITEMS
   end 
 
   def countItem(itemInfo)
-    $PokemonGlobal.itemTracker ||= {}
     mapID = $game_map.map_id
     map = load_data(sprintf("Data/Map%03d.rxdata", mapID))
     eventID = pbMapInterpreter.get_self.id
     return if map.nil? || !map.events[eventID].name[/item/i]
     map = GameData::MapMetadata.try_get(mapID)
-    regionMap = PokemonRegionMap_Scene.new 
-    district = regionMap.getDistrict(map.town_map_position)
-    $PokemonGlobal.itemTracker[district] ||= { :total => 0 }
-    $PokemonGlobal.itemTracker[district][:maps] ||= {}
-    $PokemonGlobal.itemTracker[district][:maps][mapID] ||= { :found => 0}
-    $PokemonGlobal.itemTracker[district][:maps][mapID][eventID] ||= { :found => 0, :items => [] }
-    unless $PokemonGlobal.itemTracker[district][:maps][mapID][eventID][:items].include?(itemInfo[:item])
-      $PokemonGlobal.itemTracker[district][:maps][mapID][eventID][:items] += [itemInfo[:item]]
-      $PokemonGlobal.itemTracker[district][:maps][mapID][eventID][:found] += itemInfo[:quantity]
-      $PokemonGlobal.itemTracker[district][:total] += itemInfo[:quantity]
-      $PokemonGlobal.itemTracker[district][:maps][mapID][:found] += itemInfo[:quantity]
+    district = getDistrictName(map)
+    $ArckyGlobal.itemTracker[district] ||= { :total => 0 }
+    $ArckyGlobal.itemTracker[district][:maps] ||= {}
+    $ArckyGlobal.itemTracker[district][:maps][mapID] ||= { :found => 0}
+    $ArckyGlobal.itemTracker[district][:maps][mapID][eventID] ||= { :found => 0, :items => [] }
+    unless $ArckyGlobal.itemTracker[district][:maps][mapID][eventID][:items].include?(itemInfo[:item])
+      $ArckyGlobal.itemTracker[district][:maps][mapID][eventID][:items] += [itemInfo[:item]]
+      $ArckyGlobal.itemTracker[district][:maps][mapID][eventID][:found] += itemInfo[:quantity]
+      $ArckyGlobal.itemTracker[district][:total] += itemInfo[:quantity]
+      $ArckyGlobal.itemTracker[district][:maps][mapID][:found] += itemInfo[:quantity]
     end
-    echoln($PokemonGlobal.itemTracker)
   end
-
-  class PokemonGlobalMetadata
-    attr_accessor :itemTracker
-  end 
 end 

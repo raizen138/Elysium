@@ -57,7 +57,7 @@ class PokemonStorageScene
         textstrings.push([_INTL("No item"), 86, 348, :center, nonbase, nonshadow])
       end
       if pokemon.shiny?
-        pbDrawImagePositions(plugin_overlay, [["Graphics/Pictures/shiny", 134, 16]])
+        pbDrawImagePositions(plugin_overlay, [["Graphics/UI/shiny", 134, 16]])
       end
       pbDisplayShinyLeaf(pokemon, plugin_overlay, 158, 50)      if Settings::STORAGE_SHINY_LEAF
       pbDisplayIVRatings(pokemon, plugin_overlay, 8, 198, true) if Settings::STORAGE_IV_RATINGS

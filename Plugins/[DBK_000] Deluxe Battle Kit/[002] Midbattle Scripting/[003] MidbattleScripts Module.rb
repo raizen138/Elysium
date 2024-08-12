@@ -219,7 +219,6 @@ module MidbattleScripts
       "battlerStatus" => [:PARALYSIS, true]
     }
   }
-  
 
 ################################################################################
 # Demo scenario vs. Rocket Grunt in a collapsing cave.

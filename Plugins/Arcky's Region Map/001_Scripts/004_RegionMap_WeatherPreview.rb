@@ -45,13 +45,8 @@ class PokemonRegionMap_Scene
       conversion = WeatherConfig::WEATHER_IMAGE
       id = conversion[weather]
       unless id.nil?
-        @sprites["weatherIcon"].visible = true 
-        bitmap = pbResolveBitmap(findUsableUI("WeatherPreview/WeatherIcons/#{id}"))
-        if bitmap 
-          @sprites["weatherIcon"].setBitmap(findUsableUI("WeatherPreview/WeatherIcons/#{id}"))
-        else 
-          @sprites["weatherIcon"].setBitmap("Graphics/UI/WeatherSystem/Weather/#{id}")
-        end
+        @sprites["weatherIcon"].visible = true  
+        @sprites["weatherIcon"].setBitmap("#{FOLDER}Icons/Weather/#{id}")
       else 
         @sprites["weatherIcon"].visible = false 
       end 

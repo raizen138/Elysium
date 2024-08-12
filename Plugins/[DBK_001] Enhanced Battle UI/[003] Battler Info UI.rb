@@ -27,7 +27,7 @@ class Battle::Scene
     @sprites["rightarrow"].visible = true
     loop do
       pbUpdate(cw)
-      pbUpdateSpriteHash(@sprites)
+      pbUpdateInfoSprites
       break if Input.trigger?(Input::BACK)
       if Input.trigger?(Input::LEFT)
         idx -= 1
@@ -374,11 +374,11 @@ class Battle::Scene
     #---------------------------------------------------------------------------
     # Special states.
     if battler.dynamax?
-	  if battler.effects[PBEffects::Dynamax] > 0 && !battler.isRaidBoss?
-	    tick = sprintf("%d/%d", battler.effects[PBEffects::Dynamax], Settings::DYNAMAX_TURNS)
-	  else
-	    tick = "--"
-	  end
+      if battler.effects[PBEffects::Dynamax] > 0 && !battler.isRaidBoss?
+        tick = sprintf("%d/%d", battler.effects[PBEffects::Dynamax], Settings::DYNAMAX_TURNS)
+      else
+        tick = "--"
+      end
       desc = _INTL("The Pokémon is in the Dynamax state.")
       display_effects.push([_INTL("Dynamax"), tick, desc])
     elsif battler.tera?
@@ -388,9 +388,10 @@ class Battle::Scene
     end
     #---------------------------------------------------------------------------
     # Weather
-    if battler.effectiveWeather != :None
-      if @battle.field.weather == :Hail
-        name = GameData::BattleWeather.get(@battle.field.weather).name
+    weather = battler.effectiveWeather
+    if weather != :None
+      if weather == :Hail
+        name = GameData::BattleWeather.get(weather).name
         desc = _INTL("Non-Ice types take damage each turn. Blizzard always hits.")
         if defined?(Settings::HAIL_WEATHER_TYPE)
           case Settings::HAIL_WEATHER_TYPE
@@ -403,11 +404,11 @@ class Battle::Scene
           end
         end
       else
-        name = GameData::BattleWeather.get(@battle.field.weather).name
+        name = GameData::BattleWeather.get(weather).name
       end
-      tick = @battle.field.weatherDuration
+      tick = (weather == @battle.field.weather) ? @battle.field.weatherDuration : 0
       tick = (tick > 0) ? sprintf("%d/%d", tick, 5) : "--"
-      case @battle.field.weather
+      case weather
       when :Sun         then desc = _INTL("Boosts Fire moves and weakens Water moves.")
       when :HarshSun    then desc = _INTL("Boosts Fire moves and negates Water moves.")
       when :Rain        then desc = _INTL("Boosts Water moves and weakens Fire moves.")

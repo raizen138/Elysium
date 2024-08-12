@@ -134,10 +134,13 @@ Battle::AbilityEffects::OnSwitchIn.add(:IMPOSTER,
     next if battler.dynamax? && !choice.dynamax_able?
     battle.pbShowAbilitySplash(battler, true)
     battle.pbHideAbilitySplash(battler)
+    battle.scene.pbAnimateSubstitute(battler, :hide)
     battler.effects[PBEffects::TransformPokemon] = choice.pokemon
     battle.pbAnimation(:TRANSFORM, battler, choice)
+    battler.mosaicChange = true if defined?(battler.mosaicChange)
     battle.scene.pbChangePokemon(battler, choice.pokemon)
     battler.pbTransform(choice)
+    battle.scene.pbAnimateSubstitute(battler, :show)
   }
 )
 
@@ -603,10 +606,18 @@ class Battle::Move::TransformUserIntoTarget < Battle::Move
     return dx_pbFailsAgainstTarget?(user, target, show_message)
   end
   
+  alias dx_pbEffectAgainstTarget pbEffectAgainstTarget
+  def pbEffectAgainstTarget(user, target)
+    @battle.scene.pbAnimateSubstitute(user, :hide)
+    dx_pbEffectAgainstTarget(user, target)
+  end
+  
   def pbShowAnimation(id, user, targets, hitNum = 0, showAnimation = true)
     super
     user.effects[PBEffects::TransformPokemon] = targets[0].pokemon
+    user.mosaicChange = true if defined?(user.mosaicChange)
     @battle.scene.pbChangePokemon(user, targets[0].pokemon)
+    @battle.scene.pbAnimateSubstitute(user, :show)
   end
 end
 

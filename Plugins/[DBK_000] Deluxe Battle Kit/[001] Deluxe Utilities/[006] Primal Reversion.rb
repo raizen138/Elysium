@@ -33,9 +33,11 @@ class Battle
     return if !battler.hasPrimal? || battler.primal?
     $stats.primal_reversion_count += 1 if battler.pbOwnedByPlayer?
     pbDeluxeTriggers(idxBattler, nil, "BeforePrimalReversion", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     pbAnimatePrimalReversion(battler)
     pbDisplay(_INTL("{1}'s Primal Reversion!\nIt reverted to its primal form!", battler.pbThis))
     pbDeluxeTriggers(idxBattler, nil, "AfterPrimalReversion", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   def pbAnimatePrimalReversion(battler)

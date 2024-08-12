@@ -92,14 +92,16 @@ end
 #-------------------------------------------------------------------------------
 MidbattleHandlers.add(:midbattle_global, :wild_dynamax_battle,
   proc { |battle, idxBattler, idxTarget, trigger|
-    next if !battle.wildBattle?
+    next if !battle.wildBattle? || pbInSafari?
     next if battle.wildBattleMode != :dynamax
     foe = battle.battlers[1]
     next if !foe.wild?
+    logname = _INTL("{1} ({2})", foe.pbThis, foe.index)
     case trigger
     when "RoundStartCommand_1_foe"
       if battle.pbCanDynamax?(foe.index)
-	    foe.display_dynamax_moves
+        PBDebug.log("[Midbattle Global] #{logname} will Dynamax")
+        foe.display_dynamax_moves
         battle.pbDynamax(foe.index)
         foe.effects[PBEffects::Dynamax] = -1
         battle.disablePokeBalls = true
@@ -110,7 +112,9 @@ MidbattleHandlers.add(:midbattle_global, :wild_dynamax_battle,
         battle.wildBattleMode = nil
       end
     when "BattlerReachedHPCap_foe"
+      PBDebug.log("[Midbattle Global] #{logname} damage cap reached")
       foe.unDynamax
+      battle.noBag = false
       battle.disablePokeBalls = false
       battle.pbDisplayPaused(_INTL("{1}'s Dynamax energy faded!\nIt may now be captured!", foe.pbThis))
       ch = battle.choices[idxBattler]
@@ -137,6 +141,7 @@ MidbattleHandlers.add(:midbattle_triggers, "dynamax",
     oldMode = battle.wildBattleMode
     battle.wildBattleMode = :dynamax if battler.wild? && oldMode != :dynamax
     if battle.pbCanDynamax?(battler.index)
+      PBDebug.log("     'dynamax': #{battler.name} (#{battler.index}) set to Dynamax")
       battle.scene.pbForceEndSpeech
       battler.display_dynamax_moves
       ch[2] = battler.moves[ch[1]] if !battler.movedThisRound?
@@ -157,6 +162,9 @@ MidbattleHandlers.add(:midbattle_triggers, "disableDynamax",
     side = (battler.opposes?) ? 1 : 0
     owner = battle.pbGetOwnerIndexFromBattlerIndex(idxBattler)
     battle.dynamax[side][owner] = (params) ? -2 : -1
+    value = (params) ? "disabled" : "enabled"
+    trainerName = battle.pbGetOwnerName(idxBattler)
+    PBDebug.log("     'disableDynamax': Dynamax #{value} for #{trainerName}")
   }
 )
 
@@ -309,6 +317,7 @@ class Battle
       triggers.push("BeforeGigantamax", battler.species, *battler.pokemon.types)
     end
     pbDeluxeTriggers(idxBattler, nil, *triggers)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     battler.effects[PBEffects::Dynamax]    = Settings::DYNAMAX_TURNS
     battler.effects[PBEffects::Encore]     = 0
     battler.effects[PBEffects::EncoreMove] = nil
@@ -328,6 +337,7 @@ class Battle
       triggers.push("AfterGigantamax", battler.species, *battler.pokemon.types)
     end
     pbDeluxeTriggers(idxBattler, nil, *triggers)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   #-----------------------------------------------------------------------------
@@ -427,7 +437,7 @@ class Battle::Battler
     return false if hasEligibleAction?(:mega, :primal, :zmove, :ultra, :zodiac)
     return false if defined?(isCommanderHost?) && isCommanderHost?
     return false if hasEmax? && !pbEternamaxAvailable?
-    pokemon = @effects[PBEffects::TransformPokemon] || self.displayPokemon
+    pokemon = visiblePokemon
     transformed = @effects[PBEffects::Transform] || @effects[PBEffects::Illusion]
     return false if transformed && pokemon.hasEternamaxForm?
     return pokemon.dynamax_able?
@@ -475,7 +485,7 @@ class Battle::Battler
     self.form = @pokemon.form
     @pokemon.makeDynamax
     pbUpdate(true)
-    pkmn = @effects[PBEffects::TransformPokemon] || displayPokemon
+    pkmn = visiblePokemon
     @battle.scene.pbChangePokemon(self, pkmn)
   end
   
@@ -489,7 +499,7 @@ class Battle::Battler
       self.form = @pokemon.form
       @pokemon.makeUndynamax
       pbUpdate(true)
-      pkmn = @effects[PBEffects::TransformPokemon] || displayPokemon
+      pkmn = visiblePokemon
       @battle.scene.pbChangePokemon(self, pkmn)
       @battle.scene.pbRevertBattlerEnd
       @battle.scene.pbHPChanged(self, @totalhp) if !fainted?

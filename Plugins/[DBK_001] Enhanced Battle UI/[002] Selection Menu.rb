@@ -26,7 +26,9 @@ class Battle::Scene
         @sprites["info_icon#{b.index}"].pokemon = poke
         @sprites["info_icon#{b.index}"].visible = @enhancedUIToggle == :battler
         @sprites["info_icon#{b.index}"].setOffset(PictureOrigin::CENTER)
-        if b.dynamax?
+        if b.shadowPokemon?
+          @sprites["info_icon#{b.index}"].set_shadow_icon_pattern
+        elsif b.dynamax?
           @sprites["info_icon#{b.index}"].set_dynamax_icon_pattern
           color = (b.isSpecies?(:CALYREX)) ? Color.new(36, 243, 243) : Color.new(250, 57, 96)
         elsif b.tera?
@@ -88,7 +90,7 @@ class Battle::Scene
           textPos.push([_INTL("{1}", b.pokemon.name), nameX, iconY - 16, :center, base, shadow],
                        [@battle.pbGetOwnerFromBattlerIndex(b.index).name, nameX - 10, iconY + 13, 2, BASE_LIGHT, SHADOW_LIGHT])
         end
-        @battle.player.each { |p| trainers.push(p) if p.able_pokemon_count > 0 }
+        @battle.player.each_with_index { |t, i| trainers.push([t, i]) if t.able_pokemon_count > 0 }
         ballY = ypos + 154
         ballXFirst = 35
         ballXLast = Graphics.width - (16 * NUM_BALLS) - 35
@@ -126,7 +128,7 @@ class Battle::Scene
           imagePos.push([@path + "info_gender", bgX + 146, iconY - 37, b.displayPokemon.gender * 22, 0, 22, 20])
         end
         if @battle.opponent
-          @battle.opponent.each { |p| trainers.push(p) if p.able_pokemon_count > 0 } 
+          @battle.opponent.each_with_index { |t, i| trainers.push([t, i]) if t.able_pokemon_count > 0 } 
           ballY = ypos - 17
           ballXFirst = Graphics.width - (16 * NUM_BALLS) - 35
           ballXLast = 35
@@ -139,12 +141,13 @@ class Battle::Scene
       if !trainers.empty?
         ballXMiddle = (Graphics.width / 2) - 48
         ballX = ballXMiddle
-        trainers.each do |trainer|
+        trainers.each do |array|
+          trainer, idxTrainer = *array
           if trainers.length > 1
             case trainer
-            when trainers.first then ballX = ballXFirst
-            when trainers.last  then ballX = ballXLast
-            else                     ballX = ballXMiddle
+            when trainers.first[0] then ballX = ballXFirst
+            when trainers.last[0]  then ballX = ballXLast
+            else                        ballX = ballXMiddle
             end
           end
           imagePos.push([@path + "info_owner", ballX - 16, ballY - ballOffset])
@@ -155,6 +158,18 @@ class Battle::Scene
             elsif trainer.party[slot].status != :NONE then idx = 1 # Status
             end
             imagePos.push([@path + "info_party", ballX + (slot * 16), ballY, idx * 15, 0, 15, 15])
+          end
+          # Draws each trainer's Wonder Launcher points.
+          if @battle.launcherBattle?
+            path = Settings::WONDER_LAUNCHER_PATH
+            maxPoints = Settings::WONDER_LAUNCHER_MAX_POINTS
+            points = @battle.launcherPoints[side][idxTrainer]
+            x = ballX - 16 + ((128 - (10 * maxPoints + 2)) / 2).floor
+            y = (side == 0) ? ballY + 18 : ballY - 17
+            maxPoints.times do |i|
+              imagePos.push([path + "points", x + 10 * i, y, 0, 0, 12, 14])
+              imagePos.push([path + "points", x + 10 * i, y, 12, 0, 12, 14]) if points >= i + 1
+            end
           end
         end
       end
@@ -183,7 +198,7 @@ class Battle::Scene
     switchUI = 0
     loop do
       pbUpdate(cw)
-      pbUpdateSpriteHash(@sprites)
+      pbUpdateInfoSprites
       oldSide = idxSide
       oldPoke = idxPoke
       break if Input.trigger?(Input::BACK) || Input.trigger?(Input::JUMPUP)

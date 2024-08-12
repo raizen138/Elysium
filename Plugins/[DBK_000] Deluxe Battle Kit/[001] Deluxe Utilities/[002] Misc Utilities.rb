@@ -65,6 +65,39 @@ class Battle
     allSameSideBattlers(idxBattler).each { |b| return true if b.hasLowHP? }
     return false
   end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for checking if a trainer has any available Pokemon left in the party.
+  #-----------------------------------------------------------------------------
+  def pbTeamAllFainted?(idxSide, idxTrainer)
+    teamCount = 0
+    eachInTeam(idxSide, idxTrainer) { |pkmn, _i| teamCount += 1 if pkmn.able? }
+    return teamCount == 0
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for returning an array of each battler owned by a particular trainer.
+  #-----------------------------------------------------------------------------
+  def allOwnedByTrainer(idxBattler)
+    idxTrainer = pbGetOwnerIndexFromBattlerIndex(idxBattler)
+    allies = allSameSideBattlers(idxBattler)
+    allies.select { |b| b && !b.fainted? && pbGetOwnerIndexFromBattlerIndex(b.index) == idxTrainer }
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Edits item messages for more descriptive use.
+  #-----------------------------------------------------------------------------
+  def pbUseItemMessage(item, trainerName, pkmn = nil)
+    item_data = GameData::Item.get(item)
+    itemName = item_data.portion_name
+    if pkmn.is_a?(Battle::Battler) && item_data.battle_use < 4
+      pbDisplayBrief(_INTL("{1} used the {2} on {3}.", trainerName, itemName, pkmn.pbThis(true)))
+    elsif pkmn.is_a?(Pokemon) && item_data.battle_use < 4
+      pbDisplayBrief(_INTL("{1} used the {2} on {3}.", trainerName, itemName, pkmn.name))
+    else
+      pbDisplayBrief(_INTL("{1} used the {2}.", trainerName, itemName))
+    end
+  end
 end
 
 #===============================================================================
@@ -88,6 +121,14 @@ class Battle::Battler
     @stopBoostedHPScaling = false
     dx_pbInitEffects(batonPass)
     @effects[PBEffects::TransformPokemon] = nil
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for getting the Pokemon a battler is displaying as.
+  #-----------------------------------------------------------------------------
+  def visiblePokemon
+    return @effects[PBEffects::TransformPokemon] if @effects[PBEffects::TransformPokemon]
+    return displayPokemon
   end
   
   #-----------------------------------------------------------------------------
@@ -204,6 +245,7 @@ class Battle::Battler
   #-----------------------------------------------------------------------------
   def pbSimpleFormChange(newForm, msg)
     return if fainted? || @effects[PBEffects::Transform] || @form == newForm
+    @battle.scene.pbAnimateSubstitute(self, :hide)
     oldForm = @form
     oldDmg = @totalhp - @hp
     @form = newForm
@@ -211,11 +253,13 @@ class Battle::Battler
     pbUpdate(true)
     @hp = @totalhp - oldDmg
     @effects[PBEffects::WeightChange] = 0 if Settings::MECHANICS_GENERATION >= 6
+    @mosaicChange = true if defined?(@mosaicChange)
     @battle.scene.pbChangePokemon(self, @pokemon)
     @battle.scene.pbRefreshOne(@index)
     @battle.pbDisplay(msg) if msg && msg != ""
     PBDebug.log("[Form changed] #{pbThis} changed from form #{oldForm} to form #{newForm}")
     @battle.pbSetSeen(self)
+    @battle.scene.pbAnimateSubstitute(self, :show)
   end
   
   #-----------------------------------------------------------------------------

@@ -103,6 +103,7 @@ class Battle
     return if !battler.hasMega? || battler.mega?
     $stats.mega_evolution_count += 1 if battler.pbOwnedByPlayer?
     pbDeluxeTriggers(idxBattler, nil, "BeforeMegaEvolution", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     old_ability = battler.ability_id
     if battler.hasActiveAbility?(:ILLUSION)
       Battle::AbilityEffects.triggerOnBeingHit(battler.ability, nil, battler, nil, self)
@@ -138,6 +139,7 @@ class Battle
     battler.pbTriggerAbilityOnGainingIt
     pbCalculatePriority(false, [idxBattler]) if Settings::RECALCULATE_TURN_ORDER_AFTER_MEGA_EVOLUTION
     pbDeluxeTriggers(idxBattler, nil, "AfterMegaEvolution", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   def pbAnimateMegaEvolution(battler)

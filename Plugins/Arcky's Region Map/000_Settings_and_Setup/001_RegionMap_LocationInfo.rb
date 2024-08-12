@@ -144,7 +144,7 @@ module ARMLocationPreview
   }
 
   # Region1
-  Here = {
+  TiallRegion = {
     description: _INTL("There's something here but I don't know what!")
   }
 

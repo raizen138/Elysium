@@ -21,6 +21,7 @@ class Battle::Scene
     @briefMessage = false
     fleeAnim = Animation::BattlerFlee.new(@sprites, @viewport, battler.index, @battle)
     dataBoxAnim = Animation::DataBoxDisappear.new(@sprites, @viewport, battler.index)
+    pbAnimateSubstitute(battler, :break)
     loop do
       fleeAnim.update
       dataBoxAnim.update
@@ -60,6 +61,21 @@ class Battle::Scene
   end
   
   #-----------------------------------------------------------------------------
+  # Calls animation to use an item on a battler.
+  #-----------------------------------------------------------------------------
+  def pbItemUseAnimation(idxBattler)
+    itemAnim = Animation::UseItem.new(@sprites, @viewport, idxBattler)
+    pbAnimateSubstitute(idxBattler, :hide)
+    loop do
+      itemAnim.update
+      pbUpdate
+      break if itemAnim.animDone?
+    end
+    itemAnim.dispose
+    pbAnimateSubstitute(idxBattler, :show)
+  end
+  
+  #-----------------------------------------------------------------------------
   # Used for refreshing the entire battle scene with a white flash effect.
   #-----------------------------------------------------------------------------
   def pbFlashRefresh
@@ -86,6 +102,16 @@ class Battle::Scene
       tone = lerp(255, 0, 0.4, timer_start, System.uptime)
       @viewport.tone.set(tone, tone, tone, 0)
       break if tone <= 0
+    end
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Utility for pausing further scene processing for a given number of seconds.
+  #-----------------------------------------------------------------------------
+  def pbPauseScene(seconds = 1)
+    timer_start = System.uptime
+    until System.uptime - timer_start >= seconds
+      pbUpdate
     end
   end
 end
@@ -138,6 +164,36 @@ class Battle::Scene::Animation::RevertBattlerEnd < Battle::Scene::Animation
 
   def createProcesses
     revertBattlefield(@battle, 4)
+  end
+end
+
+#-------------------------------------------------------------------------------
+# Animation code to animate the use of an item on a battler.
+#-------------------------------------------------------------------------------
+class Battle::Scene::Animation::UseItem < Battle::Scene::Animation
+  def initialize(sprites, viewport, idxBattler)
+    @index = idxBattler
+    super(sprites, viewport)
+  end
+
+  def createProcesses
+    return if !@sprites["pokemon_#{@index}"]
+    delay = 0
+    xpos  = @sprites["pokemon_#{@index}"].x
+    ypos  = @sprites["pokemon_#{@index}"].y
+    zpos  = @sprites["pokemon_#{@index}"].z
+    pulse = addNewSprite(xpos, ypos - 60, Settings::DELUXE_GRAPHICS_PATH + "pulse", PictureOrigin::CENTER)
+    pulse.setZ(delay, zpos)
+    pulse.setOpacity(delay, 0)
+    pulse2 = addNewSprite(xpos, ypos - 60, Settings::DELUXE_GRAPHICS_PATH + "pulse", PictureOrigin::CENTER)
+    pulse2.setZ(delay, zpos)
+    pulse2.setOpacity(delay, 0)
+    [pulse, pulse2].each_with_index do |p, i|
+      p.setSE(delay, "Mining found all") if i == 0
+      p.moveOpacity(delay, 4, 255)
+      p.moveZoom(delay, 8, 0)
+      delay += 2
+    end
   end
 end
 
@@ -286,14 +342,14 @@ class Battle::Scene::Animation
   #-----------------------------------------------------------------------------
   # Used for animation compatibility with animated Pokemon sprites.
   #-----------------------------------------------------------------------------  
-  def addPokeSprite(poke, origin = PictureOrigin::TOP_LEFT)
+  def addPokeSprite(poke, back = false, origin = PictureOrigin::TOP_LEFT)
     case poke
     when Pokemon
       s = PokemonSprite.new(@viewport)
-      s.setPokemonBitmap(poke)
+      s.setPokemonBitmap(poke, back)
     when Array
       s = PokemonSprite.new(@viewport)
-      s.setSpeciesBitmap(*poke)
+      s.setSpeciesBitmap(*poke, back)
     end
     num = @pictureEx.length
     picture = PictureEx.new(s.z)
@@ -318,15 +374,17 @@ class Battle::Scene::Animation
     battleBG.moveTone(delay, 4, tone)
     battle.allBattlers.each do |b|
       battler = addSprite(@sprites["pokemon_#{b.index}"], PictureOrigin::BOTTOM)
-      shadow = addSprite(@sprites["shadow_#{b.index}"], PictureOrigin::CENTER)
       box = addSprite(@sprites["dataBox_#{b.index}"])
+      if !PluginManager.installed?("[DBK] Animated Pokémon System")
+        shadow = addSprite(@sprites["shadow_#{b.index}"], PictureOrigin::CENTER)
+        shadow.moveTone(delay, 4, tone)
+      end
       if b.index == idxBattler
         battler.setSE(delay, sound) if sound
         battler.moveTone(delay, 4, Tone.new(255, 255, 255, 255))
       else
         battler.moveTone(delay, 4, tone)
-      end
-      shadow.moveTone(delay, 4, tone)
+      end 
       box.moveTone(delay, 4, tone)
     end
   end
@@ -340,12 +398,14 @@ class Battle::Scene::Animation
     battleBG.moveTone(delay, 6, tone)
     battle.allBattlers.each do |b|
       battler = addSprite(@sprites["pokemon_#{b.index}"], PictureOrigin::BOTTOM)
-      shadow = addSprite(@sprites["shadow_#{b.index}"], PictureOrigin::CENTER)
       box = addSprite(@sprites["dataBox_#{b.index}"])
+      if !PluginManager.installed?("[DBK] Animated Pokémon System")
+        shadow = addSprite(@sprites["shadow_#{b.index}"], PictureOrigin::CENTER)
+        shadow.moveOpacity(delay, 6, 255)
+        shadow.moveTone(delay, 6, tone)
+      end
       battler.moveOpacity(delay, 6, 255)
-      battler.moveTone(delay, 6, tone)
-      shadow.moveOpacity(delay, 6, 255)
-      shadow.moveTone(delay, 6, tone)
+      battler.moveTone(delay, 6, tone) 
       box.moveTone(delay, 6, tone)
     end
   end
@@ -413,15 +473,13 @@ class Battle::Scene::Animation
   #-----------------------------------------------------------------------------
   def dxSetPokemon(poke, delay, mirror = false, offset = false, opacity = 100, zoom = 100)
     battle_pos = Battle::Scene.pbBattlerPosition(1, 1)
-    picturePOKE = addPokeSprite(poke, PictureOrigin::BOTTOM)
+    picturePOKE = addPokeSprite(poke, false, PictureOrigin::BOTTOM)
     picturePOKE.setVisible(delay, false)
     spritePOKE = @pictureEx.length - 1
     @pictureSprites[spritePOKE].mirror = mirror
     @pictureSprites[spritePOKE].x = battle_pos[0] - 128
     @pictureSprites[spritePOKE].y = battle_pos[1] + 80
     @pictureSprites[spritePOKE].y += 20 if offset
-    @pictureSprites[spritePOKE].ox = @pictureSprites[spritePOKE].bitmap.width / 2
-    @pictureSprites[spritePOKE].oy = @pictureSprites[spritePOKE].bitmap.height
     @pictureSprites[spritePOKE].z = 999
     case poke
     when Pokemon
@@ -444,15 +502,13 @@ class Battle::Scene::Animation
     battle_pos = Battle::Scene.pbBattlerPosition(1, 1)
     picturePOKE = []
     for i in [ [2, 0], [-2, 0], [0, 2], [0, -2], [2, 2], [-2, -2], [2, -2], [-2, 2], [0, 0] ]
-      outline = addPokeSprite(poke, PictureOrigin::BOTTOM)
+      outline = addPokeSprite(poke, false, PictureOrigin::BOTTOM)
       outline.setVisible(delay, false)
       sprite = @pictureEx.length - 1
       @pictureSprites[sprite].mirror = mirror
       @pictureSprites[sprite].x = battle_pos[0] + i[0] - 128
       @pictureSprites[sprite].y = battle_pos[1] + i[1] + 80
       @pictureSprites[sprite].y += 20 if offset
-      @pictureSprites[sprite].ox = @pictureSprites[sprite].bitmap.width / 2
-      @pictureSprites[sprite].oy = @pictureSprites[sprite].bitmap.height
       @pictureSprites[sprite].z = 999
       case poke
       when Pokemon

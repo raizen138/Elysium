@@ -11,7 +11,7 @@ class Battle::Scene::Animation::BattlerTerastallize < Battle::Scene::Animation
     @battle = battle
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
-    @pkmn = @battler.effects[PBEffects::TransformPokemon] || @battler.displayPokemon
+    @pkmn = @battler.visiblePokemon
     @terastal = [@pkmn.species, @pkmn.gender, @pkmn.getTerastalForm, @pkmn.shiny?, @pkmn.shadowPokemon?]
     @cry_file = GameData::Species.cry_filename_from_pokemon(@pkmn)
     #---------------------------------------------------------------------------

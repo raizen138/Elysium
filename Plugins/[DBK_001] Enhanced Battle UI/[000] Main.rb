@@ -98,6 +98,19 @@ class Battle::Scene
   end
   
   #-----------------------------------------------------------------------------
+  # Utility for updating UI elements.
+  #-----------------------------------------------------------------------------
+  def pbUpdateInfoSprites
+    @sprites["leftarrow"].update
+    @sprites["rightarrow"].update
+    @sprites.each_key do |key|
+      next if !key.include?("info_icon")
+      next if @sprites[key].disposed?
+      @sprites[key].update
+    end
+  end
+  
+  #-----------------------------------------------------------------------------
   # Utilities for displaying UI elements.
   #-----------------------------------------------------------------------------
   def pbHideInfoUI

@@ -11,7 +11,7 @@ class Battle::Scene::Animation::BattlerZMove < Battle::Scene::Animation
     @battle = battle
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
-    @pkmn = @battler.effects[PBEffects::TransformPokemon] || @battler.displayPokemon
+    @pkmn = @battler.visiblePokemon
     @cry_file = GameData::Species.cry_filename_from_pokemon(@pkmn)
     if @battler.item && @battler.item.is_zcrystal?
       @zcrystal_file = "Graphics/Items/" + @battler.item_id.to_s

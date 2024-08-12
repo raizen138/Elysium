@@ -1,6 +1,6 @@
-class PokemonRegionMap_Scene 
+class PokemonRegionMap_Scene
   def addRoamingIconSprites
-    return if Settings::ROAMING_SPECIES.nil?
+    return if !enableMode(ARMSettings::SHOW_ROAMING_ICONS) || Settings::ROAMING_SPECIES.nil?
     if !@spritesMap["RoamingIcons"]
       @spritesMap["RoamingIcons"] = BitmapSprite.new(@mapWidth, @mapHeight, @viewportMap)
       @spritesMap["RoamingIcons"].x = @spritesMap["map"].x
@@ -16,8 +16,8 @@ class PokemonRegionMap_Scene
       icon = getRoamingIcon(Settings::ROAMING_SPECIES[roamPos[0]][0])
       pbDrawImagePositions(@spritesMap["RoamingIcons"].bitmap,
         [[icon, pointXtoScreenX(roamTownMapPos[1]), pointYtoScreenY(roamTownMapPos[2])]])
-    end 
-  end 
+    end
+  end
 
   def getRoamingName(x, y)
     value = ""
@@ -33,18 +33,19 @@ class PokemonRegionMap_Scene
       species = GameData::Species.try_get(Settings::ROAMING_SPECIES[roamingInfo[indRoaming][0]][0])
       value = species.real_name if species
     end
-    updateButtonInfo
+    updateButtonInfo if !ARMSettings::BUTTON_BOX_POSITION.nil?
     @sprites["modeName"].bitmap.clear
     mapModeSwitchInfo if value == ""
     return value
-  end 
+  end
 
   def getActiveRoaming(roamPos)
+    return false if roamPos.nil?
     return $game_switches[Settings::ROAMING_SPECIES[roamPos[0]][2]] && (
-           $PokemonGlobal.roamPokemon.size <= roamPos[0] || 
+           $PokemonGlobal.roamPokemon.size <= roamPos[0] ||
            $PokemonGlobal.roamPokemon[roamPos[0]]!=true
           )
-  end 
+  end
 
   def getRoamingTownMapPos(roamPos)
     mapPos = GameData::MapMetadata.try_get(roamPos[1])&.town_map_position
@@ -57,10 +58,10 @@ class PokemonRegionMap_Scene
     path = "#{FOLDER}Icons/Roaming/map"
     if speciesData.form > 0
       ret = pbResolveBitmap("#{path + speciesData.species.to_s}_#{speciesData.form}")
-      return ret if ret 
+      return ret if ret
     end
     ret = pbResolveBitmap("#{path + speciesData.species.to_s}")
-    return ret if ret 
+    return ret if ret
     return pbResolveBitmap("#{path}000")
   end
-end 
+end

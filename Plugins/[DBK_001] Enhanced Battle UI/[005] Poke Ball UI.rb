@@ -92,7 +92,7 @@ class Battle::Scene
     @sprites["rightarrow"].y = @sprites["ball_icon0"].y
     loop do
       pbUpdate
-      pbUpdateSpriteHash(@sprites)
+      pbUpdateInfoSprites
       dorefresh = false
       item = items[index][0]
       @sprites["leftarrow"].visible = index > 0
@@ -156,7 +156,7 @@ class Battle
   # Utility for checking if Poke Balls are usable.
   #-----------------------------------------------------------------------------
   def pbCanUsePokeBall?(idxBattler)
-    return false if pbInSafari?
+    return false if pbInSafari? || pbInBugContest?
     return false if !@internalBattle
     return false if @disablePokeBalls
     return false if trainerBattle?

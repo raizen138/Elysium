@@ -34,6 +34,11 @@ class PokemonRegionMap_Scene
       Graphics.update
       Input.update
       cmdwindow.update
+      if @mode == 2 && @ChangeQuestIcon
+        quest = @questInfo[cmdwindow.index][3]
+        icon = @questMap.find { |ar| ar[3] == quest }[1..5]
+        changeQuestIconChoice(icon) if !icon.nil?
+      end 
       if choiceUpdate && ARMSettings::AUTO_CURSOR_MOVEMENT
         if @mode == 1
           @mapX = @visited[cmdwindow.index][:x]
@@ -44,6 +49,8 @@ class PokemonRegionMap_Scene
         end 
         @sprites["cursor"].x = 8 + (@mapX * ARMSettings::SQUARE_WIDTH)
         @sprites["cursor"].y = 24 + (@mapY * ARMSettings::SQUARE_HEIGHT)
+        @sprites["cursor"].x -= UI_BORDER_WIDTH if ARMSettings::REGION_MAP_BEHIND_UI
+        @sprites["cursor"].y -= UI_BORDER_HEIGHT if ARMSettings::REGION_MAP_BEHIND_UI
         showAndUpdateMapInfo
         centerMapOnCursor
         updateMapRange

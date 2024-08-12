@@ -62,18 +62,21 @@ end
 #-------------------------------------------------------------------------------
 MidbattleHandlers.add(:midbattle_global, :wild_ultra_battle,
   proc { |battle, idxBattler, idxTarget, trigger|
-    next if !battle.wildBattle?
+    next if !battle.wildBattle? || pbInSafari?
     next if battle.wildBattleMode != :ultra
     foe = battle.battlers[1]
     next if !foe.wild?
+    logname = _INTL("{1} ({2})", foe.pbThis, foe.index)
     case trigger
     when "RoundStartCommand_1_foe"
       if battle.pbCanUltraBurst?(foe.index)
+        PBDebug.log("[Midbattle Global] #{logname} will Ultra Burst")
         battle.pbUltraBurst(foe.index)
         battle.disablePokeBalls = true
         battle.sosBattle = false if defined?(battle.sosBattle)
         battle.totemBattle = nil if defined?(battle.totemBattle)
         foe.damageThreshold = 6
+        PBDebug.log("[Midbattle Global] #{logname} gains a Z-Powered aura")
         battle.pbAnimation(:DRAGONDANCE, foe, foe)
         battle.pbDisplay(_INTL("{1}'s aura flared to life!", foe.pbThis))
         showAnim = true
@@ -85,6 +88,7 @@ MidbattleHandlers.add(:midbattle_global, :wild_ultra_battle,
         battle.wildBattleMode = nil
       end
     when "BattlerReachedHPCap_foe"
+      PBDebug.log("[Midbattle Global] #{logname} damage cap reached")
       foe.unUltra
       if foe.hasRaisedStatStages?
         foe.statsLoweredThisRound = true
@@ -93,6 +97,7 @@ MidbattleHandlers.add(:midbattle_global, :wild_ultra_battle,
           foe.stages[s.id] = 0 if foe.stages[s.id] > 0
         end
       end
+      battle.noBag = false
       battle.disablePokeBalls = false
       battle.pbDisplayPaused(_INTL("{1}'s Ultra Burst faded!\nIt may now be captured!", foe.pbThis))
     when "BattleEndWin"
@@ -115,6 +120,7 @@ MidbattleHandlers.add(:midbattle_triggers, "ultraBurst",
     oldMode = battle.wildBattleMode
     battle.wildBattleMode = :ultra if battler.wild? && oldMode != :ultra
     if battle.pbCanUltraBurst?(battler.index)
+      PBDebug.log("     'ultraBurst': #{battler.name} (#{battler.index}) set to Ultra Burst")
       battle.scene.pbForceEndSpeech
       battle.pbDisplay(params.gsub(/\\PN/i, battle.pbPlayer.name)) if params.is_a?(String)
       battle.pbUltraBurst(battler.index)
@@ -133,6 +139,9 @@ MidbattleHandlers.add(:midbattle_triggers, "disableUltra",
     side = (battler.opposes?) ? 1 : 0
     owner = battle.pbGetOwnerIndexFromBattlerIndex(idxBattler)
     battle.ultraBurst[side][owner] = (params) ? -2 : -1
+    value = (params) ? "disabled" : "enabled"
+    trainerName = battle.pbGetOwnerName(idxBattler)
+    PBDebug.log("     'disableUltra': Ultra Burst #{value} for #{trainerName}")
   }
 )
 
@@ -250,6 +259,7 @@ class Battle
     return if !battler.hasUltra? || battler.ultra?
     $stats.ultra_burst_count += 1 if battler.pbOwnedByPlayer?
     pbDeluxeTriggers(idxBattler, nil, "BeforeUltraBurst", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     old_ability = battler.ability_id
     if battler.hasActiveAbility?(:ILLUSION)
       Battle::AbilityEffects.triggerOnBeingHit(battler.ability, nil, battler, nil, self)
@@ -264,6 +274,7 @@ class Battle
     battler.pbTriggerAbilityOnGainingIt
     pbCalculatePriority(false, [idxBattler]) if Settings::RECALCULATE_TURN_ORDER_AFTER_MEGA_EVOLUTION
     pbDeluxeTriggers(idxBattler, nil, "AfterUltraBurst", battler.species, *battler.pokemon.types)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   #-----------------------------------------------------------------------------
@@ -408,10 +419,11 @@ class Battle::Peer
   alias ultraburst_pbOnLeavingBattle pbOnLeavingBattle
   def pbOnLeavingBattle(battle, pkmn, usedInBattle, endBattle = false)
     ultraburst_pbOnLeavingBattle(battle, pkmn, usedInBattle, endBattle)
-	return if !pkmn
+    return if !pkmn
     f = MultipleForms.call("getUnUltraForm", pkmn)
     if f && pkmn.form != f && (endBattle || pkmn.fainted?)
       pkmn.form_simple = f
+      pkmn.ability = nil
       pkmn.hp = pkmn.totalhp if pkmn.hp > pkmn.totalhp
     end
   end

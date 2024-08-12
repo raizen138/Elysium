@@ -83,7 +83,7 @@ MenuHandlers.add(:debug_menu, :deluxe_dynamax_metrics, {
             scene = DynamaxSpritePositioner.new
             scene.setSpriteFilter(filterCommand)
             scene.setBackSpriteStyle(styleCommand)
-            screen = SpritePositionerScreen.new(scene)
+            screen = DynamaxSpritePositionerScreen.new(scene)
             screen.pbStart
           }
         when 1  # Auto-set Dynamax metrics

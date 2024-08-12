@@ -325,6 +325,10 @@ ItemHandlers::UseOnPokemon.addIf(:zcrystals,
 # this item will take up your entire turn, and cannot be used if orders have
 # already been given to a Pokemon.
 #-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# Usability handler
+#-------------------------------------------------------------------------------
 ItemHandlers::CanUseInBattle.add(:ZBOOSTER, proc { |item, pokemon, battler, move, firstAction, battle, scene, showMessages|
   side  = battler.idxOwnSide
   owner = battle.pbGetOwnerIndexFromBattlerIndex(battler.index)
@@ -342,6 +346,9 @@ ItemHandlers::CanUseInBattle.add(:ZBOOSTER, proc { |item, pokemon, battler, move
   next true
 })
 
+#-------------------------------------------------------------------------------
+# Effect handler
+#-------------------------------------------------------------------------------
 ItemHandlers::UseInBattle.add(:ZBOOSTER, proc { |item, battler, battle|
   side    = battler.idxOwnSide
   owner   = battle.pbGetOwnerIndexFromBattlerIndex(battler.index)

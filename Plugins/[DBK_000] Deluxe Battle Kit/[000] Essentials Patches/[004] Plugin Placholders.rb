@@ -221,7 +221,7 @@ class Battle::Battler
   def hasStyle?;       return false; end
   def hasTera?;        return false; end
   def hasZodiacPower?; return false; end
-  def isRivalSpecies?(battler); return false; end
+  def isRivalSpecies?(arg); return false; end
 end
 
 class Battle::FakeBattler
@@ -232,13 +232,23 @@ class Battle::FakeBattler
   def celestial?;      return false; end
 end
 
+class Battle
+  def launcherBattle?; return false; end
+  def pbReduceLauncherPoints(*args); end
+end
+
 class SafariBattle
   def wildBattleMode;  return nil;   end
   def pbDeluxeTriggers(*args);       end
+  def launcherBattle?; return false; end
 end
 
 class Battle::Move
   def pbBaseDamageTera(baseDmg, user, type)
     return baseDmg
   end
+end
+
+class Battle::Scene
+  def pbAnimateSubstitute(*args); end
 end

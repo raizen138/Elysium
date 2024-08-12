@@ -5,7 +5,7 @@ class Battle::Scene::Animation
   def dynamaxSpriteWithOutline(poke, delay, x, y, mirror = false, color = Color.white)
     picturePOKE = []
     for i in [ [2, 0], [-2, 0], [0, 2], [0, -2], [2, 2], [-2, -2], [2, -2], [-2, 2], [0, 0] ]
-      outline = addPokeSprite(poke, PictureOrigin::BOTTOM)
+      outline = addPokeSprite(poke, false, PictureOrigin::BOTTOM)
       outline.setVisible(delay, false)
       sprite = @pictureEx.length - 1
       @pictureSprites[sprite].mirror = mirror
@@ -80,7 +80,7 @@ class Battle::Scene::Animation::BattlerDynamax < Battle::Scene::Animation
   # Used to determine all Pokemon-related sprites for the animation.
   #-----------------------------------------------------------------------------
   def setPokemonSpriteData
-    pkmn = @battler.effects[PBEffects::TransformPokemon] || @battler.displayPokemon
+    pkmn = @battler.visiblePokemon
     form = pkmn.getUndynamaxForm
     @pkmn = [pkmn.species, pkmn.gender, form, pkmn.shiny?, pkmn.shadowPokemon?]
     if @battler.gmax_factor?
@@ -400,7 +400,7 @@ class Battle::Scene::Animation::BattlerDynamaxWild < Battle::Scene::Animation
   # Used to determine all Pokemon-related sprites for the animation.
   #-----------------------------------------------------------------------------
   def setPokemonSpriteData
-    pkmn = @battler.effects[PBEffects::TransformPokemon] || @battler.displayPokemon
+    pkmn = @battler.visiblePokemon
     form = pkmn.getUndynamaxForm
     @pkmn = [pkmn.species, pkmn.gender, form, pkmn.shiny?, pkmn.shadowPokemon?]
     if @battler.gmax_factor?

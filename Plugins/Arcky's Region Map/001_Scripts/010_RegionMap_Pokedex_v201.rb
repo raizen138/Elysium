@@ -5,14 +5,14 @@ if Essentials::VERSION.include?("20")
   class PokemonPokedexInfo_Scene
     UI_WIDTH = Settings::SCREEN_WIDTH - 32
     UI_HEIGHT = Settings::SCREEN_HEIGHT - 64
-    SPECIAL_UI = ARMSettings::REGION_MAP_BEHIND_UI ? [0, 0, 0, 0] : [16, 32, 48, 64]
+    BEHIND_UI = ARMSettings::REGION_MAP_BEHIND_UI ? [0, 0, 0, 0] : [16, 32, 48, 64]
     THEMEPLUGIN = PluginManager.installed?("Lin's Pokegear Themes")
     FOLDER = "Graphics/Pictures/RegionMap/"
 
     def pbStartScene(dexlist, index, region)
       @viewport = Viewport.new(0, 0, Graphics.width, Graphics.height)
       @viewport.z = 100000
-      @viewportMap = Viewport.new(SPECIAL_UI[0], SPECIAL_UI[2], (Graphics.width - SPECIAL_UI[1]), (Graphics.height - SPECIAL_UI[3]))
+      @viewportMap = Viewport.new(BEHIND_UI[0], BEHIND_UI[2], (Graphics.width - BEHIND_UI[1]), (Graphics.height - BEHIND_UI[3]))
       @viewportMap.z = 99999
       @dexlist = dexlist
       @index   = index
@@ -69,11 +69,11 @@ if Essentials::VERSION.include?("20")
       @sprites["overlay"] = BitmapSprite.new(Graphics.width, Graphics.height, @viewport)
       mapMetaData = $game_map.metadata
       if !mapMetaData
-        p "There's no mapMetadata for map '#{$game_map.name}' with ID #{$game_map.map_id}. Add it to the map_metadata.txt to fix this error!" 
-        Console.echo_error _INTL("There's no mapMetadata for map '#{$game_map.name}' with ID #{$game_map.map_id}. \nAdd it to the map_metadata.txt to fix this error!") 
+        p "There's no mapMetadata for map '#{$game_map.name}' with ID #{$game_map.map_id}. Add it to the map_metadata.txt to fix this error!"
+        Console.echo_error _INTL("There's no mapMetadata for map '#{$game_map.name}' with ID #{$game_map.map_id}. \nAdd it to the map_metadata.txt to fix this error!")
       end
       playerPos = mapMetaData && mapMetaData.town_map_position ? mapMetaData.town_map_position : [0, 0, 0]
-      mapSize = mapMetaData.town_map_size 
+      mapSize = mapMetaData.town_map_size
       mapX = playerPos[1]
       mapY = playerPos[2]
       if mapSize && mapSize[0] && mapSize[0] > 0
@@ -84,24 +84,24 @@ if Essentials::VERSION.include?("20")
       end
       @mapWidth = @sprites["areamap"].bitmap.width
       @mapHeight = @sprites["areamap"].bitmap.height
-      @playerX = (-8 + SPECIAL_UI[0]) + (ARMSettings::SQUARE_WIDTH * mapX)
-      @playerY = (-8 + SPECIAL_UI[1]) + (ARMSettings::SQUARE_HEIGHT * mapY)
-      @mapMaxX = -1 * (@mapWidth  - (Graphics.width - SPECIAL_UI[1]))
-      @mapMaxY = -1 * (@mapHeight - (Graphics.height - SPECIAL_UI[3]))
+      @playerX = (-8 + BEHIND_UI[0]) + (ARMSettings::SQUARE_WIDTH * mapX)
+      @playerY = (-8 + BEHIND_UI[1]) + (ARMSettings::SQUARE_HEIGHT * mapY)
+      @mapMaxX = -1 * (@mapWidth  - (Graphics.width - BEHIND_UI[1]))
+      @mapMaxY = -1 * (@mapHeight - (Graphics.height - BEHIND_UI[3]))
       @mapPosX = (UI_WIDTH / 2) - @playerX
       @mapPosY = (UI_HEIGHT / 2) - @playerY
-      @mapOffsetX = @mapWidth < (Graphics.width - SPECIAL_UI[1]) ? ((Graphics.width - SPECIAL_UI[1]) - @mapWidth) / 2 : 0
-      @mapOffsetY = @mapHeight < (Graphics.height - SPECIAL_UI[3]) ? ((Graphics.height - SPECIAL_UI[3]) - @mapHeight) / 2 : 0
+      @mapOffsetX = @mapWidth < (Graphics.width - BEHIND_UI[1]) ? ((Graphics.width - BEHIND_UI[1]) - @mapWidth) / 2 : 0
+      @mapOffsetY = @mapHeight < (Graphics.height - BEHIND_UI[3]) ? ((Graphics.height - BEHIND_UI[3]) - @mapHeight) / 2 : 0
       pos = @mapPosX < @mapMaxX ? @mapMaxX : @mapPosX
       if @playerX > (Settings::SCREEN_WIDTH / 2) && ((@mapWidth > Graphics.width && ARMSettings::REGION_MAP_BEHIND_UI) || (@mapWidth > UI_WIDTH && !ARMSettings::REGION_MAP_BEHIND_UI))
-        @sprites["areamap"].x = pos % ARMSettings::SQUARE_WIDTH != 0 ? pos + 8 : pos  
+        @sprites["areamap"].x = pos % ARMSettings::SQUARE_WIDTH != 0 ? pos + 8 : pos
       else
         @sprites["areamap"].x = @mapOffsetX
       end
       pos = @mapPosY < @mapMaxY ? @mapMaxY : @mapPosY
       if @playerY > (Settings::SCREEN_HEIGHT / 2) && ((@mapHeight > Graphics.height && ARMSettings::REGION_MAP_BEHIND_UI) || (@mapHeight > UI_HEIGHT && !ARMSettings::REGION_MAP_BEHIND_UI))
-        @sprites["areamap"].y = pos % ARMSettings::SQUARE_HEIGHT != 0 ? pos + 24 : pos 
-      else  
+        @sprites["areamap"].y = pos % ARMSettings::SQUARE_HEIGHT != 0 ? pos + 24 : pos
+      else
         @mapOffsetY += 16 if @mapHeight <= UI_HEIGHT && ARMSettings::REGION_MAP_BEHIND_UI
         @sprites["areamap"].y = @mapOffsetY
       end
@@ -143,6 +143,10 @@ if Essentials::VERSION.include?("20")
         map_metadata = GameData::MapMetadata.try_get(enc_data.map)
         next if !map_metadata || map_metadata.has_flag?("HideEncountersInPokedex")
         mappos = map_metadata.town_map_position
+        if mappos.nil?
+          Console.echoln_li _INTL("#{map_metadata.name} has no mapPosition defined in map_metadata.txt PBS file.")
+          next
+        end
         next if mappos[0] != @region   # Map isn't in the region being shown
         # Get the size and shape of the map in the Town Map
         map_size = map_metadata.town_map_size
@@ -174,7 +178,7 @@ if Essentials::VERSION.include?("20")
       @sprites["areahighlight"].bitmap.clear
       @sprites["areahighlight"].x = @sprites["areamap"].x
       @sprites["areahighlight"].y = @sprites["areamap"].y
-      @noArea = false 
+      @noArea = false
       # Get all points to be shown as places where @species can be encountered
       points = pbGetEncounterPoints
       # Draw coloured squares on each point of the Town Map with a nest
@@ -210,7 +214,7 @@ if Essentials::VERSION.include?("20")
           [[sprintf("Graphics/Pictures/Pokedex/overlay_areanone"), 108, 188]]
         )
         textpos.push([_INTL("Area unknown"), Graphics.width / 2, (Graphics.height / 2) + 6, 2, base, shadow])
-        @noArea = true 
+        @noArea = true
       end
       textpos.push([pbGetMessage(MessageTypes::RegionNames, @region), 414, 50, 2, base, shadow])
       textpos.push([_INTL("{1}'s area", GameData::Species.get(@species).name),
@@ -222,12 +226,12 @@ if Essentials::VERSION.include?("20")
       @sprites["upArrow"] = AnimatedSprite.new(findUsableUI("mapArrowUp"), 8, 28, 40, 2, @viewport)
       @sprites["upArrow"].x = Graphics.width / 2
       @sprites["upArrow"].y = 32
-      @sprites["upArrow"].play 
+      @sprites["upArrow"].play
       @sprites["upArrow"].visible = false
       @sprites["downArrow"] = AnimatedSprite.new(findUsableUI("mapArrowDown"), 8, 28, 40, 2, @viewport)
       @sprites["downArrow"].x = Graphics.width / 2
       @sprites["downArrow"].y = Graphics.height - 60
-      @sprites["downArrow"].play 
+      @sprites["downArrow"].play
       @sprites["downArrow"].visible = false
       @sprites["leftArrow"] = AnimatedSprite.new(findUsableUI("mapArrowLeft"), 8, 40, 28, 2, @viewport)
       @sprites["leftArrow"].y = Graphics.height / 2
@@ -236,25 +240,25 @@ if Essentials::VERSION.include?("20")
       @sprites["rightArrow"] = AnimatedSprite.new(findUsableUI("mapArrowRight"), 8, 40, 28, 2, @viewport)
       @sprites["rightArrow"].x = Graphics.width - 40
       @sprites["rightArrow"].y = Graphics.height / 2
-      @sprites["rightArrow"].play 
+      @sprites["rightArrow"].play
       @sprites["rightArrow"].visible = false
-    end 
+    end
 
     def findUsableUI(image)
       if THEMEPLUGIN
         # Use Current set Theme's UI Graphics
         return "#{FOLDER}UI/#{$PokemonSystem.pokegear}/#{image}"
-      else 
+      else
         folderUI = "UI/Region#{@region}/"
         bitmap = pbResolveBitmap("#{FOLDER}#{folderUI}#{image}")
         if bitmap && ARMSettings::CHANGE_UI_ON_REGION
           # Use UI Graphics for the Current Region.
-          return "#{FOLDER}#{folderUI}#{image}" 
-        else 
+          return "#{FOLDER}#{folderUI}#{image}"
+        else
           # Use Default UI Graphics.
           return "#{FOLDER}UI/Default/#{image}"
         end
-      end 
+      end
     end
 
     def pbScene
@@ -280,11 +284,11 @@ if Essentials::VERSION.include?("20")
           next
         end
         if @mapMovement
-          @sprites["upArrow"].visible = -(@mapY * 16) < 0 
+          @sprites["upArrow"].visible = -(@mapY * 16) < 0
           @sprites["downArrow"].visible = -(@mapY * 16) > @mapMaxY
           @sprites["leftArrow"].visible = -(@mapX * 16) < 0
-          @sprites["rightArrow"].visible = -(@mapX * 16) > @mapMaxX 
-        end 
+          @sprites["rightArrow"].visible = -(@mapX * 16) > @mapMaxX
+        end
         if Input.trigger?(Input::ACTION)
           pbSEStop
           Pokemon.play_cry(@species, @form) if @page == 1
@@ -298,7 +302,7 @@ if Essentials::VERSION.include?("20")
           else
             pbPlayCloseMenuSE
             break
-          end 
+          end
         elsif Input.trigger?(Input::USE)
           case @page
           when 1   # Info
@@ -307,13 +311,13 @@ if Essentials::VERSION.include?("20")
             dorefresh = true
           when 2   # Area
             pbPlayCursorSE
-            @mapMovement = true if !@noArea && (@sprites["areamap"].bitmap.width > (Graphics.width - SPECIAL_UI[1]) || @sprites["areamap"].bitmap.height > (Graphics.height - SPECIAL_UI[3]))
+            @mapMovement = true if !@noArea && (@sprites["areamap"].bitmap.width > (Graphics.width - BEHIND_UI[1]) || @sprites["areamap"].bitmap.height > (Graphics.height - BEHIND_UI[3]))
             makeMapArrows if !@sprites["upArrow"] && !@noArea
             dorefresh = true
           when 3   # Forms
             if @available.length > 1
               pbPlayDecisionSE
-              @mapMovement = false 
+              @mapMovement = false
               pbChooseForm
               dorefresh = true
             end
@@ -328,7 +332,7 @@ if Essentials::VERSION.include?("20")
               pbSEStop
               (@page == 1) ? Pokemon.play_cry(@species, @form) : pbPlayCursorSE
               dorefresh = true
-            end 
+            end
           elsif Input.trigger?(Input::DOWN)
             oldindex = @index
             pbGoToNext
@@ -356,36 +360,36 @@ if Essentials::VERSION.include?("20")
             if @page != oldpage
               pbPlayCursorSE
               dorefresh = true
-            end 
+            end
           end
         else
-          case Input.dir8 
+          case Input.dir8
           when 1, 2, 3
             if -(@mapY * 16) > @mapMaxY
               @mapY += 1
               oy = -1 * ARMSettings::SQUARE_HEIGHT
               new_y = @sprites["areamap"].y + oy
-            end 
+            end
           when 7, 8, 9
             if -(@mapY * 16) < 0
               @mapY -= 1
               oy = 1 * ARMSettings::SQUARE_HEIGHT
               new_y = @sprites["areamap"].y + oy
-            end 
-          end 
-          case Input.dir8 
+            end
+          end
+          case Input.dir8
           when 1, 4, 7
             if -(@mapX * 16) < 0
               @mapX -= 1
               ox = 1 * ARMSettings::SQUARE_WIDTH
               new_x = @sprites["areamap"].x + ox
-            end 
+            end
           when 3, 6, 9
             if -(@mapX * 16) > @mapMaxX
               @mapX += 1
               ox = -1 * ARMSettings::SQUARE_WIDTH
               new_x = @sprites["areamap"].x + ox
-            end 
+            end
           end
         end
         if dorefresh
@@ -395,4 +399,4 @@ if Essentials::VERSION.include?("20")
       return @index
     end
   end
-end 
+end

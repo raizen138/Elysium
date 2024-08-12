@@ -156,6 +156,7 @@ class Battle
     return if !battler.hasTera? || battler.tera?
     $stats.terastallize_count += 1 if battler.pbOwnedByPlayer?
     pbDeluxeTriggers(idxBattler, nil, "BeforeTerastallize", battler.species, battler.tera_type)
+    @scene.pbAnimateSubstitute(idxBattler, :hide)
     old_ability = battler.ability_id
     if battler.hasActiveAbility?(:ILLUSION)
       illusion = battler.effects[PBEffects::Illusion]
@@ -188,6 +189,7 @@ class Battle
       $player.tera_charged = false
     end
     pbDeluxeTriggers(idxBattler, nil, "AfterTerastallize", battler.species, battler.tera_type)
+    @scene.pbAnimateSubstitute(idxBattler, :show)
   end
   
   #-----------------------------------------------------------------------------
@@ -217,7 +219,7 @@ class Battle
         @scene.pbRevertTera(battler.index)
       end
     end
-	battler.ability_id = battler.pokemon.ability_id
+    battler.ability_id = battler.pokemon.ability_id
   end
   
   #-----------------------------------------------------------------------------
