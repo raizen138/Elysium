@@ -12,6 +12,15 @@ class Battle::Scene::Animation::BattlerZMove < Battle::Scene::Animation
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
     @pkmn = @battler.visiblePokemon
+    @zpkmn = {
+      :pokemon => @pkmn,
+      :species => @pkmn.species,
+      :gender  => @pkmn.gender,
+      :form    => @pkmn.form,
+      :shiny   => @pkmn.shiny?,
+      :shadow  => @pkmn.shadowPokemon?,
+      :hue     => @pkmn.super_shiny_hue
+    }
     @cry_file = GameData::Species.cry_filename_from_pokemon(@pkmn)
     if @battler.item && @battler.item.is_zcrystal?
       @zcrystal_file = "Graphics/Items/" + @battler.item_id.to_s
@@ -76,10 +85,11 @@ class Battle::Scene::Animation::BattlerZMove < Battle::Scene::Animation
     picOVERLAY, sprOVERLAY = overlayData[0], overlayData[1]
     #---------------------------------------------------------------------------
     # Sets up battler.
-    arrPOKE = dxSetPokemonWithOutline(@pkmn, delay, !@opposes, !@battler.wild?, Color.new(*@type_outline))
+    arrPOKE = dxSetPokemonWithOutline(@zpkmn, delay, !@opposes, !@battler.wild?, Color.new(*@type_outline))
+    item_y = @pictureSprites[arrPOKE.last[1]].y - @pictureSprites[arrPOKE.last[1]].bitmap.height
+	dxSetSpotPatterns(@pkmn, @pictureSprites[arrPOKE.last[1]]) if @pkmn.form == @zpkmn[:form]
     #---------------------------------------------------------------------------
     # Sets up Z-Crystal.
-    item_y = @pictureSprites[arrPOKE.last[1]].y - @pictureSprites[arrPOKE.last[1]].bitmap.height
     arrCRYSTAL = dxSetSpriteWithOutline(@zcrystal_file, delay, center_x, item_y)
     #---------------------------------------------------------------------------
     # Sets particles.

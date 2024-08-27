@@ -15,6 +15,27 @@ class Battle::Scene
   end
   
   #-----------------------------------------------------------------------------
+  # Rewritten to toggle databoxes during move animations.
+  #-----------------------------------------------------------------------------
+  def pbAnimation(moveID, user, targets, hitNum = 0)
+    animID = pbFindMoveAnimation(moveID, user.index, hitNum)
+    return if !animID
+    anim = animID[0]
+    target = (targets.is_a?(Array)) ? targets[0] : targets
+    animations = pbLoadBattleAnimations
+    return if !animations
+    pbToggleDataboxes if Settings::HIDE_DATABOXES_DURING_MOVES
+    pbSaveShadows do
+      if animID[1]
+        pbAnimationCore(animations[anim], target, user, true)
+      else
+        pbAnimationCore(animations[anim], user, target)
+      end
+    end
+    pbToggleDataboxes(true) if Settings::HIDE_DATABOXES_DURING_MOVES
+  end
+  
+  #-----------------------------------------------------------------------------
   # Calls a flee animation for wild Pokemon.
   #-----------------------------------------------------------------------------
   def pbBattlerFlee(battler, msg = nil)
@@ -342,14 +363,15 @@ class Battle::Scene::Animation
   #-----------------------------------------------------------------------------
   # Used for animation compatibility with animated Pokemon sprites.
   #-----------------------------------------------------------------------------  
-  def addPokeSprite(poke, back = false, origin = PictureOrigin::TOP_LEFT)
+  def addPokeSprite(poke, back = false, origin = PictureOrigin::BOTTOM)
     case poke
     when Pokemon
       s = PokemonSprite.new(@viewport)
       s.setPokemonBitmap(poke, back)
-    when Array
+    when Hash
       s = PokemonSprite.new(@viewport)
-      s.setSpeciesBitmap(*poke, back)
+      s.setSpeciesBitmap(poke[:species], poke[:gender], poke[:form], poke[:shiny], poke[:shadow], back)
+	  s.hue = poke[:hue] if defined?(s.hue)
     end
     num = @pictureEx.length
     picture = PictureEx.new(s.z)
@@ -484,8 +506,10 @@ class Battle::Scene::Animation
     case poke
     when Pokemon
       poke.species_data.apply_metrics_to_sprite(@pictureSprites[spritePOKE], 1)
-    when Array
-      metrics_data = GameData::SpeciesMetrics.get_species_form(poke[0], poke[2])
+    when Hash
+      data = [poke[:species], poke[:form]]
+      data.push(poke[:gender] == 1) if PluginManager.installed?("[DBK] Animated Pokémon System")
+      metrics_data = GameData::SpeciesMetrics.get_species_form(*data)
       metrics_data.apply_metrics_to_sprite(@pictureSprites[spritePOKE], 1)
     end
     picturePOKE.setXY(delay, @pictureSprites[spritePOKE].x, @pictureSprites[spritePOKE].y)
@@ -513,9 +537,10 @@ class Battle::Scene::Animation
       case poke
       when Pokemon
         poke.species_data.apply_metrics_to_sprite(@pictureSprites[sprite], 1)
-      when Array
-        set = (poke[8]) ? 2 : poke[7] ? 1 : 0
-        metrics_data = GameData::SpeciesMetrics.get_species_form(poke[0], poke[2])
+      when Hash
+        data = [poke[:species], poke[:form]]
+        data.push(poke[:gender] == 1) if PluginManager.installed?("[DBK] Animated Pokémon System")
+        metrics_data = GameData::SpeciesMetrics.get_species_form(*data)
         metrics_data.apply_metrics_to_sprite(@pictureSprites[sprite], 1)
       end
       outline.setXY(delay, @pictureSprites[sprite].x, @pictureSprites[sprite].y)
@@ -524,6 +549,15 @@ class Battle::Scene::Animation
       picturePOKE.push([outline, sprite])
     end
     return picturePOKE
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Specifically used to reapply spot patterns to Spinda sprites during animations.
+  #-----------------------------------------------------------------------------
+  def dxSetSpotPatterns(pkmn, sprite)
+    alter_bitmap_function = MultipleForms.hasFunction?(pkmn, "alterBitmap")
+    return if !alter_bitmap_function
+    sprite.setPokemonBitmap(pkmn)
   end
   
   #-----------------------------------------------------------------------------

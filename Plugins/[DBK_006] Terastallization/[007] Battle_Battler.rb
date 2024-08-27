@@ -123,7 +123,7 @@ class Battle::Battler
     tera_pbEndTurn(_choice)
     return if !@lastMoveUsedType
     return if !tera? || tera_type != :STELLAR
-    return if @battle.pbRaidBattle? || isSpecies?(:TERAPAGOS)
+    return if @battle.raidBattle? || isSpecies?(:TERAPAGOS)
     return if GameData::Move.get(@lastMoveUsed).category >= 2
     side  = self.idxOwnSide
     owner = @battle.pbGetOwnerIndexFromBattlerIndex(@index)

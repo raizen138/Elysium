@@ -12,8 +12,16 @@ class Battle::Scene::Animation::BattlerTerastallize < Battle::Scene::Animation
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
     @pkmn = @battler.visiblePokemon
-    @terastal = [@pkmn.species, @pkmn.gender, @pkmn.getTerastalForm, @pkmn.shiny?, @pkmn.shadowPokemon?]
-    @cry_file = GameData::Species.cry_filename_from_pokemon(@pkmn)
+    @terastal = {
+      :pokemon => @pkmn,
+      :species => @pkmn.species,
+      :gender  => @pkmn.gender,
+      :form    => @pkmn.getTerastalForm,
+      :shiny   => @pkmn.shiny?,
+      :shadow  => @pkmn.shadowPokemon?,
+      :hue     => @pkmn.super_shiny_hue
+    }
+    @cry_file = GameData::Species.cry_filename(@terastal[:species], @terastal[:form])
     #---------------------------------------------------------------------------
     # Gets trainer data from battler index (non-wild only).
     if !@battler.wild?
@@ -82,6 +90,7 @@ class Battle::Scene::Animation::BattlerTerastallize < Battle::Scene::Animation
     #---------------------------------------------------------------------------
     # Sets up Tera Pokemon.
     arrPOKE = dxSetPokemonWithOutline(@terastal, delay, !@opposes, !@battler.wild?, Color.new(*@type_outline))
+    dxSetSpotPatterns(@pkmn, @pictureSprites[arrPOKE.last[1]]) if @pkmn.form == @terastal[:form]
     @pictureSprites[arrPOKE.last[1]].set_tera_pattern(@pkmn, true)
     #---------------------------------------------------------------------------
     # Sets up Tera crystals.

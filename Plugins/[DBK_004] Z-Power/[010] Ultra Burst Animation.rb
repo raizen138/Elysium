@@ -10,8 +10,16 @@ class Battle::Scene::Animation::BattlerUltraBurst < Battle::Scene::Animation
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
     @pkmn = @battler.pokemon
-    @ultra = [@pkmn.species, @pkmn.gender, @pkmn.getUltraForm, @pkmn.shiny?, @pkmn.shadowPokemon?]
-    @cry_file = GameData::Species.cry_filename(@ultra[0], @ultra[2])
+    @ultra = {
+      :pokemon => @pkmn,
+      :species => @pkmn.species,
+      :gender  => @pkmn.gender,
+      :form    => @pkmn.getUltraForm,
+      :shiny   => @pkmn.shiny?,
+      :shadow  => @pkmn.shadowPokemon?,
+      :hue     => @pkmn.super_shiny_hue
+    }
+    @cry_file = GameData::Species.cry_filename(@ultra[:species], @ultra[:form])
     #---------------------------------------------------------------------------
     # Gets background and animation data.
     @path = Settings::DELUXE_GRAPHICS_PATH

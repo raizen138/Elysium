@@ -120,6 +120,7 @@ Battle::AbilityEffects::DamageCalcFromUser.add(:GORILLATACTICS,
 Battle::AbilityEffects::OnSwitchIn.add(:IMPOSTER,
   proc { |ability, battler, battle, switch_in|
     next if !switch_in || battler.effects[PBEffects::Transform]
+    next if battler.tera? && battler.tera_type == :STELLAR
     choice = battler.pbDirectOpposing
     next if choice.fainted?
     next if choice.effects[PBEffects::Transform] ||
@@ -576,9 +577,9 @@ end
 # Saves data for Transform target prior to transforming.
 #-------------------------------------------------------------------------------
 class Battle::Move::TransformUserIntoTarget < Battle::Move
-  alias tera_pbMoveFailed? pbMoveFailed?
+  alias dx_pbMoveFailed? pbMoveFailed?
   def pbMoveFailed?(user, targets)
-    if user.tera_form?
+    if user.tera_form? || (user.tera? && user.tera_type == :STELLAR)
       @battle.pbDisplay(_INTL("But it failed!"))
       return true
     end
@@ -586,7 +587,7 @@ class Battle::Move::TransformUserIntoTarget < Battle::Move
       @battle.pbDisplay(_INTL("But it failed!"))
       return true
     end
-    return tera_pbMoveFailed?(user, targets)
+    return dx_pbMoveFailed?(user, targets)
   end
 
   alias dx_pbFailsAgainstTarget? pbFailsAgainstTarget?

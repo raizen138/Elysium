@@ -68,12 +68,32 @@ class Battle
   def pbCanSwitch?(idxBattler, idxParty = -1, partyScene = nil)
     ret = paldea_pbCanSwitch?(idxBattler, idxParty, partyScene)
     if ret && @battlers[idxBattler].effects[PBEffects::Commander]
-      partyScene&.pbDisplay(_INTL("{1} can't be switched out!", battler.pbThis))
+      partyScene&.pbDisplay(_INTL("{1} can't be switched out!", @battlers[idxBattler].pbThis))
       return false
     end
     return ret
   end
-  
+
+  #-----------------------------------------------------------------------------
+  # Aliased to ensure Pokemon affected by Commander cannot shift positions.
+  #-----------------------------------------------------------------------------
+  alias paldea_pbCanShift? pbCanShift?
+  def pbCanShift?(idxBattler)
+    ret = paldea_pbCanShift?(idxBattler)
+    if ret
+      idxOther = -1
+      case pbSideSize(idxBattler)
+      when 2
+        idxOther = (idxBattler + 2) % 4
+      when 3
+        idxOther = (idxBattler.even?) ? 2 : 3
+      end
+      return false if @battlers[idxBattler].effects[PBEffects::Commander] || 
+                      @battlers[idxOther].effects[PBEffects::Commander]
+    end
+    return ret
+  end
+
   #-----------------------------------------------------------------------------
   # Counts down the remaining turns of the Splinter effect until its reset.
   #-----------------------------------------------------------------------------

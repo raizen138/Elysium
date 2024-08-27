@@ -287,9 +287,11 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
-  # Aliased for new continuous ability checks.
+  # - Edited to trigger Commander ability
+  # - Edited to reset protean trigger
+  # - Edited to reset Judgement type
+  # - Edited to trigger skip Trace ability an Pokémon that has Ability Shield
   #-----------------------------------------------------------------------------
-  alias paldea_pbContinualAbilityChecks pbContinualAbilityChecks
   def pbContinualAbilityChecks(onSwitchIn = false)
     @battle.pbEndPrimordialWeather
     if hasActiveAbility?(:COMMANDER)
@@ -298,12 +300,28 @@ class Battle::Battler
     @proteanTrigger = false
     plateType = pbGetJudgmentType(@legendPlateType)
     @legendPlateType = plateType
-    if hasActiveAbility?(:TRACE) && hasActiveItem?(:ABILITYSHIELD)
-      @battle.pbShowAbilitySplash(self)
-      @battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its Ability Shield!", pbThis))
-      @battle.pbHideAbilitySplash(self)
-    else
-      paldea_pbContinualAbilityChecks(onSwitchIn)
+    if hasActiveAbility?(:TRACE)
+      if hasActiveItem?(:ABILITYSHIELD) # Trace failed by its own Ability Shield
+        if onSwitchIn
+          @battle.pbShowAbilitySplash(self)
+          @battle.pbDisplay(_INTL("{1}'s Ability is protected by the effects of its Ability Shield!", pbThis))
+          @battle.pbHideAbilitySplash(self)
+        end
+      else
+        choices = @battle.allOtherSideBattlers(@index).select do |b|
+          next !b.hasActiveItem?(:ABILITYSHIELD) && (b.ability_id == :WONDERGUARD || !b.uncopyableAbility?)
+        end
+        if choices.length > 0
+          choice = choices[@battle.pbRandom(choices.length)]
+          @battle.pbShowAbilitySplash(self)
+          self.ability = choice.ability
+          @battle.pbDisplay(_INTL("{1} traced {2}'s {3}!", pbThis, choice.pbThis(true), choice.abilityName))
+          @battle.pbHideAbilitySplash(self)
+          if !onSwitchIn && (unstoppableAbility? || abilityActive?)
+            Battle::AbilityEffects.triggerOnSwitchIn(self.ability, self, @battle)
+          end
+        end
+      end
     end
     pbMirrorStatUpsOpposing
   end
@@ -346,7 +364,7 @@ class Battle::Battler
   def isCommanderHost?
     commander = @effects[PBEffects::Commander]
     return commander && commander.length == 2
-  end
+  end  
   
   #-----------------------------------------------------------------------------
   # Aliased to prevent Pokemon under the effects of Commander from switching.

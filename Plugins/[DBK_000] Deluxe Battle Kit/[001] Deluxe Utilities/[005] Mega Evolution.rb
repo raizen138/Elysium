@@ -218,8 +218,16 @@ class Battle::Scene::Animation::BattlerMegaEvolve < Battle::Scene::Animation
     @battler = @battle.battlers[idxBattler]
     @opposes = @battle.opposes?(idxBattler)
     @pkmn = @battler.pokemon
-    @mega = [@pkmn.species, @pkmn.gender, @pkmn.getMegaForm, @pkmn.shiny?, @pkmn.shadowPokemon?]
-    @cry_file = GameData::Species.cry_filename(@mega[0], @mega[2])
+    @mega = {
+      :pokemon => @pkmn,
+      :species => @pkmn.species,
+      :gender  => @pkmn.gender,
+      :form    => @pkmn.getMegaForm,
+      :shiny   => @pkmn.shiny?,
+      :shadow  => @pkmn.shadowPokemon?,
+      :hue     => @pkmn.super_shiny_hue
+    }
+    @cry_file = GameData::Species.cry_filename(@mega[:species], @mega[:form])
     if @battler.item && @battler.item.is_mega_stone?
       @megastone_file = "Graphics/Items/" + @battler.item_id.to_s
     end

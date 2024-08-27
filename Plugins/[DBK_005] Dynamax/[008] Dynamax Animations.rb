@@ -18,11 +18,13 @@ class Battle::Scene::Animation
       when Pokemon
         poke.species_data.apply_dynamax_metrics_to_sprite(@pictureSprites[sprite], 1)
         @pictureSprites[sprite].set_dynamax_pattern(pkmn.species_data.id, true)
-      when Array
-        speciesID = GameData::Species.get_species_form(poke[0], poke[2]).id
-        metrics_data = GameData::SpeciesMetrics.get(speciesID)
+      when Hash
+        species_data = GameData::Species.get_species_form(poke[:species], poke[:form])
+        data = [species_data.species, species_data.form]
+        data.push(poke[:gender] == 1) if PluginManager.installed?("[DBK] Animated Pokémon System")
+        metrics_data = GameData::SpeciesMetrics.get_species_form(*data)
         metrics_data.apply_dynamax_metrics_to_sprite(@pictureSprites[sprite], 1)
-        @pictureSprites[sprite].set_dynamax_pattern(speciesID, true)
+        @pictureSprites[sprite].set_dynamax_pattern(species_data.id, true)
       end
       outline.setXY(delay, @pictureSprites[sprite].x, @pictureSprites[sprite].y)
       outline.setZ(delay, @pictureSprites[sprite].z)
@@ -82,14 +84,27 @@ class Battle::Scene::Animation::BattlerDynamax < Battle::Scene::Animation
   def setPokemonSpriteData
     pkmn = @battler.visiblePokemon
     form = pkmn.getUndynamaxForm
-    @pkmn = [pkmn.species, pkmn.gender, form, pkmn.shiny?, pkmn.shadowPokemon?]
+    @pkmn = {
+      :pokemon => pkmn,
+      :species => pkmn.species,
+      :gender  => pkmn.gender,
+      :form    => form,
+      :shiny   => pkmn.shiny?,
+      :shadow  => pkmn.shadowPokemon?,
+      :hue     => pkmn.super_shiny_hue
+    }
     if @battler.gmax_factor?
       form = pkmn.form        if pkmn.gmax?
       form = pkmn.getGmaxForm if pkmn.hasGigantamaxForm?
     end
     form = pkmn.form        if pkmn.emax?
     form = pkmn.getEmaxForm if pkmn.hasEternamaxForm?
-    @dynamax = [pkmn.species, pkmn.gender, form, pkmn.shiny?, pkmn.shadowPokemon?]
+    @dynamax = @pkmn.clone
+    @dynamax[:form] = form
+    if pkmn.super_shiny? && PluginManager.installed?("[DBK] Animated Pokémon System")
+      metrics = GameData::SpeciesMetrics.get_species_form(pkmn.species, form, pkmn.gender == 1)
+      @dynamax[:hue] = metrics.sprite_super_hue 
+    end
     @shadow_file = GameData::Species.shadow_filename(pkmn.species, form)
     @shadow_file = GameData::Species.convert_shadow_file(@shadow_file, pkmn.species, pkmn.form)
     @cry_file = GameData::Species.cry_filename(pkmn.species, form)
@@ -124,6 +139,7 @@ class Battle::Scene::Animation::BattlerDynamax < Battle::Scene::Animation
     # Sets up Dynamax Pokemon.
     ypos = Graphics.height / 4 + center_y
     arrPOKE = dynamaxSpriteWithOutline(@dynamax, delay, center_x, ypos, !@opposes)
+    dxSetSpotPatterns(@dynamax[:pokemon], @pictureSprites[arrPOKE.last[1]]) if @pkmn[:form] == @dynamax[:form]
     arrPOKE.last[0].setColor(delay, Color.white)
     arrPOKE.each do |p, s|
       p.setZoom(delay, 0)
@@ -144,6 +160,7 @@ class Battle::Scene::Animation::BattlerDynamax < Battle::Scene::Animation
     # Sets up battler.
     pokeData = dxSetPokemon(@pkmn, delay, !@opposes)
     picPOKE, sprPOKE = pokeData[0], pokeData[1]
+    dxSetSpotPatterns(@pkmn[:pokemon], @pictureSprites[sprPOKE])
     #---------------------------------------------------------------------------
     # Sets up trainer
     picTRAINER, sprTRAINER = dxSetSprite(@trainer_file, delay, center_x, 138)
@@ -350,7 +367,7 @@ class Battle::Scene::Animation::BattlerDynamax < Battle::Scene::Animation
         picPULSE.moveOpacity(delay + 2, 10, 0)
         for i in 0...arrPOKE.length
           if arrPOKE[i] == arrPOKE.last
-            if @pkmn[2] != @dynamax[2]
+            if @pkmn[:form] != @dynamax[:form]
               arrPOKE[i][0].setSE(delay + (2 * t), @cry_file) if @cry_file
             else
               arrPOKE[i][0].setSE(delay + (2 * t), @cry_file, 100, 60) if @cry_file
@@ -402,14 +419,27 @@ class Battle::Scene::Animation::BattlerDynamaxWild < Battle::Scene::Animation
   def setPokemonSpriteData
     pkmn = @battler.visiblePokemon
     form = pkmn.getUndynamaxForm
-    @pkmn = [pkmn.species, pkmn.gender, form, pkmn.shiny?, pkmn.shadowPokemon?]
+    @pkmn = {
+      :pokemon => pkmn,
+      :species => pkmn.species,
+      :gender  => pkmn.gender,
+      :form    => form,
+      :shiny   => pkmn.shiny?,
+      :shadow  => pkmn.shadowPokemon?,
+      :hue     => pkmn.super_shiny_hue
+    }
     if @battler.gmax_factor?
       form = pkmn.form        if pkmn.gmax?
       form = pkmn.getGmaxForm if pkmn.hasGigantamaxForm?
     end
     form = pkmn.form        if pkmn.emax?
     form = pkmn.getEmaxForm if pkmn.hasEternamaxForm?
-    @dynamax = [pkmn.species, pkmn.gender, form, pkmn.shiny?, pkmn.shadowPokemon?]
+    @dynamax = @pkmn.clone
+    @dynamax[:form] = form
+    if pkmn.super_shiny? && PluginManager.installed?("[DBK] Animated Pokémon System")
+      metrics = GameData::SpeciesMetrics.get_species_form(pkmn.species, form, pkmn.gender == 1)
+      @dynamax[:hue] = metrics.sprite_super_hue 
+    end
     @shadow_file = GameData::Species.shadow_filename(pkmn.species, form)
     @shadow_file = GameData::Species.convert_shadow_file(@shadow_file, pkmn.species, pkmn.form)
     @cry_file = GameData::Species.cry_filename(pkmn.species, form)
@@ -449,12 +479,14 @@ class Battle::Scene::Animation::BattlerDynamaxWild < Battle::Scene::Animation
     # Sets up battler.
     pokeData = dxSetPokemon(@pkmn, delay, !@opposes)
     picPOKE, sprPOKE = pokeData[0], pokeData[1]
+    dxSetSpotPatterns(@pkmn[:pokemon], @pictureSprites[sprPOKE])
     @pictureSprites[sprPOKE].y += 30
     picPOKE.setXY(delay, @pictureSprites[sprPOKE].x, @pictureSprites[sprPOKE].y)
     #---------------------------------------------------------------------------
     # Sets up Dynamax Pokemon.
     ypos = Graphics.height / 4 + center_y
     arrPOKE = dynamaxSpriteWithOutline(@dynamax, delay, center_x, ypos, !@opposes)
+    dxSetSpotPatterns(@dynamax[:pokemon], @pictureSprites[arrPOKE.last[1]]) if @pkmn[:form] == @dynamax[:form]
     arrPOKE.last[0].setColor(delay, Color.white)
     #---------------------------------------------------------------------------
     # Sets up pulse.
@@ -531,7 +563,7 @@ class Battle::Scene::Animation::BattlerDynamaxWild < Battle::Scene::Animation
         picPULSE.moveOpacity(delay + 2, 10, 0)
         for i in 0...arrPOKE.length
           if arrPOKE[i] == arrPOKE.last
-            if @pkmn[2] != @dynamax[2]
+            if @pkmn[:form] != @dynamax[:form]
               arrPOKE[i][0].setSE(delay + (2 * t), @cry_file) if @cry_file
             else
               arrPOKE[i][0].setSE(delay + (2 * t), @cry_file, 100, 60) if @cry_file

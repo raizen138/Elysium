@@ -626,9 +626,9 @@ class Battle::Battler
   end
   
   alias dx_pbAttract pbAttract
-  def pbAttract(msg = nil)
+  def pbAttract(user, msg = nil)
     oldEffect = @effects[PBEffects::Attract]
-    dx_pbAttract(msg)
+    dx_pbAttract(user, msg)
     if @effects[PBEffects::Attract] > oldEffect && oldEffect == -1
       @battle.pbDeluxeTriggers(self, nil, "BattlerAttractStart", @species, @pokemon.types)
     end

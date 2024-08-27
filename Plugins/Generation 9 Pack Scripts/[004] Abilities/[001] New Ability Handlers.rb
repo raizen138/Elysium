@@ -359,6 +359,7 @@ Battle::AbilityEffects::OnSwitchIn.add(:COMMANDER,
     showAnim = true
     battler.allAllies.each{|b|
       next if !b || !b.near?(battler) || b.fainted?
+      next if battle.choices[b.index][0] == :SwitchOut
       next if !b.isSpecies?(:DONDOZO)
       next if b.effects[PBEffects::Commander]
       next if defined?(b.dynamax?) && b.dynamax?

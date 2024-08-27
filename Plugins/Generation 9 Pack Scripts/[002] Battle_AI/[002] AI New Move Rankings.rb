@@ -768,12 +768,12 @@ Battle::AI::Handlers::MoveFailureCheck.add("UserMakeSubstituteSwitchOut",
 Battle::AI::Handlers::MoveEffectScore.add("UserMakeSubstituteSwitchOut",
   proc { |score, move, user, ai, battle|
     # Switch out score
-    switchout_score = Battle::AI::Handlers.apply_move_effect_against_target_score("SwitchOutUserStatusMove",
-        0, move, user, b, ai, battle)
+    switchout_score = Battle::AI::Handlers.apply_move_effect_score("SwitchOutUserStatusMove",
+        0, move, user, ai, battle)
     score += switchout_score if switchout_score != Battle::AI::MOVE_USELESS_SCORE
     # Substitute score
-    substitute_score = Battle::AI::Handlers.apply_move_effect_against_target_score("UserMakeSubstitute",
-        0, move, user, b, ai, battle)
+    substitute_score = Battle::AI::Handlers.apply_move_effect_score("UserMakeSubstitute",
+        0, move, user, ai, battle)
     score += substitute_score if substitute_score != Battle::AI::MOVE_USELESS_SCORE
     next score
   }
@@ -785,7 +785,8 @@ Battle::AI::Handlers::MoveEffectScore.add("UserMakeSubstituteSwitchOut",
 Battle::AI::Handlers::MoveFailureAgainstTargetCheck.add("SetUserAlliesAbilityToTargetAbility",
   proc { |move, user, target, ai, battle|
     will_fail = true
-    battle.allSameSideBattlers(user.index).each do |b|
+    # battle.allSameSideBattlers(user.index).each do |b|
+    ai.each_same_side_battler(user.side) do |b, i|
       next if b.ability != target.ability && !b.unstoppableAbility? &&
               b.has_active_item?(:ABILITYSHIELD)
       will_fail = false
@@ -996,7 +997,8 @@ Battle::AI::Handlers::MoveEffectScore.add("ProtectUserBanefulBunker",
 Battle::AI::Handlers::MoveFailureAgainstTargetCheck.add("RaiseAlliesCriticalHitRate1DragonTypes2",
   proc { |move, user, target, ai, battle|
     noTargets = true
-    battle.allSameSideBattlers(user).each do |b|
+    # battle.allSameSideBattlers(user).each do |b|
+    ai.each_same_side_battler(user.side) do |b, i|
       next if b.index == user.index
       next if b.effects[PBEffects::FocusEnergy] > 0
       noTargets = false
@@ -1008,7 +1010,8 @@ Battle::AI::Handlers::MoveFailureAgainstTargetCheck.add("RaiseAlliesCriticalHitR
 
 Battle::AI::Handlers::MoveEffectScore.add("RaiseAlliesCriticalHitRate1DragonTypes2",
   proc { |score, move, user, ai, battle|
-    battle.allSameSideBattlers(user).each do |b|
+    # battle.allSameSideBattlers(user).each do |b|
+    ai.each_same_side_battler(user.side) do |b, i|
       next if b.index == user.index
       next if b.effects[PBEffects::FocusEnergy] > 0
       score += 10
