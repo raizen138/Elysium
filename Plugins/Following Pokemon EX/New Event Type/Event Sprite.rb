@@ -14,17 +14,7 @@ class Sprite_Character
   end
 end
 
-#-------------------------------------------------------------------------------
-# Refresh Following Pokemon sprites whenever the map is refreshed
-#-------------------------------------------------------------------------------
-EventHandlers.add(:on_enter_map, :erase_following_pkmn, proc { |_old_map_id|
-  event = FollowingPkmn.get_data
-  next if !event
-  FollowingPkmn.refresh(false)
-  $map_factory.maps.each { |map|
-    map.events[event.event_id]&.erase if event.original_map_id == event.current_map_id
-  }
-})
+
 
 class FollowerSprites
   #-----------------------------------------------------------------------------
@@ -42,10 +32,11 @@ class FollowerSprites
     end
     data = FollowingPkmn.get_data
     $map_factory.maps.each { |map|
-      map&.events&.[](data.event_id)&.erase if data && data.original_map_id == data.current_map_id
+      map&.events&.[](data.event_id)&.erase if data && data.original_map_id == map&.events&.[](data.event_id)&.map_id
     }
     FollowingPkmn.refresh(false)
   end
+
   #-----------------------------------------------------------------------------
   # Adding DayNight and Status condition pulsing effect to Following Pokemon
   # sprite
