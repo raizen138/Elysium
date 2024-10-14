@@ -1,4 +1,0 @@
-Name         = Multi Exp Panel
-Version      = 2023.07.21
-Website      = NONE
-Credits      = Swdfm

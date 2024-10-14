@@ -1,0 +1,5 @@
+Name       = EV Selection
+Version    = 0.1.0
+Essentials = 21.1
+Requires   = Modular UI Scenes,2.0
+Credits    = Lucidious89

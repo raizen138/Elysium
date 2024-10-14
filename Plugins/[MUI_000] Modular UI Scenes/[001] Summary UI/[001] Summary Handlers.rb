@@ -47,10 +47,10 @@ UIHandlers.add(:summary, :page_memo, {
 
 # Stat page.
 UIHandlers.add(:summary, :page_skills, {
-  "name"      => "SKILLS",
+  "name"      => "STATS",
   "suffix"    => "skills",
   "order"     => 30,
-  "options"   => [:item, :nickname, :pokedex, :mark],
+  "options"   => [:item, :nickname, :pokedex, :mark, :evs],
   "layout"    => proc { |pkmn, scene| scene.drawPageThree }
 })
 

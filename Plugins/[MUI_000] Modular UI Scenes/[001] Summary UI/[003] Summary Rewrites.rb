@@ -108,13 +108,14 @@ class PokemonSummary_Scene
       when :item
         commands[:item] = _INTL("Give item")
         commands[:take] = _INTL("Take item") if @pokemon.hasItem?
-      when :nickname then commands[cmd] = _INTL("Nickname")      if Settings::MECHANICS_GENERATION >= 9 && !@pokemon.foreign?
-      when :pokedex  then commands[cmd] = _INTL("View Pokédex")  if $player.has_pokedex
-      when :moves    then commands[cmd] = _INTL("Check Moves")   if Settings::MECHANICS_GENERATION >= 9 && !@pokemon.moves.empty?
-      when :remember then commands[cmd] = _INTL("Remember Move") if Settings::MECHANICS_GENERATION >= 9 && @pokemon.can_relearn_move?
-      when :forget   then commands[cmd] = _INTL("Forget Move")   if Settings::MECHANICS_GENERATION >= 9 && @pokemon.moves.length > 1
-      when :tms      then commands[cmd] = _INTL("Use TM's")      if Settings::MECHANICS_GENERATION >= 9 && $bag.has_compatible_tm?(@pokemon)
+      when :nickname then commands[cmd] = _INTL("Nickname")             if Settings::MECHANICS_GENERATION >= 9 && !@pokemon.foreign?
+      when :pokedex  then commands[cmd] = _INTL("View Pokédex")         if $player.has_pokedex
+      when :moves    then commands[cmd] = _INTL("Check Moves")          if Settings::MECHANICS_GENERATION >= 9 && !@pokemon.moves.empty?
+      when :remember then commands[cmd] = _INTL("Remember Move")        if Settings::MECHANICS_GENERATION >= 9 && @pokemon.can_relearn_move?
+      when :forget   then commands[cmd] = _INTL("Forget Move")          if Settings::MECHANICS_GENERATION >= 9 && @pokemon.moves.length > 1
+      when :tms      then commands[cmd] = _INTL("Use TM's")             if Settings::MECHANICS_GENERATION >= 9 && $bag.has_compatible_tm?(@pokemon)
       when :mark     then commands[cmd] = _INTL("Mark")
+      when :evs      then commands[cmd] = _INTL("Assignate Efforts")    if @pokemon.ev.values.count { |ev| ev > 0 } < 2
       when String    then commands[cmd] = _INTL("#{cmd}")
       end
     end
@@ -221,6 +222,15 @@ class PokemonSummary_Scene
     # [:mark] Put markings on this Pokemon.
     when :mark      
       dorefresh = pbMarking(@pokemon)
+    #---------------------------------------------------------------------------
+    # [:evs] Assignate EVs to this Pokemon. (Custom)
+    when :evs
+      pbFadeOutIn {
+        scene = PokemonAssignEfforts_Scene.new
+        screen = PokemonAssignEffortsScreen.new(scene)
+        screen.pbStartScreen(@pokemon)
+      }
+      dorefresh = true
     #---------------------------------------------------------------------------
     # Custom options.
     else
