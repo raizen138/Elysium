@@ -123,7 +123,6 @@ Pokedex = After losing a territorial struggle, Wooper began living on land. The 
 Generation = 9
 Flags = InheritFormWithEverStone
 Evolutions = CLODSIRE,Level,20
-SpeciesSOS = WOOPER,CLODSIRE
 #-------------------------------
 [QWILFISH,1]
 FormName = Hisuian
@@ -147,7 +146,7 @@ Color = Gray
 Habitat = Mountain
 Pokedex = Its sturdy, curved claws are ideal for traversing precipitous cliffs. From the tips of these claws drips a venom that infiltrates the nerves of any prey caught in Sneasel's grasp.
 Generation = 8
-Flags = InheritFormWithEverStone
+Flags = InheritFormWithEverStone,HasGenderedSprites
 Evolutions = SNEASLER,DayHoldItem,RAZORCLAW
 #-------------------------------
 [DIALGA,1]
@@ -340,27 +339,22 @@ Weight = 2.3
 [REVAVROOM,1]
 Types = FIRE
 Abilities = SPEEDBOOST
-CallRateSOS = 0
 #-------------------------------
 [REVAVROOM,2]
 Types = FAIRY
 Abilities = MISTYSURGE
-CallRateSOS = 0
 #-------------------------------
 [REVAVROOM,3]
 Types = FIGHTING
 Abilities = STAMINA
-CallRateSOS = 0
 #-------------------------------
 [REVAVROOM,4]
 Types = POISON
 Abilities = TOXICDEBRIS
-CallRateSOS = 0
 #-------------------------------
 [REVAVROOM,5]
 Types = DARK
 Abilities = INTIMIDATE
-CallRateSOS = 0
 #-------------------------------
 [TATSUGIRI,1]
 FormName = Droopy Form
@@ -436,7 +430,6 @@ Flags = Legendary,TeraType_ROCK
 #-------------------------------
 [OGERPON,4]
 PokedexForm = 0
-Flags = Legendary,TeraType_GRASS
 #-------------------------------
 [OGERPON,5]
 FormName = Wellspring Mask
@@ -497,7 +490,6 @@ Height = 0.3
 Weight = 16.0
 Shape = Head
 Pokedex = The shell is made of crystallized Terastal energy. When struck by a move, this shell absorbs the move’s energy and transfers it to Terapagos.
-Flags = Legendary,TeraType_STELLAR
 #-------------------------------
 [TERAPAGOS,2]
 FormName = Stellar Form

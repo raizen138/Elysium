@@ -1,0 +1,6 @@
+Name       = Custom moves and abilities
+Version    = 0.1.0
+Essentials = 21.1
+Optional   = Generation 9 Pack,3.2.7
+Optional   = Deluxe Battle Kit,1.2
+Credits    = Raizen138

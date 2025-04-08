@@ -105,17 +105,18 @@ class Battle::Scene
     #---------------------------------------------------------------------------
     # General UI elements.
     poke = (battler.opposes?) ? battler.displayPokemon : battler.pokemon
+    level = (battler.isRaidBoss?) ? "???" : battler.level.to_s
     movename = (battler.lastMoveUsed) ? GameData::Move.get(battler.lastMoveUsed).name : "---"
     movename = movename[0..12] + "..." if movename.length > 16
     imagePos = [
       [@path + "info_bg", 0, 0],
       [@path + "info_bg_data", 0, 0],
-      [@path + "info_level", xpos + 16, ypos + 106],
-      [@path + "info_gender", xpos + 148, ypos + 22, poke.gender * 22, 0, 22, 22]
+      [@path + "info_level", xpos + 16, ypos + 106]
     ]
+    imagePos.push([@path + "info_gender", xpos + 148, ypos + 22, poke.gender * 22, 0, 22, 22]) if !battler.isRaidBoss?
     textPos  = [
       [_INTL("{1}", poke.name), iconX + 82, iconY - 20, :center, BASE_DARK, SHADOW_DARK],
-      [battler.level.to_s, xpos + 38, ypos + 104, :left, BASE_LIGHT, SHADOW_LIGHT],
+      [_INTL("{1}", level), xpos + 38, ypos + 104, :left, BASE_LIGHT, SHADOW_LIGHT],
       [_INTL("Used: {1}", movename), xpos + 349, ypos + 104, :center, BASE_LIGHT, SHADOW_LIGHT],
       [_INTL("Turn {1}", @battle.turnCount + 1), Graphics.width - xpos - 32, ypos + 8, :center, BASE_DARK, SHADOW_DARK]
     ]
@@ -294,8 +295,13 @@ class Battle::Scene
     end
     #---------------------------------------------------------------------------
     # Draws Tera type.
-    showTera = defined?(battler.tera_type) && battler.pokemon.terastal_able?
-    if battler.tera? || showTera && (battler.pbOwnedByPlayer? || !@battle.internalBattle)
+    if battler.tera?
+      showTera = true
+    else
+      showTera = defined?(battler.tera_type) && battler.pokemon.terastal_able?
+      showTera = ((@battle.internalBattle) ? !battler.opposes? : true) if showTera
+    end
+    if showTera
       pkmn = (illusion) ? poke : battler
       pbDrawImagePositions(@enhancedUIOverlay, [[@path + "info_extra", xpos + 182, ypos + 95]])
       pbDisplayTeraType(pkmn, @enhancedUIOverlay, xpos + 186, ypos + 97, true)
@@ -377,6 +383,12 @@ class Battle::Scene
   def pbGetDisplayEffects(battler)
     display_effects = []
     #---------------------------------------------------------------------------
+    # Damage gates for scripted battles.
+    if battler.damageThreshold
+      desc = _INTL("The Pokémon's HP won't fall below {1}% when attacked.", battler.damageThreshold)
+      display_effects.push([_INTL("Damage Gate"), "--", desc])
+    end
+    #---------------------------------------------------------------------------
     # Special states.
     if battler.dynamax?
       if battler.effects[PBEffects::Dynamax] > 0 && !battler.isRaidBoss?
@@ -396,8 +408,6 @@ class Battle::Scene
     weather = battler.effectiveWeather
     if weather != :None
       if weather == :Hail
-        name = GameData::BattleWeather.get(weather).name
-        desc = _INTL("Non-Ice types take damage each turn. Blizzard always hits.")
         if defined?(Settings::HAIL_WEATHER_TYPE)
           case Settings::HAIL_WEATHER_TYPE
           when 1
@@ -407,22 +417,26 @@ class Battle::Scene
             name = _INTL("Hailstorm")
             desc = _INTL("Combined effects of both Hail and Snow.")
           end
+        else
+          name = GameData::BattleWeather.get(weather).name
+          desc = _INTL("Non-Ice types take damage each turn. Blizzard always hits.")
         end
       else
         name = GameData::BattleWeather.get(weather).name
+        case weather
+        when :Sun         then desc = _INTL("Boosts Fire moves and weakens Water moves.")
+        when :HarshSun    then desc = _INTL("Boosts Fire moves and negates Water moves.")
+        when :Rain        then desc = _INTL("Boosts Water moves and weakens Fire moves.")
+        when :HeavyRain   then desc = _INTL("Boosts Water moves and negates Fire moves.")
+        when :Snow        then desc = _INTL("Boosts Def of Ice types. Blizzard always hits.")
+        when :Sandstorm   then desc = _INTL("Boosts Rock type Sp. Def. Damages unless Rock/Ground/Steel.")
+        when :StrongWinds then desc = _INTL("Flying types won't take super effective damage.")
+        when :ShadowSky   then desc = _INTL("Boosts Shadow moves. Non-Shadow Pokémon damaged each turn.")
+        else                   desc = _INTL("Unknown weather.")
+        end
       end
       tick = (weather == @battle.field.weather) ? @battle.field.weatherDuration : 0
       tick = (tick > 0) ? sprintf("%d/%d", tick, 5) : "--"
-      case weather
-      when :Sun         then desc = _INTL("Boosts Fire moves and weakens Water moves.")
-      when :HarshSun    then desc = _INTL("Boosts Fire moves and negates Water moves.")
-      when :Rain        then desc = _INTL("Boosts Water moves and weakens Fire moves.")
-      when :HeavyRain   then desc = _INTL("Boosts Water moves and negates Fire moves.")
-      when :Snow        then desc = _INTL("Boosts Def of Ice types. Blizzard always hits.")
-      when :Sandstorm   then desc = _INTL("Boosts Rock type Sp. Def. Damages unless Rock/Ground/Steel.")
-      when :StrongWinds then desc = _INTL("Flying types won't take super effective damage.")
-      when :ShadowSky   then desc = _INTL("Boosts Shadow moves. Non-Shadow Pokémon damaged each turn.")
-      end
       display_effects.push([name, tick, desc])
     end
     #---------------------------------------------------------------------------
@@ -436,6 +450,7 @@ class Battle::Scene
       when :Grassy   then desc = _INTL("Grounded Pokémon recover HP each turn. Boosts Grass moves.")
       when :Psychic  then desc = _INTL("Priority moves fail on grounded targets. Boosts Psychic moves.")
       when :Misty    then desc = _INTL("Status can't be changed when grounded. Weakens Dragon moves.")
+	  else                desc = _INTL("Unknown terrain.")
       end
       display_effects.push([name, tick, desc])
     end
@@ -886,8 +901,39 @@ class Battle::Scene
             tick = sprintf("%d/%d", value, 4)
             desc = _INTL("Pokémon that are not Fire types take damage every turn.")
           #---------------------------------------------------------------------
+          when :CheerOffense1
+            name = _INTL("Offense Cheer 1")
+            tick = sprintf("%d/%d", value, 3)
+            desc = _INTL("The Pokémon's attacks deal increased damage.")
+          #---------------------------------------------------------------------
+          when :CheerOffense2
+            name = _INTL("Offense Cheer 2")
+            tick = sprintf("%d/%d", value, 3)
+            desc = _INTL("The Pokémon's attacks will trigger effects & critically hit.")
+          #---------------------------------------------------------------------
+          when :CheerOffense3
+            name = _INTL("Offense Cheer 3")
+            tick = sprintf("%d/%d", value, 3)
+            desc = _INTL("The Pokémon's attacks bypass effects like Protect & Substitute.")
+          #---------------------------------------------------------------------
+          when :CheerDefense1
+            name = _INTL("Defense Cheer 1")
+            tick = sprintf("%d/%d", value, 3)
+            desc = _INTL("The Pokémon takes reduced damage from attacks.")
+          #---------------------------------------------------------------------
+          when :CheerDefense2
+            name = _INTL("Defense Cheer 2")
+            tick = sprintf("%d/%d", value, 3)
+            desc = _INTL("The Pokémon is immune to critical hits and move effects.")
+          #---------------------------------------------------------------------
+          when :CheerDefense3
+            name = _INTL("Defense Cheer 3")
+            tick = sprintf("%d/%d", value, 3)
+            desc = _INTL("The Pokémon will survive all incoming attacks with 1 HP.")
+          #---------------------------------------------------------------------
           else next
           end
+          tick = "--" if type == :counter && value < 0
           display_effects.push([name, tick, desc])
         end
       end

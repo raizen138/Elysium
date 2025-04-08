@@ -1,0 +1,11 @@
+#-------------------------------
+[OMASTAR,1]
+FormName = Void Omastar
+MegaStone = VOIDTENTACLE
+BaseStats = 90,145,120,84,78,68
+BaseExp = 290
+Abilities = DRAGONSMAW
+HiddenAbilities = DRAGONSMAW
+Height = 2.4
+Pokedex = First it comes crashing down on foes, and then it finishes them off with its massive jaws.
+#-------------------------------

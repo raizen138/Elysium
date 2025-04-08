@@ -133,6 +133,8 @@ class Battle
         trigger_array.push(trigger + "_repeat_every")
       end
     end
+    trigger_array.push("VariableOver_")
+    trigger_array.push("VariableUnder_")
     return trigger_array
   end
   
@@ -537,13 +539,14 @@ class Battle::Battler
         @battle.pbDeluxeTriggers(user, b.index, *triggers)
         next if b.damageState.unaffected || b.damageState.substitute
         next if b.damageState.calcDamage == 0
-        next if b.damageThreshold == 0
-        next if b.hp > b.hpThreshold
-        next if b.effects[PBEffects::Endure] && b.hpThreshold == 1
+        next if !b.damageThreshold
+        hpThreshold = (b.totalhp * (b.damageThreshold / 100.0)).round
+        hpThreshold = 1 if hpThreshold < 1
+        next if b.hp > hpThreshold
+        next if b.effects[PBEffects::Endure] && hpThreshold == 1
         targ_indecies.push(b.index)
         targ_triggers.push("BattlerReachedHPCap", b.species, *b.pokemon.types)
-        b.hpThreshold = 0
-        b.damageThreshold = 0
+        b.damageThreshold = nil
       end
       targ_indecies.each do |i|
         @battle.pbDeluxeTriggers(i, user.index, *targ_triggers)
@@ -644,6 +647,27 @@ class Battle::Battler
   end
   
   #-----------------------------------------------------------------------------
+  # Midbattle triggers upon a battler fainting.
+  #-----------------------------------------------------------------------------
+  alias dx_pbAbilitiesOnFainting pbAbilitiesOnFainting
+  def pbAbilitiesOnFainting
+    dx_pbAbilitiesOnFainting
+    triggers = ["BattlerFainted", @species, *@pokemon.types]
+    if @battle.pbAllFainted?(@index)
+      lastBattler = true
+      owner = @battle.pbGetOwnerFromBattlerIndex(@index)
+      @battle.battlers.each do |b|
+        next if !b || b.opposes?(@index) || !b.fainted? || b.fainted
+        thisOwner = @battle.pbGetOwnerFromBattlerIndex(b.index)
+        next if thisOwner != owner
+        lastBattler = false
+      end
+      triggers.push("LastBattlerFainted", @species, *@pokemon.types) if lastBattler
+    end
+    @battle.pbDeluxeTriggers(@index, nil, *triggers)
+  end
+  
+  #-----------------------------------------------------------------------------
   # Midbattle triggers upon a battler's stats being raised.
   #-----------------------------------------------------------------------------
   alias dx_pbRaiseStatStage pbRaiseStatStage
@@ -728,18 +752,21 @@ class Battle::Move
   #-----------------------------------------------------------------------------
   alias dx_pbEffectivenessMessage pbEffectivenessMessage
   def pbEffectivenessMessage(user, target, numTargets = 1)
-    return if self.is_a?(Battle::Move::FixedDamageMove)
     return if target.damageState.disguise || target.damageState.iceFace
     dx_pbEffectivenessMessage(user, target, numTargets)
     return if target.damageState.substitute || target.fainted?
     @battler_triggers[:user].push("UserDealtDamage", @id, @type, user.species)
     @battler_triggers[:targ].push("TargetTookDamage", @id, @type, target.species)
+    return if self.is_a?(Battle::Move::FixedDamageMove)
     if Effectiveness.super_effective?(target.damageState.typeMod)
       @battler_triggers[:user].push("UserMoveEffective", @id, @type, user.species)
       @battler_triggers[:targ].push("TargetWeakToMove", @id, @type, target.species)
     elsif Effectiveness.not_very_effective?(target.damageState.typeMod)
       @battler_triggers[:user].push("UserMoveResisted", @id, @type, user.species)
       @battler_triggers[:targ].push("TargetResistedMove", @id, @type, target.species)
+    end
+    if multiHitMove? || user.effects[PBEffects::ParentalBond] > 0
+      pbFinalizeMoveTriggers(user, target)
     end
   end
   
@@ -797,6 +824,8 @@ class Battle::Move
       when :targ then @battle.pbDeluxeTriggers(target, user.index, *triggers)
       end
     end
+    @battler_triggers[:user].clear
+    @battler_triggers[:targ].clear
   end
 end
 

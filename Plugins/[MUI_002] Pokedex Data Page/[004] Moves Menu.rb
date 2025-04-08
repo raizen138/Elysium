@@ -22,7 +22,7 @@ class PokemonPokedexInfo_Scene
         @moveList.push(m)
       end
     when 2  # Egg moves
-      species_data.get_egg_moves.each do |m| 
+      species_data.get_inherited_moves.each do |m| 
         @moveCommands.push(GameData::Move.get(m).name)
         @moveList.push(m)
       end
@@ -50,7 +50,7 @@ class PokemonPokedexInfo_Scene
     allMoves = []
     species.moves.each { |m| allMoves.push(m[1]) }
     allMoves.concat(species.get_tutor_moves.clone)
-    allMoves.concat(species.get_egg_moves.clone)
+    allMoves.concat(species.get_inherited_moves.clone)
     allMoves.uniq!
     @zcrystals.each do |item|
       if item.has_zmove_combo?
@@ -82,7 +82,7 @@ class PokemonPokedexInfo_Scene
     allMoves = []
     species.moves.each { |m| allMoves.push(m[1]) }
     allMoves.concat(species.get_tutor_moves.clone)
-    allMoves.concat(species.get_egg_moves.clone)
+    allMoves.concat(species.get_inherited_moves.clone)
     allMoves.uniq!
     maxGuard = false
     @maxmoves.each do |type, id|

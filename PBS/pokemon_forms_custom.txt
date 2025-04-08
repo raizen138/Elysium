@@ -1,0 +1,73 @@
+﻿# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[BUTTERFREE,1]
+FormName = Mega Butterfree
+MegaStone = BUTTERFRITE
+BaseStats = 65,45,60,110,160,110
+BaseExp = 284
+Abilities = POISONSCALES
+HiddenAbilities = POISONSCALES
+Height = 1.7
+Pokedex = The crystallized energy makes up this Pokémon's blindingly bright and highly toxic scales.
+Generation = 6
+#-------------------------------
+[MACHAMP,1]
+FormName = Mega Machamp
+MegaStone = MACHAMPITE
+BaseStats = 90,170,100,75,65,105
+BaseExp = 290
+Abilities = SHEERFORCE
+HiddenAbilities = SHEERFORCE
+Height = 2.5
+Pokedex = The energy coursing through its arms makes its punches hit as hard as bomb blasts.
+Generation = 6
+#-------------------------------
+[MELMETAL,1]
+FormName = Mega Melmetal
+MegaStone = MELMETALITE
+BaseStats = 135,183,183,34,100,65
+BaseExp = 330
+Abilities = ATOMICPUNCH
+HiddenAbilities = ATOMICPUNCH
+Height = 2.9
+Pokedex = In a distant land, there are legends about a cyclopean giant. In fact, the giant was a Melmetal that was flooded with its megastone energy.
+Generation = 8
+#-------------------------------
+[DREDNAW,1]
+FormName = Mega Drednaw
+MegaStone = DREDNAWITE
+BaseStats = 90,145,120,84,78,68
+BaseExp = 290
+Abilities = DRAGONSMAW
+HiddenAbilities = DRAGONSMAW
+Height = 2.4
+Pokedex = First it comes crashing down on foes, and then it finishes them off with its massive jaws.
+#-------------------------------
+[ETERNATUS,1]
+FormName = Eternamax
+BaseStats = 255,115,250,130,125,250
+Height = 10.0
+Shape = Serpentine
+Pokedex = Infinite amounts of energy pour from this Pokémon's enlarged core, warping the surrounding space-time.
+#-------------------------------
+[URSHIFU,2]
+FormName = Mega Single Strike Style
+MegaMove = WICKEDBLOW
+MegaMessage = 2
+BaseStats = 100,200,120,107,63,60
+Abilities = WAYOFPRECISION
+HiddenAbilities = WAYOFPRECISION
+Height = 2.9
+Pokedex = The energy released by this Pokémon's fists forms shock waves that can blow away Pokémon in just one hit.
+#-------------------------------
+[URSHIFU,3]
+FormName = Mega Rapid Strike Style
+MegaMove = SURGINGSTRIKES
+MegaMessage = 2
+Types = FIGHTING,WATER
+BaseStats = 100,170,100,137,63,80
+Abilities = WAYOFSWIFTNESS
+HiddenAbilities = WAYOFSWIFTNESS
+Moves = 0,SURGINGSTRIKES,1,FOCUSENERGY,1,ENDURE,1,ROCKSMASH,1,AQUAJET,1,LEER,12,AERIALACE,16,SCARYFACE,20,HEADBUTT,24,BRICKBREAK,28,DETECT,32,BULKUP,36,IRONHEAD,40,DYNAMICPUNCH,44,COUNTER,48,CLOSECOMBAT,52,FOCUSPUNCH
+Height = 2.6
+Pokedex = As it waits for the right moment to unleash its power, this Pokémon maintains a perfect one-legged stance. It won't even twitch.

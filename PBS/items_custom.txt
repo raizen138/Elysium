@@ -1,0 +1,73 @@
+#-------------------------------
+[BUTTERFRITE]
+Name = Butterfrite
+NamePlural = Butterfrites
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = One of a variety of mysterious Mega Stones. Have Butterfree hold it, and it will be able to Mega Evolve.
+#-------------------------------
+[MACHAMPITE]
+Name = Machampite
+NamePlural = Machampites
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = One of a variety of mysterious Mega Stones. Have Machamp hold it, and it will be able to Mega Evolve.
+#-------------------------------
+[DREDNAWITE]
+Name = Drednawite
+NamePlural = Drednawites
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = One of a variety of mysterious Mega Stones. Have Drednaw hold it, and it will be able to Mega Evolve.
+#-------------------------------
+[MELMETALITE]
+Name = Melmetalite
+NamePlural = Melmetalites
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = One of a variety of mysterious Mega Stones. Have Melmetal hold it, and it will be able to Mega Evolve.
+#-------------------------------
+[ASTRALFRAGMENT]
+Name = Astral Fragment
+NamePlural = Astral Fragments
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = A fragment of a star. Certain species of Pokémon can hold it to Mega Evolve.
+#-------------------------------
+[VOIDTENTACLE]
+Name = Void Tentacle
+NamePlural = Void Tentacles
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = A tentacle of some undiscovered entity. Certain species of Pokémon can hold it to Mega Evolve.
+#-------------------------------
+[HOLYSYMBOL]
+Name = Holy Symbol
+NamePlural = Holy Symbols
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = A holy symbol used time ago. Certain species of Pokémon can hold it to Mega Evolve.
+#-------------------------------
+[DEMONBLOOD]
+Name = Demon Blood
+NamePlural = Demon Bloods
+Pocket = 1
+Price = 0
+BPPrice = 50
+Flags = MegaStone,Fling_80
+Description = A jar of green blood. Certain species of Pokémon can hold it to Mega Evolve.
+

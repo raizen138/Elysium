@@ -76,8 +76,8 @@ end
 # Returns a battler's colorized name & title. Takes Illusion into account.
 #-------------------------------------------------------------------------------
 class Battle::Battler
-  def name_title
-    return displayPokemon.name_title
+  def name_title(withColor = true)
+    return displayPokemon.name_title(withColor)
   end
 end
 

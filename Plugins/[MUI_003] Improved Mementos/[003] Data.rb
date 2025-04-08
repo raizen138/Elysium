@@ -103,7 +103,7 @@ class Pokemon
   #-----------------------------------------------------------------------------
   # Returns the Pokemon's name & title as a colorized string.
   #-----------------------------------------------------------------------------
-  def name_title
+  def name_title(withColor = true)
     name = self.name
     if @memento && !shadowPokemon?
       memento = GameData::Ribbon.get(@memento)
@@ -114,6 +114,7 @@ class Pokemon
       else
         full_title = _INTL("{1} {2}", name, title)
       end
+      return full_title if !withColor
       case Settings::TITLE_COLORATION
       when 1 then name = "<c2=043c3aff>#{full_title}</c2>"
       when 2 then name = "<c2=06644bd2>#{full_title}</c2>"

@@ -1,0 +1,77 @@
+# See the documentation on the wiki to learn how to edit this file.
+#-------------------------------
+[INTOXICATE]
+Name = Intoxicate
+Description = Normal-type moves become Poison-type and powered up.
+#-------------------------------
+[POLLINATE]
+Name = Pollinate
+Description = Normal-type moves become Bug-type and powered up.
+#-------------------------------
+[EMANATE]
+Name = Emanate
+Description = Normal-type moves become Psychic-type and powered up.
+#-------------------------------
+[IMMOLATE]
+Name = Immolate
+Description = Normal-type moves become Fire-type and powered up.
+#-------------------------------
+[HYDRATE]
+Name = Hydrate
+Description = Normal-type moves become Water-type and powered up.
+#-------------------------------
+[SPECTRALIZE]
+Name = Spectralize
+Description = Normal-type moves become Ghost-type and powered up.
+#-------------------------------
+[MINERALIZE]
+Name = Mineralize
+Description = Normal-type moves become Rock-type and powered up.
+#-------------------------------
+[DRACONIZE]
+Name = Draconize
+Description = Normal-type moves become Dragon-type and powered up.
+#-------------------------------
+[FERTILIZE]
+Name = Fertilize
+Description = Normal-type moves become Grass-type and powered up.
+#-------------------------------
+[WORKINIZE]
+Name = Workinize
+Description = Normal-type moves become Fighting-type and powered up.
+#-------------------------------
+[OVERCHARGED]
+Name = Overcharged
+Description = Boosts Electric-type moves but takes recoil damage.
+#-------------------------------
+[NUMBINGPOISON]
+Name = Numbing Poison
+Description = Moves that inflict poison may paralyze instead.
+#-------------------------------
+[SPINNINGENTRY]
+Name = Spinning Entry
+Description = Rapid spins when entering a battle.
+#-------------------------------
+[POISONABSORB]
+Name = Poison Absorb
+Description = Restores HP if hit by a Poison-type move.
+#-------------------------------
+[POISONSCALES]
+Name = Poison Scales
+Description = May poison targets with non contact moves.
+#-------------------------------
+[GIANTWINGS]
+Name = Giant Wings
+Description = Boosts the power of wing moves.
+#-------------------------------
+[ATOMICPUNCH]
+Name = Atomic Punch
+Description = Combines Iron Fist and Steelworker Abilities.
+#-------------------------------
+[WAYOFPRECISION]
+Name = Way of Precision
+Description = Combines Unseen Fist and Inner Focus Abilities.
+#-------------------------------
+[WAYOFSWIFTNESS]
+Name = Way of Swiftness
+Description = Combines Unseen Fist and Swift Swim Abilities.

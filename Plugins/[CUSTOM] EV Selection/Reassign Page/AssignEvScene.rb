@@ -151,11 +151,17 @@ class PokemonAssignEfforts_Scene
     base_stats = pkmn.baseStats
     level = pkmn.level
     ivs = pkmn.calcIV
+    # Format stat multipliers due to nature
+    nature_mod = 100
+    this_nature = pkmn.nature
+    if this_nature && this_nature.stat_changes.any? { |change| change[0] == stat }
+      nature_mod = 100 + this_nature.stat_changes.find { |change| change[0] == stat }[1]
+    end
     if stat == :HP
       return 1 if base_stats[stat] == 1   # For Shedinja
       return (((base_stats[stat] * 2) + ivs[stat] + (evvalue / 4)) * level / 100).floor + level + 10
     else
-      return (((base_stats[stat] * 2) + ivs[stat] + (evvalue / 4)) * level / 100).floor + 5
+      return (((((base_stats[stat] * 2) + ivs[stat] + (evvalue / 4)) * level / 100).floor + 5) * nature_mod / 100).floor
     end
   end
 
